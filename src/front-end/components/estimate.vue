@@ -1,9 +1,6 @@
 <script lang="ts">
 import { Component } from 'vue';
-import { estimate } from '../store/modules/story';
-import { sessionState } from '../store/modules/session';
-import { storyState } from '../store/modules/story';
-import { participant } from '../store/modules/participants';
+import { estimate, participant, sessionState, storyState } from '../types';
 
 const FIBONACCI = ['1', '2', '3', '5', '8', '13', '?'] as const;
 const TSHIRTS = ['S', 'M', 'L', 'XL'] as const;
@@ -24,9 +21,9 @@ type pointsData = {
 
 const Estimate: Component = {
   computed: {
-    you(): participant {
-      return Object.values(this.$store.state.participants.people)
-        .find((v: participant) => v.id === this.session.id);
+    you(): participant | undefined {
+      return Object.values<participant>(this.$store.state.participants.people)
+        .find(v => v.id === this.session.id);
     },
     options(): Readonly<Array<string>> {
       return modeMap[this.mode as mode];
@@ -46,7 +43,10 @@ const Estimate: Component = {
   methods: {
     setEstimate(option: string) {
       const estimate: estimate = {
-        user: this.you,
+        user: {
+          id: this.session.id,
+          name: this.session.name,
+        },
         value: option == this.you?.value ? null : option,
       };
 

@@ -1,16 +1,6 @@
 import { ActionContext, Module } from 'vuex';
+import { estimate, participant, storyState } from '../../types';
 import { State } from 'vue';
-import { participant, participantsState } from './participants';
-
-export interface storyState {
-  id: string,
-  title: string,
-};
-
-export type estimate = {
-  user: participant,
-  value: string | null,
-};
 
 export const storyModule: Module<storyState, State> = {
   actions: {

@@ -1,16 +1,12 @@
 import { LOCALSTORAGE_GLOBAL_PREFIX } from '../../constants';
+import { Module } from 'vuex';
+import { sessionProperty, sessionState } from '../../types';
 import { State } from 'vue';
 import { v4 as uuid } from 'uuid';
-import { Module } from 'vuex';
 
 /** Make a localStorage key for use in this module */
 const makeKey = (key: string): string =>
   `${LOCALSTORAGE_GLOBAL_PREFIX}session.${key}`;
-
-type sessionProperty = {
-  default(): string,
-  key: string,
-};
 
 /** Session property metadata */
 const properties: Record<string, sessionProperty> = {
@@ -22,11 +18,6 @@ const properties: Record<string, sessionProperty> = {
     default() { return 'Anonymous'; },
     key: makeKey('name'),
   },
-};
-
-export interface sessionState {
-  id: string,
-  name: string,
 };
 
 export const sessionModule: Module<sessionState, State> = {

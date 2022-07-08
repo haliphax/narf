@@ -2,22 +2,27 @@ import { State } from "vue";
 import { Module } from "vuex";
 
 export type participant = {
+  id: string,
   name: string,
+  value?: string | null,
 };
 
 export interface participantsState {
-  list: Array<participant>,
+  people: Record<string, participant>,
 };
 
 export const participantsModule: Module<participantsState, State> = {
   mutations: {
-    participants(state: participantsState, payload: Array<participant>) {
-      state.list = payload;
+    'participants.people'(
+      state: participantsState,
+      payload: Record<string, participant>,
+    ) {
+      state.people = payload;
     },
   },
   state(): participantsState {
     return {
-      list: [],
+      people: {},
     };
   },
 };

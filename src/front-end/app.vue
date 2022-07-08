@@ -1,8 +1,8 @@
 <script lang="ts">
 import { Component } from 'vue';
-import Estimate from './estimate.vue';
-import Participants from './participants.vue';
-import Header from './header.vue';
+import Estimate from './components/estimate.vue';
+import Participants from './components/participants.vue';
+import Header from './components/header.vue';
 
 const App: Component = {
   components: {

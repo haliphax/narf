@@ -2,13 +2,13 @@
 import { Component } from 'vue';
 import Estimate from './estimate.vue';
 import Participants from './participants.vue';
-import StoryTitle from './storytitle.vue';
+import Header from './header.vue';
 
 const App: Component = {
   components: {
     Estimate,
+    Header,
     Participants,
-    StoryTitle,
   },
 };
 
@@ -16,7 +16,7 @@ export default App;
 </script>
 
 <template>
-  <StoryTitle></StoryTitle>
+  <Header></Header>
   <Participants></Participants>
   <Estimate></Estimate>
   <!--

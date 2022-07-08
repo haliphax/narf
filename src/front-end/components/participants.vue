@@ -15,8 +15,8 @@ export default Participants;
 <template>
   <h2>Participants</h2>
   <ul>
-    <li v-for="participant in participants">
-      {{ participant.name }}
+    <li v-for="p in participants.list">
+      {{ p.name }}
     </li>
   </ul>
 </template>

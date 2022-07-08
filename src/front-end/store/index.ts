@@ -1,28 +1,11 @@
 import { createStore } from 'vuex';
-
-type participantData = {
-  name: string,
-};
-
-type storeData = {
-  participants: Array<participantData>,
-  storyTitle: string | null,
-};
+import { participantsModule } from './modules/participants';
+import { storyModule } from './modules/story';
 
 const store = createStore({
-  mutations: {
-    participants(state: storeData, payload: Array<participantData>) {
-      state.participants = payload;
-    },
-    storyTitle(state: storeData, payload: string) {
-      state.storyTitle = payload;
-    }
-  },
-  state(): storeData {
-    return {
-      participants: [],
-      storyTitle: null,
-    };
+  modules: {
+    participants: participantsModule,
+    story: storyModule,
   },
 });
 

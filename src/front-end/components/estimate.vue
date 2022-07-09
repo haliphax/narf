@@ -2,8 +2,8 @@
 import { Component } from 'vue';
 import { estimate, participant, sessionState, storyState } from '../types';
 
-const FIBONACCI = ['0', '1/2', '1', '2', '3', '5', '8', '13', '☕'] as const;
-const TSHIRTS = ['S', 'M', 'L', 'XL'] as const;
+const FIBONACCI = ['0', '1/2', '1', '2', '3', '5', '8', '13', '💬'] as const;
+const TSHIRTS = ['XS', 'S', 'M', 'L', 'XL', '💬'] as const;
 
 enum mode {
   Fibonacci,
@@ -69,9 +69,10 @@ export default Estimate;
 <template>
   <div>
     <h2>Estimate</h2>
-    <ul>
+    <ul class="unstyled grid">
       <li v-for="option in options">
-        <button @click="setEstimate(option)" :class="classes(option)">
+        <button @click="setEstimate(option)" :class="classes(option)"
+          :disabled="story.revealed">
           {{ option }}
         </button>
       </li>
@@ -80,8 +81,31 @@ export default Estimate;
 </template>
 
 <style scoped>
-  .chosen {
-    background-color: var(--secondary-bg-color);
-    color: var(--secondary-color);
+button {
+  height: 10vh;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+}
+
+.grid {
+  grid-template-columns: auto auto auto;
+}
+
+.chosen {
+  background-color: var(--secondary-bg-color);
+  color: var(--secondary-color);
+}
+
+@media screen and (min-width: 540px) {
+  .grid {
+    grid-template-columns: auto auto auto auto;
   }
+}
+
+@media screen and (min-width: 768px) {
+  .grid {
+    grid-template-columns: auto auto auto auto auto auto;
+  }
+}
 </style>

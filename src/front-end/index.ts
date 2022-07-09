@@ -6,7 +6,9 @@ import store from './store/index';
 (globalThis as any).__VUE_PROD_DEVTOOLS__ = false;
 
 store.commit('story.title', 'Testing this thing');
-store.commit('participants.people', {'a': { id: 'a', name: 'Somebody' }})
+store.commit(
+  'participants.people',
+  { 'a': { id: 'a', name: 'Somebody', value: '8' }});
 
 const app = createApp(App);
 

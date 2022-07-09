@@ -1,15 +1,18 @@
 <script lang="ts">
 import { Component } from 'vue';
-import { participant } from '../types';
+import { participantsState, sessionState, storyState } from '../types';
 
 const Participants: Component = {
   computed: {
-    people(): Record<string, participant> {
-      return this.$store.state.participants.people;
+    participants(): participantsState {
+      return this.$store.state.participants;
     },
-    session() {
+    session(): sessionState {
       return this.$store.state.session;
     },
+    story(): storyState {
+      return this.$store.state.story;
+    }
   },
 };
 
@@ -20,11 +23,13 @@ export default Participants;
   <div>
     <h2>Participants</h2>
     <ul class="unstyled">
-      <li v-for="p of people">
-        <span class="name">{{ p.name }}</span>
-        <span class="you" v-if="p.id === session.id">(You)</span>
-        <span class="value" v-if="p.value">
-          <span v-if="revealed">{{ p.value }}</span>
+      <li class="grid" v-for="p of participants.people">
+        <span class="name">
+          {{ p.name }}
+          <span class="you" v-if="p.id === session.id">(You)</span>
+        </span>
+        <span class="value" v-show="p.value">
+          <span v-if="story.revealed">{{ p.value }}</span>
           <span v-else>?</span>
         </span>
       </li>
@@ -35,7 +40,8 @@ export default Participants;
 <style scoped>
 li {
   background-color: var(--bg-color);
-  display: block;
+  grid-auto-flow: row;
+  grid-template-columns: auto min-content;
   padding: .5em 1em;
   margin-bottom: .25rem;
 }
@@ -49,10 +55,9 @@ li {
   opacity: 0.8;
 }
 
-.value {
+.value > * {
   background-color: var(--secondary-bg-color);
   color: var(--secondary-color);
-  float: right;
-  padding: 0 .25em;
+  padding: .125em .25em;
 }
 </style>

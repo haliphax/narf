@@ -20,21 +20,51 @@ export default App;
 <template>
   <Header></Header>
   <div class="grid">
-    <Participants></Participants>
-    <Estimate></Estimate>
-    <!-- Action buttons -->
+    <Participants class="participants"></Participants>
+    <Estimate class="estimates"></Estimate>
+    <Actions class="actions"></Actions>
   </div>
-  <Actions></Actions>
 </template>
 
 <style scoped>
   .grid {
-    grid-template-columns: auto;
+    grid-auto-columns: auto;
+    grid-auto-flow: row;
   }
 
-  @media screen and (min-width: 540px) {
+  .participants {
+    grid-column: 1 / span 2;
+    grid-row: 2;
+  }
+
+  .estimates {
+    grid-column: 1 / span 2;
+    grid-row: 1;
+  }
+
+  .actions {
+    border-top: 1px solid var(--color);
+    grid-column: 1 / span 2;
+    margin-top: .5rem;
+    padding-top: 1rem;
+    text-align: center;
+  }
+
+  @media screen and (min-width: 640px) {
     .grid {
-      grid-template-columns: 30% 70%;
+      grid-template-columns:
+        calc(40% - var(--grid-gap) / 2)
+        calc(60% - var(--grid-gap) / 2);
+    }
+
+    .participants {
+      grid-column: 1 / span 1;
+      grid-row: 1;
+    }
+
+    .estimates {
+      grid-column: 2 / span 1;
+      grid-row: 1;
     }
   }
 </style>

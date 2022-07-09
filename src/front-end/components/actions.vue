@@ -16,12 +16,8 @@ export default Actions;
 
 <template>
   <ul class="unstyled">
-    <li v-if="!story.revealed">
-      <button @click="reveal">Reveal</button>
+    <li>
+      <button @click="reveal" :disabled="story.revealed">Reveal</button>
     </li>
   </ul>
 </template>
-
-<style scoped>
-
-</style>

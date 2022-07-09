@@ -3,9 +3,7 @@ import { Component } from 'vue';
 
 const Header: Component = {
   computed: {
-    story() {
-      return this.$store.state.story;
-    }
+    story() { return this.$store.state.story; },
   },
 };
 

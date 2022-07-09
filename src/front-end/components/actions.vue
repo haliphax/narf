@@ -4,7 +4,7 @@ import { storyState } from "../types";
 
 const Actions: Component = {
   computed: {
-    story(): storyState { return this.$store.state.story; }
+    story(): storyState { return this.$store.state.story; },
   },
   methods: {
     reveal() { this.$store.dispatch('reveal'); },

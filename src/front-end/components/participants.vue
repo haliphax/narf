@@ -7,12 +7,8 @@ const Participants: Component = {
     participants(): participantsState {
       return this.$store.state.participants;
     },
-    session(): sessionState {
-      return this.$store.state.session;
-    },
-    story(): storyState {
-      return this.$store.state.story;
-    }
+    session(): sessionState { return this.$store.state.session; },
+    story(): storyState { return this.$store.state.story; }
   },
 };
 

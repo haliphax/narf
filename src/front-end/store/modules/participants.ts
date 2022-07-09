@@ -12,8 +12,6 @@ export const participantsModule: Module<participantsState, State> = {
     },
   },
   state(): participantsState {
-    return {
-      people: {},
-    };
+    return { people: {} };
   },
 };

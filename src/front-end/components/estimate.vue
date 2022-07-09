@@ -21,24 +21,16 @@ type pointsData = {
 
 const Estimate: Component = {
   computed: {
-    options(): Readonly<Array<string>> {
-      return modeMap[this.mode as mode];
-    },
-    session(): sessionState {
-      return this.$store.state.session;
-    },
-    story(): storyState {
-      return this.$store.state.story;
-    },
+    options(): Readonly<Array<string>> { return modeMap[this.mode as mode]; },
+    session(): sessionState { return this.$store.state.session; },
+    story(): storyState { return this.$store.state.story; },
     you(): participant | undefined {
       return Object.values<participant>(this.$store.state.participants.people)
         .find(v => v.id === this.session.id);
     },
   },
   data(): pointsData {
-    return {
-      mode: mode.Fibonacci,
-    };
+    return { mode: mode.Fibonacci };
   },
   methods: {
     classes(option: string) {

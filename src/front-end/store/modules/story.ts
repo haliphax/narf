@@ -19,9 +19,15 @@ export const storyModule: Module<storyState, State> = {
       people[payload.user.id].value = payload.value;
       ctx.commit('participants.people', people);
     },
+    reveal(ctx: ActionContext<storyState, State>) {
+      ctx.commit('story.revealed', true);
+    },
   },
   mutations: {
-    'story.title'(state, payload: string) {
+    'story.revealed'(state: storyState, payload: boolean) {
+      state.revealed = payload;
+    },
+    'story.title'(state: storyState, payload: string) {
       state.title = payload;
     },
   },
@@ -29,6 +35,7 @@ export const storyModule: Module<storyState, State> = {
     return {
       id: '',
       title: '',
+      revealed: false,
     };
   },
 };

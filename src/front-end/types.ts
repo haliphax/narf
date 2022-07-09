@@ -26,4 +26,5 @@ export type sessionState = {
 export type storyState = {
   id: string,
   title: string,
+  revealed: boolean,
 };

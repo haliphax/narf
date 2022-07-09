@@ -2,7 +2,7 @@
 import { Component } from 'vue';
 import { estimate, participant, sessionState, storyState } from '../types';
 
-const FIBONACCI = ['1', '2', '3', '5', '8', '13', '?'] as const;
+const FIBONACCI = ['0', '1/2', '1', '2', '3', '5', '8', '13', '☕'] as const;
 const TSHIRTS = ['S', 'M', 'L', 'XL'] as const;
 
 enum mode {
@@ -21,10 +21,6 @@ type pointsData = {
 
 const Estimate: Component = {
   computed: {
-    you(): participant | undefined {
-      return Object.values<participant>(this.$store.state.participants.people)
-        .find(v => v.id === this.session.id);
-    },
     options(): Readonly<Array<string>> {
       return modeMap[this.mode as mode];
     },
@@ -34,6 +30,10 @@ const Estimate: Component = {
     story(): storyState {
       return this.$store.state.story;
     },
+    you(): participant | undefined {
+      return Object.values<participant>(this.$store.state.participants.people)
+        .find(v => v.id === this.session.id);
+    },
   },
   data(): pointsData {
     return {
@@ -41,6 +41,14 @@ const Estimate: Component = {
     };
   },
   methods: {
+    classes(option: string) {
+      const classes = [];
+
+      if (this.you?.value == option)
+        classes.push('chosen');
+
+      return classes;
+    },
     setEstimate(option: string) {
       const estimate: estimate = {
         user: {
@@ -59,13 +67,21 @@ export default Estimate;
 </script>
 
 <template>
-  <h2>Estimate</h2>
-  <ul>
-    <li v-for="option in options">
-      <button @click="setEstimate(option)">
-        <span v-if="option === you?.value">*</span>
-        {{ option }}
-      </button>
-    </li>
-  </ul>
+  <div>
+    <h2>Estimate</h2>
+    <ul>
+      <li v-for="option in options">
+        <button @click="setEstimate(option)" :class="classes(option)">
+          {{ option }}
+        </button>
+      </li>
+    </ul>
+  </div>
 </template>
+
+<style scoped>
+  .chosen {
+    background-color: var(--secondary-bg-color);
+    color: var(--secondary-color);
+  }
+</style>

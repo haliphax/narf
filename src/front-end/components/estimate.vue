@@ -1,6 +1,7 @@
 <script lang="ts">
 import { Component } from 'vue';
-import { estimate, participant, sessionState, storyState } from '../types';
+import { estimate, participant, participantsState, sessionState, storyState } from '../types';
+import PieChart from './piechart.vue';
 
 const FIBONACCI = ['0', '1/2', '1', '2', '3', '5', '8', '13', '💬'] as const;
 const TSHIRTS = ['XS', 'S', 'M', 'L', 'XL', '💬'] as const;
@@ -20,12 +21,35 @@ type pointsData = {
 };
 
 const Estimate: Component = {
+  components: {
+    PieChart,
+  },
   computed: {
     options(): Readonly<Array<string>> { return modeMap[this.mode as mode]; },
+    participants(): participantsState {
+      return this.$store.state.participants;
+    },
     session(): sessionState { return this.$store.state.session; },
     story(): storyState { return this.$store.state.story; },
+    votes() {
+      const votes = new Map<string, number>();
+
+      Object.values<participant>(this.participants.people).map(v => {
+        if (!v.value)
+          return;
+
+        const value = v.value!.toString();
+
+        if (!votes.hasOwnProperty(value))
+          votes.set(value, 0);
+
+        votes.set(value, votes.get(value)! + 1);
+      });
+
+      return votes;
+    },
     you(): participant | undefined {
-      return Object.values<participant>(this.$store.state.participants.people)
+      return Object.values<participant>(this.participants.people)
         .find(v => v.id === this.session.id);
     },
   },
@@ -61,14 +85,16 @@ export default Estimate;
 <template>
   <div>
     <h2>Estimate</h2>
-    <ul class="unstyled grid">
+    <ul class="unstyled grid" v-if="!story.revealed">
       <li v-for="option in options">
-        <button @click="setEstimate(option)" :class="classes(option)"
-          :disabled="story.revealed">
+        <button @click="setEstimate(option)" :class="classes(option)">
           {{ option }}
         </button>
       </li>
     </ul>
+    <div v-else>
+      <PieChart :data="votes"> </PieChart>
+    </div>
   </div>
 </template>
 

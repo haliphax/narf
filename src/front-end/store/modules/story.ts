@@ -1,10 +1,9 @@
 import { ActionContext, Module } from 'vuex';
 import { estimate, participant, storyState } from '../../types';
-import { State } from 'vue';
 
-export const storyModule: Module<storyState, State> = {
+export const storyModule: Module<storyState, any> = {
   actions: {
-    estimate(ctx: ActionContext<storyState, State>, payload: estimate) {
+    estimate(ctx: ActionContext<storyState, any>, payload: estimate) {
       const people: Record<string, participant> =
         (ctx.rootState as any).participants.people;
 
@@ -19,7 +18,7 @@ export const storyModule: Module<storyState, State> = {
       people[payload.user.id].value = payload.value;
       ctx.commit('participants.people', people);
     },
-    reveal(ctx: ActionContext<storyState, State>) {
+    reveal(ctx: ActionContext<storyState, any>) {
       ctx.commit('story.revealed', true);
     },
   },

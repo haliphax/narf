@@ -1,7 +1,6 @@
 import { LOCALSTORAGE_GLOBAL_PREFIX } from '../../constants';
 import { Module } from 'vuex';
 import { sessionProperty, sessionState } from '../../types';
-import { State } from 'vue';
 import { v4 as uuid } from 'uuid';
 
 /** Make a localStorage key for use in this module */
@@ -20,7 +19,7 @@ const properties: Record<string, sessionProperty> = {
   },
 };
 
-export const sessionModule: Module<sessionState, State> = {
+export const sessionModule: Module<sessionState, any> = {
   mutations: {
     'session.name'(state, payload: string) {
       state.name = payload;

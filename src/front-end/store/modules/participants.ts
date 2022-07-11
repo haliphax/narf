@@ -1,8 +1,7 @@
-import { State } from "vue";
-import { Module } from "vuex";
-import { participant, participantsState } from "../../types";
+import { Module } from 'vuex';
+import { participant, participantsState } from '../../types';
 
-export const participantsModule: Module<participantsState, State> = {
+export const participantsModule: Module<participantsState, any> = {
   mutations: {
     'participants.people'(
       state: participantsState,

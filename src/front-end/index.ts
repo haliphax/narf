@@ -5,7 +5,7 @@ import store from './store/index';
 (globalThis as any).__VUE_OPTIONS_API__ = true;
 (globalThis as any).__VUE_PROD_DEVTOOLS__ = false;
 
-store.commit('story.title', 'Testing this thing');
+store.commit('story.title', 'Refactor spline reticulation');
 store.commit(
   'participants.people',
   {

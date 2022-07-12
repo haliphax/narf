@@ -35,11 +35,14 @@ export default Participants;
 
 <style scoped>
 li {
-  background-color: var(--bg-color);
   grid-auto-flow: row;
   grid-template-columns: auto min-content;
   padding: .5em 1em;
   margin-bottom: .25rem;
+}
+
+li:nth-child(2n) {
+  background-color: var(--bg-color);
 }
 
 .name {

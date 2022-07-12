@@ -105,7 +105,7 @@ button {
 }
 
 .grid {
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(4, minmax(0, 1fr));
 }
 
 .chosen {
@@ -115,7 +115,17 @@ button {
 
 @media screen and (min-width: 480px) {
   .grid {
-    grid-template-columns: repeat(4, minmax(0, 1fr));
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+  }
+}
+
+@media screen and (min-width: 640px) {
+  h2 {
+    text-align: center;
+  }
+
+  .grid {
+    grid-template-columns: repeat(4, minmax(4, 1fr));
   }
 }
 

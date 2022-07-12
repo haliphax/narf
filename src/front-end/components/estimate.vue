@@ -90,21 +90,22 @@ export default Estimate;
       </li>
     </ul>
     <div v-else>
-      <PieChart :data="votes"> </PieChart>
+      <PieChart :data="votes"></PieChart>
     </div>
   </div>
 </template>
 
 <style scoped>
 button {
-  height: 10vh;
+  aspect-ratio: 1;
+  font-size: 2rem;
   margin: 0;
   padding: 0;
   width: 100%;
 }
 
 .grid {
-  grid-template-columns: auto auto auto;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
 }
 
 .chosen {
@@ -112,15 +113,15 @@ button {
   color: var(--secondary-color);
 }
 
-@media screen and (min-width: 540px) {
+@media screen and (min-width: 480px) {
   .grid {
-    grid-template-columns: auto auto auto auto;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
   }
 }
 
 @media screen and (min-width: 768px) {
   .grid {
-    grid-template-columns: auto auto auto auto auto auto;
+    grid-template-columns: repeat(6, minmax(0, 1fr));
   }
 }
 </style>

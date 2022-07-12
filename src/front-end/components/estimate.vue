@@ -95,7 +95,9 @@ export default Estimate;
   </div>
 </template>
 
-<style scoped>
+<style lang="less" scoped>
+@import '../styles/variables.less';
+
 button {
   aspect-ratio: 1;
   font-size: 2rem;
@@ -113,13 +115,13 @@ button {
   color: var(--secondary-color);
 }
 
-@media screen and (min-width: 480px) {
+@media @breakpoint_s {
   .grid {
     grid-template-columns: repeat(5, minmax(0, 1fr));
   }
 }
 
-@media screen and (min-width: 640px) {
+@media @breakpoint_m {
   h2 {
     text-align: center;
   }
@@ -129,7 +131,7 @@ button {
   }
 }
 
-@media screen and (min-width: 768px) {
+@media @breakpoint_l {
   .grid {
     grid-template-columns: repeat(6, minmax(0, 1fr));
   }

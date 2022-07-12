@@ -1,4 +1,4 @@
-import App from './app.vue';
+import App from './components/app.vue';
 import { createApp } from 'vue';
 import store from './store/index';
 

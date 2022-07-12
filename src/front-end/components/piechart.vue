@@ -103,7 +103,9 @@ export default PieChart;
   </div>
 </template>
 
-<style scoped>
+<style lang="less" scoped>
+@import '../styles/variables.less';
+
 .pie {
   aspect-ratio: 1;
   gap: 0;
@@ -211,19 +213,19 @@ tr > td:first-child {
   --c: #859900;
 }
 
-@media screen and (min-width: 480px) {
+@media @breakpoint_s {
   .pie label {
     font-size: 4rem;
   }
 }
 
-@media screen and (min-width: 640px) {
+@media @breakpoint_m {
   .pie label {
     font-size: 2rem;
   }
 }
 
-@media screen and (min-width: 768px) {
+@media @breakpoint_l {
   .pie label {
     font-size: 3rem;
   }

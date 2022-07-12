@@ -135,7 +135,7 @@ export default PieChart;
 }
 
 .slice label {
-  -webkit-text-stroke: 1px var(--color);
+  -webkit-text-stroke: 1px #000;
   color: #fff;
   display: block;
   font-size: 4rem;
@@ -143,7 +143,7 @@ export default PieChart;
   padding: 1rem;
   position: absolute;
   stroke-width: 1px;
-  stroke: 1px var(--color);
+  stroke: 1px #000;
   text-align: center;
   transform: rotate(calc(var(--p) * 180deg));
   width: 100%;
@@ -184,6 +184,7 @@ tr > td:first-child {
 
 .color {
   background-color: var(--c);
+  border: 1px solid var(--outline-color);
   display: inline-block;
   height: 1em;
   margin-right: .25em;

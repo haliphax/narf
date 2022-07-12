@@ -32,22 +32,27 @@ const PieChart: Component = {
         slices.push({
           key: k,
           percent: percent,
-          index: index,
+          index: 0,
           rotation: rotation,
           votes: v,
         });
         index++;
-        rotation += (360 * percent);
+        rotation += Math.ceil(360 * percent);
       };
 
-      return slices.sort((a, b) => a.votes - b.votes);
+      return slices
+        .sort((a, b) => b.votes - a.votes)
+        .map((v, i) => {
+          v.index = i;
+          return v;
+        });
     },
   },
   methods: {
     styles(slice: slice) {
       const output: Array<string> = [];
 
-      output.push(`--p:${slice.percent * 100}`);
+      output.push(`--p:${slice.percent}`);
       output.push(`--i:${slice.index}`);
       output.push(`--r:${slice.rotation}deg`);
 
@@ -62,8 +67,10 @@ export default PieChart;
 
 <template>
   <div class="pie">
-    <div v-for="s, idx in slices" :class="`slice color_${idx}`"
-      :style="styles(s)">
+    <div v-for="s, idx in slices" :style="styles(s)">
+      <div :class="`slice color_${idx}`">
+        <label>{{ s.key }}</label>
+      </div>
     </div>
   </div>
   <div class="key">
@@ -91,30 +98,47 @@ export default PieChart;
 }
 
 .pie {
+  aspect-ratio: 1;
   gap: 0;
   margin: 0;
   padding: 0;
   position: relative;
 }
 
-.slice {
-  aspect-ratio: 1;
-  height: 100%;
-  margin: 0;
-  margin-top: calc(-100% * var(--i));
-  place-content: center;
-  position: relative;
+.pie > div {
+  position: absolute;
   width: 100%;
 }
 
+.slice {
+  aspect-ratio: 1;
+  place-content: center;
+  position: relative;
+  transform: rotate(var(--r));
+  top: 0;
+}
+
 .slice::before {
+  background: conic-gradient(var(--c) calc(var(--p) * 100%), #0000 0);
+  border-radius: 50%;
   content: '';
   display: block;
-  position: absolute;
-  border-radius: 50%;
   inset: 0;
-  background:
-    conic-gradient(from var(--r), var(--c) calc(var(--p) * 1%), #0000 0);
+  position: absolute;
+}
+
+.slice label {
+  -webkit-text-stroke: 1px black;
+  color: #fff;
+  display: block;
+  font-size: 4rem;
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  stroke-width: 1px;
+  stroke: 1px black;
+  text-align: center;
+  transform: rotate(calc(var(--p) * 180deg));
 }
 
 .color_0 {

@@ -35,12 +35,9 @@ const Estimate: Component = {
       const votes = new Map<string, number>();
 
       Object.values<participant>(this.participants.people).map(v => {
-        if (!v.value)
-          return;
-
         const value = v.value!.toString();
 
-        if (!votes.hasOwnProperty(value))
+        if (!votes.has(value))
           votes.set(value, 0);
 
         votes.set(value, votes.get(value)! + 1);

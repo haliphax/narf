@@ -14,11 +14,12 @@ export type participantsState = {
 };
 
 export type sessionProperty = {
-  default(): string,
+  default(): any,
   key: string,
 };
 
 export type sessionState = {
+  darkMode: boolean,
   id: string,
   name: string,
 };

@@ -37,7 +37,7 @@ const PieChart: Component = {
           votes: v,
         });
         index++;
-        rotation += Math.ceil(360 * percent);
+        rotation += 360 * percent;
       };
 
       return slices
@@ -74,29 +74,33 @@ export default PieChart;
     </div>
   </div>
   <div class="key">
-    <h3>Key</h3>
-    <ul>
-      <li v-for="s, idx in slices">
-        <span :class="`color color_${idx}`" :id="`slice_color_${s.key}`"
-          :style="styles(s)">
-        </span>
-        <label :for="`slice_color_${s.key}`">
-          {{ s.key }}: {{ s.votes }} vote(s)
-        </label>
-      </li>
-    </ul>
+    <h3>Results</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Key</th>
+          <th>Value</th>
+          <th>Votes</th>
+          <th><abbr title="Percentage">%</abbr></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr v-for="s, idx in slices">
+          <td>
+            <span :class="`color color_${idx}`" :id="`slice_color_${s.key}`"
+              :style="styles(s)">
+            </span>
+          </td>
+          <td>{{ s.key }}</td>
+          <td>{{ s.votes }}</td>
+          <td>{{ s.percent.toFixed(2) }}</td>
+        </tr>
+      </tbody>
+    </table>
   </div>
 </template>
 
 <style scoped>
-.color {
-  background-color: var(--c);
-  display: inline-block;
-  height: 1em;
-  margin-right: .25em;
-  width: 1em;
-}
-
 .pie {
   aspect-ratio: 1;
   gap: 0;
@@ -128,7 +132,7 @@ export default PieChart;
 }
 
 .slice label {
-  -webkit-text-stroke: 1px black;
+  -webkit-text-stroke: 1px var(--color);
   color: #fff;
   display: block;
   font-size: 4rem;
@@ -136,28 +140,64 @@ export default PieChart;
   height: 100%;
   width: 100%;
   stroke-width: 1px;
-  stroke: 1px black;
+  stroke: 1px var(--color);
   text-align: center;
   transform: rotate(calc(var(--p) * 180deg));
 }
 
+table {
+  border: solid var(--color);
+  border-spacing: 0;
+  border-width: 1px 1px 0 0;
+  width: 100%;
+}
+
+thead {
+  background-color: var(--color);
+  color: var(--secondary-color);
+}
+
+tr:nth-child(2n) {
+  background-color: var(--bg-color);
+}
+
+th, td {
+  border: solid var(--color);
+  border-width: 0 0 1px 1px;
+  border-collapse: collapse;
+  margin: 0;
+  padding: 0.25rem .5rem;
+}
+
+tr > td:first-child {
+  text-align: center;
+}
+
+.color {
+  background-color: var(--c);
+  display: inline-block;
+  height: 1em;
+  margin-right: .25em;
+  width: 1em;
+}
+
 .color_0 {
-  --c: #000;
+  --c: #002b36;
 }
 
 .color_1 {
-  --c: #fa0;
+  --c: #b58900;
 }
 
 .color_2 {
-  --c: #7f7;
+  --c: #d33682;
 }
 
 .color_3 {
-  --c: #faf;
+  --c: #6c71c4;
 }
 
 .color_4 {
-  --c: #00f;
+  --c: #859900;
 }
 </style>

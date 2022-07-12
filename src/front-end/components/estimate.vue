@@ -3,7 +3,7 @@ import { Component } from 'vue';
 import { estimate, participant, participantsState, sessionState, storyState } from '../types';
 import PieChart from './piechart.vue';
 
-const FIBONACCI = ['0', '1/2', '1', '2', '3', '5', '8', '13', '💬'] as const;
+const FIBONACCI = ['0', '0.5', '1', '2', '3', '5', '8', '13', '💬'] as const;
 const TSHIRTS = ['XS', 'S', 'M', 'L', 'XL', '💬'] as const;
 
 enum mode {

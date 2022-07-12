@@ -1,6 +1,12 @@
 <script lang="ts">
 import { Component } from 'vue';
-import { estimate, participant, participantsState, sessionState, storyState } from '../types';
+import {
+  estimate,
+  participant,
+  participantsState,
+  sessionState,
+  storyState,
+} from '../types';
 import PieChart from './piechart.vue';
 
 const FIBONACCI = ['0', '0.5', '1', '2', '3', '5', '8', '13', '💬'] as const;
@@ -96,7 +102,7 @@ export default Estimate;
 </template>
 
 <style lang="less" scoped>
-@import '../styles/variables.less';
+@import '../../styles/variables.less';
 
 button {
   aspect-ratio: 1;

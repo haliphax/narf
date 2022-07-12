@@ -138,7 +138,7 @@ export default PieChart;
   -webkit-text-stroke: 1px #000;
   color: #fff;
   display: block;
-  font-size: 4rem;
+  font-size: 2rem;
   height: 100%;
   padding: 1rem;
   position: absolute;
@@ -209,5 +209,23 @@ tr > td:first-child {
 
 .color_4 {
   --c: #859900;
+}
+
+@media screen and (min-width: 480px) {
+  .pie label {
+    font-size: 4rem;
+  }
+}
+
+@media screen and (min-width: 640px) {
+  .pie label {
+    font-size: 2rem;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .pie label {
+    font-size: 3rem;
+  }
 }
 </style>

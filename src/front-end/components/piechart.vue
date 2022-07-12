@@ -39,8 +39,12 @@ const PieChart: Component = {
 
       return slices
         .sort((a, b) => b.votes - a.votes)
-        .map((v, i) => {
+        .map((v, i, a) => {
           v.index = i;
+
+          if (i === a.length - 1)
+            v.percent = Math.ceil(v.percent * 10000) / 10000;
+
           return v;
         });
     },
@@ -66,7 +70,9 @@ export default PieChart;
   <div class="pie">
     <div v-for="s, idx in slices" :style="styles(s)">
       <div :class="`slice color_${idx}`">
-        <label>{{ s.key }}</label>
+        <label>
+          <span>{{ s.key }}</span>
+        </label>
       </div>
     </div>
   </div>
@@ -133,13 +139,19 @@ export default PieChart;
   color: #fff;
   display: block;
   font-size: 4rem;
-  position: absolute;
   height: 100%;
-  width: 100%;
+  padding: 1rem;
+  position: absolute;
   stroke-width: 1px;
   stroke: 1px var(--color);
   text-align: center;
   transform: rotate(calc(var(--p) * 180deg));
+  width: 100%;
+}
+
+.slice label span {
+  display: block;
+  transform: rotate(calc(var(--p) * -180deg - var(--r)));
 }
 
 table {

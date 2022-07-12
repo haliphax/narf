@@ -19,10 +19,10 @@ export default App;
 
 <template>
   <Header></Header>
+  <Actions class="actions"></Actions>
   <div class="grid">
     <Participants class="participants"></Participants>
     <Estimate class="estimates"></Estimate>
-    <Actions class="actions"></Actions>
   </div>
 </template>
 
@@ -43,11 +43,8 @@ export default App;
   }
 
   .actions {
-    border-top: 1px solid var(--color);
     grid-column: 1 / span 2;
-    margin-top: .5rem;
     padding-top: 1rem;
-    text-align: center;
   }
 
   @media screen and (min-width: 640px) {

@@ -24,8 +24,6 @@ const PieChart: Component = {
         total += value.value;
       }
 
-      let index = 0;
-
       for (let [k, v] of this.data.entries()) {
         const percent = v / total;
 
@@ -36,7 +34,6 @@ const PieChart: Component = {
           rotation: rotation,
           votes: v,
         });
-        index++;
         rotation += 360 * percent;
       };
 
@@ -52,8 +49,8 @@ const PieChart: Component = {
     styles(slice: slice) {
       const output: Array<string> = [];
 
-      output.push(`--p:${slice.percent}`);
       output.push(`--i:${slice.index}`);
+      output.push(`--p:${slice.percent}`);
       output.push(`--r:${slice.rotation}deg`);
 
       return output.join(';');

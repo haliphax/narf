@@ -1,5 +1,7 @@
 # narf!
 
+[![Publish site](https://github.com/haliphax/narf/actions/workflows/publish-site.yml/badge.svg?branch=master)](https://haliphax.github.io/narf/)
+
 [Story points] estimation webapp written in TypeScript
 
 ## Stack

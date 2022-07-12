@@ -32,6 +32,3 @@ export default DarkMode;
     </li>
   </ul>
 </template>
-
-<style scoped>
-</style>

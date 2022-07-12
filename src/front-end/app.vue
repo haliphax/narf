@@ -1,6 +1,7 @@
 <script lang="ts">
 import { Component } from 'vue';
 import Actions from './components/actions.vue';
+import DarkMode from './components/darkmode.vue';
 import Estimate from './components/estimate.vue';
 import Header from './components/header.vue';
 import Participants from './components/participants.vue';
@@ -8,6 +9,7 @@ import Participants from './components/participants.vue';
 const App: Component = {
   components: {
     Actions,
+    DarkMode,
     Estimate,
     Header,
     Participants,
@@ -18,6 +20,7 @@ export default App;
 </script>
 
 <template>
+  <DarkMode></DarkMode>
   <Header></Header>
   <Actions class="actions"></Actions>
   <div class="grid">

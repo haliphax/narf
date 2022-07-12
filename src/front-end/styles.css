@@ -1,10 +1,20 @@
 :root {
   --bg-color: #ccc;
   --color: #000;
+  --global-bg-color: #fff;
+  --grid-gap: .5rem;
+  --outline-color: #000;
   --secondary-bg-color: #000;
   --secondary-color: #fff;
+}
 
-  --grid-gap: .5rem;
+body.dark-mode {
+  --bg-color: #555;
+  --color: #ccc;
+  --global-bg-color: #222;
+  --outline-color: #fff;
+  --secondary-bg-color: #ccc;
+  --secondary-color: #000;
 }
 
 * {
@@ -22,6 +32,7 @@ html, body {
 
 body {
   align-content: center;
+  background-color: var(--global-bg-color);
   color: var(--color);
   display: flex;
   flex-grow: 1;

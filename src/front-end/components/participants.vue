@@ -37,8 +37,8 @@ export default Participants;
 li {
   grid-auto-flow: row;
   grid-template-columns: auto min-content;
-  padding: .5em 1em;
-  margin-bottom: .25rem;
+  padding: var(--space-m) var(--space-l);
+  margin-bottom: var(--space-s);
 }
 
 li:nth-child(2n) {
@@ -46,7 +46,7 @@ li:nth-child(2n) {
 }
 
 .name {
-  margin-right: .5em;
+  margin-right: var(--space-m);
 }
 
 .you {
@@ -57,6 +57,6 @@ li:nth-child(2n) {
 .value > * {
   background-color: var(--secondary-bg-color);
   color: var(--secondary-color);
-  padding: .125em .25em;
+  padding: var(--space-xs) var(--space-s);
 }
 </style>

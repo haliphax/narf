@@ -47,7 +47,7 @@ export default App;
 
   .actions {
     grid-column: 1 / span 2;
-    padding-top: 1rem;
+    padding-top: var(--space-m);
   }
 
   @media screen and (min-width: 640px) {

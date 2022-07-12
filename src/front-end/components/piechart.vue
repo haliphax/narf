@@ -140,7 +140,7 @@ export default PieChart;
   display: block;
   font-size: 2rem;
   height: 100%;
-  padding: 1rem;
+  padding: var(--space-l);
   position: absolute;
   stroke-width: 1px;
   stroke: 1px #000;
@@ -175,7 +175,7 @@ th, td {
   border-width: 0 0 1px 1px;
   border-collapse: collapse;
   margin: 0;
-  padding: 0.25rem .5rem;
+  padding: var(--space-s) var(--space-m);
 }
 
 tr > td:first-child {
@@ -185,10 +185,10 @@ tr > td:first-child {
 .color {
   background-color: var(--c);
   border: 1px solid var(--outline-color);
-  display: inline-block;
-  height: 1em;
-  margin-right: .25em;
-  width: 1em;
+  display: block;
+  height: var(--space-l);
+  margin: 0 auto;
+  width: var(--space-l);
 }
 
 .color_0 {

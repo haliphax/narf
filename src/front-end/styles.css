@@ -1,4 +1,5 @@
 :root {
+  /* colors */
   --bg-color: #ccc;
   --color: #000;
   --global-bg-color: #fff;
@@ -6,6 +7,13 @@
   --outline-color: #000;
   --secondary-bg-color: #000;
   --secondary-color: #fff;
+  /* spacing */
+  --space-xs: .125rem;
+  --space-s: .25rem;
+  --space-m: .5rem;
+  --space-l: 1rem;
+  --space-xl: 1.5rem;
+  --space-xxl: 2rem;
 }
 
 body.dark-mode {
@@ -46,7 +54,7 @@ body {
 #app {
   margin: 0 auto;
   max-width: 960px;
-  padding: .5rem;
+  padding: var(--space-m);
   width: 100%;
 }
 
@@ -64,7 +72,7 @@ body {
 
 @media screen and (min-width: 640px) {
   #app {
-    padding-left: 2rem;
-    padding-right: 2rem;
+    padding-left: var(--space-xxl);
+    padding-right: var(--space-xxl);
   }
 }

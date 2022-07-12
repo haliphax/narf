@@ -93,7 +93,7 @@ export default PieChart;
           </td>
           <td>{{ s.key }}</td>
           <td>{{ s.votes }}</td>
-          <td>{{ s.percent.toFixed(2) }}</td>
+          <td>{{ (s.percent * 100).toFixed(2) }}</td>
         </tr>
       </tbody>
     </table>

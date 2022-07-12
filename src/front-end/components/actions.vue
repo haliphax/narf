@@ -1,6 +1,6 @@
 <script lang="ts">
-import { Component } from "vue";
-import { storyState } from "../types";
+import { Component } from 'vue';
+import { storyState } from '../types';
 
 const Actions: Component = {
   computed: {

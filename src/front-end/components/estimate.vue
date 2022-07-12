@@ -80,7 +80,7 @@ export default Estimate;
 </script>
 
 <template>
-  <div>
+  <div aria-live="polite">
     <h2>Estimate</h2>
     <ul class="unstyled grid" v-if="!story.revealed">
       <li v-for="option in options">

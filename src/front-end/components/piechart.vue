@@ -67,7 +67,7 @@ export default PieChart;
 </script>
 
 <template>
-  <div class="pie">
+  <div class="pie" role="figure">
     <div v-for="s, idx in slices" :style="styles(s)">
       <div :class="`slice color_${idx}`">
         <label>

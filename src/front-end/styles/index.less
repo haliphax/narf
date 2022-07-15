@@ -2,14 +2,14 @@
 
 :root {
   /* colors */
-  --bg-color: #ccc;
-  --color: #000;
-  --global-bg-color: #fff;
-  --grid-gap: .5rem;
-  --outline-color: #000;
-  --secondary-bg-color: #000;
-  --secondary-color: #fff;
+  --color-bg-global: #fff;
+  --color-bg-secondary: #000;
+  --color-bg: #ccc;
+  --color-fg-secondary: #fff;
+  --color-fg: #000;
+  --color-outline: #000;
   /* spacing */
+  --grid-gap: .5rem;
   --space-xs: .125rem;
   --space-s: .25rem;
   --space-m: .5rem;
@@ -19,12 +19,12 @@
 }
 
 body.dark-mode {
-  --bg-color: #555;
-  --color: #ccc;
-  --global-bg-color: #222;
-  --outline-color: #fff;
-  --secondary-bg-color: #ccc;
-  --secondary-color: #000;
+  --color-bg-global: #222;
+  --color-bg-secondary: #ccc;
+  --color-bg: #555;
+  --color-fg-secondary: #000;
+  --color-fg: #ccc;
+  --color-outline: #fff;
 }
 
 * {
@@ -42,8 +42,8 @@ html, body {
 
 body {
   align-content: center;
-  background-color: var(--global-bg-color);
-  color: var(--color);
+  background-color: var(--color-bg-global);
+  color: var(--color-fg);
   display: flex;
   flex-grow: 1;
   font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;

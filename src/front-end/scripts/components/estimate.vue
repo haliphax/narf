@@ -117,8 +117,8 @@ button {
 }
 
 .chosen {
-  background-color: var(--secondary-bg-color);
-  color: var(--secondary-color);
+  background-color: var(--color-bg-secondary);
+  color: var(--color-fg-secondary);
 }
 
 @media @breakpoint_s {

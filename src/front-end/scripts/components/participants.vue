@@ -42,7 +42,7 @@ li {
 }
 
 li:nth-child(2n) {
-  background-color: var(--bg-color);
+  background-color: var(--color-bg);
 }
 
 .name {
@@ -55,8 +55,8 @@ li:nth-child(2n) {
 }
 
 .value > * {
-  background-color: var(--secondary-bg-color);
-  color: var(--secondary-color);
+  background-color: var(--color-bg-secondary);
+  color: var(--color-fg-secondary);
   padding: var(--space-xs) var(--space-s);
 }
 </style>

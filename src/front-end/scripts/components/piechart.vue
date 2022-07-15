@@ -157,23 +157,23 @@ export default PieChart;
 }
 
 table {
-  border: solid var(--color);
+  border: solid var(--color-outline);
   border-spacing: 0;
   border-width: 1px 1px 0 0;
   width: 100%;
 }
 
 thead {
-  background-color: var(--color);
-  color: var(--secondary-color);
+  background-color: var(--color-fg);
+  color: var(--color-fg-secondary);
 }
 
 tr:nth-child(2n) {
-  background-color: var(--bg-color);
+  background-color: var(--color-bg);
 }
 
 th, td {
-  border: solid var(--color);
+  border: solid var(--color-fg);
   border-width: 0 0 1px 1px;
   border-collapse: collapse;
   margin: 0;
@@ -186,7 +186,7 @@ tr > td:first-child {
 
 .color {
   background-color: var(--c);
-  border: 1px solid var(--outline-color);
+  border: 1px solid var(--color-outline);
   display: block;
   height: var(--space-l);
   margin: 0 auto;

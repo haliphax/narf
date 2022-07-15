@@ -194,23 +194,35 @@ tr > td:first-child {
 }
 
 .color_0 {
-	--c: #002b36;
-}
-
-.color_1 {
-	--c: #b58900;
-}
-
-.color_2 {
 	--c: #d33682;
 }
 
-.color_3 {
+.color_1 {
 	--c: #6c71c4;
+}
+
+.color_2 {
+	--c: #b58900;
+}
+
+.color_3 {
+	--c: #cb4b16;
 }
 
 .color_4 {
 	--c: #859900;
+}
+
+.color_5 {
+	--c: #268bd2;
+}
+
+.color_6 {
+	--c: #dc322f;
+}
+
+.color_7 {
+	--c: #2aa198;
 }
 
 @media @breakpoint_s {

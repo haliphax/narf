@@ -26,9 +26,16 @@ export default DarkMode;
 </script>
 
 <template>
-  <ul class="unstyled">
-    <li>
-      <button @click="toggle()">Dark mode</button>
-    </li>
-  </ul>
+  <label for="darkmode">Dark mode
+    <span class="tog">
+      <input id="darkmode" type="checkbox" :checked="session.darkMode" @click="toggle()">
+      <i></i>
+    </span>
+  </label>
 </template>
+
+<style type="less" scoped>
+label {
+  float: right;
+}
+</style>

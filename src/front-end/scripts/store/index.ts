@@ -4,11 +4,11 @@ import { sessionModule } from './modules/session';
 import { storyModule } from './modules/story';
 
 const store = createStore({
-  modules: {
-    participants: participantsModule,
-    session: sessionModule,
-    story: storyModule,
-  },
+	modules: {
+		participants: participantsModule,
+		session: sessionModule,
+		story: storyModule,
+	},
 });
 
 export default store;

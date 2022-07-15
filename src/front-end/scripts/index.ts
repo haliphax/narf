@@ -7,14 +7,14 @@ import store from './store/index';
 
 store.commit('story.title', 'Refactor spline reticulation');
 store.commit(
-  'participants.people',
-  {
-    'a': { id: 'a', name: 'Somebody', value: '8' },
-    'b': { id: 'b', name: 'Anybody', value: '8' },
-    'c': { id: 'c', name: 'Anakin', value: '8' },
-    'd': { id: 'd', name: 'Padmei', value: '0.5' },
-    'e': { id: 'e', name: 'Jar-jar', value: '1' },
-  });
+	'participants.people',
+	{
+		'a': { id: 'a', name: 'Somebody', value: '8' },
+		'b': { id: 'b', name: 'Anybody', value: '8' },
+		'c': { id: 'c', name: 'Anakin', value: '8' },
+		'd': { id: 'd', name: 'Padmei', value: '0.5' },
+		'e': { id: 'e', name: 'Jar-jar', value: '1' },
+	});
 
 const app = createApp(App);
 

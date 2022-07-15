@@ -1,31 +1,31 @@
 export type estimate = {
-  user: participant,
-  value: string | null,
+	user: participant,
+	value: string | null,
 };
 
 export type participant = {
-  id: string,
-  name: string,
-  value?: string | null,
+	id: string,
+	name: string,
+	value?: string | null,
 };
 
 export type participantsState = {
-  people: Record<string, participant>,
+	people: Record<string, participant>,
 };
 
 export type sessionProperty = {
-  default(): any,
-  key: string,
+	default(): any,
+	key: string,
 };
 
 export type sessionState = {
-  darkMode: boolean,
-  id: string,
-  name: string,
+	darkMode: boolean,
+	id: string,
+	name: string,
 };
 
 export type storyState = {
-  id: string,
-  title: string,
-  revealed: boolean,
+	id: string,
+	title: string,
+	revealed: boolean,
 };

@@ -10,6 +10,9 @@ const Participants: Component = {
 		session(): sessionState { return this.$store.state.session; },
 		story(): storyState { return this.$store.state.story; }
 	},
+	created() {
+		this.$store.dispatch('addParticipant', this.session);
+	},
 };
 
 export default Participants;

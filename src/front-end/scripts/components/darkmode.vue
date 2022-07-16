@@ -1,21 +1,18 @@
 <script lang="ts">
 import { Component } from 'vue';
-import { sessionState } from '../types';
+import store from '../store';
 
 const DarkMode: Component = {
-	computed: {
-		session(): sessionState { return this.$store.state.session; },
-	},
 	methods: {
 		toggle() {
 			const val = document.body.classList.toggle('dark-mode');
 
-			this.$store.commit('session.darkMode', val);
+			store.commit('session.darkMode', val);
 		},
 	},
 	mounted() {
 		if (matchMedia('prefers-color-scheme: dark').matches
-			|| (this.session as sessionState).darkMode)
+			|| store.state.session.darkMode)
 		{
 			this.toggle();
 		}
@@ -28,7 +25,8 @@ export default DarkMode;
 <template>
 	<label for="darkmode">Dark mode
 		<span class="tog">
-			<input id="darkmode" type="checkbox" :checked="session.darkMode" @click="toggle()">
+			<input id="darkmode" type="checkbox"
+				:checked="$store.state.session.darkMode" @click="toggle()">
 			<i></i>
 		</span>
 	</label>

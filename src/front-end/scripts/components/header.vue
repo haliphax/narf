@@ -1,15 +1,11 @@
 <script lang="ts">
 import { Component } from 'vue';
 
-const Header: Component = {
-	computed: {
-		story() { return this.$store.state.story; },
-	},
-};
+const Header: Component = {};
 
 export default Header;
 </script>
 
 <template>
-	<h1>{{ story.title }}</h1>
+	<h1>{{ $store.state.story.title }}</h1>
 </template>

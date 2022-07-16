@@ -1,13 +1,13 @@
 <script lang="ts">
 import { Component } from 'vue';
-import { storyState } from '../types';
+import store from '../store/index';
 
 const Actions: Component = {
 	computed: {
-		story(): storyState { return this.$store.state.story; },
+		story() { return store.state.story; },
 	},
 	methods: {
-		reveal() { this.$store.dispatch('reveal'); },
+		reveal() { store.dispatch('reveal'); },
 	},
 };
 

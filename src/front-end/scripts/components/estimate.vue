@@ -1,13 +1,8 @@
 <script lang="ts">
 import { Component } from 'vue';
-import {
-	estimate,
-	participant,
-	participantsState,
-	sessionState,
-	storyState,
-} from '../types';
+import { estimate } from '../types';
 import PieChart from './piechart.vue';
+import store from '../store';
 
 const FIBONACCI = ['0', '0.5', '1', '2', '3', '5', '8', '13', '💬'] as const;
 const TSHIRTS = ['XS', 'S', 'M', 'L', 'XL', '💬'] as const;
@@ -32,15 +27,10 @@ const Estimate: Component = {
 	},
 	computed: {
 		options(): Readonly<Array<string>> { return modeMap[this.mode as mode]; },
-		participants(): participantsState {
-			return this.$store.state.participants;
-		},
-		session(): sessionState { return this.$store.state.session; },
-		story(): storyState { return this.$store.state.story; },
 		votes() {
 			const votes = new Map<string, number>();
 
-			Object.values<participant>(this.participants.people).map(v => {
+			Object.values(store.state.participants.people).map(v => {
 				const value = v.value!.toString();
 
 				if (!votes.has(value))
@@ -51,9 +41,9 @@ const Estimate: Component = {
 
 			return votes;
 		},
-		you(): participant | undefined {
-			return Object.values<participant>(this.participants.people)
-				.find(v => v.id === this.session.id);
+		you() {
+			return Object.values(store.state.participants.people)
+				.find(v => v.id === store.state.session.id);
 		},
 	},
 	data(): pointsData {
@@ -71,13 +61,13 @@ const Estimate: Component = {
 		setEstimate(option: string) {
 			const estimate: estimate = {
 				user: {
-					id: this.session.id,
-					name: this.session.name,
+					id: store.state.session.id,
+					name: store.state.session.name,
 				},
 				value: option == this.you?.value ? null : option,
 			};
 
-			this.$store.dispatch('estimate', estimate);
+			store.dispatch('estimate', estimate);
 		},
 	},
 };
@@ -88,7 +78,7 @@ export default Estimate;
 <template>
 	<div aria-live="polite">
 		<h2>Estimate</h2>
-		<ul class="unstyled grid" v-if="!story.revealed">
+		<ul class="unstyled grid" v-if="!$store.state.story.revealed">
 			<li v-for="option in options">
 				<button @click="setEstimate(option)" :class="classes(option)">
 					{{ option }}

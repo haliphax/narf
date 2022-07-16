@@ -1,17 +1,10 @@
 <script lang="ts">
 import { Component } from 'vue';
-import { participantsState, sessionState, storyState } from '../types';
+import store from '../store';
 
 const Participants: Component = {
-	computed: {
-		participants(): participantsState {
-			return this.$store.state.participants;
-		},
-		session(): sessionState { return this.$store.state.session; },
-		story(): storyState { return this.$store.state.story; }
-	},
 	created() {
-		this.$store.dispatch('addParticipant', this.session);
+		store.dispatch('addParticipant', store.state.session);
 	},
 };
 
@@ -22,13 +15,15 @@ export default Participants;
 	<div>
 		<h2>Participants</h2>
 		<ul class="unstyled">
-			<li class="grid" v-for="p of participants.people">
+			<li class="grid" v-for="p of $store.state.participants.people">
 				<span class="name">
 					{{ p.name }}
-					<span class="you" v-if="p.id === session.id">(You)</span>
+					<span class="you" v-if="p.id === $store.state.session.id">
+						(You)
+					</span>
 				</span>
 				<span class="value" v-show="p.value">
-					<span v-if="story.revealed">{{ p.value }}</span>
+					<span v-if="$store.state.story.revealed">{{ p.value }}</span>
 					<span v-else>?</span>
 				</span>
 			</li>

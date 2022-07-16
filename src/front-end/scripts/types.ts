@@ -24,6 +24,12 @@ export type sessionState = {
 	name: string,
 };
 
+export type storeState = {
+	participants: participantsState,
+	session: sessionState,
+	story: storyState,
+};
+
 export type storyState = {
 	id: string,
 	title: string,

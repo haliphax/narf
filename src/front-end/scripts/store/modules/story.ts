@@ -1,7 +1,7 @@
 import { ActionContext, Module } from 'vuex';
 import { estimate, participant, storyState } from '../../types';
 
-export const storyModule: Module<storyState, any> = {
+const storyModule: Module<storyState, any> = {
 	actions: {
 		estimate(ctx: ActionContext<storyState, any>, payload: estimate) {
 			const people: Record<string, participant> =
@@ -38,3 +38,5 @@ export const storyModule: Module<storyState, any> = {
 		};
 	},
 };
+
+export default storyModule;

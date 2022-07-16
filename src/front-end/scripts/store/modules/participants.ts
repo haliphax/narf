@@ -1,7 +1,7 @@
 import { ActionContext, Module } from 'vuex';
 import { participant, participantsState } from '../../types';
 
-export const participantsModule: Module<participantsState, any> = {
+const participantsModule: Module<participantsState, any> = {
 	actions: {
 		addParticipant(
 			ctx: ActionContext<participantsState, any>,
@@ -32,3 +32,5 @@ export const participantsModule: Module<participantsState, any> = {
 		return { people: {} };
 	},
 };
+
+export default participantsModule;

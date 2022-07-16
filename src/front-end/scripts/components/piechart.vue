@@ -25,7 +25,7 @@ const PieChart: Component = {
 			}
 
 			for (let [k, v] of this.data.entries()) {
-				const percent = v / total;
+				const percent = parseFloat((v / total).toFixed(4));
 
 				slices.push({
 					key: k,

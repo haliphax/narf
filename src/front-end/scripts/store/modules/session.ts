@@ -23,7 +23,7 @@ const properties: Record<string, sessionProperty> = {
 	},
 };
 
-export const sessionModule: Module<sessionState, any> = {
+const sessionModule: Module<sessionState, any> = {
 	mutations: {
 		'session.darkMode'(state, payload: boolean) {
 			state.darkMode = payload;
@@ -58,3 +58,5 @@ export const sessionModule: Module<sessionState, any> = {
 		return session;
 	},
 };
+
+export default sessionModule;

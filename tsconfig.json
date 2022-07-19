@@ -1,5 +1,7 @@
 {
   "compilerOptions": {
+		"esModuleInterop": true,
+		"experimentalDecorators": true,
     "lib": ["ES2017", "DOM"],
     "noImplicitAny": true,
     "noImplicitThis": true,

@@ -4,6 +4,6 @@
     "noImplicitAny": true,
     "noImplicitThis": true,
     "noUnusedLocals": true,
-    "strict": true,
+    "strict": true
   }
 }

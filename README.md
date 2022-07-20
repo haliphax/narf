@@ -10,6 +10,7 @@
 - [Vue3] - Framework
   - [Vuex] - State management
   - [Vue Router] - Routing
+- [Remult] - Data access layer
 - [Parcel] - Build agent (transpilation, minification, bundling, etc.)
 - [CSS Grid] (mostly) - Layout paradigm
 - [Less] - CSS preprocessor (for media queries as variables)
@@ -20,6 +21,7 @@
 [Vue3]: https://vuejs.org
 [Vuex]: https://vuex.vuejs.org
 [Vue Router]: https://router.vuejs.org
+[Remult]: https://remult.dev
 [Parcel]: https://parceljs.org
 [CSS Grid]: https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Grid_Layout
 [Less]: https://lesscss.org

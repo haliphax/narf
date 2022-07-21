@@ -11,7 +11,7 @@
   },
   "dependencies": {
     "express": "^4.18.1",
-    "remult": "^0.13.31",
+    "remult": "^0.14.13",
     "uuid": "^8.3.2",
     "vuex": "^4.0.2"
   }

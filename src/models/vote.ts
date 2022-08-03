@@ -6,7 +6,7 @@ import { Participant } from './participant';
 	id: entity => entity.find('id'),
 })
 export class Vote {
-	@Fields.autoIncrement()
+	@Fields.autoIncrement({ allowApiUpdate: false })
 	id!: number;
 
 	@Fields.string()

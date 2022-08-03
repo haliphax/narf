@@ -1,4 +1,4 @@
-import { Story } from '../../models/story';
+import Story from '../../models/story';
 
 export type sessionSettings = {
 	darkMode: boolean,

@@ -1,9 +1,10 @@
 import cors from 'cors';
 import express from 'express';
 import { remultExpress } from 'remult/remult-express';
-import { Participant } from '../models/participant';
-import { Story } from '../models/story';
-import { Vote } from '../models/vote';
+// models
+import Participant from '../models/participant';
+import Story from '../models/story';
+import Vote from '../models/vote';
 
 const port = 3001;
 const app = express();

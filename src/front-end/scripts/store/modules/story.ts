@@ -1,9 +1,9 @@
 import { Module } from 'vuex';
-import { Story } from '../../../../models/story';
-import { Vote } from '../../../../models/vote';
 import remult from '../../remult';
 import router from '../../router';
 import { storeState, storyState, votePayload } from '../../types';
+import Story from '../../../../models/story';
+import Vote from '../../../../models/vote';
 
 const story: Module<storyState | Promise<storyState>, storeState> = {
 	actions: {

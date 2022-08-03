@@ -1,11 +1,11 @@
 import { Entity, Fields } from 'remult';
-import { Participant } from './participant';
+import Participant from './participant';
 
 @Entity('vote', {
 	allowApiCrud: true,
 	id: entity => entity.find('id'),
 })
-export class Vote {
+export default class Vote {
 	@Fields.autoIncrement({ allowApiUpdate: false })
 	id!: number;
 

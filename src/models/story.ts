@@ -1,8 +1,8 @@
 import { Entity, Fields } from 'remult';
-import { Vote } from './vote';
+import Vote from './vote';
 
 @Entity('story', { allowApiCrud: true })
-export class Story {
+export default class Story {
 	@Fields.string({ allowApiUpdate: false })
 	id = '';
 

@@ -1,12 +1,7 @@
 <script lang="ts">
 import { Component } from 'vue';
-import store from '../store';
 
-const Participants: Component = {
-	created() {
-		store.dispatch('addParticipant', store.state.session);
-	},
-};
+const Participants: Component = {};
 
 export default Participants;
 </script>
@@ -15,15 +10,15 @@ export default Participants;
 	<div>
 		<h2>Participants</h2>
 		<ul class="unstyled">
-			<li class="grid" v-for="p of $store.state.participants.people">
+			<li class="grid" v-for="v of $store.state.story.story?.votes">
 				<span class="name">
-					{{ p.name }}
-					<span class="you" v-if="p.id === $store.state.session.id">
+					{{ v.participant?.name ?? 'Anonymous' }}
+					<span class="you" v-if="v.participantId === $store.state.session.id">
 						(You)
 					</span>
 				</span>
-				<span class="value" v-show="p.value">
-					<span v-if="$store.state.story.revealed">{{ p.value }}</span>
+				<span class="value">
+					<span v-if="$store.state.story.revealed">{{ v.vote }}</span>
 					<span v-else>?</span>
 				</span>
 			</li>
@@ -31,7 +26,7 @@ export default Participants;
 	</div>
 </template>
 
-<style scoped>
+<style lang="less" scoped>
 li {
 	grid-auto-flow: row;
 	grid-template-columns: auto min-content;

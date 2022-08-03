@@ -1,6 +1,6 @@
 <script lang="ts">
 import { Component } from 'vue';
-import { estimate } from '../types';
+import { votePayload } from '../types';
 import PieChart from './piechart.vue';
 import store from '../store';
 
@@ -28,10 +28,12 @@ const Estimate: Component = {
 	computed: {
 		options(): Readonly<Array<string>> { return modeMap[this.mode as mode]; },
 		votes() {
+			if (store.state.story.story == null) return [];
+
 			const votes = new Map<string, number>();
 
-			Object.values(store.state.participants.people).map(v => {
-				const value = v.value!.toString();
+			Object.values(store.state.story.story.votes).map(v => {
+				const value = v.vote.toString();
 
 				if (!votes.has(value))
 					votes.set(value, 0);
@@ -42,8 +44,10 @@ const Estimate: Component = {
 			return votes;
 		},
 		you() {
-			return Object.values(store.state.participants.people)
-				.find(v => v.id === store.state.session.id);
+			if (store.state.story.story == null) return null;
+
+			return Object.values(store.state.story.story.votes)
+				.find(v => v.participantId === store.state.session.id);
 		},
 	},
 	data(): pointsData {
@@ -58,16 +62,12 @@ const Estimate: Component = {
 
 			return classes;
 		},
-		setEstimate(option: string) {
-			const estimate: estimate = {
-				user: {
-					id: store.state.session.id,
-					name: store.state.session.name,
-				},
-				value: option == this.you?.value ? null : option,
+		vote(option: string) {
+			const payload: votePayload = {
+				person: store.state.session.id,
+				vote: option,
 			};
-
-			store.dispatch('estimate', estimate);
+			store.dispatch('story.vote', payload);
 		},
 	},
 };
@@ -80,7 +80,7 @@ export default Estimate;
 		<h2>Estimate</h2>
 		<ul class="unstyled grid" v-if="!$store.state.story.revealed">
 			<li v-for="option in options">
-				<button @click="setEstimate(option)" :class="classes(option)">
+				<button @click="vote(option)" :class="classes(option)">
 					{{ option }}
 				</button>
 			</li>

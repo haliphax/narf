@@ -1,37 +1,25 @@
-export type estimate = {
-	user: participant,
-	value: string | null,
-};
+import { Story } from '../../models/story';
 
-export type participant = {
-	id: string,
-	name: string,
-	value?: string | null,
-};
-
-export type participantsState = {
-	people: Record<string, participant>,
-};
-
-export type sessionProperty = {
-	default(): any,
-	key: string,
+export type sessionSettings = {
+	darkMode: boolean,
 };
 
 export type sessionState = {
-	darkMode: boolean,
 	id: string,
-	name: string,
+	settings: sessionSettings,
 };
 
 export type storeState = {
-	participants: participantsState,
 	session: sessionState,
 	story: storyState,
 };
 
 export type storyState = {
-	id: string,
-	title: string,
 	revealed: boolean,
+	story: Story | null,
+};
+
+export type votePayload = {
+	person: string,
+	vote: string,
 };

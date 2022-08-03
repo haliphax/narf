@@ -1,14 +1,12 @@
 import { createStore } from 'vuex';
-import participantsModule from './modules/participants';
-import sessionModule from './modules/session';
+import session from './modules/session';
 import { storeState } from '../types';
-import storyModule from './modules/story';
+import story from './modules/story';
 
 const store = createStore<storeState>({
 	modules: {
-		participants: participantsModule,
-		session: sessionModule,
-		story: storyModule,
+		session,
+		story,
 	},
 });
 

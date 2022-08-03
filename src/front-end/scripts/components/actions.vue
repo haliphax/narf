@@ -3,11 +3,8 @@ import { Component } from 'vue';
 import store from '../store/index';
 
 const Actions: Component = {
-	computed: {
-		story() { return store.state.story; },
-	},
 	methods: {
-		reveal() { store.dispatch('reveal'); },
+		reveal() { store.dispatch('story.reveal'); },
 	},
 };
 
@@ -17,7 +14,7 @@ export default Actions;
 <template>
 	<ul class="unstyled">
 		<li>
-			<button @click="reveal" :disabled="story.revealed">Reveal</button>
+			<button @click="reveal" :disabled="$store.state.story.revealed">Reveal</button>
 		</li>
 	</ul>
 </template>

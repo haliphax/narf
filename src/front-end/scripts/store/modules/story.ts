@@ -1,42 +1,46 @@
-import { ActionContext, Module } from 'vuex';
-import { estimate, participant, storyState } from '../../types';
+import { Module } from 'vuex';
+import { Story } from '../../../../models/story';
+import { Vote } from '../../../../models/vote';
+import remult from '../../remult';
+import router from '../../router';
+import { storeState, storyState, votePayload } from '../../types';
 
-const storyModule: Module<storyState, any> = {
+const story: Module<storyState | Promise<storyState>, storeState> = {
 	actions: {
-		estimate(ctx: ActionContext<storyState, any>, payload: estimate) {
-			const people: Record<string, participant> =
-				(ctx.rootState as any).participants.people;
+		async 'story.load'(ctx) {
+			const story = await remult.repo(Story).findFirst({
+				id: router.currentRoute.value.params.story,
+			});
 
-			if (!people.hasOwnProperty(payload.user.id))
-			{
-				people[payload.user.id] = {
-					id: payload.user.id,
-					name: payload.user.name,
-				};
-			}
-
-			people[payload.user.id].value = payload.value;
-			ctx.commit('participants.people', people);
+			ctx.commit('story', story);
 		},
-		reveal(ctx: ActionContext<storyState, any>) {
+		'story.reveal'(ctx) {
 			ctx.commit('story.revealed', true);
 		},
+		async 'story.vote'(ctx, payload: votePayload) {
+			await remult.repo(Vote)
+				.insert({
+					storyId: (ctx.state as storyState).story?.id,
+					participantId: payload.person,
+					vote: payload.vote,
+				})
+				.then(v => (ctx.state as storyState).story?.votes.push(v));
+		}
 	},
 	mutations: {
-		'story.revealed'(state: storyState, payload: boolean) {
-			state.revealed = payload;
+		story(state, payload: Story) {
+			(state as storyState).story = payload;
 		},
-		'story.title'(state: storyState, payload: string) {
-			state.title = payload;
+		'story.revealed'(state, payload: boolean) {
+			(state as storyState).revealed = payload;
 		},
 	},
-	state(): storyState {
+	state() {
 		return {
-			id: '',
-			title: '',
+			story: null,
 			revealed: false,
-		};
+		} as storyState;
 	},
 };
 
-export default storyModule;
+export default story;

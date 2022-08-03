@@ -10,6 +10,7 @@ export class Story {
 	title = '';
 
 	@Fields.object<Story>((options, remult) => {
+		options.lazy = true;
 		options.serverExpression = async (story) =>
 			remult.repo(Vote).find({
 				where: { 'storyId': story.id }

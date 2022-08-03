@@ -27,6 +27,6 @@
   },
 	"scripts": {
 		"back-end": "nodemon -w src/back-end -w src/models -x 'npx tsc -p back-end.tsconfig.json && node dist/back-end/index.js'",
-		"front-end": "npx parcel src/front-end/scripts/index.ts"
+		"front-end": "npx parcel src/front-end/index.html"
 	}
 }

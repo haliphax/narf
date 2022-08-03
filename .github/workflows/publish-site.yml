@@ -22,7 +22,10 @@ jobs:
 
     - name: Build
       run: |
-        #--- build site with Parcel
+        #--- build back-end with tsc
+        npx tsc -p back-end.tsconfig.json
+
+        #--- build front-end with Parcel
         npx parcel build --dist-dir docs --public-url /narf \
           src/front-end/index.html
 

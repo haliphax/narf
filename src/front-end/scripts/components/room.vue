@@ -31,7 +31,7 @@ export default Room;
 </template>
 
 <style lang="less" scoped>
-@import '../../styles/variables.less';
+@import '../../styles/breakpoints.less';
 
 .grid {
 	grid-auto-columns: auto;

@@ -104,7 +104,7 @@ export default PieChart;
 </template>
 
 <style lang="less" scoped>
-@import '../../styles/variables.less';
+@import '../../styles/breakpoints.less';
 
 .pie {
 	aspect-ratio: 1;

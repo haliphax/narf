@@ -92,7 +92,7 @@ export default Estimate;
 </template>
 
 <style lang="less" scoped>
-@import '../../styles/variables.less';
+@import '../../styles/breakpoints.less';
 
 button {
 	aspect-ratio: 1;

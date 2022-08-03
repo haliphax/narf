@@ -1,9 +1,9 @@
 <script lang="ts">
 import { Component } from 'vue';
 
-const Header: Component = {};
+const Heading: Component = {};
 
-export default Header;
+export default Heading;
 </script>
 
 <template>

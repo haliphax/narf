@@ -2,7 +2,7 @@
 import Actions from './actions.vue';
 import { Component } from 'vue';
 import Estimate from './estimate.vue';
-import Header from './header.vue';
+import Heading from './heading.vue';
 import Participants from './participants.vue';
 import store from '../store';
 
@@ -10,7 +10,7 @@ const Room: Component = {
 	components: {
 		Actions,
 		Estimate,
-		Header,
+		Heading,
 		Participants,
 	},
 	created() {
@@ -22,7 +22,7 @@ export default Room;
 </script>
 
 <template>
-	<Header></Header>
+	<Heading></Heading>
 	<Actions class="actions"></Actions>
 	<div class="grid">
 		<Participants class="participants"></Participants>

@@ -1,9 +1,7 @@
 <script lang="ts">
 import { Component } from 'vue';
 
-const Home: Component = {
-
-};
+const Home: Component = {};
 
 export default Home;
 </script>

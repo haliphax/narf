@@ -6,7 +6,9 @@
 	--color-bg-secondary: #000;
 	--color-bg: #ccc;
 	--color-fg-secondary: #fff;
+	--color-fg-subtle: #777;
 	--color-fg: #000;
+	--color-link: #00c;
 	--color-outline: #000;
 	/* spacing */
 	--space-xs: .125rem;
@@ -22,7 +24,9 @@ body.dark-mode {
 	--color-bg-secondary: #ccc;
 	--color-bg: #555;
 	--color-fg-secondary: #000;
+	--color-fg-subtle: #999;
 	--color-fg: #ccc;
+	--color-link: #c0c;
 	--color-outline: #fff;
 }
 
@@ -31,12 +35,16 @@ body.dark-mode {
 	word-wrap: break-word;
 }
 
+html {
+	overflow-y: auto !important;
+}
+
 html, body {
-	height: 100%;
 	margin: 0;
-	min-height: 100%;
-	overflow-x: hidden;
+	min-width: 100%;
+	overflow: hidden;
 	padding: 0;
+	width: 100%;
 }
 
 body {
@@ -46,10 +54,7 @@ body {
 	display: flex;
 	flex-grow: 1;
 	font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-	height: auto;
-	margin: 0;
 	min-height: 100%;
-	padding: 0;
 }
 
 button {
@@ -58,14 +63,23 @@ button {
 	font-size: 115%;
 }
 
+a, a:link {
+	color: var(--color-link);
+}
+
+a:hover {
+	text-decoration: none;
+}
+
+a:visited {
+	opacity: 0.9;
+}
+
 label {
 	cursor: pointer;
 }
 
 #app {
-	margin: 0 auto;
-	max-width: 960px;
-	padding: var(--space-m);
 	width: 100%;
 }
 
@@ -83,7 +97,7 @@ label {
 
 /* screen-reader only */
 .sr-only {
-	margin-left: -100vw;
+	right: 100vw;
 	position: absolute;
 }
 
@@ -130,11 +144,4 @@ label {
 .tog input:checked + i::before {
 	left: auto;
 	right: var(--tog-c-offset);
-}
-
-@media @breakpoint_m {
-	#app {
-		padding-left: var(--space-xxl);
-		padding-right: var(--space-xxl);
-	}
 }

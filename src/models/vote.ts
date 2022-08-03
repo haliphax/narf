@@ -1,9 +1,14 @@
 import { Entity, Fields } from 'remult';
 import { Participant } from './participant';
-//import { Story } from './story';
 
-@Entity('vote', { allowApiCrud: true })
+@Entity('vote', {
+	allowApiCrud: true,
+	id: entity => entity.find('id'),
+})
 export class Vote {
+	@Fields.autoIncrement()
+	id!: number;
+
 	@Fields.string()
 	storyId = '';
 

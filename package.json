@@ -9,6 +9,7 @@
     "buffer": "^6.0.3",
     "crypto-browserify": "^3.12.0",
     "events": "^3.3.0",
+    "nodemon": "^2.0.19",
     "parcel": "^2.6.2",
     "process": "^0.11.10",
     "stream-browserify": "^3.0.0",
@@ -23,5 +24,9 @@
     "uuid": "^8.3.2",
     "vue-router": "^4.1.2",
     "vuex": "^4.0.2"
-  }
+  },
+	"scripts": {
+		"back-end": "nodemon -w src/back-end -w src/models -x 'npx tsc -p back-end.tsconfig.json && node dist/back-end/index.js'",
+		"front-end": "npx parcel src/front-end/scripts/index.ts"
+	}
 }

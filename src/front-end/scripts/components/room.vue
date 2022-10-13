@@ -56,8 +56,9 @@ export default Room;
 @media @breakpoint_m {
 	.grid {
 		grid-template-columns:
-			calc(40% - var(--space-m) / 2)
-			calc(60% - var(--space-m) / 2);
+			calc(40% - var(--space-xl) / 2)
+			calc(60% - var(--space-xl) / 2);
+		column-gap: var(--space-xl);
 	}
 
 	.participants {

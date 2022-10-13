@@ -106,17 +106,24 @@ export default PieChart;
 <style lang="less" scoped>
 @import '../../styles/breakpoints.less';
 
+label {
+	cursor: default;
+}
+
 .pie {
 	aspect-ratio: 1;
 	gap: 0;
+	isolation: isolate;
 	margin: 0;
 	padding: 0;
 	position: relative;
+	z-index: -2;
 }
 
 .pie > div {
 	position: absolute;
 	width: 100%;
+	z-index: -1;
 }
 
 .slice {

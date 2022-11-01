@@ -23,7 +23,7 @@
     "remult": "^0.13.31",
     "uuid": "^8.3.2",
     "vue-router": "^4.1.2",
-    "vuex": "^4.0.2"
+    "vuex": "^4.1.0"
   },
 	"scripts": {
 		"back-end": "nodemon -w src/back-end -w src/models -x 'npx tsc -p back-end.tsconfig.json && node dist/back-end/index.js'",

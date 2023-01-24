@@ -4,7 +4,7 @@
     "@parcel/transformer-less": "^2.8.2",
     "@parcel/transformer-vue": "^2.8.2",
     "@types/cors": "^2.8.13",
-    "@types/express": "^4.17.15",
+    "@types/express": "^4.17.16",
     "@types/uuid": "^9.0.0",
     "buffer": "^6.0.3",
     "crypto-browserify": "^3.12.0",

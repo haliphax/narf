@@ -1,6 +1,6 @@
 {
   "devDependencies": {
-    "@babel/types": "^7.20.7",
+    "@babel/types": "^7.21.3",
     "@parcel/transformer-less": "^2.8.3",
     "@parcel/transformer-vue": "^2.8.3",
     "@types/cors": "^2.8.13",

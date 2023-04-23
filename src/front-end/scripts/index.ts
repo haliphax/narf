@@ -4,9 +4,9 @@ import router from './router';
 import store from './store/index';
 
 (globalThis as any).__VUE_OPTIONS_API__ = true;
-(globalThis as any).__VUE_PROD_DEVTOOLS__ = false;
+(globalThis as any).__VUE_PROD_DEVTOOLS__ = !!process.env.DEBUG;
 
-const app = createApp(App);
+const app = createApp((App as unknown) as App.Component);
 
 app.use(router);
 app.use(store);

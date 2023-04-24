@@ -1,5 +1,6 @@
-.parcel-cache/
-.vscode/
-db/
-dist/
+/.parcel-cache/
+/.vscode/
+/db/
+/dist/
+/html/
 node_modules/

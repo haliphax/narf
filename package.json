@@ -27,6 +27,9 @@
     "vue-router": "^4.1.6",
     "vuex": "^4.1.0"
   },
+	"engines": {
+		"node": "^16 || 19"
+	},
   "scripts": {
     "build": "npx parcel build --dist-dir html src/front-end/index.html",
     "reload": "nodemon -w src/back-end -w src/models -x 'npx tsc -p back-end.tsconfig.json && node dist/back-end/index.js'",

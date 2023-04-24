@@ -1,4 +1,6 @@
 {
+  "name": "narf",
+  "version": "0.0.1",
   "devDependencies": {
     "@babel/types": "^7.21.4",
     "@parcel/transformer-less": "^2.8.3",

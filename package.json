@@ -41,10 +41,21 @@
 	"engines": {
 		"node": "^16 || ^18"
 	},
-	"browserslist": [
-		"last 2 versions",
-		"not dead"
-	],
+	"targets": {
+		"frontend": {
+			"context": "browser",
+			"distDir": "dist/front-end",
+			"engines": {
+				"browsers": "> 0.25%"
+			},
+			"source": "src/front-end/index.html"
+		},
+		"backend": {
+			"context": "node",
+			"distDir": "dist/back-end",
+			"source": "src/back-end/index.ts"
+		}
+	},
 	"prettier": {
 		"plugins": [
 			"prettier-plugin-organize-imports"
@@ -52,9 +63,6 @@
 		"vueIndentScriptAndStyle": false
 	},
 	"scripts": {
-		"client": "npx parcel src/front-end/index.html",
-		"install": "npx tsc -p back-end.tsconfig.json && npx parcel build --dist-dir dist/front-end src/front-end/index.html",
-		"server": "nodemon -w src/back-end -w src/models -x 'npx tsc -p back-end.tsconfig.json && node dist/back-end/index.js'",
-		"start": "node dist/back-end/index.js"
+		"start": "npx parcel build && node dist/back-end/index.js"
 	}
 }

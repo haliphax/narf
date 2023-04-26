@@ -1,6 +1,8 @@
+import historyApiFallback from "connect-history-api-fallback";
 import cors from "cors";
 import express from "express";
 import { remultExpress } from "remult/remult-express";
+
 // models
 import Participant from "../models/participant";
 import Story from "../models/story";
@@ -13,7 +15,12 @@ const app = express();
 
 if (host === "localhost") app.use(cors({ origin: "*" }));
 
-app.use(express.static("dist/front-end"));
+const staticMiddleware = express.static("dist/front-end");
+
+app.use(staticMiddleware);
+app.use(historyApiFallback());
+app.use(staticMiddleware);
+
 app.use(
 	remultExpress({
 		entities: [Participant, Story, Vote],

@@ -11,12 +11,9 @@ const port = parseInt(process.env.port ?? '3001');
 
 const app = express();
 
-app.use(cors({
-	origin: host === 'localhost'
-		? 'http://localhost:1234'
-		: 'https://haliphax.github.io'
-}));
+if (host === 'localhost') app.use(cors({ origin: "*" }));
 
+app.use(express.static("dist/front-end"));
 app.use(remultExpress({
 	entities: [Participant, Story, Vote],
 	async initApi(remult) {
@@ -30,5 +27,5 @@ app.use(remultExpress({
 	},
 }));
 app.listen(port, host, () => {
-	console.log(`API listening at http://${host}:${port}`);
+	console.log(`Server listening at http://${host}:${port}`);
 });

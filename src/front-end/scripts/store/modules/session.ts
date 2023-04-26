@@ -1,6 +1,7 @@
 import { Module } from 'vuex';
 import { sessionState, storeState } from '../../types';
 import { LOCALSTORAGE_GLOBAL_PREFIX } from '../../constants';
+import { v4 } from 'uuid';
 
 const SESSION_PREFIX = `${LOCALSTORAGE_GLOBAL_PREFIX}session.`;
 
@@ -17,7 +18,7 @@ const session: Module<sessionState, storeState> = {
 	},
 	state() {
 		return {
-			id: crypto.randomUUID(),
+			id: v4(),
 			settings: {
 				darkMode: JSON.parse(localStorage.getItem(keys.darkMode) ?? "false"),
 			},

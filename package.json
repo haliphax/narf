@@ -27,17 +27,17 @@
     "vue-router": "^4.1.6",
     "vuex": "^4.1.0"
   },
-	"engines": {
-		"node": ">= 16"
-	},
-	"browserslist": [
-		"last 2 versions",
-		"not dead"
-	],
+  "engines": {
+    "node": "^16 || ^18"
+  },
+  "browserslist": [
+    "last 2 versions",
+    "not dead"
+  ],
   "scripts": {
-    "back-end": "nodemon -w src/back-end -w src/models -x 'npx tsc -p back-end.tsconfig.json && node dist/back-end/index.js'",
-    "front-end": "npx parcel src/front-end/index.html",
-    "html": "npx parcel build --dist-dir dist/front-end src/front-end/index.html",
-    "start": "npx tsc -p back-end.tsconfig.json && host=0.0.0.0 port=3000 node dist/back-end/index.js"
+    "install": "rm -rf dist && npx tsc -p back-end.tsconfig.json && npx parcel build --dist-dir dist/front-end src/front-end/index.html",
+    "client": "npx parcel src/front-end/index.html",
+    "server": "nodemon -w src/back-end -w src/models -x 'npx tsc -p back-end.tsconfig.json && node dist/back-end/index.js'",
+    "start": "node dist/back-end/index.js"
   }
 }

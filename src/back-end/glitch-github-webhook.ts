@@ -18,21 +18,20 @@ const glitchGitHubWebHook = (app: Express) => {
 			const event = req.headers['x-github-event'] as string;
 
 			console.log(`received valid webhook: ${event}`)
+			res.sendStatus(200)
 
 			if (event === 'push') {
 				[
 					'git fetch origin master',
 					'git reset --hard origin/master',
 					'git pull origin master --force',
-					'npm ci',
-					'npm run install',
 					'refresh'
 				].forEach((cmd) => {
 					console.log(execSync(cmd).toString());
 				});
 			}
 
-			return res.sendStatus(200);
+			return;
 		}
 		else {
 			console.error('webhook signature incorrect');

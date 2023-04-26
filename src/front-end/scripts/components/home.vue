@@ -1,7 +1,7 @@
 <script lang="ts">
-import { Component } from "vue";
+import { defineComponent } from "vue";
 
-const Home: Component = {};
+const Home = defineComponent({});
 
 export default Home;
 </script>

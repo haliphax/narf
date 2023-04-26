@@ -1,10 +1,10 @@
 <script lang="ts">
-import { Component } from "vue";
+import { defineComponent } from "vue";
 import store from "../store";
 
 const settings = store.state.session.settings;
 
-const DarkMode: Component = {
+const DarkMode = defineComponent({
 	methods: {
 		toggle() {
 			const val = document.body.classList.toggle("dark-mode");
@@ -16,7 +16,7 @@ const DarkMode: Component = {
 		if (matchMedia("prefers-color-scheme: dark").matches || settings.darkMode)
 			this.toggle();
 	},
-};
+});
 
 export default DarkMode;
 </script>

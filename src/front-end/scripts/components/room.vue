@@ -1,12 +1,12 @@
 <script lang="ts">
 import Actions from "./actions.vue";
-import { Component } from "vue";
+import { defineComponent } from "vue";
 import Estimate from "./estimate.vue";
 import Heading from "./heading.vue";
 import Participants from "./participants.vue";
 import store from "../store";
 
-const Room: Component = {
+const Room = defineComponent({
 	components: {
 		Actions,
 		Estimate,
@@ -16,7 +16,7 @@ const Room: Component = {
 	created() {
 		store.dispatch("story.load");
 	},
-};
+});
 
 export default Room;
 </script>

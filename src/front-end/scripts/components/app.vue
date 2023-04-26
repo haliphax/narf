@@ -1,12 +1,12 @@
 <script lang="ts">
-import { Component } from "vue";
+import { defineComponent } from "vue";
 import DarkMode from "./darkmode.vue";
 
-const App: Component = {
+const App = defineComponent({
 	components: {
 		DarkMode,
 	},
-};
+});
 
 export default App;
 </script>

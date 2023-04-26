@@ -1,7 +1,7 @@
 <script lang="ts">
-import { Component } from "vue";
+import { defineComponent } from "vue";
 
-const Heading: Component = {};
+const Heading = defineComponent({});
 
 export default Heading;
 </script>

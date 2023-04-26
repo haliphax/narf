@@ -1,14 +1,14 @@
 <script lang="ts">
-import { Component } from "vue";
+import { defineComponent } from "vue";
 import store from "../store/index";
 
-const Actions: Component = {
+const Actions = defineComponent({
 	methods: {
 		reveal() {
 			store.dispatch("story.reveal");
 		},
 	},
-};
+});
 
 export default Actions;
 </script>
@@ -16,7 +16,7 @@ export default Actions;
 <template>
 	<ul class="unstyled">
 		<li>
-			<button @click="reveal" :disabled="$store.state.story.revealed">
+			<button :disabled="$store.state.story.revealed" @click="reveal">
 				Reveal
 			</button>
 		</li>

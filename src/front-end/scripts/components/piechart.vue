@@ -1,5 +1,5 @@
 <script lang="ts">
-import { Component } from "vue";
+import { defineComponent } from "vue";
 
 type slice = {
 	key: string;
@@ -9,7 +9,7 @@ type slice = {
 	votes: number;
 };
 
-const PieChart: Component = {
+const PieChart = defineComponent({
 	computed: {
 		slices() {
 			const data = this.data as Map<string, number>;
@@ -61,7 +61,7 @@ const PieChart: Component = {
 		},
 	},
 	props: ["data"],
-};
+});
 
 export default PieChart;
 </script>

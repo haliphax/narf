@@ -1,10 +1,19 @@
 repos:
   - repo: local
     hooks:
+      - id: eslint
+        name: eslint
+        args: [eslint, --fix]
+        entry: npx
+        language: system
+        types: [ts]
+        require_serial: true
+
       - id: prettier
         name: prettier
-        args: [prettier, -u, -c, -w]
+        args: [prettier, -c, -u, -w]
         entry: npx
         language: system
         types: [text]
+        exclude: \.ts$
         require_serial: true

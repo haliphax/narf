@@ -1,7 +1,7 @@
 <script lang="ts">
-import { Component } from "vue";
+import { defineComponent } from "vue";
 
-const Participants: Component = {};
+const Participants = defineComponent({});
 
 export default Participants;
 </script>

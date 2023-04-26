@@ -8,8 +8,14 @@
 		"@types/cors": "^2.8.13",
 		"@types/express": "^4.17.15",
 		"@types/uuid": "^9.0.0",
+		"@typescript-eslint/eslint-plugin": "^5.59.1",
+		"@typescript-eslint/parser": "^5.59.1",
 		"buffer": "^5.7.1",
 		"crypto-browserify": "^3.12.0",
+		"eslint": "^8.39.0",
+		"eslint-config-prettier": "^8.8.0",
+		"eslint-plugin-prettier": "^4.2.1",
+		"eslint-plugin-vue": "^9.11.0",
 		"events": "^3.3.0",
 		"gitmoji-cli": "^8.1.1",
 		"nodemon": "^2.0.22",
@@ -40,11 +46,12 @@
 	"prettier": {
 		"plugins": [
 			"prettier-plugin-organize-imports"
-		]
+		],
+		"vueIndentScriptAndStyle": false
 	},
 	"scripts": {
-		"install": "rm -rf dist && npx tsc -p back-end.tsconfig.json && npx parcel build --dist-dir dist/front-end src/front-end/index.html",
 		"client": "npx parcel src/front-end/index.html",
+		"install": "rm -rf dist && npx tsc -p back-end.tsconfig.json && npx parcel build --dist-dir dist/front-end src/front-end/index.html",
 		"server": "nodemon -w src/back-end -w src/models -x 'npx tsc -p back-end.tsconfig.json && node dist/back-end/index.js'",
 		"start": "node dist/back-end/index.js"
 	}

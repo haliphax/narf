@@ -1,5 +1,5 @@
 <script lang="ts">
-import { Component } from "vue";
+import { defineComponent } from "vue";
 import { votePayload } from "../types";
 import PieChart from "./piechart.vue";
 import store from "../store";
@@ -21,7 +21,7 @@ type pointsData = {
 	mode: mode;
 };
 
-const Estimate: Component = {
+const Estimate = defineComponent({
 	components: {
 		PieChart,
 	},
@@ -59,7 +59,7 @@ const Estimate: Component = {
 		classes(option: string) {
 			const classes = [];
 
-			if (this.you?.value == option) classes.push("chosen");
+			if (this.you?.vote == option) classes.push("chosen");
 
 			return classes;
 		},
@@ -71,7 +71,7 @@ const Estimate: Component = {
 			store.dispatch("story.vote", payload);
 		},
 	},
-};
+});
 
 export default Estimate;
 </script>

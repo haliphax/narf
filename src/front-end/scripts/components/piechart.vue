@@ -1,12 +1,12 @@
 <script lang="ts">
-import { Component } from 'vue';
+import { Component } from "vue";
 
 type slice = {
-	key: string,
-	percent: number,
-	index: number,
-	rotation: number,
-	votes: number,
+	key: string;
+	percent: number;
+	index: number;
+	rotation: number;
+	votes: number;
 };
 
 const PieChart: Component = {
@@ -19,7 +19,7 @@ const PieChart: Component = {
 			let total = 0;
 			let rotation = 0;
 
-			while (value = valIter.next()) {
+			while ((value = valIter.next())) {
 				if (value.done) break;
 				total += value.value;
 			}
@@ -35,7 +35,7 @@ const PieChart: Component = {
 					votes: v,
 				});
 				rotation += 360 * percent;
-			};
+			}
 
 			return slices
 				.sort((a, b) => b.votes - a.votes)
@@ -57,10 +57,10 @@ const PieChart: Component = {
 			output.push(`--p:${slice.percent}`);
 			output.push(`--r:${slice.rotation}deg`);
 
-			return output.join(';');
-		}
+			return output.join(";");
+		},
 	},
-	props: ['data'],
+	props: ["data"],
 };
 
 export default PieChart;
@@ -68,7 +68,7 @@ export default PieChart;
 
 <template>
 	<div class="pie" role="figure">
-		<div v-for="s, idx in slices" :style="styles(s)">
+		<div v-for="(s, idx) in slices" :style="styles(s)">
 			<div :class="`slice color_${idx}`">
 				<label>
 					<span>{{ s.key }}</span>
@@ -88,10 +88,13 @@ export default PieChart;
 				</tr>
 			</thead>
 			<tbody>
-				<tr v-for="s, idx in slices">
+				<tr v-for="(s, idx) in slices">
 					<td>
-						<span :class="`color color_${idx}`" :id="`slice_color_${s.key}`"
-							:style="styles(s)">
+						<span
+							:class="`color color_${idx}`"
+							:id="`slice_color_${s.key}`"
+							:style="styles(s)"
+						>
 						</span>
 					</td>
 					<td>{{ s.key }}</td>
@@ -104,7 +107,7 @@ export default PieChart;
 </template>
 
 <style lang="less" scoped>
-@import '../../styles/breakpoints.less';
+@import "../../styles/breakpoints.less";
 
 label {
 	cursor: default;
@@ -137,7 +140,7 @@ label {
 .slice::before {
 	background: conic-gradient(var(--c) calc(var(--p) * 100%), #0000 0);
 	border-radius: 50%;
-	content: '';
+	content: "";
 	display: block;
 	inset: 0;
 	position: absolute;
@@ -179,7 +182,8 @@ tr:nth-child(2n) {
 	background-color: var(--color-bg);
 }
 
-th, td {
+th,
+td {
 	border: solid var(--color-fg);
 	border-width: 0 0 1px 1px;
 	border-collapse: collapse;

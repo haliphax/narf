@@ -1,25 +1,25 @@
-import Story from '../../models/story';
+import Story from "../../models/story";
 
 export type sessionSettings = {
-	darkMode: boolean,
+	darkMode: boolean;
 };
 
 export type sessionState = {
-	id: string,
-	settings: sessionSettings,
+	id: string;
+	settings: sessionSettings;
 };
 
 export type storeState = {
-	session: sessionState,
-	story: storyState,
+	session: sessionState;
+	story: storyState;
 };
 
 export type storyState = {
-	revealed: boolean,
-	story: Story | null,
+	revealed: boolean;
+	story: Story | null;
 };
 
 export type votePayload = {
-	person: string,
-	vote: string,
+	person: string;
+	vote: string;
 };

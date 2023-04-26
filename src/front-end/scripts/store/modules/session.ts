@@ -1,17 +1,17 @@
-import { Module } from 'vuex';
-import { sessionState, storeState } from '../../types';
-import { LOCALSTORAGE_GLOBAL_PREFIX } from '../../constants';
-import { v4 } from 'uuid';
+import { v4 } from "uuid";
+import { Module } from "vuex";
+import { LOCALSTORAGE_GLOBAL_PREFIX } from "../../constants";
+import { sessionState, storeState } from "../../types";
 
 const SESSION_PREFIX = `${LOCALSTORAGE_GLOBAL_PREFIX}session.`;
 
 const keys = {
-	darkMode: `${SESSION_PREFIX}darkMode`	,
+	darkMode: `${SESSION_PREFIX}darkMode`,
 };
 
 const session: Module<sessionState, storeState> = {
 	mutations: {
-		'session.settings.darkMode'(state, payload: boolean) {
+		"session.settings.darkMode"(state, payload: boolean) {
 			state.settings.darkMode = payload;
 			localStorage.setItem(keys.darkMode, payload.toString());
 		},

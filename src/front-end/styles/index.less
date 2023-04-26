@@ -9,9 +9,9 @@
 	--color-link: #00c;
 	--color-outline: #000;
 	/* spacing */
-	--space-xs: .125rem;
-	--space-s: .25rem;
-	--space-m: .5rem;
+	--space-xs: 0.125rem;
+	--space-s: 0.25rem;
+	--space-m: 0.5rem;
 	--space-l: 1rem;
 	--space-xl: 1.5rem;
 	--space-xxl: 2rem;
@@ -37,7 +37,8 @@ html {
 	overflow-y: auto !important;
 }
 
-html, body {
+html,
+body {
 	margin: 0;
 	min-width: 100%;
 	overflow: hidden;
@@ -51,7 +52,7 @@ body {
 	color: var(--color-fg);
 	display: flex;
 	flex-grow: 1;
-	font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+	font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
 	min-height: 100%;
 }
 
@@ -61,7 +62,8 @@ button {
 	font-size: 115%;
 }
 
-a, a:link {
+a,
+a:link {
 	color: var(--color-link);
 }
 
@@ -132,7 +134,7 @@ label {
 .tog i::before {
 	background: var(--tog-c-back);
 	border-radius: 50%;
-	content: '';
+	content: "";
 	height: var(--tog-c-dim);
 	left: var(--tog-c-offset);
 	position: absolute;

@@ -1,5 +1,5 @@
 <script lang="ts">
-import { Component } from 'vue';
+import { Component } from "vue";
 
 const Heading: Component = {};
 

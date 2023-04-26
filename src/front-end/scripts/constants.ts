@@ -1,1 +1,1 @@
-export const LOCALSTORAGE_GLOBAL_PREFIX = 'narf.';
+export const LOCALSTORAGE_GLOBAL_PREFIX = "narf.";

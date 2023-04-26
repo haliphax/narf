@@ -1,10 +1,10 @@
-import { Entity, Fields } from 'remult';
+import { Entity, Fields } from "remult";
 
-@Entity('participant', { allowApiCrud: true })
+@Entity("participant", { allowApiCrud: true })
 export default class Participant {
 	@Fields.string({ allowApiUpdate: false })
-	id = '';
+	id = "";
 
 	@Fields.string()
-	name = '';
+	name = "";
 }

@@ -1,5 +1,5 @@
 <script lang="ts">
-import { Component } from 'vue';
+import { Component } from "vue";
 
 const Participants: Component = {};
 
@@ -12,7 +12,7 @@ export default Participants;
 		<ul class="unstyled">
 			<li class="grid" v-for="v of $store.state.story.story?.votes">
 				<span class="name">
-					{{ v.participant?.name ?? 'Anonymous' }}
+					{{ v.participant?.name ?? "Anonymous" }}
 					<span class="you" v-if="v.participantId === $store.state.session.id">
 						(You)
 					</span>
@@ -43,7 +43,7 @@ li:nth-child(2n) {
 }
 
 .you {
-	font-size: .75em;
+	font-size: 0.75em;
 	opacity: 0.8;
 }
 

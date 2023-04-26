@@ -1,16 +1,16 @@
 <script lang="ts">
-import { Component } from 'vue';
-import { votePayload } from '../types';
-import PieChart from './piechart.vue';
-import store from '../store';
+import { Component } from "vue";
+import { votePayload } from "../types";
+import PieChart from "./piechart.vue";
+import store from "../store";
 
-const FIBONACCI = ['0', '0.5', '1', '2', '3', '5', '8', '13', '💬'] as const;
-const TSHIRTS = ['XS', 'S', 'M', 'L', 'XL', '💬'] as const;
+const FIBONACCI = ["0", "0.5", "1", "2", "3", "5", "8", "13", "💬"] as const;
+const TSHIRTS = ["XS", "S", "M", "L", "XL", "💬"] as const;
 
 enum mode {
 	Fibonacci,
 	TShirts,
-};
+}
 
 const modeMap = {
 	[mode.Fibonacci]: FIBONACCI,
@@ -18,7 +18,7 @@ const modeMap = {
 };
 
 type pointsData = {
-	mode: mode,
+	mode: mode;
 };
 
 const Estimate: Component = {
@@ -26,17 +26,18 @@ const Estimate: Component = {
 		PieChart,
 	},
 	computed: {
-		options(): Readonly<Array<string>> { return modeMap[this.mode as mode]; },
+		options(): Readonly<Array<string>> {
+			return modeMap[this.mode as mode];
+		},
 		votes() {
 			if (store.state.story.story == null) return [];
 
 			const votes = new Map<string, number>();
 
-			Object.values(store.state.story.story.votes).map(v => {
+			Object.values(store.state.story.story.votes).map((v) => {
 				const value = v.vote.toString();
 
-				if (!votes.has(value))
-					votes.set(value, 0);
+				if (!votes.has(value)) votes.set(value, 0);
 
 				votes.set(value, votes.get(value)! + 1);
 			});
@@ -46,8 +47,9 @@ const Estimate: Component = {
 		you() {
 			if (store.state.story.story == null) return null;
 
-			return Object.values(store.state.story.story.votes)
-				.find(v => v.participantId === store.state.session.id);
+			return Object.values(store.state.story.story.votes).find(
+				(v) => v.participantId === store.state.session.id
+			);
 		},
 	},
 	data(): pointsData {
@@ -57,8 +59,7 @@ const Estimate: Component = {
 		classes(option: string) {
 			const classes = [];
 
-			if (this.you?.value == option)
-				classes.push('chosen');
+			if (this.you?.value == option) classes.push("chosen");
 
 			return classes;
 		},
@@ -67,7 +68,7 @@ const Estimate: Component = {
 				person: store.state.session.id,
 				vote: option,
 			};
-			store.dispatch('story.vote', payload);
+			store.dispatch("story.vote", payload);
 		},
 	},
 };
@@ -92,7 +93,7 @@ export default Estimate;
 </template>
 
 <style lang="less" scoped>
-@import '../../styles/breakpoints.less';
+@import "../../styles/breakpoints.less";
 
 button {
 	aspect-ratio: 1;

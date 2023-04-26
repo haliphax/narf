@@ -1,6 +1,6 @@
 <script lang="ts">
-import { Component } from 'vue';
-import DarkMode from './darkmode.vue';
+import { Component } from "vue";
+import DarkMode from "./darkmode.vue";
 
 const App: Component = {
 	components: {
@@ -24,7 +24,7 @@ export default App;
 </template>
 
 <style lang="less" scoped>
-@import '../../styles/breakpoints.less';
+@import "../../styles/breakpoints.less";
 
 .app {
 	margin: 0 auto;

@@ -1,10 +1,10 @@
 <script lang="ts">
-import Actions from './actions.vue';
-import { Component } from 'vue';
-import Estimate from './estimate.vue';
-import Heading from './heading.vue';
-import Participants from './participants.vue';
-import store from '../store';
+import Actions from "./actions.vue";
+import { Component } from "vue";
+import Estimate from "./estimate.vue";
+import Heading from "./heading.vue";
+import Participants from "./participants.vue";
+import store from "../store";
 
 const Room: Component = {
 	components: {
@@ -14,7 +14,7 @@ const Room: Component = {
 		Participants,
 	},
 	created() {
-		store.dispatch('story.load');
+		store.dispatch("story.load");
 	},
 };
 
@@ -31,7 +31,7 @@ export default Room;
 </template>
 
 <style lang="less" scoped>
-@import '../../styles/breakpoints.less';
+@import "../../styles/breakpoints.less";
 
 .grid {
 	grid-auto-columns: auto;

@@ -9,18 +9,17 @@ import Story from "../models/story";
 import Vote from "../models/vote";
 
 const host = process.env.host ?? "localhost";
-const port = parseInt(process.env.port ?? "3001");
+const port = parseInt(process.env.port ?? "3000");
 
 const app = express();
 
-if (host === "localhost") app.use(cors({ origin: "*" }));
+if (process.env.NODE_ENV !== "production") app.use(cors({ origin: "*" }));
 
 const staticMiddleware = express.static("dist/front-end");
 
 app.use(staticMiddleware);
 app.use(historyApiFallback());
 app.use(staticMiddleware);
-
 app.use(
 	remultExpress({
 		entities: [Participant, Story, Vote],

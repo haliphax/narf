@@ -1,0 +1,24 @@
+name: Refresh Glitch app
+
+on:
+  push:
+    branches: [master]
+
+  workflow_dispatch:
+
+jobs:
+  glitch-refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Refresh Glitch app via API
+        env:
+          GLITCH_TOKEN: ${{ secrets.GLITCH_TOKEN }}
+        run: |
+          url="https://api.glitch.com/project/githubImport?"
+          auth="authorization=$GLITCH_TOKEN&"
+          proj="projectId=sphenoid-secret-antimony&"
+          repo="repo=haliphax/narf"
+          full_url="$url$auth$proj$repo"
+          echo "$full_url"
+          res="$(curl -sX POST -w '%{http_code}' -o /dev/stderr "$full_url")"
+          [[ $res -eq 200 ]] || exit 1

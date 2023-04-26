@@ -2,8 +2,6 @@
 	"compilerOptions": {
 		"outDir": "./dist"
 	},
-  "extends": "./tsconfig.json",
-  "include": [
-      "./src/back-end/*"
-  ]
+	"extends": "./tsconfig.json",
+	"include": ["./src/back-end/*"]
 }

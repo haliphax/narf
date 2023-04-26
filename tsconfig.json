@@ -1,12 +1,12 @@
 {
-  "compilerOptions": {
+	"compilerOptions": {
 		"esModuleInterop": true,
 		"experimentalDecorators": true,
 		"jsx": "preserve",
-    "lib": ["ES2017", "DOM"],
-    "noImplicitAny": true,
-    "noImplicitThis": true,
-    "noUnusedLocals": true,
-    "strict": true
-  }
+		"lib": ["ES2017", "DOM"],
+		"noImplicitAny": true,
+		"noImplicitThis": true,
+		"noUnusedLocals": true,
+		"strict": true
+	}
 }

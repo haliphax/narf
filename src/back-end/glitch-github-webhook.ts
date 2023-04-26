@@ -15,7 +15,11 @@ const glitchGitHubWebHook = (app: Express) => {
 				Buffer.from(req.headers['x-hub-signature'] as string)
 			)
 		) {
-			if (req.headers['x-github-event'] === 'push') {
+			const event = req.headers['x-github-event'] as string;
+
+			console.log(`received valid webhook: ${event}`)
+
+			if (event === 'push') {
 				[
 					'git fetch origin master',
 					'git reset --hard origin/master',

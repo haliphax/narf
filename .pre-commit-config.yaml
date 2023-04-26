@@ -1,0 +1,10 @@
+repos:
+  - repo: local
+    hooks:
+      - id: prettier
+        name: prettier
+        args: [prettier, -u, -c, -w]
+        entry: npx
+        language: system
+        types: [text]
+        require_serial: true

@@ -6,6 +6,10 @@ on:
 
   workflow_dispatch:
 
+concurrency:
+  cancel-in-progress: true
+  group: ${{ github.workflow }}-${{ github.branch }}
+
 jobs:
   glitch-refresh:
     runs-on: ubuntu-latest

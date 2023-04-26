@@ -5,6 +5,7 @@ import { remultExpress } from 'remult/remult-express';
 import Participant from '../models/participant';
 import Story from '../models/story';
 import Vote from '../models/vote';
+import glitchGitHubWebHook from './glitch-github-webhook';
 
 const host = process.env.host ?? 'localhost';
 const port = parseInt(process.env.port ?? '3001');
@@ -26,6 +27,9 @@ app.use(remultExpress({
 		}
 	},
 }));
+
+glitchGitHubWebHook(app);
+
 app.listen(port, host, () => {
 	console.log(`Server listening at http://${host}:${port}`);
 });

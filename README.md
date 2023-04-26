@@ -4,6 +4,8 @@
 
 [![Refresh Glitch app](https://github.com/haliphax/narf/actions/workflows/glitch-refresh.yml/badge.svg)](https://github.com/haliphax/narf/actions/workflows/glitch-refresh.yml)
 
+[Demonstration app][]
+
 ## Stack
 
 - [TypeScript][] - Language
@@ -15,13 +17,13 @@
 - [CSS Grid][] (mostly) - Layout paradigm
 - [Less][] - CSS preprocessor (for media queries as variables)
 
-
+[css grid]: https://developer.mozilla.org/en-us/docs/web/css/css_grid_layout
+[demonstration app]: https://sphenoid-secret-antimony.glitch.me
+[less]: https://lesscss.org
+[parcel]: https://parceljs.org
+[remult]: https://remult.dev
 [story points]: https://www.scrum.org/resources/blog/why-do-we-use-story-points-estimating
 [typescript]: https://typescriptlang.org
+[vue router]: https://router.vuejs.org
 [vue3]: https://vuejs.org
 [vuex]: https://vuex.vuejs.org
-[vue router]: https://router.vuejs.org
-[remult]: https://remult.dev
-[parcel]: https://parceljs.org
-[css grid]: https://developer.mozilla.org/en-us/docs/web/css/css_grid_layout
-[less]: https://lesscss.org

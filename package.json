@@ -53,7 +53,7 @@
 	},
 	"scripts": {
 		"client": "npx parcel src/front-end/index.html",
-		"install": "rm -rf dist && npx tsc -p back-end.tsconfig.json && npx parcel build --dist-dir dist/front-end src/front-end/index.html",
+		"install": "npx tsc -p back-end.tsconfig.json && npx parcel build --dist-dir dist/front-end src/front-end/index.html",
 		"server": "nodemon -w src/back-end -w src/models -x 'npx tsc -p back-end.tsconfig.json && node dist/back-end/index.js'",
 		"start": "node dist/back-end/index.js"
 	}

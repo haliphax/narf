@@ -3,7 +3,7 @@ import Story from "../../../../models/story";
 import Vote from "../../../../models/vote";
 import remult from "../../remult";
 import router from "../../router";
-import { storeState, storyState, votePayload } from "../../types";
+import { storeState, storyState } from "../../types";
 
 const story: Module<storyState | Promise<storyState>, storeState> = {
 	actions: {
@@ -17,15 +17,16 @@ const story: Module<storyState | Promise<storyState>, storeState> = {
 		"story.reveal"(ctx) {
 			ctx.commit("story.revealed", true);
 		},
-		async "story.vote"(ctx, payload: votePayload) {
+		async "story.vote"(ctx, payload: Vote) {
+			if (!(ctx.state as storyState).story) {
+				return;
+			}
+
 			await remult
 				.repo(Vote)
-				.insert({
-					storyId: (ctx.state as storyState).story?.id,
-					participantId: payload.person,
-					vote: payload.vote,
-				})
-				.then((v) => (ctx.state as storyState).story?.votes.push(v));
+				.save(payload)
+				.then((vote) => remult.repo(Story).findId(vote.storyId ?? ""))
+				.then((story) => ctx.commit("story", story));
 		},
 	},
 	mutations: {

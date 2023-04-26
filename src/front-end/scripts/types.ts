@@ -18,8 +18,3 @@ export type storyState = {
 	revealed: boolean;
 	story: Story | null;
 };
-
-export type votePayload = {
-	person: string;
-	vote: string;
-};

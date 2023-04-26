@@ -1,8 +1,8 @@
 <script lang="ts">
 import { defineComponent } from "vue";
-import { votePayload } from "../types";
 import PieChart from "./piechart.vue";
 import store from "../store";
+import Vote from "../../../models/vote";
 
 const FIBONACCI = ["0", "0.5", "1", "2", "3", "5", "8", "13", "💬"] as const;
 const TSHIRTS = ["XS", "S", "M", "L", "XL", "💬"] as const;
@@ -25,6 +25,9 @@ const Estimate = defineComponent({
 	components: {
 		PieChart,
 	},
+	data(): pointsData {
+		return { mode: mode.Fibonacci };
+	},
 	computed: {
 		options(): Readonly<Array<string>> {
 			return modeMap[this.mode as mode];
@@ -39,7 +42,7 @@ const Estimate = defineComponent({
 
 				if (!votes.has(value)) votes.set(value, 0);
 
-				votes.set(value, votes.get(value)! + 1);
+				votes.set(value, (votes.get(value) ?? 0) + 1);
 			});
 
 			return votes;
@@ -52,9 +55,6 @@ const Estimate = defineComponent({
 			);
 		},
 	},
-	data(): pointsData {
-		return { mode: mode.Fibonacci };
-	},
 	methods: {
 		classes(option: string) {
 			const classes = [];
@@ -64,10 +64,19 @@ const Estimate = defineComponent({
 			return classes;
 		},
 		vote(option: string) {
-			const payload: votePayload = {
-				person: store.state.session.id,
-				vote: option,
-			};
+			const payload: Vote =
+				this.you ??
+				(() => {
+					const v = new Vote();
+					v.participantId = this.$store.state.session.id;
+
+					if (this.$store.state.story.story?.id) {
+						v.storyId = this.$store.state.story.story.id;
+					}
+
+					return v;
+				})();
+			payload.vote = option;
 			store.dispatch("story.vote", payload);
 		},
 	},
@@ -79,9 +88,9 @@ export default Estimate;
 <template>
 	<div aria-live="polite">
 		<h2>Estimate</h2>
-		<ul class="unstyled grid" v-if="!$store.state.story.revealed">
-			<li v-for="option in options">
-				<button @click="vote(option)" :class="classes(option)">
+		<ul v-if="!$store.state.story.revealed" class="unstyled grid">
+			<li v-for="option in options" :key="option">
+				<button :class="classes(option)" @click="vote(option)">
 					{{ option }}
 				</button>
 			</li>

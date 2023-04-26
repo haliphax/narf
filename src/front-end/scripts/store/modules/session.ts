@@ -7,6 +7,7 @@ const SESSION_PREFIX = `${LOCALSTORAGE_GLOBAL_PREFIX}session.`;
 
 const keys = {
 	darkMode: `${SESSION_PREFIX}darkMode`,
+	sessionId: `${SESSION_PREFIX}sessionId`,
 };
 
 const session: Module<sessionState, storeState> = {
@@ -17,8 +18,15 @@ const session: Module<sessionState, storeState> = {
 		},
 	},
 	state() {
+		let sessionId = localStorage.getItem(keys.sessionId);
+
+		if (!sessionId) {
+			sessionId = v4();
+			localStorage.setItem(keys.sessionId, sessionId);
+		}
+
 		return {
-			id: v4(),
+			id: sessionId,
 			settings: {
 				darkMode: JSON.parse(localStorage.getItem(keys.darkMode) ?? "false"),
 			},

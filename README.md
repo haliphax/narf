@@ -2,8 +2,6 @@
 
 > [Story points][] estimation webapp written in TypeScript
 
-[![Refresh Glitch app](https://github.com/haliphax/narf/actions/workflows/glitch-refresh.yml/badge.svg)](https://github.com/haliphax/narf/actions/workflows/glitch-refresh.yml)
-
 [Demonstration app][]
 
 ## Stack

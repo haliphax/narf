@@ -63,6 +63,7 @@
 		"vueIndentScriptAndStyle": false
 	},
 	"scripts": {
+		"build": "npx parcel build",
 		"start": "node dist/back-end/index.js"
 	}
 }

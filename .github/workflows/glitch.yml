@@ -27,7 +27,7 @@ jobs:
         run: npm ci --ignore-scripts
 
       - name: Build application
-        run: npx parcel build
+        run: npm run build
 
       - name: Push to glitch branch
         run: |

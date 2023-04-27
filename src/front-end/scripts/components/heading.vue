@@ -7,5 +7,8 @@ export default Heading;
 </script>
 
 <template>
-	<h1>{{ $store.state.story.story?.title ?? "Loading..." }}</h1>
+	<h1>
+		<span v-if="!$store.state.story.story" aria-hidden="true">&nbsp;</span>
+		{{ $store.state.story.story?.title }}
+	</h1>
 </template>

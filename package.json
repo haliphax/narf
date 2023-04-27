@@ -1,6 +1,6 @@
 {
 	"name": "narf",
-	"version": "1.0.0-dev.1",
+	"version": "0.0.1",
 	"private": true,
 	"devDependencies": {
 		"@parcel/transformer-less": "^2.8.3",

@@ -20,7 +20,10 @@ const glitchWebhook = (app: Application) => {
 		) {
 			res.sendStatus(200);
 
-			if (req.headers["x-github-event"] === "push") {
+			if (
+				req.headers["x-github-event"] === "push" &&
+				req.body.ref === "refs/heads/glitch"
+			) {
 				[
 					"git fetch origin glitch",
 					"git reset --hard origin/glitch",

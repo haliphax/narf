@@ -1,0 +1,39 @@
+name: Deploy to Glitch
+
+on:
+  push:
+    branches: [dev, master]
+    tags: ["v*"]
+
+  workflow_dispatch:
+
+concurrency:
+  cancel-in-progress: true
+  group: ${{ github.workflow }}
+
+jobs:
+  glitch-refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: lts/hydrogen
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci --ignore-scripts
+
+      - name: Build application
+        run: npx parcel build
+
+      - name: Push to glitch branch
+        run: |
+          git.config user.name "GitHub Actions"
+          git.config user.email "git@github.com"
+          git add dist/ -f
+          git commit -m "🚀 deploy to glitch"
+          git push -f -u origin glitch

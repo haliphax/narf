@@ -29,11 +29,30 @@ jobs:
       - name: Build application
         run: npm run build
 
+      - name: Trim package.json for production
+        run: |
+          cat >_package.json <<EOF
+          {
+            "name": $(jq '.name' <package.json),
+            "version": $(jq '.version' <package.json),
+            "dependencies": $(jq '.dependencies' <package.json),
+            "engines": $(jq '.engines' <package.json),
+            "scripts": {
+              "start": $(jq '.scripts.start' <package.json)
+            }
+          }
+          EOF
+          jq -r >package.json <_package.json
+          cat package.json
+
+      - name: Prune node_modules
+        run: npm prune --omit=dev
+
       - name: Push to glitch branch
         run: |
           git config user.name "GitHub Actions"
           git config user.email "git@github.com"
           git checkout -b glitch
-          git add dist/ -f
+          git add dist/ node_modules/ package.json -f
           git commit -m "🚀 deploy to glitch"
           git push -f -u origin glitch

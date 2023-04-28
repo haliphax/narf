@@ -15,5 +15,4 @@ repos:
         entry: npx
         language: system
         types: [text]
-        exclude: \.ts$
         require_serial: true

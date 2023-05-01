@@ -14,8 +14,12 @@ export default App;
 <template>
 	<div class="app">
 		<header class="grid">
-			<router-link :to="{ name: 'home' }">narf!</router-link>
-			<DarkMode class="darkmode"></DarkMode>
+			<div>
+				<router-link :to="{ name: 'home' }" class="ib">narf!</router-link>
+			</div>
+			<div class="right">
+				<DarkMode class="ib"></DarkMode>
+			</div>
 		</header>
 		<main>
 			<router-view></router-view>
@@ -41,10 +45,6 @@ header {
 
 header a {
 	font-weight: 900;
-}
-
-.darkmode {
-	text-align: right;
 }
 
 @media @breakpoint_m {

@@ -88,15 +88,24 @@ label {
 	gap: var(--space-m);
 }
 
-:is(ol, ul).unstyled {
-	list-style-type: none;
-	list-style-position: inside;
-	margin: 0;
-	padding: 0;
+.ib {
+	display: inline-block;
+}
+
+.right {
+	text-align: right;
 }
 
 /* screen-reader only */
 .sr-only {
 	right: 100vw;
 	position: absolute;
+}
+
+/* unstyled list */
+:is(ol, ul).unstyled {
+	list-style-type: none;
+	list-style-position: inside;
+	margin: 0;
+	padding: 0;
 }

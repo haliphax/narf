@@ -1,10 +1,14 @@
 <script lang="ts">
 import { defineComponent } from "vue";
+import Toggle from "./toggle.vue";
 import store from "../store";
 
 const settings = store.state.session.settings;
 
 const DarkMode = defineComponent({
+	components: {
+		Toggle,
+	},
 	mounted() {
 		if (matchMedia("prefers-color-scheme: dark").matches || settings.darkMode)
 			this.toggle();
@@ -22,21 +26,17 @@ export default DarkMode;
 </script>
 
 <template>
-	<label for="darkmode">
+	<label for="darkmode-toggle">
 		<span class="sr-only">Dark mode</span>
 		<span aria-hidden="true" class="icon">
 			<span class="sun">☀️</span>
 			<span class="moon">🌙</span>
 		</span>
-		<span class="tog">
-			<input
-				id="darkmode"
-				type="checkbox"
-				:checked="$store.state.session.settings.darkMode"
-				@click="toggle()"
-			/>
-			<i></i>
-		</span>
+		<Toggle
+			id="darkmode-toggle"
+			:checked="$store.state.session.settings.darkMode"
+			@click="toggle"
+		></Toggle>
 	</label>
 </template>
 

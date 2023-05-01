@@ -1,3 +1,4 @@
+import compression from "compression";
 import historyApiFallback from "connect-history-api-fallback";
 import cors from "cors";
 import express from "express";
@@ -16,6 +17,7 @@ if (process.env.NODE_ENV !== "production") app.use(cors({ origin: "*" }));
 
 const staticMiddleware = express.static("dist/front-end");
 
+app.use(compression());
 app.use(staticMiddleware);
 app.use(historyApiFallback());
 app.use(staticMiddleware);

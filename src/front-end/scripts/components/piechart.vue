@@ -25,16 +25,16 @@ const PieChart = defineComponent({
 			}
 
 			for (let [k, v] of this.data.entries()) {
-				const percent = parseFloat((v / total).toFixed(4));
+				const percent = v / total;
 
 				slices.push({
 					key: k,
-					percent: percent,
+					percent: parseFloat(percent.toFixed(4)),
 					index: 0,
 					rotation: rotation,
 					votes: v,
 				});
-				rotation += 360 * percent;
+				rotation += Math.floor(360 * percent);
 			}
 
 			return slices

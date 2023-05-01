@@ -4,9 +4,11 @@
 		"experimentalDecorators": true,
 		"jsx": "preserve",
 		"lib": ["ES2017", "DOM"],
+		"moduleResolution": "node",
 		"noImplicitAny": true,
 		"noImplicitThis": true,
 		"noUnusedLocals": true,
-		"strict": true
+		"strict": true,
+		"target": "ES2017"
 	}
 }

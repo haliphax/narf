@@ -10,12 +10,17 @@ type slice = {
 };
 
 const PieChart = defineComponent({
+	props: {
+		data: {
+			type: Map<string, number>,
+			required: true,
+		},
+	},
 	computed: {
 		slices() {
-			const data = this.data as Map<string, number>;
 			const slices: Array<slice> = [];
-			const valIter = data.values();
-			let value: IteratorResult<number, any>;
+			const valIter = this.data.values();
+			let value: IteratorResult<number, number>;
 			let total = 0;
 			let rotation = 0;
 
@@ -60,7 +65,6 @@ const PieChart = defineComponent({
 			return output.join(";");
 		},
 	},
-	props: ["data"],
 });
 
 export default PieChart;
@@ -68,7 +72,7 @@ export default PieChart;
 
 <template>
 	<div class="pie" role="figure">
-		<div v-for="(s, idx) in slices" :style="styles(s)">
+		<div v-for="(s, idx) in slices" :key="s.key" :style="styles(s)">
 			<div :class="`slice color_${idx}`">
 				<label>
 					<span>{{ s.key }}</span>
@@ -88,11 +92,11 @@ export default PieChart;
 				</tr>
 			</thead>
 			<tbody>
-				<tr v-for="(s, idx) in slices">
+				<tr v-for="(s, idx) in slices" :key="s.key">
 					<td>
 						<span
-							:class="`color color_${idx}`"
 							:id="`slice_color_${s.key}`"
+							:class="`color color_${idx}`"
 							:style="styles(s)"
 						>
 						</span>

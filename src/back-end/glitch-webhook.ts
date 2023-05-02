@@ -10,7 +10,7 @@ const glitchWebhook = (app: Application) => {
 		if (!process.env.SECRET) return res.sendStatus(500);
 
 		const hmac = createHmac("sha1", process.env.SECRET);
-		const sig = "sha1=" + hmac.update(JSON.stringify(req.body)).digest("hex");
+		const sig = `sha1=${hmac.update(JSON.stringify(req.body)).digest("hex")}`;
 
 		if (
 			timingSafeEqual(

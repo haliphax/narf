@@ -12,6 +12,9 @@ concurrency:
 
 jobs:
   glitch:
+    environment:
+      name: glitch
+      url: https://sphenoid-secret-antimony.glitch.me
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository

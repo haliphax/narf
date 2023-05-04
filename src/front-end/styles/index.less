@@ -59,7 +59,12 @@ body {
 button {
 	background-color: var(--color-bg);
 	color: var(--color-fg);
+	cursor: pointer;
 	font-size: 115%;
+}
+
+button[disabled] {
+	cursor: not-allowed;
 }
 
 a,

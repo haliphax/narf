@@ -8,9 +8,9 @@ cat >"$hook" <<EOF
 # check for skip var
 if [[ "\$SKIP_GITMOJI_HOOK" != "" ]]; then exit 0; fi
 
-# check for existing gitmoji message
+# check for existing gitmoji (actually check that first character isn't ASCII)
 if [[ -f "\$1" ]] && [[ "\$2" == "message" ]] && {
-	[[ "\$(grep -E \$'^[\\u0000-\\u007f]' <\$1)" != "" ]]
+	[[ "\$(grep -o -P "^[\\x{0000}-\\x{007f}]" <\$1)" == "" ]]
 } then exit 0; fi
 
 # prompt for gitmoji

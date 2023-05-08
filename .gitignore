@@ -1,6 +1,15 @@
 /.parcel-cache/
-/.vscode/
 /db/
 /dist/
 /html/
 node_modules/
+
+# vs code
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+!.vscode/*.code-snippets
+.history/
+*.vsix

@@ -55,8 +55,8 @@ jobs:
 
       - name: Push to glitch branch
         run: |
-          git config user.name "GitHub Actions"
-          git config user.email "git@github.com"
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git checkout -b glitch
           git add dist/ node_modules/ package.json -f
           git commit -m "🚀 deploy to glitch"

@@ -7,7 +7,6 @@ repos:
         entry: npx
         language: system
         types: [ts]
-        require_serial: true
 
       - id: prettier
         name: prettier
@@ -15,4 +14,3 @@ repos:
         entry: npx
         language: system
         types: [text]
-        require_serial: true

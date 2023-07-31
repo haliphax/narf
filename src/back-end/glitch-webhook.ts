@@ -13,30 +13,29 @@ const glitchWebhook = (app: Application) => {
 		const sig = `sha1=${hmac.update(JSON.stringify(req.body)).digest("hex")}`;
 
 		if (
-			timingSafeEqual(
+			!timingSafeEqual(
 				Buffer.from(sig),
 				Buffer.from(req.headers["x-hub-signature"] as string)
 			)
 		) {
-			res.sendStatus(200);
-
-			if (
-				req.headers["x-github-event"] === "push" &&
-				req.body.ref === "refs/heads/glitch"
-			) {
-				[
-					"git fetch origin glitch",
-					"git reset --hard origin/glitch",
-					"git pull origin glitch --force",
-					"refresh",
-				].forEach((cmd) => console.log(execSync(cmd).toString()));
-			}
-
+			console.error("webhook signature incorrect");
+			res.sendStatus(403);
 			return;
 		}
 
-		console.error("webhook signature incorrect");
-		res.sendStatus(403);
+		res.sendStatus(200);
+
+		if (
+			req.headers["x-github-event"] === "push" &&
+			req.body.ref === "refs/heads/glitch"
+		) {
+			[
+				"git fetch origin glitch",
+				"git reset --hard origin/glitch",
+				"git pull origin glitch --force",
+				"refresh",
+			].forEach((cmd) => console.log(execSync(cmd).toString()));
+		}
 	});
 };
 

@@ -1,5 +1,5 @@
 module.exports = {
-	branches: ["master"],
+	branches: ["main"],
 	failComment: false,
 	plugins: [
 		["@semantic-release/changelog", { changelogFile: "CHANGELOG.md" }],

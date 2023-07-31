@@ -43,46 +43,41 @@ export default Toggle;
 
 <style lang="less" scoped>
 .tog {
-	--tog-c-back: var(--color-bg);
-	--tog-c-back-on: var(--color-bg);
-	--tog-c-dim: calc(var(--tog-height) - (var(--tog-c-offset) * 2));
-	--tog-c-offset: var(--space-xs);
 	--tog-height: var(--space-l);
-	--tog-off: var(--color-fg);
-	--tog-on: var(--color-fg);
-	--tog-width: var(--space-xxl);
+	--tog-offset: var(--space-xs);
 	display: inline-block;
 	height: var(--tog-height);
 	position: relative;
 	top: var(--space-xs);
-	width: var(--tog-width);
+	width: var(--space-xxl);
 }
 
 .tog i {
-	bottom: 0;
-	left: 0;
-	right: 0;
-	background: var(--tog-off);
+	background: var(--color-fg);
 	border-radius: var(--tog-height);
+	bottom: 0;
 	cursor: pointer;
 	display: block;
+	left: 0;
 	position: absolute;
+	right: 0;
 	top: 0;
 }
 
 .tog i::before {
-	background: var(--tog-c-back);
+	--size: calc(var(--tog-height) - (var(--tog-offset) * 2));
+	background: var(--color-bg);
 	border-radius: 50%;
 	content: "";
-	height: var(--tog-c-dim);
-	left: var(--tog-c-offset);
+	height: var(--size);
+	left: var(--tog-offset);
 	position: absolute;
-	top: var(--tog-c-offset);
-	width: var(--tog-c-dim);
+	top: var(--tog-offset);
+	width: var(--size);
 }
 
 .tog input:checked + i::before {
 	left: auto;
-	right: var(--tog-c-offset);
+	right: var(--tog-offset);
 }
 </style>

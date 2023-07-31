@@ -32,7 +32,7 @@ export default Toggle;
 	<span class="tog">
 		<input
 			:id="id"
-			class="sr-only"
+			class="sr"
 			type="checkbox"
 			:checked="checked ?? defaultChecked"
 			@click="$emit('click')"

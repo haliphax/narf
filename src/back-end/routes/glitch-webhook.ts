@@ -1,13 +1,13 @@
-import bodyParser from "body-parser";
 import { execSync } from "child_process";
 import { createHmac, timingSafeEqual } from "crypto";
 import { Application, Request, Response } from "express";
 
 /** Adds webhook endpoint for updating from remote git */
 const glitchWebhook = (app: Application) => {
-	app.use(bodyParser.json());
 	app.post("/git", (req: Request, res: Response) => {
-		if (!process.env.SECRET) return res.sendStatus(500);
+		if (!process.env.SECRET) {
+			return res.sendStatus(500);
+		}
 
 		const hmac = createHmac("sha1", process.env.SECRET);
 		const sig = `sha1=${hmac.update(JSON.stringify(req.body)).digest("hex")}`;
@@ -19,8 +19,7 @@ const glitchWebhook = (app: Application) => {
 			)
 		) {
 			console.error("webhook signature incorrect");
-			res.sendStatus(403);
-			return;
+			return res.sendStatus(403);
 		}
 
 		res.sendStatus(200);

@@ -1,47 +1,63 @@
 import { Module } from "vuex";
-import Story from "../../../../models/story";
-import Vote from "../../../../models/vote";
+import { Story } from "../../../../models/story";
+import { Vote } from "../../../../models/vote";
 import remult from "../../remult";
 import router from "../../router";
-import { storeState, storyState } from "../../types";
+import { StoreState, StoryState } from "../../types";
 
-const story: Module<storyState | Promise<storyState>, storeState> = {
+const story: Module<StoryState | Promise<StoryState>, StoreState> = {
 	actions: {
 		async "story.load"(ctx) {
-			const story = await remult.repo(Story).findFirst({
-				id: router.currentRoute.value.params.story,
-			});
-
+			const story = await remult
+				.repo(Story)
+				.findId(router.currentRoute.value.params.story as string, {
+					useCache: false,
+				});
 			ctx.commit("story", story);
 		},
-		"story.reveal"(ctx) {
-			ctx.commit("story.revealed", true);
-		},
-		async "story.vote"(ctx, payload: Vote) {
-			if (!(ctx.state as storyState).story) {
+		async "story.reveal"(ctx) {
+			const state = ctx.state as StoryState;
+
+			if (!state.story) {
 				return;
 			}
 
-			await remult
-				.repo(Vote)
-				.save(payload)
-				.then((vote) => remult.repo(Story).findId(vote.storyId ?? ""))
-				.then((story) => ctx.commit("story", story));
+			await fetch(`/reveal/${state.story.id}`, { method: "POST" });
+		},
+		async "story.vote"(ctx, payload: Vote) {
+			const state = ctx.state as StoryState;
+
+			if (!state.story) {
+				return;
+			}
+
+			await fetch(`/vote/${state.story.id}`, {
+				body: JSON.stringify(payload),
+				headers: { "Content-Type": "application/json" },
+				method: "PUT",
+			});
 		},
 	},
 	mutations: {
 		story(state, payload: Story) {
-			(state as storyState).story = payload;
-		},
-		"story.revealed"(state, payload: boolean) {
-			(state as storyState).revealed = payload;
+			const storyState = state as StoryState;
+
+			if (storyState.story?.id !== payload.id) {
+				storyState.events = new EventSource(`/story/${payload.id}/events`);
+				storyState.events?.addEventListener("message", (ev: MessageEvent) => {
+					console.log("Story update", ev.data);
+					storyState.story = JSON.parse(ev.data);
+				});
+			}
+
+			storyState.story = payload;
 		},
 	},
 	state() {
 		return {
+			events: null,
 			story: null,
-			revealed: false,
-		} as storyState;
+		} as StoryState;
 	},
 };
 

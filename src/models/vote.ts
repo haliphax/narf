@@ -1,27 +1,10 @@
-import { Entity, Fields } from "remult";
+import { Fields } from "remult";
 import Participant from "./participant";
 
-@Entity("vote", {
-	allowApiCrud: true,
-	id: (entity) => entity.find("id"),
-})
-export default class Vote {
-	@Fields.autoIncrement({ allowApiUpdate: false })
-	id!: number;
+export class Vote {
+	@Fields.object(() => Participant)
+	participant!: Participant;
 
 	@Fields.string()
-	storyId = "";
-
-	@Fields.string()
-	participantId = "";
-
-	@Fields.object<Vote>((options, remult) => {
-		options.lazy = true;
-		options.serverExpression = async (vote) =>
-			remult.repo(Participant).findFirst({ id: vote.participantId });
-	})
-	participant?: Participant;
-
-	@Fields.string()
-	vote = "";
+	vote!: string;
 }

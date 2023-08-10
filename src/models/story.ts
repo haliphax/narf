@@ -1,20 +1,30 @@
 import { Entity, Fields } from "remult";
-import Vote from "./vote";
+import { Vote } from "./vote";
 
 @Entity("story", { allowApiCrud: true })
-export default class Story {
+export class Story {
 	@Fields.string({ allowApiUpdate: false })
-	id = "";
+	id!: string;
 
 	@Fields.string()
-	title = "";
+	title!: string;
 
-	@Fields.object<Story>((options, remult) => {
-		options.lazy = true;
-		options.serverExpression = async (story) =>
-			remult.repo(Vote).find({
-				where: { storyId: story.id },
-			});
+	@Fields.boolean()
+	revealed = false;
+
+	@Fields.object<Story>((options) => {
+		options.includeInApi = false;
 	})
-	votes: Vote[] = [];
+	_votes?: Vote[];
+
+	@Fields.object<Story>((options) => {
+		options.allowApiUpdate = false;
+		options.includeInApi = true;
+		options.serverExpression = (s) => {
+			return s.revealed
+				? s._votes
+				: s._votes?.map((v) => ({ ...v, vote: "?" } as Vote));
+		};
+	})
+	votes?: Vote[];
 }

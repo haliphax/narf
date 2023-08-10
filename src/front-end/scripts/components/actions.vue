@@ -16,7 +16,7 @@ export default Actions;
 <template>
 	<ul class="unstyled">
 		<li>
-			<button :disabled="$store.state.story.revealed" @click="reveal">
+			<button :disabled="$store.state.story.story?.revealed" @click="reveal">
 				Reveal
 			</button>
 		</li>

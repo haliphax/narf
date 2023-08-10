@@ -1,20 +1,21 @@
-import Story from "../../models/story";
+import { Story } from "../../models/story";
 
-export type sessionSettings = {
+export type SessionSettings = {
 	darkMode: boolean;
 };
 
-export type sessionState = {
+export type SessionState = {
 	id: string;
-	settings: sessionSettings;
+	name: string;
+	settings: SessionSettings;
 };
 
-export type storeState = {
-	session: sessionState;
-	story: storyState;
+export type StoreState = {
+	session: SessionState;
+	story: StoryState;
 };
 
-export type storyState = {
-	revealed: boolean;
+export type StoryState = {
+	events: EventSource | null;
 	story: Story | null;
 };

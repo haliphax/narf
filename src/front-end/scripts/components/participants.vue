@@ -10,16 +10,19 @@ export default Participants;
 	<div>
 		<h2>Participants</h2>
 		<ul class="unstyled">
-			<li class="grid" v-for="v of $store.state.story.story?.votes">
+			<li
+				v-for="v of $store.state.story.story?.votes"
+				:key="v.participant.id"
+				class="grid"
+			>
 				<span class="name">
-					{{ v.participant?.name ?? "Anonymous" }}
-					<span class="you" v-if="v.participantId === $store.state.session.id">
+					{{ v.participant.name ?? "Anonymous" }}
+					<span v-if="v.participant.id === $store.state.session.id" class="you">
 						(You)
 					</span>
 				</span>
 				<span class="value">
-					<span v-if="$store.state.story.revealed">{{ v.vote }}</span>
-					<span v-else>?</span>
+					<span>{{ $store.state.story.story?.revealed ? v.vote : "?" }}</span>
 				</span>
 			</li>
 		</ul>

@@ -1,7 +1,7 @@
 import { createStore } from "vuex";
-import { StoreState } from "../StoreState";
-import session from "./modules/session";
-import story from "./modules/story";
+import { StoreState } from "../types";
+import session from "./session";
+import story from "./story";
 
 const store = createStore<StoreState>({
 	modules: {

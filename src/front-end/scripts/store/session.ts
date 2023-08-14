@@ -1,7 +1,7 @@
 import { v4 } from "uuid";
 import { Module } from "vuex";
-import { LOCALSTORAGE_GLOBAL_PREFIX } from "../../constants";
-import { SessionState, StoreState } from "../../types";
+import { LOCALSTORAGE_GLOBAL_PREFIX } from "../constants";
+import { SessionState, StoreState } from "../types";
 
 const SESSION_PREFIX = `${LOCALSTORAGE_GLOBAL_PREFIX}session.`;
 

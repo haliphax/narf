@@ -1,6 +1,0 @@
-{
-	"typescript.tsdk": "node_modules/typescript/lib",
-	"eslint.format.enable": true,
-	"prettier.enable": true,
-	"prettier.documentSelectors": ["!**/*.ts"]
-}

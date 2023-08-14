@@ -26,8 +26,7 @@ export default DarkMode;
 </script>
 
 <template>
-	<label for="darkmode-toggle">
-		<span class="sr">Dark mode</span>
+	<label for="darkmode-toggle" title="Toggle dark mode">
 		<span aria-hidden="true" class="icon">
 			<span class="sun">☀️</span>
 			<span class="moon">🌙</span>

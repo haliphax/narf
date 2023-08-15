@@ -6,6 +6,9 @@ export class Story {
 	@Fields.string({ allowApiUpdate: false })
 	id!: string;
 
+	@Fields.string({ allowApiUpdate: false })
+	owner!: string;
+
 	@Fields.string()
 	title!: string;
 

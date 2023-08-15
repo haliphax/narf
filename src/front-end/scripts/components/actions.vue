@@ -5,6 +5,13 @@ import store from "../store/index";
 const Actions = defineComponent({
 	methods: {
 		reveal() {
+			if (
+				store.state.story.story?.owner !== store.state.session.id &&
+				!confirm("You are not the owner of this story. Are you sure?")
+			) {
+				return;
+			}
+
 			store.dispatch("story.reveal");
 		},
 	},

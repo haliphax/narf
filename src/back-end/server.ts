@@ -19,6 +19,7 @@ const server = remultExpress({
 		if ((await storyRepo.count()) === 0) {
 			await storyRepo.insert({
 				id: "1",
+				owner: "test",
 				title: "Testing this thing",
 				_votes: [
 					{

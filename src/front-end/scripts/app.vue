@@ -1,6 +1,6 @@
 <script lang="ts">
 import { defineComponent } from "vue";
-import DarkMode from "./darkmode.vue";
+import DarkMode from "./components/darkmode.vue";
 
 const App = defineComponent({
 	components: {
@@ -28,7 +28,7 @@ export default App;
 </template>
 
 <style lang="less" scoped>
-@import "../../styles/breakpoints.less";
+@import "../styles/breakpoints.less";
 
 .app {
 	margin: 0 auto;

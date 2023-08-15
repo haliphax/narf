@@ -1,10 +1,10 @@
 <script lang="ts">
-import Actions from "./actions.vue";
 import { defineComponent } from "vue";
-import Estimate from "./estimate.vue";
-import Heading from "./heading.vue";
-import Participants from "./participants.vue";
 import store from "../store";
+import Actions from "../components/actions.vue";
+import Estimate from "../components/estimate.vue";
+import Heading from "../components/heading.vue";
+import Participants from "../components/participants.vue";
 
 const Room = defineComponent({
 	components: {

@@ -46,9 +46,9 @@ const Estimate = defineComponent({
 			return votes;
 		},
 		you() {
-			if (store.state.story.story == null) return null;
+			if (!store.state.story.story) return null;
 
-			return store.state.story.story?.votes?.find(
+			return store.state.story.story.votes?.find(
 				(v) => v.participant.id === store.state.session.id
 			);
 		},

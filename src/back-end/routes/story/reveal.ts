@@ -1,11 +1,11 @@
 import { Application } from "express";
 import { remult } from "remult";
-import { Story } from "../../models/story";
-import server from "../server";
-import { updateStory } from "./story-sse";
+import { Story } from "../../../models/story";
+import server from "../../server";
+import { updateStory } from "./events";
 
 const reveal = (app: Application) =>
-	app.post("/reveal/:story", server.withRemult, async (r, s) => {
+	app.post("/story/:story/reveal", server.withRemult, async (r, s) => {
 		const story = r.params.story;
 
 		console.log(`Revealing ${story}`);

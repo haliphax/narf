@@ -1,8 +1,8 @@
 import { Application } from "express";
 import glitchWebhook from "./routes/glitch-webhook";
-import reveal from "./routes/reveal";
-import { storySSE } from "./routes/story-sse";
-import vote from "./routes/vote";
+import { storySSE } from "./routes/story/events";
+import reveal from "./routes/story/reveal";
+import vote from "./routes/story/vote";
 
 const routes = async (app: Application) => {
 	glitchWebhook(app);

@@ -1,13 +1,13 @@
 import { Application } from "express";
 import { remult } from "remult";
-import { Story } from "../../models/story";
-import { Vote } from "../../models/vote";
-import server from "../server";
-import { updateStory } from "./story-sse";
+import { Story } from "../../../models/story";
+import { Vote } from "../../../models/vote";
+import server from "../../server";
+import { updateStory } from "./events";
 
 /** Route for accepting a vote submission for a story */
 const vote = (app: Application) => {
-	app.put("/vote/:story", server.withRemult, async (r, s) => {
+	app.put("/story/:story/vote", server.withRemult, async (r, s) => {
 		console.log(`Incoming vote for ${r.params.story}`);
 
 		const vote = r.body;

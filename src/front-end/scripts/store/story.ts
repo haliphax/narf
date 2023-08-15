@@ -22,7 +22,7 @@ const story: Module<StoryState | Promise<StoryState>, StoreState> = {
 				return;
 			}
 
-			await fetch(`/reveal/${state.story.id}`, { method: "POST" });
+			await fetch(`/story/${state.story.id}/reveal`, { method: "POST" });
 		},
 		async "story.vote"(ctx, payload: Vote) {
 			const state = ctx.state as StoryState;
@@ -31,7 +31,7 @@ const story: Module<StoryState | Promise<StoryState>, StoreState> = {
 				return;
 			}
 
-			await fetch(`/vote/${state.story.id}`, {
+			await fetch(`/story/${state.story.id}/vote`, {
 				body: JSON.stringify(payload),
 				headers: { "Content-Type": "application/json" },
 				method: "PUT",

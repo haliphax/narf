@@ -1,6 +1,6 @@
 import { Application, Response } from "express";
 import { v4 as uuid } from "uuid";
-import { Story } from "../../models/story";
+import { Story } from "../../../models/story";
 
 interface NarfClient {
 	id: string;

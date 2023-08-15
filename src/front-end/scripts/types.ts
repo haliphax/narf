@@ -6,7 +6,7 @@ export type SessionSettings = {
 
 export type SessionState = {
 	id: string;
-	name: string;
+	userName: string;
 	settings: SessionSettings;
 };
 

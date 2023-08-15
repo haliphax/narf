@@ -44,7 +44,7 @@ export const updateStory = (story: Story) => {
 	console.log(`Sending update to story ${story.id}`);
 	clients.get(story.id)?.map((c) => {
 		console.log(`Updating client ${c.id}`);
-		c.response.write(`data: ${JSON.stringify(story)}\n\n`);
+		c.response.write(`data: update\n\n`);
 		c.response.flush();
 	});
 };

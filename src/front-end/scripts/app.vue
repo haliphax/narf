@@ -1,10 +1,14 @@
 <script lang="ts">
 import { defineComponent } from "vue";
 import DarkMode from "./components/darkmode.vue";
+import store from "./store";
 
 const App = defineComponent({
 	components: {
 		DarkMode,
+	},
+	async beforeCreate() {
+		document.cookie = `narfClient=${store.state.session.id};path=/;samesite=strict;secure`;
 	},
 });
 

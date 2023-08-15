@@ -17,13 +17,23 @@ export class Story {
 	})
 	_votes?: Vote[];
 
-	@Fields.object<Story>((options) => {
+	@Fields.object<Story>((options, remult) => {
 		options.allowApiUpdate = false;
-		options.includeInApi = true;
 		options.serverExpression = (s) => {
-			return s.revealed
-				? s._votes
-				: s._votes?.map((v) => ({ ...v, vote: "?" } as Vote));
+			if (s.revealed) {
+				return s._votes;
+			}
+
+			return s._votes?.map((v) => {
+				if (v.participant.id === remult.user?.id) {
+					return v;
+				}
+
+				return {
+					participant: { id: "", name: v.participant.name },
+					vote: "?",
+				};
+			});
 		};
 	})
 	votes?: Vote[];

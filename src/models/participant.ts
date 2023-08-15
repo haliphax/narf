@@ -1,7 +1,7 @@
 import { Fields } from "remult";
 
 export default class Participant {
-	@Fields.string({ allowApiUpdate: false })
+	@Fields.string()
 	id!: string;
 
 	@Fields.string()

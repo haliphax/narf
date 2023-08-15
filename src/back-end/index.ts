@@ -1,5 +1,6 @@
 import compression from "compression";
 import historyApiFallback from "connect-history-api-fallback";
+import cookieParser from "cookie-parser";
 import cors from "cors";
 import express from "express";
 import routes from "./routes";
@@ -15,6 +16,7 @@ if (process.env.NODE_ENV !== "production") {
 
 app.use(compression());
 app.use(express.json());
+app.use(cookieParser());
 app.use(server);
 routes(app);
 app.use(historyApiFallback());

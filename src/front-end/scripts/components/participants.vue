@@ -22,7 +22,7 @@ export default Participants;
 					</span>
 				</span>
 				<span class="value">
-					<span>{{ $store.state.story.story?.revealed ? v.vote : "?" }}</span>
+					<span>{{ v.vote }}</span>
 				</span>
 			</li>
 		</ul>

@@ -16,6 +16,6 @@ export type StoreState = {
 };
 
 export type StoryState = {
-	events: EventSource | null;
-	story: Story | null;
+	events?: EventSource;
+	story?: Story;
 };

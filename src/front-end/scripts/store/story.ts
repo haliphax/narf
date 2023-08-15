@@ -13,6 +13,18 @@ const story: Module<StoryState | Promise<StoryState>, StoreState> = {
 				.findId(router.currentRoute.value.params.story as string, {
 					useCache: false,
 				});
+
+			if (!(ctx.state as StoryState).events) {
+				const events = new EventSource(`/story/${story.id}/events`);
+
+				events.addEventListener("message", () => {
+					console.log("Story update received");
+					ctx.dispatch("story.load");
+				});
+
+				ctx.commit("events", events);
+			}
+
 			ctx.commit("story", story);
 		},
 		async "story.reveal"(ctx) {
@@ -39,24 +51,19 @@ const story: Module<StoryState | Promise<StoryState>, StoreState> = {
 		},
 	},
 	mutations: {
+		events(state, payload: EventSource) {
+			const storyState = state as StoryState;
+			storyState.events = payload;
+		},
 		story(state, payload: Story) {
 			const storyState = state as StoryState;
-
-			if (storyState.story?.id !== payload.id) {
-				storyState.events = new EventSource(`/story/${payload.id}/events`);
-				storyState.events?.addEventListener("message", (ev: MessageEvent) => {
-					console.log("Story update", ev.data);
-					storyState.story = JSON.parse(ev.data);
-				});
-			}
-
 			storyState.story = payload;
 		},
 	},
 	state() {
 		return {
-			events: null,
-			story: null,
+			events: undefined,
+			story: undefined,
 		} as StoryState;
 	},
 };

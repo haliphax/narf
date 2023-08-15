@@ -6,7 +6,7 @@ import Estimate from "../components/estimate.vue";
 import Heading from "../components/heading.vue";
 import Participants from "../components/participants.vue";
 
-const Room = defineComponent({
+const Story = defineComponent({
 	components: {
 		Actions,
 		Estimate,
@@ -18,7 +18,7 @@ const Room = defineComponent({
 	},
 });
 
-export default Room;
+export default Story;
 </script>
 
 <template>
@@ -55,9 +55,9 @@ export default Room;
 
 @media @breakpoint_m {
 	.grid {
-		grid-template-columns:
-			calc(40% - var(--space-xl) / 2)
-			calc(60% - var(--space-xl) / 2);
+		grid-template-columns: calc(40% - var(--space-xl) / 2) calc(
+				60% - var(--space-xl) / 2
+			);
 		column-gap: var(--space-xl);
 	}
 

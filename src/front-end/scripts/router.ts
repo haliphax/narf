@@ -1,7 +1,7 @@
 import { Component } from "vue";
 import { createRouter, createWebHistory } from "vue-router";
 import Home from "./views/home.vue";
-import Room from "./views/room.vue";
+import Story from "./views/story.vue";
 
 const router = createRouter({
 	history: createWebHistory(),
@@ -13,7 +13,7 @@ const router = createRouter({
 		},
 		{
 			path: "/:story",
-			component: Room as unknown as Component,
+			component: Story as unknown as Component,
 			name: "story",
 		},
 	],

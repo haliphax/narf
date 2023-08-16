@@ -5,6 +5,8 @@ import remult from "../remult";
 import router from "../router";
 import { StoreState, StoryState } from "../types";
 
+const rootURI = (document.getElementById("rootURI") as HTMLInputElement).value;
+
 const story: Module<StoryState | Promise<StoryState>, StoreState> = {
 	actions: {
 		async "story.load"(ctx) {
@@ -15,7 +17,7 @@ const story: Module<StoryState | Promise<StoryState>, StoreState> = {
 				});
 
 			if (!(ctx.state as StoryState).events) {
-				const events = new EventSource(`/story/${story.id}/events`);
+				const events = new EventSource(`${rootURI}/story/${story.id}/events`);
 
 				events.addEventListener("message", () => {
 					console.log("Story update received");
@@ -34,7 +36,9 @@ const story: Module<StoryState | Promise<StoryState>, StoreState> = {
 				return;
 			}
 
-			await fetch(`/story/${state.story.id}/reveal`, { method: "POST" });
+			await fetch(`${rootURI}/story/${state.story.id}/reveal`, {
+				method: "POST",
+			});
 		},
 		async "story.vote"(ctx, payload: Vote) {
 			const state = ctx.state as StoryState;
@@ -43,7 +47,7 @@ const story: Module<StoryState | Promise<StoryState>, StoreState> = {
 				return;
 			}
 
-			await fetch(`/story/${state.story.id}/vote`, {
+			await fetch(`${rootURI}/story/${state.story.id}/vote`, {
 				body: JSON.stringify(payload),
 				headers: { "Content-Type": "application/json" },
 				method: "PUT",

@@ -17,7 +17,7 @@ const story: Module<StoryState | Promise<StoryState>, StoreState> = {
 				});
 
 			if (!(ctx.state as StoryState).events) {
-				const events = new EventSource(`${rootURI}/story/${story.id}/events`);
+				const events = new EventSource(`${rootURI}story/${story.id}/events`);
 
 				events.addEventListener("message", () => {
 					console.log("Story update received");
@@ -36,7 +36,7 @@ const story: Module<StoryState | Promise<StoryState>, StoreState> = {
 				return;
 			}
 
-			await fetch(`${rootURI}/story/${state.story.id}/reveal`, {
+			await fetch(`${rootURI}story/${state.story.id}/reveal`, {
 				method: "POST",
 			});
 		},
@@ -47,7 +47,7 @@ const story: Module<StoryState | Promise<StoryState>, StoreState> = {
 				return;
 			}
 
-			await fetch(`${rootURI}/story/${state.story.id}/vote`, {
+			await fetch(`${rootURI}story/${state.story.id}/vote`, {
 				body: JSON.stringify(payload),
 				headers: { "Content-Type": "application/json" },
 				method: "PUT",

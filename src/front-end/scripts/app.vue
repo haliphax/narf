@@ -3,14 +3,14 @@ import { defineComponent } from "vue";
 import DarkMode from "./components/darkmode.vue";
 import store from "./store";
 
+const rootURI = (document.getElementById("rootURI") as HTMLInputElement).value;
+
 const App = defineComponent({
 	components: {
 		DarkMode,
 	},
 	async beforeCreate() {
-		document.cookie = `narfClient=${store.state.session.id};path=${
-			process.env.ROOT_URI ?? "/"
-		};samesite=strict;secure`;
+		document.cookie = `narfClient=${store.state.session.id};path=${rootURI};samesite=strict;secure`;
 	},
 });
 

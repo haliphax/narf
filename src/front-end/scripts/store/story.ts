@@ -1,11 +1,10 @@
 import { Module } from "vuex";
 import { Story } from "../../../models/story";
 import { Vote } from "../../../models/vote";
+import { ROOT_URI } from "../constants";
 import remult from "../remult";
 import router from "../router";
 import { StoreState, StoryState } from "../types";
-
-const rootURI = (document.getElementById("rootURI") as HTMLInputElement).value;
 
 const story: Module<StoryState | Promise<StoryState>, StoreState> = {
 	actions: {
@@ -17,7 +16,7 @@ const story: Module<StoryState | Promise<StoryState>, StoreState> = {
 				});
 
 			if (!(ctx.state as StoryState).events) {
-				const events = new EventSource(`${rootURI}story/${story.id}/events`);
+				const events = new EventSource(`${ROOT_URI}story/${story.id}/events`);
 
 				events.addEventListener("message", () => {
 					console.log("Story update received");
@@ -36,7 +35,7 @@ const story: Module<StoryState | Promise<StoryState>, StoreState> = {
 				return;
 			}
 
-			await fetch(`${rootURI}story/${state.story.id}/reveal`, {
+			await fetch(`${ROOT_URI}story/${state.story.id}/reveal`, {
 				method: "POST",
 			});
 		},
@@ -47,7 +46,7 @@ const story: Module<StoryState | Promise<StoryState>, StoreState> = {
 				return;
 			}
 
-			await fetch(`${rootURI}story/${state.story.id}/vote`, {
+			await fetch(`${ROOT_URI}story/${state.story.id}/vote`, {
 				body: JSON.stringify(payload),
 				headers: { "Content-Type": "application/json" },
 				method: "PUT",

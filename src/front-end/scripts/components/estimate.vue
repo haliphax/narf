@@ -31,11 +31,11 @@ const Estimate = defineComponent({
 			return modeMap[this.mode as mode];
 		},
 		votes() {
-			if (store.state.story.story == null) return [];
+			if (!store.state.story.story) return [];
 
 			const votes = new Map<string, number>();
 
-			store.state.story.story?.votes?.map((v: Vote) => {
+			store.state.story.story.votes?.map((v: Vote) => {
 				const value = v.vote.toString();
 
 				if (!votes.has(value)) votes.set(value, 0);
@@ -46,9 +46,7 @@ const Estimate = defineComponent({
 			return votes;
 		},
 		you() {
-			if (!store.state.story.story) return null;
-
-			return store.state.story.story.votes?.find(
+			return store.state.story.story?.votes?.find(
 				(v) => v.participant.id === store.state.session.id
 			);
 		},
@@ -68,7 +66,7 @@ const Estimate = defineComponent({
 					return {
 						participant: {
 							id: this.$store.state.session.id,
-							name: this.$store.state.session.name,
+							name: this.$store.state.session.userName,
 						},
 						vote: option,
 					} as Vote;

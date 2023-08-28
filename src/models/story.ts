@@ -23,10 +23,6 @@ export class Story {
 	@Fields.object<Story>((options, remult) => {
 		options.allowApiUpdate = false;
 		options.serverExpression = (s) => {
-			if (s.revealed) {
-				return s._votes;
-			}
-
 			return s._votes?.map((v) => {
 				if (v.participant.id === remult.user?.id) {
 					return v;
@@ -34,7 +30,7 @@ export class Story {
 
 				return {
 					participant: { id: "", name: v.participant.name },
-					vote: "?",
+					vote: s.revealed ? v.vote : "?",
 				};
 			});
 		};

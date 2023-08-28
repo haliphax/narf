@@ -4,7 +4,7 @@ import { Vote } from "../../../models/vote";
 import { ROOT_URI } from "../constants";
 import remult from "../remult";
 import router from "../router";
-import { StoreState, StoryState } from "../types";
+import { StoreState, StoryState } from "./types";
 
 const story: Module<StoryState | Promise<StoryState>, StoreState> = {
 	actions: {

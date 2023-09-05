@@ -10,7 +10,7 @@ repos:
 
       - id: prettier
         name: prettier
-        args: [prettier, -l, -u]
+        args: [prettier, -l, -u, -w]
         entry: npx
         language: system
         types: [text]

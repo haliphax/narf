@@ -34,7 +34,7 @@ const join = (app: Application) =>
 		}
 
 		updateStory(updatedStory);
-		s.sendStatus(201);
+		s.sendStatus(204);
 	});
 
 export default join;

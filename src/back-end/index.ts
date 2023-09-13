@@ -22,6 +22,8 @@ routes(app);
 app.use(historyApiFallback());
 app.use(express.static("dist/front-end"));
 
+app.disable("x-powered-by");
+
 app.listen(port, host, () =>
 	console.log(`Server listening at http://${host}:${port}`)
 );

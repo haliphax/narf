@@ -67,8 +67,11 @@ const story: Module<StoryState | Promise<StoryState>, StoreState> = {
 		},
 	},
 	mutations: {
-		events(state, payload: EventSource) {
+		events(state, payload: EventSource | undefined) {
 			const storyState = state as StoryState;
+
+			if (!payload) storyState.events?.close();
+
 			storyState.events = payload;
 		},
 		story(state, payload: Story) {

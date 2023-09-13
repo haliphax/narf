@@ -9,6 +9,8 @@ type slice = {
 	votes: number;
 };
 
+const isNumber = /^\d+(\.\d+)?$/;
+
 const PieChart = defineComponent({
 	props: {
 		data: {
@@ -19,37 +21,50 @@ const PieChart = defineComponent({
 	computed: {
 		slices() {
 			const slices: Array<slice> = [];
-			const valIter = this.data.values();
-			let value: IteratorResult<number, number>;
+			const valIter = this.data.entries();
+
+			let entry: IteratorResult<[string, number]>;
 			let total = 0;
 			let rotation = 0.0;
 
-			while ((value = valIter.next())) {
-				if (value.done) break;
-				total += value.value;
-			}
+			while ((entry = valIter.next())) {
+				if (entry.done) break;
 
-			for (let [k, v] of this.data.entries()) {
-				const percent = v / total;
+				const [key, value] = entry.value;
 
+				total += value;
 				slices.push({
-					key: k,
-					percent,
+					key,
+					percent: 0,
 					index: 0,
 					rotation,
-					votes: v,
+					votes: value,
 				});
-				rotation += Math.floor(360 * percent);
 			}
 
-			return slices
-				.sort((a, b) => b.votes - a.votes)
-				.map((v, i) => {
-					return {
-						...v,
-						index: i,
-					};
-				});
+			slices.sort((a, b) => {
+				const a1 = isNumber.test(a.key)
+					? parseFloat(a.key)
+					: Number.MAX_SAFE_INTEGER;
+				const b1 = isNumber.test(b.key)
+					? parseFloat(b.key)
+					: Number.MAX_SAFE_INTEGER;
+
+				return a.votes === b.votes ? a1 - b1 : b.votes - a.votes;
+			});
+
+			let index = 0;
+
+			for (let i = 0; i < slices.length; i++) {
+				const s = slices[i];
+
+				s.percent = s.votes / total;
+				s.index = index++;
+				s.rotation = rotation;
+				rotation += Math.floor(360 * s.percent);
+			}
+
+			return slices;
 		},
 	},
 	methods: {

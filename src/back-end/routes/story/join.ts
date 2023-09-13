@@ -14,6 +14,11 @@ const join = (app: Application) =>
 		const storyId = r.params.story;
 		const story = await remult.repo(Story).findId(storyId);
 
+		if (!story) {
+			s.sendStatus(400);
+			return;
+		}
+
 		console.log(`User ${remult.user.id} joining ${storyId}`);
 
 		if (!story._votes?.find((v) => v.participant.id === remult.user?.id)) {

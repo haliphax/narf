@@ -22,7 +22,9 @@ export default Participants;
 					</span>
 				</span>
 				<span class="value">
-					<span>{{ v.vote }}</span>
+					<span :title="!v.vote ? 'Waiting' : 'Voted'">
+						{{ v.vote ?? "⏱️" }}
+					</span>
 				</span>
 			</li>
 		</ul>

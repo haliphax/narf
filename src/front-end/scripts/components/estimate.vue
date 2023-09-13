@@ -36,6 +36,8 @@ const Estimate = defineComponent({
 			const votes = new Map<string, number>();
 
 			store.state.story.story.votes?.map((v: Vote) => {
+				if (v.vote === null) return;
+
 				const value = v.vote.toString();
 
 				if (!votes.has(value)) votes.set(value, 0);
@@ -66,7 +68,7 @@ const Estimate = defineComponent({
 					return {
 						participant: {
 							id: this.$store.state.session.id,
-							name: this.$store.state.session.userName,
+							name: this.$store.state.session.name,
 						},
 						vote: option,
 					} as Vote;

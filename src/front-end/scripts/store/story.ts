@@ -8,14 +8,27 @@ import { StoreState, StoryState } from "./types";
 
 const story: Module<StoryState | Promise<StoryState>, StoreState> = {
 	actions: {
+		async "story.join"(ctx) {
+			const storyId = router.currentRoute.value.params.story as string;
+
+			await fetch(`${ROOT_URI}story/${storyId}/join`, {
+				body: JSON.stringify(ctx.rootState.session),
+				headers: { "Content-Type": "application/json" },
+				method: "POST",
+			});
+		},
 		async "story.load"(ctx) {
+			const firstLoad = !(ctx.state as StoryState).events;
+
+			if (firstLoad) await ctx.dispatch("story.join");
+
 			const story = await remult
 				.repo(Story)
 				.findId(router.currentRoute.value.params.story as string, {
 					useCache: false,
 				});
 
-			if (!(ctx.state as StoryState).events) {
+			if (firstLoad) {
 				const events = new EventSource(`${ROOT_URI}story/${story.id}/events`);
 
 				events.addEventListener("message", () => {

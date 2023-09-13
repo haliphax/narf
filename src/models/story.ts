@@ -31,7 +31,7 @@ export class Story {
 				return {
 					...v,
 					participant: { ...v.participant, id: "" },
-					vote: s.revealed ? v.vote : "?",
+					vote: s.revealed ? v.vote : v.vote ? "❓" : null,
 				};
 			});
 		};

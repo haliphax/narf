@@ -6,5 +6,5 @@ export class Vote {
 	participant!: Participant;
 
 	@Fields.string()
-	vote!: string;
+	vote: string | null = null;
 }

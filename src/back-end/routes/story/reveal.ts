@@ -12,13 +12,13 @@ const reveal = (app: Application) =>
 		await remult.repo(Story).update(story, { revealed: true });
 		s.sendStatus(202);
 
-		const storyObject = await remult.repo(Story).findId(story);
+		const updatedStory = await remult.repo(Story).findId(story);
 
-		if (!storyObject) {
+		if (!updatedStory) {
 			throw new Error("No story");
 		}
 
-		updateStory(storyObject);
+		updateStory(updatedStory);
 	});
 
 export default reveal;

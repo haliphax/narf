@@ -8,7 +8,7 @@ const SESSION_PREFIX = `${LOCALSTORAGE_GLOBAL_PREFIX}session.`;
 const keys = {
 	darkMode: `${SESSION_PREFIX}darkMode`,
 	sessionId: `${SESSION_PREFIX}sessionId`,
-	userName: `${SESSION_PREFIX}userName`,
+	name: `${SESSION_PREFIX}name`,
 };
 
 const session: Module<SessionState, StoreState> = {
@@ -17,9 +17,9 @@ const session: Module<SessionState, StoreState> = {
 			state.settings.darkMode = payload;
 			localStorage.setItem(keys.darkMode, payload.toString());
 		},
-		"session.settings.userName"(state, payload: string) {
-			state.userName = payload;
-			localStorage.setItem(keys.userName, payload);
+		"session.settings.name"(state, payload: string) {
+			state.name = payload;
+			localStorage.setItem(keys.name, payload);
 		},
 	},
 	state() {
@@ -32,7 +32,7 @@ const session: Module<SessionState, StoreState> = {
 
 		return {
 			id: sessionId,
-			userName: localStorage.getItem(keys.userName) ?? "User",
+			name: localStorage.getItem(keys.name) ?? "User",
 			settings: {
 				darkMode: JSON.parse(localStorage.getItem(keys.darkMode) ?? "false"),
 			},

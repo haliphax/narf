@@ -22,7 +22,7 @@ const PieChart = defineComponent({
 			const valIter = this.data.values();
 			let value: IteratorResult<number, number>;
 			let total = 0;
-			let rotation = 0;
+			let rotation = 0.0;
 
 			while ((value = valIter.next())) {
 				if (value.done) break;
@@ -34,9 +34,9 @@ const PieChart = defineComponent({
 
 				slices.push({
 					key: k,
-					percent: parseFloat(percent.toFixed(4)),
+					percent,
 					index: 0,
-					rotation: rotation,
+					rotation,
 					votes: v,
 				});
 				rotation += Math.floor(360 * percent);
@@ -44,25 +44,21 @@ const PieChart = defineComponent({
 
 			return slices
 				.sort((a, b) => b.votes - a.votes)
-				.map((v, i, a) => {
-					v.index = i;
-
-					if (i === a.length - 1)
-						v.percent = Math.ceil(v.percent * 10000) / 10000;
-
-					return v;
+				.map((v, i) => {
+					return {
+						...v,
+						index: i,
+					};
 				});
 		},
 	},
 	methods: {
 		styles(slice: slice) {
-			const output: Array<string> = [];
-
-			output.push(`--i:${slice.index}`);
-			output.push(`--p:${slice.percent}`);
-			output.push(`--r:${slice.rotation}deg`);
-
-			return output.join(";");
+			return [
+				`--i:${slice.index}`,
+				`--p:${slice.percent}`,
+				`--r:${slice.rotation}deg`,
+			].join(";");
 		},
 	},
 });
@@ -142,11 +138,12 @@ label {
 }
 
 .slice::before {
-	background: conic-gradient(var(--c) calc(var(--p) * 100%), #0000 0);
+	background-image: conic-gradient(var(--c) calc(var(--p) * 100%), #0000 0);
+	background-position: 50%;
 	border-radius: 50%;
 	content: "";
 	display: block;
-	inset: 0;
+	inset: 1px;
 	position: absolute;
 }
 

@@ -29,7 +29,8 @@ export class Story {
 				}
 
 				return {
-					participant: { id: "", name: v.participant.name },
+					...v,
+					participant: { ...v.participant, id: "" },
 					vote: s.revealed ? v.vote : "?",
 				};
 			});

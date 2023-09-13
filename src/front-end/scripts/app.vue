@@ -9,7 +9,12 @@ const App = defineComponent({
 		DarkMode,
 	},
 	async beforeCreate() {
-		document.cookie = `narfClient=${store.state.session.id};path=${ROOT_URI};samesite=strict;secure`;
+		document.cookie = [
+			`narfClient=${store.state.session.id}`,
+			`path=${ROOT_URI}`,
+			"samesite=strict",
+			"secure",
+		].join(";");
 	},
 });
 

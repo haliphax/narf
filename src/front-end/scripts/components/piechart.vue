@@ -4,7 +4,6 @@ import { defineComponent } from "vue";
 type slice = {
 	key: string;
 	percent: number;
-	index: number;
 	rotation: number;
 	votes: number;
 };
@@ -36,7 +35,6 @@ const PieChart = defineComponent({
 				slices.push({
 					key,
 					percent: 0,
-					index: 0,
 					rotation,
 					votes: value,
 				});
@@ -53,13 +51,10 @@ const PieChart = defineComponent({
 				return a.votes === b.votes ? a1 - b1 : b.votes - a.votes;
 			});
 
-			let index = 0;
-
 			for (let i = 0; i < slices.length; i++) {
 				const s = slices[i];
 
 				s.percent = s.votes / total;
-				s.index = index++;
 				s.rotation = rotation;
 				rotation += Math.floor(360 * s.percent);
 			}
@@ -69,11 +64,7 @@ const PieChart = defineComponent({
 	},
 	methods: {
 		styles(slice: slice) {
-			return [
-				`--i:${slice.index}`,
-				`--p:${slice.percent}`,
-				`--r:${slice.rotation}deg`,
-			].join(";");
+			return [`--p:${slice.percent}`, `--r:${slice.rotation}deg`].join(";");
 		},
 	},
 });

@@ -18,12 +18,14 @@ repos:
         name: eslint
         args: [eslint, --fix]
         entry: npx
+        files: \.(js|ts|vue)$
         language: system
-        types: [ts]
+        types: [text]
 
       - id: prettier
         name: prettier
         args: [prettier, -l, -u, -w]
         entry: npx
+        exclude: \.(js|ts|vue)$
         language: system
         types: [text]

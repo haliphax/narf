@@ -86,18 +86,67 @@ code {
 	padding-inline: var(--space-m);
 }
 
-details {
-	margin-bottom: var(--space-l);
-}
-
-details[open] summary {
-	margin-bottom: var(--space-m);
-}
-
 label,
 summary {
 	cursor: pointer;
 	font-weight: bold;
+}
+
+/* details */
+
+details {
+	margin-bottom: var(--space-l);
+}
+
+details[open] {
+	summary {
+		margin-bottom: var(--space-m);
+	}
+
+	> :not(summary) {
+		border-left: 0.3em dotted var(--color-bg);
+		margin-left: var(--space-s);
+		padding-bottom: var(--space-s);
+		padding-left: var(--space-m);
+	}
+}
+
+summary {
+	font-size: 1.2em;
+}
+
+/* forms */
+
+fieldset {
+	border-color: var(--color-fg-secondary);
+	padding: var(--space-m) var(--space-l);
+
+	label {
+		margin: auto;
+		padding-right: var(--space-s);
+	}
+
+	> span {
+		display: flex;
+		flex-direction: row;
+
+		button,
+		input,
+		select {
+			flex-grow: 1;
+		}
+	}
+}
+
+fieldset:not(:last-child) {
+	margin-bottom: var(--space-l);
+}
+
+legend {
+	color: var(--color-fg);
+	font-size: 1.2em;
+	font-weight: bold;
+	padding-inline: var(--space-s);
 }
 
 /* application wrapper */
@@ -132,27 +181,4 @@ summary {
 	list-style-position: inside;
 	margin: 0;
 	padding: 0;
-}
-
-/* form styles */
-
-fieldset.grid {
-	margin-bottom: var(--space-l);
-	padding: var(--space-m) var(--space-l);
-
-	label {
-		margin: auto;
-		padding-right: var(--space-s);
-	}
-
-	> span {
-		display: flex;
-		flex-direction: row;
-
-		button,
-		input,
-		select {
-			flex-grow: 1;
-		}
-	}
 }

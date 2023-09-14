@@ -12,12 +12,12 @@ export default Participants;
 		<ul class="unstyled">
 			<li
 				v-for="v of $store.state.story.story?.votes"
-				:key="v.participant.id"
+				:key="v.participantId"
 				class="grid"
 			>
 				<span class="name">
-					{{ v.participant.name ?? "Anonymous" }}
-					<span v-if="v.participant.id === $store.state.session.id" class="you">
+					{{ v.participantName ?? "User" }}
+					<span v-if="v.participantId === $store.state.session.id" class="you">
 						(You)
 					</span>
 				</span>

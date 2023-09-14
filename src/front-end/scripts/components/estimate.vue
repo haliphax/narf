@@ -32,7 +32,7 @@ const Estimate = defineComponent({
 		},
 		you() {
 			return store.state.story.story?.votes?.find(
-				(v) => v.participant.id === store.state.session.id
+				(v) => v.participantId === store.state.session.id
 			);
 		},
 	},
@@ -49,10 +49,9 @@ const Estimate = defineComponent({
 				this.you ??
 				(() => {
 					return {
-						participant: {
-							id: this.$store.state.session.id,
-							name: this.$store.state.session.name,
-						},
+						participantId: this.$store.state.session.id,
+						participantName: this.$store.state.session.name,
+						storyId: this.$store.state.story.story?.id,
 						vote: option,
 					} as Vote;
 				})();

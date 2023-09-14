@@ -1,6 +1,7 @@
 import { Application } from "express";
 import { remult } from "remult";
 import { Story } from "../../../models/story";
+import { Vote } from "../../../models/vote";
 import server from "../../server";
 import { updateStory } from "./events";
 
@@ -23,18 +24,18 @@ const join = (app: Application) =>
 		console.log(`User ${remult.user.id} joining ${storyId}`);
 
 		try {
-			if (!story._votes?.find((v) => v.participant.id === remult.user?.id)) {
-				if (!story._votes) story._votes = [];
-
-				story._votes.push({
-					participant: req.body,
+			if (!story._votes?.find((v) => v.participantId === remult.user?.id)) {
+				await remult.repo(Vote).insert({
+					participantId: req.body.id,
+					participantName: req.body.name,
+					storyId,
 					vote: null,
 				});
-
-				await remult.repo(Story).update(story.id, story);
 			}
 
-			const updatedStory = await remult.repo(Story).findId(storyId);
+			const updatedStory = await remult
+				.repo(Story)
+				.findId(storyId, { useCache: false });
 
 			if (!updatedStory) {
 				throw new Error("No story");

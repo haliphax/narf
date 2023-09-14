@@ -2,33 +2,16 @@
 import { defineComponent } from "vue";
 import PieChart from "./piechart.vue";
 import store from "../store";
-import { FIBONACCI, TSHIRTS } from "../../../scales";
+import scales from "../../../scales";
 import { Vote } from "../../../models/vote";
-
-enum mode {
-	Fibonacci,
-	TShirts,
-}
-
-const modeMap = {
-	[mode.Fibonacci]: FIBONACCI,
-	[mode.TShirts]: TSHIRTS,
-};
-
-type pointsData = {
-	mode: mode;
-};
 
 const Estimate = defineComponent({
 	components: {
 		PieChart,
 	},
-	data(): pointsData {
-		return { mode: mode.Fibonacci };
-	},
 	computed: {
 		options(): Readonly<Array<string>> {
-			return modeMap[this.mode as mode];
+			return scales.get(this.$store.state.story.story?.scale ?? "") ?? [];
 		},
 		votes() {
 			if (!store.state.story.story) return [];

@@ -1,7 +1,7 @@
 import { UserInfo } from "remult";
 import { remultExpress } from "remult/remult-express";
 import { Story } from "../models/story";
-import { FIBONACCI } from "../scales";
+import scales from "../scales";
 
 const server = remultExpress({
 	entities: [Story],
@@ -17,17 +17,20 @@ const server = remultExpress({
 		const storyRepo = remult.repo(Story);
 
 		if ((await storyRepo.count()) === 0) {
+			const [scale, opts] = scales.entries().next().value as [string, string[]];
+
 			await storyRepo.insert({
 				id: "1",
 				owner: "test",
 				title: "Testing this thing",
+				scale,
 				_votes: [
 					{
 						participant: {
 							id: "test",
 							name: "Test Participant",
 						},
-						vote: FIBONACCI[0],
+						vote: opts[0],
 					},
 				],
 			});

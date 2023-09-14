@@ -1,4 +1,5 @@
 import { Entity, Fields } from "remult";
+import scales from "../scales";
 import { Vote } from "./vote";
 
 @Entity("story", { allowApiCrud: true })
@@ -15,9 +16,19 @@ export class Story {
 	@Fields.boolean()
 	revealed = false;
 
-	@Fields.object<Story>((options) => {
-		options.includeInApi = false;
+	@Fields.string<Story>({
+		allowApiUpdate: false,
+		defaultValue: () => scales.keys().next().value,
+		validate: (s) => {
+			if (s.scale && !scales.has(s.scale)) {
+				console.error(`Unknown scale: ${s.scale}`);
+				throw "Unknown scale";
+			}
+		},
 	})
+	scale!: string;
+
+	@Fields.object<Story>({ includeInApi: false })
 	_votes?: Vote[];
 
 	@Fields.object<Story>((options, remult) => {

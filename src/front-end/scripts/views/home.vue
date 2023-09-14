@@ -1,7 +1,10 @@
 <script lang="ts">
 import { defineComponent } from "vue";
+import NewStory from "../components/newstory.vue";
 
-const Home = defineComponent({});
+const Home = defineComponent({
+	components: { NewStory },
+});
 
 export default Home;
 </script>
@@ -11,7 +14,7 @@ export default Home;
 		narf!
 		<small>Simple story points estimation</small>
 	</h1>
-	<router-link :to="{ name: 'story', params: { story: 1 } }">Demo</router-link>
+	<NewStory></NewStory>
 </template>
 
 <style lang="less" scoped>

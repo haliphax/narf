@@ -5,7 +5,7 @@ import { Vote } from "../../../models/vote";
 import server from "../../server";
 import { updateStory } from "./events";
 
-/** Route for accepting a vote submission for a story */
+/** vote on a story */
 const vote = (app: Application) => {
 	app.put("/story/:story/vote", server.withRemult, async (r, s) => {
 		console.log(`Incoming vote for ${r.params.story}`);

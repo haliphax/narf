@@ -1,10 +1,14 @@
 import { Entity, Fields } from "remult";
+import { v4 } from "uuid";
 import scales from "../scales";
 import { Vote } from "./vote";
 
 @Entity("story", { allowApiCrud: true })
 export class Story {
-	@Fields.string({ allowApiUpdate: false })
+	@Fields.string({
+		allowApiUpdate: false,
+		defaultValue: () => v4(),
+	})
 	id!: string;
 
 	@Fields.string({ allowApiUpdate: false })

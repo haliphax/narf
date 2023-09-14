@@ -11,37 +11,22 @@ const vote = (app: Application) => {
 		console.log(`Incoming vote for ${req.params.story}`);
 
 		const vote = req.body;
-		const story = await remult.repo(Story).findId(req.params.story);
+		const storyRepo = remult.repo(Story);
+		const story = await storyRepo.findId(req.params.story);
 
 		if (!story) return next(new Error("No such story"));
 
-		const votes: Vote[] = [];
-
-		if (!story._votes) {
-			votes.push(vote);
-		} else {
-			let updated = false;
-
-			for (const v of story._votes) {
-				if (v.participant?.id === vote.participant?.id) {
-					updated = true;
-					votes.push(vote);
-				} else {
-					votes.push(v);
-				}
-			}
-
-			if (!updated) {
-				votes.push(vote);
-			}
-		}
-
-		story._votes = votes;
+		const voteRepo = remult.repo(Vote);
 
 		try {
-			await remult.repo(Story).update(req.params.story, story);
+			await voteRepo.update(voteRepo.metadata.idMetadata.getId(vote), vote);
 			res.sendStatus(201);
-			updateStory(story);
+
+			const updatedStory = await storyRepo.findId(req.params.story, {
+				useCache: false,
+			});
+
+			updateStory(updatedStory);
 		} catch (ex) {
 			next(ex);
 		}

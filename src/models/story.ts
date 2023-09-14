@@ -1,15 +1,12 @@
-import { Entity, Fields } from "remult";
+import { Entity, Fields, Validators } from "remult";
 import { v4 } from "uuid";
 import scales from "../scales";
 import { Vote } from "./vote";
 
 @Entity("story", { allowApiCrud: true })
 export class Story {
-	@Fields.string({
-		allowApiUpdate: false,
-		defaultValue: () => v4(),
-	})
-	id!: string;
+	@Fields.string({ allowApiUpdate: false, validate: Validators.unique })
+	id: string = v4();
 
 	@Fields.string({ allowApiUpdate: false })
 	owner!: string;
@@ -32,21 +29,25 @@ export class Story {
 	})
 	scale!: string;
 
-	@Fields.object<Story>({ includeInApi: false })
+	@Fields.object<Story>((options, remult) => {
+		options.includeInApi = false;
+		options.serverExpression = (e) =>
+			remult.repo(Vote).find({ where: { storyId: e.id } });
+	})
 	_votes?: Vote[];
 
 	@Fields.object<Story>((options, remult) => {
 		options.allowApiUpdate = false;
-		options.serverExpression = (s) => {
-			return s._votes?.map((v) => {
-				if (v.participant.id === remult.user?.id) {
+		options.serverExpression = (e) => {
+			return e._votes?.map((v) => {
+				if (v.participantId === remult.user?.id) {
 					return v;
 				}
 
 				return {
 					...v,
-					participant: { ...v.participant, id: "" },
-					vote: s.revealed ? v.vote : v.vote ? "❓" : null,
+					participantId: "",
+					vote: e.revealed ? v.vote : v.vote ? "❓" : null,
 				};
 			});
 		};

@@ -1,3 +1,9 @@
+# [v1.2.0](https://github.com/haliphax/narf/compare/v1.1.0...v1.2.0) (2023-09-14)
+
+## ✨ New Features
+- [`25cce3e`](https://github.com/haliphax/narf/commit/25cce3e)  instructions on homepage 
+- [`44ada66`](https://github.com/haliphax/narf/commit/44ada66)  links on homepage
+
 # [v1.1.0](https://github.com/haliphax/narf/compare/v1.0.0...v1.1.0) (2023-09-14)
 
 ## ✨ New Features

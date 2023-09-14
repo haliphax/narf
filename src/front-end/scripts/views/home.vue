@@ -43,6 +43,15 @@ export default Home;
 		<li>Click the <strong>Reveal</strong> button to show results</li>
 		<li>Take over the world! 🌎🐁</li>
 	</ol>
+	<ul class="links unstyled">
+		<li><a href="https://github.com/haliphax/narf">source</a></li>
+		<li><a href="https://haliphax.dev">author</a></li>
+		<li>
+			<a href="https://en.wikipedia.org/wiki/Pinky_and_the_Brain">
+				nostalgia
+			</a>
+		</li>
+	</ul>
 </template>
 
 <style lang="less" scoped>
@@ -56,5 +65,13 @@ small {
 	color: var(--color-fg-subtle);
 	display: block;
 	font-size: 0.5em;
+}
+
+.links {
+	display: block;
+	border-top: 0.3em dotted var(--color-bg);
+	margin-top: calc(var(--space-l) * 2);
+	padding-top: var(--space-l);
+	text-align: center;
 }
 </style>

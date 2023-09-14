@@ -73,5 +73,13 @@ small {
 	margin-top: calc(var(--space-l) * 2);
 	padding-top: var(--space-l);
 	text-align: center;
+
+	li {
+		display: inline-block;
+	}
+
+	li:not(:last-child) {
+		margin-right: var(--space-m);
+	}
 }
 </style>

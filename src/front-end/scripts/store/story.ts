@@ -12,7 +12,10 @@ const story: Module<StoryState | Promise<StoryState>, StoreState> = {
 			const storyId = router.currentRoute.value.params.story as string;
 
 			await fetch(`${ROOT_URI}story/${storyId}/join`, {
-				body: JSON.stringify(ctx.rootState.session),
+				body: JSON.stringify({
+					id: ctx.rootState.session.id,
+					name: ctx.rootState.session.name,
+				}),
 				headers: { "Content-Type": "application/json" },
 				method: "POST",
 			});

@@ -31,6 +31,18 @@ export default Home;
 		<Profile></Profile>
 	</details>
 	<NewStory></NewStory>
+	<h2>Point?</h2>
+	<ol>
+		<li>
+			<em>(Optional)</em> Provide your name in the
+			<strong>User profile</strong> section
+		</li>
+		<li>Create a story room with a title and voting scale</li>
+		<li>Share the room URL with your team members</li>
+		<li>Wait for votes to roll in</li>
+		<li>Click the <strong>Reveal</strong> button to show results</li>
+		<li>Take over the world! 🌎🐁</li>
+	</ol>
 </template>
 
 <style lang="less" scoped>

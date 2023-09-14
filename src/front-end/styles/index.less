@@ -28,6 +28,10 @@ body.dark-mode {
 	--color-outline: #fff;
 }
 
+::marker {
+	color: var(--color-fg-subtle);
+}
+
 * {
 	box-sizing: border-box;
 	word-wrap: break-word;
@@ -90,6 +94,10 @@ label,
 summary {
 	cursor: pointer;
 	font-weight: bold;
+}
+
+:is(ol, ul):not(.unstyled) li:not(:last-child) {
+	margin-bottom: var(--space-s);
 }
 
 /* details */

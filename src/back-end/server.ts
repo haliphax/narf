@@ -1,5 +1,6 @@
 import { UserInfo } from "remult";
 import { remultExpress } from "remult/remult-express";
+import { v4 } from "uuid";
 import { Story } from "../models/story";
 import scales from "../scales";
 
@@ -20,7 +21,7 @@ const server = remultExpress({
 			const [scale, opts] = scales.entries().next().value as [string, string[]];
 
 			await storyRepo.insert({
-				id: "1",
+				id: v4().replace(/[^-]/g, "0"),
 				owner: "test",
 				title: "Testing this thing",
 				scale,

@@ -1,3 +1,8 @@
+# [v1.1.0](https://github.com/haliphax/narf/compare/v1.0.0...v1.1.0) (2023-09-14)
+
+## ✨ New Features
+- [`4ec3573`](https://github.com/haliphax/narf/commit/4ec3573)  sqlite backend (#86) (Issues: [`#86`](https://github.com/haliphax/narf/issues/86))
+
 # v1.0.0 (2023-09-14)
 
 ## ✨ New Features

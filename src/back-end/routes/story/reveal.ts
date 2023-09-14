@@ -4,20 +4,22 @@ import { Story } from "../../../models/story";
 import server from "../../server";
 import { updateStory } from "./events";
 
+/** reveal votes for story room */
 const reveal = (app: Application) =>
 	app.post("/story/:story/reveal", server.withRemult, async (r, s) => {
 		const story = r.params.story;
 
 		console.log(`Revealing ${story}`);
-		await remult.repo(Story).update(story, { revealed: true });
-		s.sendStatus(202);
 
-		const updatedStory = await remult.repo(Story).findId(story);
+		const updatedStory = await remult
+			.repo(Story)
+			.update(story, { revealed: true });
 
 		if (!updatedStory) {
 			throw new Error("No story");
 		}
 
+		s.sendStatus(202);
 		updateStory(updatedStory);
 	});
 

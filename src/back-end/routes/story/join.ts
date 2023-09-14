@@ -4,6 +4,7 @@ import { Story } from "../../../models/story";
 import server from "../../server";
 import { updateStory } from "./events";
 
+/** join voting participants for story room */
 const join = (app: Application) =>
 	app.post("/story/:story/join", server.withRemult, async (r, s) => {
 		if (!remult.user) {

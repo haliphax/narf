@@ -6,21 +6,29 @@ import { updateStory } from "./events";
 
 /** reveal votes for story room */
 const reveal = (app: Application) =>
-	app.post("/story/:story/reveal", server.withRemult, async (r, s) => {
-		const story = r.params.story;
+	app.post(
+		"/story/:story/reveal",
+		server.withRemult,
+		async (req, res, next) => {
+			const story = req.params.story;
 
-		console.log(`Revealing ${story}`);
+			console.log(`Revealing ${story}`);
 
-		const updatedStory = await remult
-			.repo(Story)
-			.update(story, { revealed: true });
+			try {
+				const updatedStory = await remult
+					.repo(Story)
+					.update(story, { revealed: true });
 
-		if (!updatedStory) {
-			throw new Error("No story");
+				if (!updatedStory) {
+					throw new Error("No story");
+				}
+
+				res.sendStatus(202);
+				updateStory(updatedStory);
+			} catch (ex) {
+				next(ex);
+			}
 		}
-
-		s.sendStatus(202);
-		updateStory(updatedStory);
-	});
+	);
 
 export default reveal;

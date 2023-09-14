@@ -6,41 +6,45 @@ import { updateStory } from "./events";
 
 /** join voting participants for story room */
 const join = (app: Application) =>
-	app.post("/story/:story/join", server.withRemult, async (r, s) => {
+	app.post("/story/:story/join", server.withRemult, async (req, res, next) => {
 		if (!remult.user) {
-			s.sendStatus(403);
+			res.sendStatus(403);
 			return;
 		}
 
-		const storyId = r.params.story;
+		const storyId = req.params.story;
 		const story = await remult.repo(Story).findId(storyId);
 
 		if (!story) {
-			s.sendStatus(400);
+			res.sendStatus(400);
 			return;
 		}
 
 		console.log(`User ${remult.user.id} joining ${storyId}`);
 
-		if (!story._votes?.find((v) => v.participant.id === remult.user?.id)) {
-			if (!story._votes) story._votes = [];
+		try {
+			if (!story._votes?.find((v) => v.participant.id === remult.user?.id)) {
+				if (!story._votes) story._votes = [];
 
-			story._votes.push({
-				participant: r.body,
-				vote: null,
-			});
+				story._votes.push({
+					participant: req.body,
+					vote: null,
+				});
 
-			await remult.repo(Story).update(story.id, story);
+				await remult.repo(Story).update(story.id, story);
+			}
+
+			const updatedStory = await remult.repo(Story).findId(storyId);
+
+			if (!updatedStory) {
+				throw new Error("No story");
+			}
+
+			updateStory(updatedStory);
+			res.sendStatus(204);
+		} catch (ex) {
+			next(ex);
 		}
-
-		const updatedStory = await remult.repo(Story).findId(storyId);
-
-		if (!updatedStory) {
-			throw new Error("No story");
-		}
-
-		updateStory(updatedStory);
-		s.sendStatus(204);
 	});
 
 export default join;

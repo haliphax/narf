@@ -1,13 +1,11 @@
 import { execSync } from "child_process";
 import { createHmac, timingSafeEqual } from "crypto";
-import { Application, Request, Response } from "express";
+import { Application } from "express";
 
 /** Adds webhook endpoint for updating from remote git */
 const glitchWebhook = (app: Application) => {
-	app.post("/git", (req: Request, res: Response) => {
-		if (!process.env.SECRET) {
-			return res.sendStatus(500);
-		}
+	app.post("/git", (req, res) => {
+		if (!process.env.SECRET) return res.sendStatus(500);
 
 		const hmac = createHmac("sha1", process.env.SECRET);
 		const sig = `sha1=${hmac.update(JSON.stringify(req.body)).digest("hex")}`;

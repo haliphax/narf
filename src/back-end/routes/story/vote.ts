@@ -7,15 +7,13 @@ import { updateStory } from "./events";
 
 /** vote on a story */
 const vote = (app: Application) => {
-	app.put("/story/:story/vote", server.withRemult, async (r, s) => {
-		console.log(`Incoming vote for ${r.params.story}`);
+	app.put("/story/:story/vote", server.withRemult, async (req, res, next) => {
+		console.log(`Incoming vote for ${req.params.story}`);
 
-		const vote = r.body;
-		const story = await remult.repo(Story).findId(r.params.story);
+		const vote = req.body;
+		const story = await remult.repo(Story).findId(req.params.story);
 
-		if (!story) {
-			throw new Error("No such story");
-		}
+		if (!story) return next(new Error("No such story"));
 
 		const votes: Vote[] = [];
 
@@ -39,9 +37,14 @@ const vote = (app: Application) => {
 		}
 
 		story._votes = votes;
-		await remult.repo(Story).update(r.params.story, story);
-		s.sendStatus(201);
-		updateStory(story);
+
+		try {
+			await remult.repo(Story).update(req.params.story, story);
+			res.sendStatus(201);
+			updateStory(story);
+		} catch (ex) {
+			next(ex);
+		}
 	});
 };
 

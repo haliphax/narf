@@ -5,21 +5,25 @@ import server from "../../server";
 
 /** create a new story room */
 const create = (app: Application) =>
-	app.put("/story", server.withRemult, async (r, s) => {
+	app.put("/story", server.withRemult, async (req, res, next) => {
 		if (!remult.user) {
-			s.sendStatus(403);
+			res.sendStatus(403);
 			return;
 		}
 
-		console.log(`Creating new story: ${r.body.title}`);
+		console.log(`Creating new story: ${req.body.title}`);
 
-		const story = await remult.repo(Story).insert({
-			scale: r.body.scale,
-			title: r.body.title,
-			owner: remult.user.id,
-		});
+		try {
+			const story = await remult.repo(Story).insert({
+				scale: req.body.scale,
+				title: req.body.title,
+				owner: remult.user.id,
+			});
 
-		s.json({ id: story.id });
+			res.json({ id: story.id });
+		} catch (ex) {
+			next(ex);
+		}
 	});
 
 export default create;

@@ -32,7 +32,7 @@ jobs:
       - name: Build application
         env:
           NODE_ENV: production
-        run: npm run build && npm run clean
+        run: npm run build
 
       - name: Trim package.json for production
         run: |

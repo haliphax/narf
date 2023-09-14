@@ -72,8 +72,7 @@
 		"vueIndentScriptAndStyle": false
 	},
 	"scripts": {
-		"build": "npx parcel build",
-		"clean": "npx ts-node src/tasks/clean.ts",
+		"build": "npx parcel build && npx ts-node src/tasks/clean.ts",
 		"start": "node dist/back-end/index.js"
 	}
 }

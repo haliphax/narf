@@ -17,6 +17,7 @@ const Story = defineComponent({
 		store.dispatch("story.load");
 	},
 	unmounted() {
+		store.commit("story", undefined);
 		store.commit("events", undefined);
 	},
 });

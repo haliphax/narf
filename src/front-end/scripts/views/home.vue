@@ -1,9 +1,18 @@
 <script lang="ts">
 import { defineComponent } from "vue";
 import NewStory from "../components/newstory.vue";
+import Profile from "../components/profile.vue";
 
 const Home = defineComponent({
-	components: { NewStory },
+	components: {
+		NewStory,
+		Profile,
+	},
+	data() {
+		return {
+			openProfile: this.$store.state.session.name === "User",
+		};
+	},
 });
 
 export default Home;
@@ -14,6 +23,10 @@ export default Home;
 		narf!
 		<small>Simple story points estimation</small>
 	</h1>
+	<details :open="openProfile">
+		<summary>🧑 User profile</summary>
+		<Profile></Profile>
+	</details>
 	<NewStory></NewStory>
 </template>
 

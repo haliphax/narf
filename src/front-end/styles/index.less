@@ -81,14 +81,26 @@ a:visited {
 	opacity: 0.9;
 }
 
-label {
+details {
+	margin-bottom: var(--space-l);
+}
+
+details[open] summary {
+	margin-bottom: var(--space-m);
+}
+
+label,
+summary {
 	cursor: pointer;
 	font-weight: bold;
 }
 
+/* application wrapper */
 #app {
 	width: 100%;
 }
+
+/* utility classes */
 
 .grid {
 	display: grid;
@@ -115,4 +127,27 @@ label {
 	list-style-position: inside;
 	margin: 0;
 	padding: 0;
+}
+
+/* form styles */
+
+fieldset.grid {
+	margin-bottom: var(--space-l);
+	padding: var(--space-m) var(--space-l);
+
+	label {
+		margin: auto;
+		padding-right: var(--space-s);
+	}
+
+	> span {
+		display: flex;
+		flex-direction: row;
+
+		button,
+		input,
+		select {
+			flex-grow: 1;
+		}
+	}
 }

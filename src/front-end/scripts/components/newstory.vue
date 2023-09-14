@@ -71,29 +71,6 @@ export default NewStory;
 <style lang="less" scoped>
 @import "../../styles/breakpoints.less";
 
-button {
-	margin: auto;
-}
-
-fieldset {
-	padding: var(--space-m) var(--space-l);
-}
-
-label {
-	margin: auto;
-	padding-right: var(--space-s);
-}
-
-.grid > span {
-	display: flex;
-	flex-direction: row;
-
-	input,
-	select {
-		flex-grow: 1;
-	}
-}
-
 @media @breakpoint_m {
 	.grid > span {
 		grid-area: 1 / span 3;

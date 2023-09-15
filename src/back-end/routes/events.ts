@@ -1,6 +1,6 @@
 import { Application, Response } from "express";
 import { v4 as uuid } from "uuid";
-import { Story } from "../../../models/story";
+import { Story } from "../../models/story";
 
 interface NarfClient {
 	id: string;
@@ -10,8 +10,8 @@ interface NarfClient {
 const clients = new Map<string, NarfClient[]>();
 
 /** Server-sent events endpoint for story updates */
-export const storySSE = (app: Application) => {
-	app.get("/story/:story/events", async (r, s) => {
+export const events = (app: Application) => {
+	app.get("/:story/events", async (r, s) => {
 		s.set({
 			"Cache-Control": "no-cache",
 			"Content-Type": "text/event-stream",

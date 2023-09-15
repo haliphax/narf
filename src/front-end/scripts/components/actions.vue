@@ -1,18 +1,17 @@
 <script lang="ts">
 import { defineComponent } from "vue";
-import store from "../store/index";
 
 const Actions = defineComponent({
 	methods: {
 		reveal() {
 			if (
-				store.state.story.story?.owner !== store.state.session.id &&
+				this.$store.state.story.story?.owner !== this.$store.state.session.id &&
 				!confirm("You are not the owner of this story. Are you sure?")
 			) {
 				return;
 			}
 
-			store.dispatch("story.reveal");
+			this.$store.dispatch("story.reveal");
 		},
 	},
 });

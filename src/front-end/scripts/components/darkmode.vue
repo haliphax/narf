@@ -1,23 +1,27 @@
 <script lang="ts">
 import { defineComponent } from "vue";
 import Toggle from "./toggle.vue";
-import store from "../store";
-
-const settings = store.state.session.settings;
 
 const DarkMode = defineComponent({
 	components: {
 		Toggle,
 	},
+	data() {
+		return { settings: this.$store.state.session.settings };
+	},
 	mounted() {
-		if (matchMedia("prefers-color-scheme: dark").matches || settings.darkMode)
+		if (
+			matchMedia("prefers-color-scheme: dark").matches ||
+			this.settings.darkMode
+		) {
 			this.toggle();
+		}
 	},
 	methods: {
 		toggle() {
 			const val = document.body.classList.toggle("dark-mode");
 
-			store.commit("session.settings.darkMode", val);
+			this.$store.commit("session.settings.darkMode", val);
 		},
 	},
 });

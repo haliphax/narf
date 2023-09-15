@@ -1,6 +1,5 @@
 <script lang="ts">
 import { defineComponent } from "vue";
-import store from "../store";
 import Actions from "../components/actions.vue";
 import Estimate from "../components/estimate.vue";
 import Heading from "../components/heading.vue";
@@ -14,11 +13,11 @@ const Story = defineComponent({
 		Participants,
 	},
 	created() {
-		store.dispatch("story.load");
+		this.$store.dispatch("story.join");
 	},
 	unmounted() {
-		store.commit("story", undefined);
-		store.commit("events", undefined);
+		this.$store.commit("story", undefined);
+		this.$store.commit("events", undefined);
 	},
 });
 

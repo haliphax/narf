@@ -1,6 +1,6 @@
-import { UserInfo } from "remult";
+import { UserInfo, dbNamesOf } from "remult";
 import { remultExpress } from "remult/remult-express";
-import { createKnexDataProvider } from "remult/remult-knex";
+import { KnexDataProvider, createKnexDataProvider } from "remult/remult-knex";
 import { Story } from "../models/story";
 import { Vote } from "../models/vote";
 
@@ -20,6 +20,17 @@ const server = remultExpress({
 				: undefined;
 
 		return await new Promise((resolve) => resolve(user));
+	},
+	async initApi() {
+		// add a unique index that will serve in place of a compound primary key
+		const db = KnexDataProvider.getDb();
+		const table = (await dbNamesOf(Vote)).$entityName;
+
+		await db.raw(`
+			create unique index if not exists
+			idx_vote_compound_key
+			on ${table} (participantId, storyId)
+		`);
 	},
 });
 

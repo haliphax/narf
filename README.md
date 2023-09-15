@@ -1,6 +1,6 @@
 # narf!
 
-> [Story points][] estimation webapp written in TypeScript
+> Simple [story points][] estimation
 
 [Live web application][]
 

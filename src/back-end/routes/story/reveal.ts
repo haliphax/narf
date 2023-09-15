@@ -28,7 +28,7 @@ const reveal = (app: Application) =>
 			} catch (ex) {
 				next(ex);
 			}
-		}
+		},
 	);
 
 export default reveal;

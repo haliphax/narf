@@ -32,7 +32,7 @@ const Estimate = defineComponent({
 		},
 		you() {
 			return store.state.story.story?.votes?.find(
-				(v) => v.participantId === store.state.session.id
+				(v) => v.participantId === store.state.session.id,
 			);
 		},
 	},

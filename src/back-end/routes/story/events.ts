@@ -34,7 +34,7 @@ export const storySSE = (app: Application) => {
 			console.log(`Client ${client.id} disconnected`);
 			clients.set(
 				story,
-				(clients.get(story) ?? []).filter((c) => c.id !== client.id)
+				(clients.get(story) ?? []).filter((c) => c.id !== client.id),
 			);
 		});
 	});

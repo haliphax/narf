@@ -13,7 +13,7 @@ const glitchWebhook = (app: Application) => {
 		if (
 			!timingSafeEqual(
 				Buffer.from(sig),
-				Buffer.from(req.headers["x-hub-signature"] as string)
+				Buffer.from(req.headers["x-hub-signature"] as string),
 			)
 		) {
 			console.error("webhook signature incorrect");

@@ -11,6 +11,6 @@ const rootURI = process.env.ROOT_URI || "/";
 	const input = (await readFile(filename)).toString();
 	await writeFile(
 		filename,
-		input.replace(rgx, (_: string, c1: string) => `="${rootURI}${c1}"`)
+		input.replace(rgx, (_: string, c1: string) => `="${rootURI}${c1}"`),
 	);
 })();

@@ -3,6 +3,7 @@
 	"version": "1.2.1",
 	"private": true,
 	"devDependencies": {
+		"@flydotio/dockerfile": "^0.4.9",
 		"@parcel/optimizer-data-url": "^2.9.3",
 		"@parcel/transformer-inline-string": "^2.9.3",
 		"@parcel/transformer-less": "^2.9.3",

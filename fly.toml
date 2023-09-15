@@ -1,17 +1,30 @@
+# fly.toml app configuration file generated for narf on 2023-09-15T17:32:35-05:00
+#
+# See https://fly.io/docs/reference/configuration/ for information about how to use this file.
+#
+
 app = "narf"
 primary_region = "den"
 
 [build]
 
-[[mounts]]
-  source = "db"
-  destination = "/app/db"
+[mounts]
+source = "db"
+destination = "/app/db"
 
 [http_service]
-  internal_port = 3000
-  force_https = true
-  auto_stop_machines = true
-  auto_start_machines = true
-  min_machines_running = 0
-  processes = ["app"]
+internal_port = 3000
+force_https = true
+auto_stop_machines = true
+auto_start_machines = true
+min_machines_running = 0
+processes = ["app"]
 
+[[http_service.checks]]
+grace_period = "30s"
+interval = "15s"
+method = "get"
+path = "/path/to/status"
+port = 5500
+timeout = "10s"
+type = "http"

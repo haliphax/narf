@@ -1,8 +1,16 @@
 import { Entity, Fields } from "remult";
+import { updateStory } from "../back-end/routes/events";
+import scales from "../scales";
+import { Story } from "./story";
 
-@Entity<Vote>("vote", {
-	allowApiUpdate: (e, remult) => remult?.user?.id === e?.participantId,
-	id: (e) => [e.participantId, e.storyId],
+@Entity<Vote>("vote", (options, remult) => {
+	options.allowApiCrud = true;
+	options.allowApiUpdate = (e, remult) => remult?.user?.id === e?.participantId;
+	options.id = (e) => [e.participantId, e.storyId];
+	options.saved = async (e) => {
+		const story = await remult.repo(Story).findId(e.storyId);
+		updateStory(story);
+	};
 })
 export class Vote {
 	@Fields.string()
@@ -14,6 +22,15 @@ export class Vote {
 	@Fields.string()
 	participantName!: string;
 
-	@Fields.string({ allowNull: true })
+	@Fields.string<Vote>((options, remult) => {
+		options.allowNull = true;
+		options.validate = async (e) => {
+			if (!e.vote) return;
+
+			const story = await remult.repo(Story).findId(e.storyId);
+
+			if (!scales.get(story.scale)?.includes(e.vote)) throw "Invalid vote";
+		};
+	})
 	vote: string | null = null;
 }

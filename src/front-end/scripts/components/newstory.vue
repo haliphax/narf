@@ -1,8 +1,9 @@
 <script lang="ts">
 import { defineComponent } from "vue";
 import scales from "../../../scales";
-import { ROOT_URI } from "../constants";
 import router from "../router";
+import { remult } from "remult";
+import { Story } from "../../../models/story";
 
 interface NewStoryProps {
 	scale: string;
@@ -30,16 +31,14 @@ const NewStory = defineComponent({
 	},
 	methods: {
 		async submit() {
-			const resp = await fetch(`${ROOT_URI}story`, {
-				body: JSON.stringify({
-					scale: this.scale,
-					title: this.title,
-				}),
-				headers: { "Content-Type": "application/json" },
-				method: "PUT",
-			}).then((r) => r.json());
+			const storyRepo = remult.repo(Story);
+			const story = await storyRepo.insert({
+				owner: this.$store.state.session.id,
+				scale: this.scale,
+				title: this.title,
+			});
 
-			router.push({ name: "story", params: { story: resp.id } });
+			router.push({ name: "story", params: { story: story.id } });
 		},
 	},
 });

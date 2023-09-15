@@ -1,7 +1,6 @@
 <script lang="ts">
 import { defineComponent } from "vue";
 import PieChart from "./piechart.vue";
-import store from "../store";
 import scales from "../../../scales";
 import { Vote } from "../../../models/vote";
 
@@ -14,11 +13,11 @@ const Estimate = defineComponent({
 			return scales.get(this.$store.state.story.story?.scale ?? "") ?? [];
 		},
 		votes() {
-			if (!store.state.story.story) return [];
+			if (!this.$store.state.story.story) return [];
 
 			const votes = new Map<string, number>();
 
-			store.state.story.story.votes?.map((v: Vote) => {
+			this.$store.state.story.story.votes?.map((v: Vote) => {
 				if (v.vote === null) return;
 
 				const value = v.vote.toString();
@@ -31,8 +30,8 @@ const Estimate = defineComponent({
 			return votes;
 		},
 		you() {
-			return store.state.story.story?.votes?.find(
-				(v) => v.participantId === store.state.session.id,
+			return this.$store.state.story.story?.votes?.find(
+				(v) => v.participantId === this.$store.state.session.id,
 			);
 		},
 	},
@@ -56,7 +55,7 @@ const Estimate = defineComponent({
 					} as Vote;
 				})();
 			payload.vote = option;
-			store.dispatch("story.vote", payload);
+			this.$store.dispatch("story.vote", payload);
 		},
 	},
 });

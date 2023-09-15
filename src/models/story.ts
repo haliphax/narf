@@ -1,33 +1,39 @@
-import { Entity, Fields, Validators } from "remult";
+import { Entity, Fields, Remult, Validators } from "remult";
 import { v4 } from "uuid";
+import { updateStory } from "../back-end/routes/events";
 import scales from "../scales";
 import { Vote } from "./vote";
 
-@Entity("story", { allowApiCrud: true })
+const ownerOnly = (e?: Story, remult?: Remult) =>
+	!e?.owner || remult?.user?.id === e?.owner;
+
+@Entity<Story>("story", {
+	allowApiCrud: true,
+	saved: (r) => updateStory(r),
+})
 export class Story {
 	@Fields.string({ allowApiUpdate: false, validate: Validators.unique })
 	id: string = v4();
 
-	@Fields.string({ allowApiUpdate: false })
+	@Fields.string<Story>({ allowApiUpdate: ownerOnly })
 	owner!: string;
 
-	@Fields.string()
+	@Fields.string({ allowApiUpdate: ownerOnly })
 	title!: string;
 
 	@Fields.boolean()
 	revealed = false;
 
-	@Fields.string<Story>({
-		allowApiUpdate: false,
-		defaultValue: () => scales.keys().next().value,
-		validate: (s) => {
-			if (s.scale && !scales.has(s.scale)) {
-				console.error(`Unknown scale: ${s.scale}`);
+	@Fields.string({
+		allowApiUpdate: ownerOnly,
+		validate: (e) => {
+			if (e.scale && !scales.has(e.scale)) {
+				console.error(`Unknown scale: ${e.scale}`);
 				throw "Unknown scale";
 			}
 		},
 	})
-	scale!: string;
+	scale = scales.keys().next().value;
 
 	@Fields.object<Story>((options, remult) => {
 		options.includeInApi = false;
@@ -37,7 +43,6 @@ export class Story {
 	_votes?: Vote[];
 
 	@Fields.object<Story>((options, remult) => {
-		options.allowApiUpdate = false;
 		options.serverExpression = (e) => {
 			return e._votes?.map((v) => {
 				if (v.participantId === remult.user?.id) {

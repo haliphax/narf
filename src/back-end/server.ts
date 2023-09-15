@@ -11,6 +11,7 @@ const server = remultExpress({
 		connection: {
 			filename: "./db/narf.sqlite3",
 		},
+		useNullAsDefault: true,
 	}),
 	async getUser(request) {
 		const user =

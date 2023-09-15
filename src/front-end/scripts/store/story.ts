@@ -10,63 +10,55 @@ const story: Module<StoryState | Promise<StoryState>, StoreState> = {
 	actions: {
 		async "story.join"(ctx) {
 			const storyId = router.currentRoute.value.params.story as string;
+			const events = new EventSource(`${ROOT_URI}${storyId}/events`);
 
-			await fetch(`${ROOT_URI}story/${storyId}/join`, {
-				body: JSON.stringify({
-					id: ctx.rootState.session.id,
-					name: ctx.rootState.session.name,
-				}),
-				headers: { "Content-Type": "application/json" },
-				method: "POST",
+			events.addEventListener("message", () => {
+				console.log("Story update received");
+				ctx.dispatch("story.load");
 			});
+			ctx.commit("events", events);
+
+			const voteRepo = remult.repo(Vote);
+			const partial = {
+				participantId: ctx.rootState.session.id,
+				participantName: ctx.rootState.session.name,
+				storyId,
+			};
+
+			if (
+				(await voteRepo.count({
+					participantId: partial.participantId,
+					storyId,
+				})) === 0
+			) {
+				await voteRepo.insert(partial);
+			}
+
+			ctx.dispatch("story.load");
 		},
 		async "story.load"(ctx) {
-			const firstLoad = !(ctx.state as StoryState).events;
-
-			if (firstLoad) await ctx.dispatch("story.join");
-
 			const story = await remult
 				.repo(Story)
-				.findId(router.currentRoute.value.params.story as string, {
+				.findId(router.currentRoute.value.params.story.toString(), {
 					useCache: false,
 				});
 
-			if (firstLoad) {
-				const events = new EventSource(`${ROOT_URI}story/${story.id}/events`);
-
-				events.addEventListener("message", () => {
-					console.log("Story update received");
-					ctx.dispatch("story.load");
-				});
-
-				ctx.commit("events", events);
-			}
-
+			console.log("Story", story);
 			ctx.commit("story", story);
 		},
 		async "story.reveal"(ctx) {
 			const state = ctx.state as StoryState;
 
-			if (!state.story) {
-				return;
-			}
+			if (!state.story) return;
 
-			await fetch(`${ROOT_URI}story/${state.story.id}/reveal`, {
-				method: "POST",
-			});
+			await remult.repo(Story).update(state.story.id, { revealed: true });
 		},
 		async "story.vote"(ctx, payload: Vote) {
 			const state = ctx.state as StoryState;
 
-			if (!state.story) {
-				return;
-			}
+			if (!state.story) return;
 
-			await fetch(`${ROOT_URI}story/${state.story.id}/vote`, {
-				body: JSON.stringify(payload),
-				headers: { "Content-Type": "application/json" },
-				method: "PUT",
-			});
+			await remult.repo(Vote).save(payload);
 		},
 	},
 	mutations: {

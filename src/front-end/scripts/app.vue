@@ -2,7 +2,6 @@
 import { defineComponent } from "vue";
 import DarkMode from "./components/darkmode.vue";
 import { ROOT_URI } from "./constants";
-import store from "./store";
 
 const App = defineComponent({
 	components: {
@@ -10,7 +9,7 @@ const App = defineComponent({
 	},
 	async beforeCreate() {
 		document.cookie = [
-			`narfClient=${store.state.session.id}`,
+			`narfClient=${this.$store.state.session.id}`,
 			`path=${ROOT_URI}`,
 			"samesite=strict",
 			"secure",

@@ -1,3 +1,8 @@
+# [v1.2.1](https://github.com/haliphax/narf/compare/v1.2.0...v1.2.1) (2023-09-15)
+
+## 🐛 Bug Fixes
+- [`e77aa49`](https://github.com/haliphax/narf/commit/e77aa49)  primary key for vote table (#94) (Issues: [`#94`](https://github.com/haliphax/narf/issues/94))
+
 # [v1.2.0](https://github.com/haliphax/narf/compare/v1.1.0...v1.2.0) (2023-09-14)
 
 ## ✨ New Features

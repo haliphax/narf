@@ -2,7 +2,7 @@
 
 > [Story points][] estimation webapp written in TypeScript
 
-[Demonstration app][]
+[Live web application][]
 
 ## Stack
 
@@ -18,6 +18,7 @@
 [css grid]: https://developer.mozilla.org/en-us/docs/web/css/css_grid_layout
 [demonstration app]: https://sphenoid-secret-antimony.glitch.me
 [less]: https://lesscss.org
+[live web application]: https://narf.fly.dev
 [parcel]: https://parceljs.org
 [remult]: https://remult.dev
 [story points]: https://www.scrum.org/resources/blog/why-do-we-use-story-points-estimating

@@ -27,6 +27,8 @@ const glitchWebhook = (app: Application) => {
 			req.body.ref === "refs/heads/glitch"
 		) {
 			[
+				"rm -rf dist/front-end",
+				"git restore dist",
 				"git fetch origin glitch",
 				"git reset --hard origin/glitch",
 				"git pull origin glitch --force",

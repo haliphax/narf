@@ -1,13 +1,12 @@
 # syntax = docker/dockerfile:1
-ARG NODE_VERSION=18.17.1
-FROM node:${NODE_VERSION}-slim as base
+FROM node:18-slim as base
 LABEL fly_launch_runtime="Node.js"
 WORKDIR /app
 ENV NODE_ENV="production"
 
 FROM base as build
 RUN apt-get update -qq && \
-    apt-get install -y build-essential pkg-config python-is-python3
+	apt-get install -y build-essential pkg-config python-is-python3
 COPY --link package-lock.json package.json ./
 RUN npm ci --include=dev
 COPY --link . .

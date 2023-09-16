@@ -24,6 +24,11 @@ app.use(express.static("dist/front-end"));
 
 app.disable("x-powered-by");
 
-app.listen(port, host, () =>
+const listener = app.listen(port, host, () =>
 	console.log(`Server listening at http://${host}:${port}`),
 );
+
+process.on("SIGTERM", () => {
+	console.log("Terminating");
+	listener.close(() => console.log("Listener closed"));
+});

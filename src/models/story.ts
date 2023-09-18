@@ -18,6 +18,9 @@ export class Story {
 	@Fields.string<Story>({ allowApiUpdate: ownerOnly })
 	owner!: string;
 
+	@Fields.integer({ allowApiUpdate: false })
+	created = new Date().valueOf();
+
 	@Fields.string({ allowApiUpdate: ownerOnly })
 	title!: string;
 

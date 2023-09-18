@@ -3,6 +3,7 @@ import { remultExpress } from "remult/remult-express";
 import { KnexDataProvider, createKnexDataProvider } from "remult/remult-knex";
 import { Story } from "../models/story";
 import { Vote } from "../models/vote";
+import cronjobs from "./cronjobs";
 
 const server = remultExpress({
 	entities: [Story, Vote],
@@ -31,6 +32,7 @@ const server = remultExpress({
 			idx_vote_compound_key
 			on ${table} (participantId, storyId)
 		`);
+		cronjobs.start();
 	},
 });
 

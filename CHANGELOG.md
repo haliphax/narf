@@ -1,3 +1,8 @@
+# [v1.4.0](https://github.com/haliphax/narf/compare/v1.3.0...v1.4.0) (2023-09-20)
+
+## ✨ New Features
+- [`1385552`](https://github.com/haliphax/narf/commit/1385552)  export/import profile (#98) (Issues: [`#98`](https://github.com/haliphax/narf/issues/98))
+
 # [v1.3.0](https://github.com/haliphax/narf/compare/v1.2.1...v1.3.0) (2023-09-18)
 
 ## ✨ New Features

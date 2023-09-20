@@ -61,17 +61,7 @@ body {
 	min-height: 100%;
 }
 
-button {
-	background-color: var(--color-bg);
-	color: var(--color-fg);
-	cursor: pointer;
-	font-size: 115%;
-}
-
-button[disabled] {
-	cursor: not-allowed;
-	text-decoration: line-through;
-}
+/* links */
 
 a,
 a:link {
@@ -86,19 +76,19 @@ a:visited {
 	opacity: 0.9;
 }
 
-code {
+/* buttons */
+
+button {
 	background-color: var(--color-bg);
-	padding-inline: var(--space-m);
-}
-
-label,
-summary {
+	color: var(--color-fg);
 	cursor: pointer;
-	font-weight: bold;
+	font-size: 115%;
+	padding: var(--space-s) var(--space-l);
 }
 
-:is(ol, ul):not(.unstyled) li:not(:last-child) {
-	margin-bottom: var(--space-s);
+button[disabled] {
+	cursor: not-allowed;
+	text-decoration: line-through;
 }
 
 /* details */
@@ -158,6 +148,19 @@ legend {
 	padding-inline: var(--space-s);
 }
 
+/* lists */
+
+:is(ol, ul).unstyled {
+	list-style-type: none;
+	list-style-position: inside;
+	margin: 0;
+	padding: 0;
+}
+
+:is(ol, ul):not(.unstyled) li:not(:last-child) {
+	margin-bottom: var(--space-s);
+}
+
 /* application wrapper */
 #app {
 	width: 100%;
@@ -174,21 +177,29 @@ legend {
 	display: inline-block;
 }
 
+.no {
+	display: none;
+}
+
 .right {
 	text-align: right;
 }
 
-/* screen-reader only */
 .sr {
+	/* screen reader only */
 	right: 100vw;
 	position: absolute;
 }
 
-/* unstyled list */
+/* misc elements */
 
-:is(ol, ul).unstyled {
-	list-style-type: none;
-	list-style-position: inside;
-	margin: 0;
-	padding: 0;
+code {
+	background-color: var(--color-bg);
+	padding-inline: var(--space-m);
+}
+
+label,
+summary {
+	cursor: pointer;
+	font-weight: bold;
 }

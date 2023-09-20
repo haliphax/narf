@@ -1,3 +1,8 @@
+# [v1.5.0](https://github.com/haliphax/narf/compare/v1.4.0...v1.5.0) (2023-09-20)
+
+## ✨ New Features
+- [`6a8e99f`](https://github.com/haliphax/narf/commit/6a8e99f)  add ❌ option to voting scales (#100) (Issues: [`#100`](https://github.com/haliphax/narf/issues/100))
+
 # [v1.4.0](https://github.com/haliphax/narf/compare/v1.3.0...v1.4.0) (2023-09-20)
 
 ## ✨ New Features

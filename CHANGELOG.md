@@ -1,3 +1,8 @@
+# [v1.6.0](https://github.com/haliphax/narf/compare/v1.5.0...v1.6.0) (2023-09-20)
+
+## ✨ New Features
+- [`87e0ce1`](https://github.com/haliphax/narf/commit/87e0ce1)  shorten story URLs with URI-coded base64 (#101) (Issues: [`#101`](https://github.com/haliphax/narf/issues/101))
+
 # [v1.5.0](https://github.com/haliphax/narf/compare/v1.4.0...v1.5.0) (2023-09-20)
 
 ## ✨ New Features

@@ -7,13 +7,18 @@ import { Vote } from "./vote";
 const ownerOnly = (e?: Story, remult?: Remult) =>
 	!e?.owner || remult?.user?.id === e?.owner;
 
+const generateId = () =>
+	encodeURIComponent(
+		Buffer.from(v4().replace("-", ""), "hex").toString("base64"),
+	);
+
 @Entity<Story>("story", {
 	allowApiCrud: true,
 	saved: (r) => updateStory(r),
 })
 export class Story {
 	@Fields.string({ allowApiUpdate: false, validate: Validators.unique })
-	id: string = v4();
+	id: string = generateId();
 
 	@Fields.string<Story>({ allowApiUpdate: ownerOnly })
 	owner!: string;

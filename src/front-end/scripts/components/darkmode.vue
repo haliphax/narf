@@ -7,33 +7,34 @@ const DarkMode = defineComponent({
 	components: {
 		Toggle,
 	},
-	computed: {
+	data() {
+		return {
+			enabled: this.$store.state.session.settings.darkMode,
+		};
+	},
+	watch: {
 		enabled() {
-			return this.$store.state.session.settings.darkMode;
+			this.bodyClass(this.enabled);
 		},
 	},
-	mounted() {
-		this.bodyClass();
+	created() {
+		this.bodyClass(this.enabled);
 		this.$store.subscribe((mutation) => {
-			console.log(mutation);
 			const keys = Object.getOwnPropertyNames(mutation.payload);
 
-			if (mutation.type == "session" && keys.includes("settings")) {
-				console.log("session");
-				return this.bodyClass(
-					(mutation.payload as SessionState).settings.darkMode,
-				);
-			}
-
-			if (mutation.type == "session.settings" && keys.includes("darkMode")) {
-				console.log("settings");
-				return this.bodyClass((mutation.payload as SessionSettings).darkMode);
+			if (mutation.type == "session" && keys.includes("settings"))
+				this.enabled = (mutation.payload as SessionState).settings.darkMode;
+			else if (
+				mutation.type == "session.settings" &&
+				keys.includes("darkMode")
+			) {
+				this.enabled = (mutation.payload as SessionSettings).darkMode;
 			}
 		});
 	},
 	methods: {
-		bodyClass(force?: boolean) {
-			document.body.classList.toggle("dark-mode", force ?? this.enabled);
+		bodyClass(force: boolean) {
+			document.body.classList.toggle("dark-mode", force);
 		},
 		toggle() {
 			this.$store.commit("session.settings", { darkMode: !this.enabled });
@@ -52,7 +53,8 @@ export default DarkMode;
 		</span>
 		<Toggle
 			id="darkmode-toggle"
-			:checked="$store.state.session.settings.darkMode"
+			ref="toggle"
+			:checked="enabled"
 			@click="toggle"
 		></Toggle>
 	</label>

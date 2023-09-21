@@ -18,6 +18,11 @@ const Toggle = defineComponent({
 			defaultChecked: false,
 		};
 	},
+	computed: {
+		isChecked() {
+			return this.checked ?? this.defaultChecked;
+		},
+	},
 	methods: {
 		defaultToggle() {
 			this.defaultChecked = !this.defaultChecked;
@@ -32,9 +37,9 @@ export default Toggle;
 	<span class="tog">
 		<input
 			:id="id"
+			v-model="isChecked"
 			class="sr"
 			type="checkbox"
-			:checked="checked ?? defaultChecked"
 			@click="$emit('click')"
 		/>
 		<i aria-hidden="true"></i>

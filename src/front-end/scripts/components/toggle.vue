@@ -39,10 +39,13 @@ export default Toggle;
 			:id="id"
 			v-model="isChecked"
 			class="sr"
+			tabindex="-1"
 			type="checkbox"
 			@click="$emit('click')"
 		/>
-		<i aria-hidden="true"></i>
+		<label :for="id" tabindex="0" aria-hidden="true">
+			<span class="sr">Toggle</span>
+		</label>
 	</span>
 </template>
 
@@ -57,7 +60,7 @@ export default Toggle;
 	width: var(--space-xxl);
 }
 
-.tog i {
+.tog label {
 	background: var(--color-fg);
 	border-radius: var(--tog-height);
 	bottom: 0;
@@ -69,7 +72,7 @@ export default Toggle;
 	top: 0;
 }
 
-.tog i::before {
+.tog label::before {
 	--size: calc(var(--tog-height) - (var(--tog-offset) * 2));
 	background: var(--color-bg);
 	border-radius: 50%;
@@ -81,7 +84,7 @@ export default Toggle;
 	width: var(--size);
 }
 
-.tog input:checked + i::before {
+.tog input:checked + label::before {
 	left: auto;
 	right: var(--tog-offset);
 }

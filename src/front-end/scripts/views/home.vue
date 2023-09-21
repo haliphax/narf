@@ -34,7 +34,10 @@ export default Home;
 		<small>Simple story points estimation</small>
 	</h1>
 	<details :open="openProfile">
-		<summary>🧑 User profile</summary>
+		<summary>
+			<span aria-hidden="true">🧑</span>
+			User profile
+		</summary>
 		<Profile></Profile>
 	</details>
 	<NewStory></NewStory>
@@ -48,7 +51,7 @@ export default Home;
 		<li>Share the room URL with your team members</li>
 		<li>Wait for votes to roll in</li>
 		<li>Click the <strong>Reveal</strong> button to show results</li>
-		<li>Take over the world! 🌎🐁</li>
+		<li>Take over the world! <span aria-hidden="true">🌎🐁</span></li>
 	</ol>
 	<ul class="links unstyled">
 		<li><a href="https://github.com/haliphax/narf">source</a></li>

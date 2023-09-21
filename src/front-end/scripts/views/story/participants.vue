@@ -1,7 +1,22 @@
 <script lang="ts">
 import { defineComponent } from "vue";
+import { Vote } from "../../../../models/vote";
 
-const Participants = defineComponent({});
+const Participants = defineComponent({
+	methods: {
+		getVoteTitle(v: Vote) {
+			if (!v.vote) return "has not voted";
+
+			if (this.isYou(v) || this.$store.state.story.story?.revealed)
+				return undefined;
+
+			return "voted";
+		},
+		isYou(v: Vote) {
+			return v.participantId === this.$store.state.session.id;
+		},
+	},
+});
 
 export default Participants;
 </script>
@@ -17,12 +32,10 @@ export default Participants;
 			>
 				<span class="name">
 					{{ v.participantName ?? "User" }}
-					<span v-if="v.participantId === $store.state.session.id" class="you">
-						(You)
-					</span>
+					<span v-if="isYou(v)" class="you">(You)</span>
 				</span>
 				<span class="value">
-					<span :title="!v.vote ? 'Waiting' : 'Voted'">
+					<span :title="getVoteTitle(v)">
 						{{ v.vote ?? "⏱️" }}
 					</span>
 				</span>

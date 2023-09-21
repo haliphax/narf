@@ -68,7 +68,11 @@ export default Estimate;
 		<h2>Estimate</h2>
 		<ul v-if="!$store.state.story.story?.revealed" class="unstyled grid">
 			<li v-for="option in options" :key="option">
-				<button :class="classes(option)" @click="vote(option)">
+				<button
+					:class="classes(option)"
+					:title="`Vote ${option}`"
+					@click="vote(option)"
+				>
 					{{ option }}
 				</button>
 			</li>

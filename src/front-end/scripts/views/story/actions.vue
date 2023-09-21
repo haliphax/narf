@@ -23,6 +23,7 @@ export default Actions;
 	<ul class="unstyled">
 		<li>
 			<button :disabled="$store.state.story.story?.revealed" @click="reveal">
+				<span aria-hidden="true">👀</span>
 				Reveal
 			</button>
 		</li>

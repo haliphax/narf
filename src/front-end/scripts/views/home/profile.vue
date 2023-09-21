@@ -67,16 +67,25 @@ export default Profile;
 					<input id="name" v-model="name" type="text" required />
 				</span>
 				<span>
-					<button type="submit" :disabled="upToDate">✅ Update</button>
+					<button type="submit" :disabled="upToDate">
+						<span aria-hidden="true">✅</span>
+						Update
+					</button>
 				</span>
 			</fieldset>
 		</form>
 		<ul class="unstyled grid">
 			<li>
-				<button @click="exportSession()">💾 Export</button>
+				<button @click="exportSession()">
+					<span aria-hidden="true">💾</span>
+					Export
+				</button>
 			</li>
 			<li>
-				<button @click="importSession()">📥 Import</button>
+				<button @click="importSession()">
+					<span aria-hidden="true">📥</span>
+					Import
+				</button>
 				<input
 					ref="file"
 					accept="application/json"

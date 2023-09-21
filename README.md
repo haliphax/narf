@@ -14,7 +14,7 @@
 - [Remult][] - Data access layer
 - [Parcel][] - Build agent (transpilation, minification, bundling, etc.)
 - [CSS Grid][] (mostly) - Layout paradigm
-- [Less][] - CSS preprocessor (for media queries as variables)
+- [Less][] - CSS preprocessor (media queries as variables, complex nesting)
 
 [css grid]: https://developer.mozilla.org/en-us/docs/web/css/css_grid_layout
 [demonstration app]: https://sphenoid-secret-antimony.glitch.me

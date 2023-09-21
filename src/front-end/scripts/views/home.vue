@@ -70,7 +70,7 @@ export default Home;
 code {
 	font-size: 0.75em;
 	position: relative;
-	top: -0.25em;
+	top: -0.125em;
 
 	a {
 		color: inherit;

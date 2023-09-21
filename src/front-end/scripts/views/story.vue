@@ -2,14 +2,12 @@
 import { defineComponent } from "vue";
 import Actions from "../components/actions.vue";
 import Estimate from "../components/estimate.vue";
-import Heading from "../components/heading.vue";
 import Participants from "../components/participants.vue";
 
 const Story = defineComponent({
 	components: {
 		Actions,
 		Estimate,
-		Heading,
 		Participants,
 	},
 	created() {
@@ -25,7 +23,10 @@ export default Story;
 </script>
 
 <template>
-	<Heading></Heading>
+	<h1>
+		<span v-if="!$store.state.story.story">⏳ Loading&hellip;</span>
+		<span v-else>{{ $store.state.story.story?.title }}</span>
+	</h1>
 	<Actions class="actions"></Actions>
 	<div class="grid">
 		<Participants class="participants"></Participants>

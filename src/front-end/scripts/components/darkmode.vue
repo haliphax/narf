@@ -1,27 +1,42 @@
 <script lang="ts">
 import { defineComponent } from "vue";
 import Toggle from "./toggle.vue";
+import { SessionSettings, SessionState } from "../store/types";
 
 const DarkMode = defineComponent({
 	components: {
 		Toggle,
 	},
-	data() {
-		return { settings: this.$store.state.session.settings };
+	computed: {
+		enabled() {
+			return this.$store.state.session.settings.darkMode;
+		},
 	},
 	mounted() {
-		if (
-			matchMedia("prefers-color-scheme: dark").matches ||
-			this.settings.darkMode
-		) {
-			this.toggle();
-		}
+		this.bodyClass();
+		this.$store.subscribe((mutation) => {
+			console.log(mutation);
+			const keys = Object.getOwnPropertyNames(mutation.payload);
+
+			if (mutation.type == "session" && keys.includes("settings")) {
+				console.log("session");
+				return this.bodyClass(
+					(mutation.payload as SessionState).settings.darkMode,
+				);
+			}
+
+			if (mutation.type == "session.settings" && keys.includes("darkMode")) {
+				console.log("settings");
+				return this.bodyClass((mutation.payload as SessionSettings).darkMode);
+			}
+		});
 	},
 	methods: {
+		bodyClass(force?: boolean) {
+			document.body.classList.toggle("dark-mode", force ?? this.enabled);
+		},
 		toggle() {
-			const val = document.body.classList.toggle("dark-mode");
-
-			this.$store.commit("session.settings", { darkMode: val });
+			this.$store.commit("session.settings", { darkMode: !this.enabled });
 		},
 	},
 });

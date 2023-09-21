@@ -37,9 +37,14 @@ const session: Module<SessionState, StoreState> = {
 				...state.settings,
 				...payload,
 			};
-			payload.darkMode &&
+
+			if (payload.darkMode != undefined) {
 				localStorage.setItem(keys.darkMode, payload.darkMode.toString());
-			payload.scale && localStorage.setItem(keys.scale, payload.scale);
+			}
+
+			if (payload.scale != undefined) {
+				payload.scale && localStorage.setItem(keys.scale, payload.scale);
+			}
 		},
 	},
 	state() {
@@ -50,11 +55,15 @@ const session: Module<SessionState, StoreState> = {
 			localStorage.setItem(keys.sessionId, sessionId);
 		}
 
+		const darkModeDetected = matchMedia("(prefers-color-scheme:dark)").matches;
+
 		return {
 			id: sessionId,
 			name: localStorage.getItem(keys.name) ?? "User",
 			settings: {
-				darkMode: JSON.parse(localStorage.getItem(keys.darkMode) ?? "false"),
+				darkMode: JSON.parse(
+					localStorage.getItem(keys.darkMode) ?? darkModeDetected.toString(),
+				),
 				scale: localStorage.getItem(keys.scale) ?? scales.keys().next().value,
 			},
 		};

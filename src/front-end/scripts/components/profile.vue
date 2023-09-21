@@ -24,7 +24,6 @@ const Profile = defineComponent({
 			link.click();
 		},
 		importSession() {
-			console.log(`start ${Date.now()}`);
 			(this.$refs.file as HTMLInputElement).click();
 		},
 		async loadFile() {

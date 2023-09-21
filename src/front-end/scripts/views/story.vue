@@ -31,7 +31,10 @@ export default Story;
 <template>
 	<h1 :id="id">
 		<span v-if="!$store.state.story.story">⏳ Loading&hellip;</span>
-		<span v-else>{{ $store.state.story.story?.title }}</span>
+		<span v-else>
+			<span class="sr">Story title:</span>
+			{{ $store.state.story.story?.title }}
+		</span>
 	</h1>
 	<Actions class="actions"></Actions>
 	<div class="grid">

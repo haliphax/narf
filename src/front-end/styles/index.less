@@ -4,7 +4,7 @@
 	--color-bg-secondary: #000;
 	--color-bg: #aaa;
 	--color-fg-secondary: #fff;
-	--color-fg-subtle: #555;
+	--color-fg-subtle: #666;
 	--color-fg: #333;
 	--color-link: #00c;
 	--color-outline: #000;
@@ -18,11 +18,11 @@
 }
 
 body.dark-mode {
-	--color-bg-global: #222;
+	--color-bg-global: #333;
 	--color-bg-secondary: #ccc;
-	--color-bg: #555;
+	--color-bg: #666;
 	--color-fg-secondary: #000;
-	--color-fg-subtle: #999;
+	--color-fg-subtle: #aaa;
 	--color-fg: #ccc;
 	--color-link: #c0c;
 	--color-outline: #fff;
@@ -78,18 +78,26 @@ a:visited {
 
 /* buttons */
 
-button {
+button,
+.btn,
+a.btn:link,
+a.btn:visited {
 	background-color: var(--color-bg);
+	border: 0.125em outset var(--color-fg-subtle);
 	color: var(--color-fg);
 	cursor: pointer;
-	font-size: 115%;
+	font-size: inherit;
 	padding: var(--space-s) var(--space-l);
-}
 
-button[disabled] {
-	cursor: not-allowed;
-	opacity: 0.75;
-	text-decoration: line-through;
+	&[disabled] {
+		cursor: not-allowed;
+		opacity: 0.75;
+		text-decoration: line-through;
+	}
+
+	&:active {
+		border-style: inset;
+	}
 }
 
 /* details */

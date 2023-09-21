@@ -28,7 +28,6 @@ repos:
         entry: npx
         files: \.(js|ts|vue)$
         language: system
-        types: [text]
 
       - id: prettier
         name: Lint files with Prettier

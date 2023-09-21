@@ -10,6 +10,12 @@ const Story = defineComponent({
 		Estimate,
 		Participants,
 	},
+	props: {
+		id: {
+			default: "main",
+			type: String,
+		},
+	},
 	created() {
 		this.$store.dispatch("story.join");
 	},
@@ -23,7 +29,7 @@ export default Story;
 </script>
 
 <template>
-	<h1>
+	<h1 :id="id">
 		<span v-if="!$store.state.story.story">⏳ Loading&hellip;</span>
 		<span v-else>{{ $store.state.story.story?.title }}</span>
 	</h1>

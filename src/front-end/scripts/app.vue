@@ -21,6 +21,10 @@ export default App;
 </script>
 
 <template>
+	<a class="btn skip" href="#main">
+		<span aria-hidden="true">⏩</span>
+		Skip to main
+	</a>
 	<div class="app">
 		<header class="grid">
 			<div>
@@ -44,6 +48,18 @@ export default App;
 	max-width: 960px;
 	padding: var(--space-m);
 	width: 100%;
+}
+
+.skip {
+	left: 0;
+	margin: var(--space-l);
+	position: absolute;
+	top: -100%;
+	transition: top 0.25s ease-in-out;
+}
+
+.skip:focus {
+	top: 0;
 }
 
 header {

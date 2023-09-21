@@ -89,7 +89,7 @@ small {
 	font-size: 0.5em;
 }
 
-footer ul {
+footer {
 	display: block;
 	border-top: 0.3em dotted var(--color-bg);
 	margin-top: calc(var(--space-l) * 2);

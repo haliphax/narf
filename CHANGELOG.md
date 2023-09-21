@@ -1,3 +1,8 @@
+# [v1.8.0](https://github.com/haliphax/narf/compare/v1.7.0...v1.8.0) (2023-09-21)
+
+## ✨ New Features
+- [`7ce00a3`](https://github.com/haliphax/narf/commit/7ce00a3)  link to release notes on homepage
+
 # [v1.7.0](https://github.com/haliphax/narf/compare/v1.6.0...v1.7.0) (2023-09-21)
 
 ## ✨ New Features

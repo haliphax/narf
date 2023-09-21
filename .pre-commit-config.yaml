@@ -8,11 +8,9 @@ repos:
       # blocks files with leftover merge conflict markers
       - id: check-merge-conflict
 
-      # blocks commits to master/main
       - id: no-commit-to-branch
         name: Block commits to main branch
 
-  # lint Dockerfile
   - repo: https://github.com/AleksaC/hadolint-py
     rev: v2.12.0
     hooks:

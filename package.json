@@ -1,6 +1,6 @@
 {
 	"name": "narf",
-	"version": "1.6.0",
+	"version": "1.7.0",
 	"private": true,
 	"devDependencies": {
 		"@flydotio/dockerfile": "^0.4.9",

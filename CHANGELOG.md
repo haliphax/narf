@@ -1,3 +1,12 @@
+# [v1.7.0](https://github.com/haliphax/narf/compare/v1.6.0...v1.7.0) (2023-09-21)
+
+## ✨ New Features
+- [`f0ca843`](https://github.com/haliphax/narf/commit/f0ca843)  loading indicator in story view 
+- [`7313219`](https://github.com/haliphax/narf/commit/7313219)  remember last used scale 
+
+## 🐛 Bug Fixes
+- [`ee5c50c`](https://github.com/haliphax/narf/commit/ee5c50c)  fix dark mode toggle on profile import
+
 # [v1.6.0](https://github.com/haliphax/narf/compare/v1.5.0...v1.6.0) (2023-09-20)
 
 ## ✨ New Features

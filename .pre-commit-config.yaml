@@ -12,6 +12,14 @@ repos:
       - id: no-commit-to-branch
         name: Block commits to main branch
 
+  # lint Dockerfile
+  - repo: https://github.com/AleksaC/hadolint-py
+    rev: v2.12.0
+    hooks:
+      - id: hadolint
+        name: Lint Dockerfile with hadolint
+        args: [--ignore, DL3048]
+
   - repo: local
     hooks:
       - id: eslint

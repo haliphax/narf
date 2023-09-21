@@ -30,7 +30,7 @@ export default App;
 				<DarkMode class="ib"></DarkMode>
 			</div>
 		</header>
-		<main>
+		<main aria-live="assertive">
 			<router-view></router-view>
 		</main>
 	</div>

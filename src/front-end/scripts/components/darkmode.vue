@@ -21,7 +21,7 @@ const DarkMode = defineComponent({
 		toggle() {
 			const val = document.body.classList.toggle("dark-mode");
 
-			this.$store.commit("session.settings.darkMode", val);
+			this.$store.commit("session.settings", { darkMode: val });
 		},
 	},
 });

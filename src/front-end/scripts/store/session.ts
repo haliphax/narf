@@ -1,33 +1,45 @@
 import { v4 } from "uuid";
 import { Module } from "vuex";
+import scales from "../../../scales";
 import { LOCALSTORAGE_GLOBAL_PREFIX } from "../constants";
-import { SessionState, StoreState } from "./types";
+import { SessionSettings, SessionState, StoreState } from "./types";
 
 const SESSION_PREFIX = `${LOCALSTORAGE_GLOBAL_PREFIX}session.`;
 
 const keys = {
 	darkMode: `${SESSION_PREFIX}darkMode`,
 	name: `${SESSION_PREFIX}name`,
+	scale: `${SESSION_PREFIX}scale`,
 	sessionId: `${SESSION_PREFIX}sessionId`,
 };
 
 const session: Module<SessionState, StoreState> = {
 	mutations: {
-		"session.settings"(state, payload: SessionState) {
-			state.id = payload.id;
-			state.name = payload.name;
-			state.settings = payload.settings;
-			localStorage.setItem(keys.darkMode, payload.settings.darkMode.toString());
-			localStorage.setItem(keys.sessionId, payload.id);
-			localStorage.setItem(keys.name, payload.name.toString());
+		session(state, payload: Partial<SessionState>) {
+			state = {
+				...state,
+				...payload,
+			};
+
+			payload.id && localStorage.setItem(keys.sessionId, payload.id);
+			payload.name && localStorage.setItem(keys.name, payload.name.toString());
+
+			if (payload.settings) {
+				localStorage.setItem(
+					keys.darkMode,
+					payload.settings.darkMode.toString(),
+				);
+				localStorage.setItem(keys.scale, payload.settings.scale);
+			}
 		},
-		"session.settings.darkMode"(state, payload: boolean) {
-			state.settings.darkMode = payload;
-			localStorage.setItem(keys.darkMode, payload.toString());
-		},
-		"session.settings.name"(state, payload: string) {
-			state.name = payload;
-			localStorage.setItem(keys.name, payload);
+		"session.settings"(state, payload: Partial<SessionSettings>) {
+			state.settings = {
+				...state.settings,
+				...payload,
+			};
+			payload.darkMode &&
+				localStorage.setItem(keys.darkMode, payload.darkMode.toString());
+			payload.scale && localStorage.setItem(keys.scale, payload.scale);
 		},
 	},
 	state() {
@@ -43,6 +55,7 @@ const session: Module<SessionState, StoreState> = {
 			name: localStorage.getItem(keys.name) ?? "User",
 			settings: {
 				darkMode: JSON.parse(localStorage.getItem(keys.darkMode) ?? "false"),
+				scale: localStorage.getItem(keys.scale) ?? scales.keys().next().value,
 			},
 		};
 	},

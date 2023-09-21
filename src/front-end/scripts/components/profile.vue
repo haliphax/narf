@@ -40,7 +40,7 @@ const Profile = defineComponent({
 
 			const session: SessionState = JSON.parse(await file.text());
 
-			this.$store.commit("session.settings", session);
+			this.$store.commit("session", session);
 			this.name = session.name;
 			requestAnimationFrame(() => {
 				this.upToDate = true;
@@ -48,7 +48,7 @@ const Profile = defineComponent({
 			});
 		},
 		submit() {
-			this.$store.commit("session.settings.name", this.name);
+			this.$store.commit("session", { name: this.name });
 			this.upToDate = true;
 			alert("Profile updated");
 		},

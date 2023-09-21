@@ -24,10 +24,15 @@ const NewStory = defineComponent({
 		}
 
 		return {
-			scale: opts[0],
+			scale: this.$store.state.session.settings.scale,
 			scales: opts,
 			title: "",
 		};
+	},
+	watch: {
+		scale() {
+			this.$store.commit("session.settings", { scale: this.scale });
+		},
 	},
 	methods: {
 		async submit() {

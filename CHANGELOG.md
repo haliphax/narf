@@ -1,3 +1,8 @@
+# [v1.9.0](https://github.com/haliphax/narf/compare/v1.8.0...v1.9.0) (2023-09-21)
+
+## ✨ New Features
+- [`8efae62`](https://github.com/haliphax/narf/commit/8efae62)  skip to main content button
+
 # [v1.8.0](https://github.com/haliphax/narf/compare/v1.7.0...v1.8.0) (2023-09-21)
 
 ## ✨ New Features

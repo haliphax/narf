@@ -38,7 +38,7 @@ export default Toggle;
 </script>
 
 <template>
-	<span class="tog">
+	<span class="t">
 		<input
 			:id="id"
 			ref="checkbox"
@@ -60,19 +60,19 @@ export default Toggle;
 </template>
 
 <style lang="less" scoped>
-.tog {
-	--tog-height: var(--space-l);
-	--tog-offset: var(--space-xs);
+.t {
+	--t-height: var(--space-l);
+	--t-offset: var(--space-xs);
 	display: inline-block;
-	height: var(--tog-height);
+	height: var(--t-height);
 	position: relative;
 	top: var(--space-xs);
 	width: var(--space-xxl);
 }
 
-.tog label {
+.t label {
 	background: var(--color-fg);
-	border-radius: var(--tog-height);
+	border-radius: var(--t-height);
 	bottom: 0;
 	cursor: pointer;
 	display: block;
@@ -82,20 +82,20 @@ export default Toggle;
 	top: 0;
 }
 
-.tog label::before {
-	--size: calc(var(--tog-height) - (var(--tog-offset) * 2));
+.t label::before {
+	--size: calc(var(--t-height) - (var(--t-offset) * 2));
 	background: var(--color-bg);
 	border-radius: 50%;
 	content: "";
 	height: var(--size);
-	left: var(--tog-offset);
+	left: var(--t-offset);
 	position: absolute;
-	top: var(--tog-offset);
+	top: var(--t-offset);
 	width: var(--size);
 }
 
-.tog input:checked + label::before {
+.t input:checked + label::before {
 	left: auto;
-	right: var(--tog-offset);
+	right: var(--t-offset);
 }
 </style>

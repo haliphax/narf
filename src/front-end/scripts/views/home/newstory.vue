@@ -59,7 +59,7 @@ export default NewStory;
 
 <template>
 	<form :id="id" @submit.prevent="submit()">
-		<fieldset class="grid">
+		<fieldset class="g">
 			<legend>New room</legend>
 			<span>
 				<label for="title">Title:</label>
@@ -72,7 +72,10 @@ export default NewStory;
 				</select>
 			</span>
 			<span>
-				<button type="submit">Create</button>
+				<button type="submit">
+					<span aria-hidden="true">🎉</span>
+					Create
+				</button>
 			</span>
 		</fieldset>
 	</form>
@@ -82,7 +85,7 @@ export default NewStory;
 @import "../../../styles/breakpoints.less";
 
 @media @breakpoint_m {
-	.grid > span {
+	.g > span {
 		grid-area: 1 / span 3;
 	}
 }

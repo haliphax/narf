@@ -39,7 +39,7 @@ const Estimate = defineComponent({
 		classes(option: string) {
 			const classes = [];
 
-			if (this.you?.vote == option) classes.push("chosen");
+			if (this.you?.vote == option) classes.push("✅");
 
 			return classes;
 		},
@@ -66,7 +66,7 @@ export default Estimate;
 <template>
 	<div aria-live="polite">
 		<h2>Estimate</h2>
-		<ul v-if="!$store.state.story.story?.revealed" class="unstyled grid">
+		<ul v-if="!$store.state.story.story?.revealed" class="g x">
 			<li v-for="option in options" :key="option">
 				<button
 					:class="classes(option)"
@@ -94,17 +94,17 @@ button {
 	width: 100%;
 }
 
-.grid {
+.g {
 	grid-template-columns: repeat(4, minmax(0, 1fr));
 }
 
-.chosen {
+.✅ {
 	background-color: var(--color-bg-secondary);
 	color: var(--color-fg-secondary);
 }
 
 @media @breakpoint_s {
-	.grid {
+	.g {
 		grid-template-columns: repeat(5, minmax(0, 1fr));
 	}
 }
@@ -114,13 +114,13 @@ button {
 		text-align: center;
 	}
 
-	.grid {
+	.g {
 		grid-template-columns: repeat(4, minmax(0, 1fr));
 	}
 }
 
 @media @breakpoint_l {
-	.grid {
+	.g {
 		grid-template-columns: repeat(6, minmax(0, 1fr));
 	}
 }

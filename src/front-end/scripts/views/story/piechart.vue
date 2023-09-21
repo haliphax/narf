@@ -73,16 +73,16 @@ export default PieChart;
 </script>
 
 <template>
-	<div class="pie" role="figure">
+	<div class="🥧" role="figure">
 		<div v-for="(s, idx) in slices" :key="s.key" :style="styles(s)">
-			<div :class="`slice color_${idx}`">
+			<div :class="`🍕 🌈${idx}`">
 				<label>
 					<span>{{ s.key }}</span>
 				</label>
 			</div>
 		</div>
 	</div>
-	<div class="key">
+	<div>
 		<h3>Results</h3>
 		<table>
 			<thead>
@@ -97,8 +97,8 @@ export default PieChart;
 				<tr v-for="(s, idx) in slices" :key="s.key">
 					<td>
 						<span
-							:id="`slice_color_${s.key}`"
-							:class="`color color_${idx}`"
+							:id="`🍕🌈${s.key}`"
+							:class="`🌈 🌈${idx}`"
 							:style="styles(s)"
 						>
 						</span>
@@ -119,7 +119,7 @@ label {
 	cursor: default;
 }
 
-.pie {
+.🥧 {
 	aspect-ratio: 1;
 	gap: 0;
 	isolation: isolate;
@@ -129,13 +129,13 @@ label {
 	z-index: -2;
 }
 
-.pie > div {
+.🥧 > div {
 	position: absolute;
 	width: 100%;
 	z-index: -1;
 }
 
-.slice {
+.🍕 {
 	aspect-ratio: 1;
 	place-content: center;
 	position: relative;
@@ -143,7 +143,7 @@ label {
 	top: 0;
 }
 
-.slice::before {
+.🍕::before {
 	background-image: conic-gradient(var(--c) calc(var(--p) * 100%), #0000 0);
 	background-position: 50%;
 	border-radius: 50%;
@@ -153,7 +153,7 @@ label {
 	position: absolute;
 }
 
-.slice label {
+.🍕 label {
 	-webkit-text-stroke: 1px #000;
 	color: #fff;
 	display: block;
@@ -168,7 +168,7 @@ label {
 	width: 100%;
 }
 
-.slice label span {
+.🍕 label span {
 	display: block;
 	transform: rotate(calc(var(--p) * -180deg - var(--r)));
 }
@@ -202,7 +202,7 @@ tr > td:first-child {
 	text-align: center;
 }
 
-.color {
+.🌈 {
 	background-color: var(--c);
 	border: 1px solid var(--color-outline);
 	display: block;
@@ -211,52 +211,52 @@ tr > td:first-child {
 	width: var(--space-l);
 }
 
-.color_0 {
+.🌈0 {
 	--c: #d33682;
 }
 
-.color_1 {
+.🌈1 {
 	--c: #6c71c4;
 }
 
-.color_2 {
+.🌈2 {
 	--c: #b58900;
 }
 
-.color_3 {
+.🌈3 {
 	--c: #cb4b16;
 }
 
-.color_4 {
+.🌈4 {
 	--c: #859900;
 }
 
-.color_5 {
+.🌈5 {
 	--c: #268bd2;
 }
 
-.color_6 {
+.🌈6 {
 	--c: #dc322f;
 }
 
-.color_7 {
+.🌈7 {
 	--c: #2aa198;
 }
 
 @media @breakpoint_s {
-	.pie label {
+	.🥧 label {
 		font-size: 4rem;
 	}
 }
 
 @media @breakpoint_m {
-	.pie label {
+	.🥧 label {
 		font-size: 2rem;
 	}
 }
 
 @media @breakpoint_l {
-	.pie label {
+	.🥧 label {
 		font-size: 3rem;
 	}
 }

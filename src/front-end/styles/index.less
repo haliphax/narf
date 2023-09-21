@@ -17,7 +17,7 @@
 	--space-xxl: 2rem;
 }
 
-body.dark-mode {
+body.dm {
 	--color-bg-global: #333;
 	--color-bg-secondary: #ccc;
 	--color-bg: #666;
@@ -105,18 +105,18 @@ a.btn:visited {
 
 details {
 	margin-bottom: var(--space-l);
-}
 
-details[open] {
-	summary {
-		margin-bottom: var(--space-m);
-	}
+	&[open] {
+		summary {
+			margin-bottom: var(--space-m);
+		}
 
-	> :not(summary) {
-		border-left: 0.3em dotted var(--color-bg);
-		margin-left: var(--space-s);
-		padding-bottom: var(--space-s);
-		padding-left: var(--space-m);
+		> :not(summary) {
+			border-left: 0.3em dotted var(--color-bg);
+			margin-left: var(--space-s);
+			padding-bottom: var(--space-s);
+			padding-left: var(--space-m);
+		}
 	}
 }
 
@@ -130,9 +130,8 @@ fieldset {
 	border-color: var(--color-fg-secondary);
 	padding: var(--space-m) var(--space-l);
 
-	label {
-		margin: auto;
-		padding-right: var(--space-s);
+	&:not(:last-child) {
+		margin-bottom: var(--space-l);
 	}
 
 	> span {
@@ -145,10 +144,11 @@ fieldset {
 			flex-grow: 1;
 		}
 	}
-}
 
-fieldset:not(:last-child) {
-	margin-bottom: var(--space-l);
+	label {
+		margin: auto;
+		padding-right: var(--space-s);
+	}
 }
 
 input[type="text"],
@@ -164,26 +164,43 @@ legend {
 }
 
 /* lists */
+:is(ol, ul) {
+	&:not(.x) li:not(:last-child) {
+		margin-bottom: var(--space-s);
+	}
 
-:is(ol, ul).unstyled {
-	list-style-type: none;
-	list-style-position: inside;
-	margin: 0;
-	padding: 0;
+	/* unstyled list */
+	&.x {
+		list-style-type: none;
+		list-style-position: inside;
+		margin: 0;
+		padding: 0;
+	}
 }
 
-:is(ol, ul):not(.unstyled) li:not(:last-child) {
-	margin-bottom: var(--space-s);
+/* misc elements */
+
+code {
+	background-color: var(--color-bg);
+	padding-inline: var(--space-m);
+}
+
+a.btn,
+button,
+label,
+summary {
+	cursor: pointer;
+	font-weight: bold;
 }
 
 /* application wrapper */
-#app {
+#🖥️ {
 	width: 100%;
 }
 
 /* utility classes */
 
-.grid {
+.g {
 	display: grid;
 	gap: var(--space-m);
 }
@@ -196,7 +213,7 @@ legend {
 	display: none;
 }
 
-.right {
+.r {
 	text-align: right;
 }
 
@@ -204,17 +221,4 @@ legend {
 	/* screen reader only */
 	right: 100vw;
 	position: absolute;
-}
-
-/* misc elements */
-
-code {
-	background-color: var(--color-bg);
-	padding-inline: var(--space-m);
-}
-
-label,
-summary {
-	cursor: pointer;
-	font-weight: bold;
 }

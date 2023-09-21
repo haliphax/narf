@@ -36,51 +36,51 @@ export default Story;
 			{{ $store.state.story.story?.title }}
 		</span>
 	</h1>
-	<Actions class="actions"></Actions>
-	<div class="grid">
-		<Participants class="participants"></Participants>
-		<Estimate class="estimates"></Estimate>
+	<Actions class="a"></Actions>
+	<div class="g">
+		<Participants class="p"></Participants>
+		<Estimate class="e"></Estimate>
 	</div>
 </template>
 
 <style lang="less" scoped>
 @import "../../styles/breakpoints.less";
 
-.grid {
-	grid-auto-columns: auto;
-	grid-auto-flow: row;
-}
-
-.participants {
-	grid-column: 1 / span 2;
-	grid-row: 2;
-}
-
-.estimates {
-	grid-column: 1 / span 2;
-	grid-row: 1;
-}
-
-.actions {
+.a {
 	grid-column: 1 / span 2;
 	padding-top: var(--space-m);
 }
 
+.e {
+	grid-column: 1 / span 2;
+	grid-row: 1;
+}
+
+.g {
+	grid-auto-columns: auto;
+	grid-auto-flow: row;
+}
+
+.p {
+	grid-column: 1 / span 2;
+	grid-row: 2;
+}
+
 @media @breakpoint_m {
-	.grid {
+	.e {
+		grid-column: 2 / span 1;
+		grid-row: 1;
+	}
+
+	.g {
 		grid-template-columns: calc(40% - var(--space-xl) / 2) calc(
 				60% - var(--space-xl) / 2
 			);
 		column-gap: var(--space-xl);
 	}
 
-	.participants {
+	.p {
 		grid-column: 1 / span 1;
-		grid-row: 1;
-	}
-
-	.estimates {
-		grid-column: 2 / span 1;
 		grid-row: 1;
 	}
 }

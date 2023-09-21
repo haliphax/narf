@@ -60,7 +60,7 @@ export default Profile;
 <template>
 	<div>
 		<form @submit.prevent="submit()">
-			<fieldset class="grid">
+			<fieldset class="g">
 				<legend>Profile</legend>
 				<span>
 					<label for="name">Name:</label>
@@ -74,7 +74,7 @@ export default Profile;
 				</span>
 			</fieldset>
 		</form>
-		<ul class="unstyled grid">
+		<ul class="g x">
 			<li>
 				<button @click="exportSession()">
 					<span aria-hidden="true">💾</span>
@@ -102,7 +102,7 @@ export default Profile;
 <style lang="less" scoped>
 @import "../../../styles/breakpoints.less";
 
-ul.unstyled {
+ul.x {
 	margin-top: var(--space-l);
 }
 
@@ -115,7 +115,7 @@ li button {
 }
 
 @media @breakpoint_m {
-	fieldset.grid > span {
+	fieldset > span {
 		grid-area: 1 / span 2;
 	}
 }

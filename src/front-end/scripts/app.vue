@@ -21,16 +21,16 @@ export default App;
 </script>
 
 <template>
-	<a class="btn skip" href="#main">
+	<a class="btn ⏩" href="#main">
 		<span aria-hidden="true">⏩</span>
 		Skip to main
 	</a>
-	<div class="app">
-		<header class="grid">
+	<div class="📦">
+		<header class="g">
 			<div>
 				<router-link :to="{ name: 'home' }" class="ib">narf!</router-link>
 			</div>
-			<div class="right">
+			<div class="r">
 				<DarkMode class="ib"></DarkMode>
 			</div>
 		</header>
@@ -43,14 +43,14 @@ export default App;
 <style lang="less" scoped>
 @import "../styles/breakpoints.less";
 
-.app {
+.📦 {
 	margin: 0 auto;
 	max-width: 960px;
 	padding: var(--space-m);
 	width: 100%;
 }
 
-.skip {
+.⏩ {
 	left: 0;
 	margin: var(--space-l);
 	position: absolute;
@@ -58,7 +58,7 @@ export default App;
 	transition: top 0.25s ease-in-out;
 }
 
-.skip:focus {
+.⏩:focus {
 	top: 0;
 }
 
@@ -73,7 +73,7 @@ header a {
 }
 
 @media @breakpoint_m {
-	.app {
+	.📦 {
 		padding-left: var(--space-xxl);
 		padding-right: var(--space-xxl);
 	}

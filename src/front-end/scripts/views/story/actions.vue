@@ -20,7 +20,7 @@ export default Actions;
 </script>
 
 <template>
-	<ul class="unstyled">
+	<ul class="x">
 		<li>
 			<button :disabled="$store.state.story.story?.revealed" @click="reveal">
 				<span aria-hidden="true">👀</span>

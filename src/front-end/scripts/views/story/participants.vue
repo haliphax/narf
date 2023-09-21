@@ -24,17 +24,17 @@ export default Participants;
 <template>
 	<div>
 		<h2>Participants</h2>
-		<ul class="unstyled">
+		<ul class="x">
 			<li
 				v-for="v of $store.state.story.story?.votes"
 				:key="v.participantId"
-				class="grid"
+				class="g"
 			>
-				<span class="name">
+				<span class="n">
 					{{ v.participantName ?? "User" }}
-					<span v-if="isYou(v)" class="you">(You)</span>
+					<span v-if="isYou(v)" class="y">(You)</span>
 				</span>
-				<span class="value">
+				<span class="v">
 					<span :title="getVoteTitle(v)">
 						{{ v.vote ?? "⏱️" }}
 					</span>
@@ -56,18 +56,21 @@ li:nth-child(2n) {
 	background-color: var(--color-bg);
 }
 
-.name {
+/* name */
+.n {
 	margin-right: var(--space-m);
 }
 
-.you {
-	font-size: 0.75em;
-	opacity: 0.8;
-}
-
-.value > * {
+/* value */
+.v > * {
 	background-color: var(--color-bg-secondary);
 	color: var(--color-fg-secondary);
 	padding: var(--space-xs) var(--space-s);
+}
+
+/* you */
+.y {
+	font-size: 0.75em;
+	opacity: 0.8;
 }
 </style>

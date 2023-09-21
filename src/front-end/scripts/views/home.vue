@@ -54,7 +54,7 @@ export default Home;
 		<li>Take over the world! <span aria-hidden="true">🌎🐁</span></li>
 	</ol>
 	<footer>
-		<ul class="unstyled">
+		<ul class="x">
 			<li><a href="https://github.com/haliphax/narf">source</a></li>
 			<li><a href="https://haliphax.dev">author</a></li>
 			<li>

@@ -34,7 +34,7 @@ const DarkMode = defineComponent({
 	},
 	methods: {
 		bodyClass(force: boolean) {
-			document.body.classList.toggle("dark-mode", force);
+			document.body.classList.toggle("dm", force);
 		},
 		toggle() {
 			this.$store.commit("session.settings", { darkMode: !this.enabled });
@@ -46,13 +46,13 @@ export default DarkMode;
 </script>
 
 <template>
-	<label for="darkmode-toggle" title="Toggle dark mode">
-		<span aria-hidden="true" class="icon">
-			<span class="sun">☀️</span>
-			<span class="moon">🌙</span>
+	<label for="dm-toggle" title="Toggle dark mode">
+		<span aria-hidden="true">
+			<span class="☀️">☀️</span>
+			<span class="🌙">🌙</span>
 		</span>
 		<Toggle
-			id="darkmode-toggle"
+			id="dm-toggle"
 			ref="toggle"
 			:checked="enabled"
 			@click="toggle"
@@ -61,23 +61,23 @@ export default DarkMode;
 </template>
 
 <style type="less" scoped>
-.icon {
-	margin-right: var(--space-m);
-}
-
-.moon {
-	display: none;
-}
-
-body.dark-mode .moon {
+body.dm .🌙 {
 	display: inline;
 }
 
-body.dark-mode .sun {
+body.dm .☀️ {
 	display: none;
 }
 
 label {
 	float: right;
+}
+
+label > span {
+	margin-right: var(--space-m);
+}
+
+.🌙 {
+	display: none;
 }
 </style>

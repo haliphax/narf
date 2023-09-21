@@ -7,7 +7,8 @@
 ## Stack
 
 - [TypeScript][] - Language
-- [Vue3][] - Framework
+- [Express][] - Server
+- [Vue3][] - Client framework
   - [Vuex][] - State management
   - [Vue Router][] - Routing
 - [Remult][] - Data access layer
@@ -17,6 +18,7 @@
 
 [css grid]: https://developer.mozilla.org/en-us/docs/web/css/css_grid_layout
 [demonstration app]: https://sphenoid-secret-antimony.glitch.me
+[express]: https://expressjs.com
 [less]: https://lesscss.org
 [live web application]: https://narf.fly.dev
 [parcel]: https://parceljs.org

@@ -1,8 +1,8 @@
 <script lang="ts">
 import { defineComponent } from "vue";
-import Actions from "../components/actions.vue";
-import Estimate from "../components/estimate.vue";
-import Participants from "../components/participants.vue";
+import Actions from "./story/actions.vue";
+import Estimate from "./story/estimate.vue";
+import Participants from "./story/participants.vue";
 
 const Story = defineComponent({
 	components: {

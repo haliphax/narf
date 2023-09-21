@@ -1,6 +1,6 @@
 <script lang="ts">
 import { defineComponent } from "vue";
-import { SessionState } from "../store/types";
+import { SessionState } from "../../store/types";
 
 const Profile = defineComponent({
 	data() {
@@ -91,7 +91,7 @@ export default Profile;
 </template>
 
 <style lang="less" scoped>
-@import "../../styles/breakpoints.less";
+@import "../../../styles/breakpoints.less";
 
 ul.unstyled {
 	margin-top: var(--space-l);

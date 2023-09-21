@@ -1,8 +1,8 @@
 <script lang="ts">
 import { defineComponent } from "vue";
 import PieChart from "./piechart.vue";
-import scales from "../../../scales";
-import { Vote } from "../../../models/vote";
+import scales from "../../../../scales";
+import { Vote } from "../../../../models/vote";
 
 const Estimate = defineComponent({
 	components: {
@@ -80,7 +80,7 @@ export default Estimate;
 </template>
 
 <style lang="less" scoped>
-@import "../../styles/breakpoints.less";
+@import "../../../styles/breakpoints.less";
 
 button {
 	aspect-ratio: 1;

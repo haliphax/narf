@@ -1,9 +1,9 @@
 <script lang="ts">
 import { defineComponent } from "vue";
-import scales from "../../../scales";
-import router from "../router";
+import scales from "../../../../scales";
+import router from "../../router";
 import { remult } from "remult";
-import { Story } from "../../../models/story";
+import { Story } from "../../../../models/story";
 
 interface NewStoryProps {
 	scale: string;
@@ -73,7 +73,7 @@ export default NewStory;
 </template>
 
 <style lang="less" scoped>
-@import "../../styles/breakpoints.less";
+@import "../../../styles/breakpoints.less";
 
 @media @breakpoint_m {
 	.grid > span {

@@ -1,7 +1,7 @@
 <script lang="ts">
 import { defineComponent } from "vue";
-import NewStory from "../components/newstory.vue";
-import Profile from "../components/profile.vue";
+import NewStory from "./home/newstory.vue";
+import Profile from "./home/profile.vue";
 import pkg from "../../../../package.json";
 
 const Home = defineComponent({

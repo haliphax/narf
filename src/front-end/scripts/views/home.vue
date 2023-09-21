@@ -23,7 +23,14 @@ export default Home;
 <template>
 	<h1>
 		narf!
-		<code>{{ version }}</code>
+		<code>
+			<a
+				:href="`https://github.com/haliphax/narf/releases/tag/v${version}`"
+				title="Release notes"
+			>
+				{{ version }}
+			</a>
+		</code>
 		<small>Simple story points estimation</small>
 	</h1>
 	<details :open="openProfile">
@@ -59,6 +66,16 @@ code {
 	font-size: 0.75em;
 	position: relative;
 	top: -0.25em;
+
+	a {
+		color: inherit;
+		text-decoration: none;
+
+		&:hover,
+		&:focus {
+			text-decoration: underline;
+		}
+	}
 }
 
 small {

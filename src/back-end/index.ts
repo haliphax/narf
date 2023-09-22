@@ -22,7 +22,7 @@ app.use(cookieParser());
 app.use(server);
 routes(app);
 app.use(historyApiFallback());
-app.use(express.static("dist/front-end"));
+app.use(express.static("dist"));
 
 app.disable("x-powered-by");
 

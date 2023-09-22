@@ -1,15 +1,23 @@
 {
 	"compilerOptions": {
-		"esModuleInterop": true,
+		"allowImportingTsExtensions": true,
 		"experimentalDecorators": true,
+		"isolatedModules": true,
 		"jsx": "preserve",
-		"lib": ["ES2017", "DOM"],
-		"moduleResolution": "node",
-		"noImplicitAny": true,
-		"noImplicitThis": true,
+		"lib": ["ES2020", "DOM", "DOM.Iterable"],
+		"module": "ESNext",
+		"moduleResolution": "bundler",
+		"noEmit": true,
+		"noFallthroughCasesInSwitch": true,
 		"noUnusedLocals": true,
+		"noUnusedParameters": true,
 		"resolveJsonModule": true,
+		"skipLibCheck": true,
 		"strict": true,
-		"target": "ES2017"
-	}
+		"target": "ES2020",
+		"types": ["vite/client"],
+		"useDefineForClassFields": true
+	},
+	"include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue"],
+	"references": [{ "path": "./tsconfig.node.json" }]
 }

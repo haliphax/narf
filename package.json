@@ -62,7 +62,9 @@
 	},
 	"private": true,
 	"scripts": {
-		"build": "vite build src/front-end --emptyOutDir --outDir ../../dist",
+		"build": "vite build src/front-end --emptyOutDir --outDir ../../dist/front-end",
+		"generate": "npm run build && npm run render && node dist/back-end/prerender.mjs",
+		"render": "vite build src/front-end --ssr prerender.ts --emptyOutDir --outDir ../../dist/back-end",
 		"start": "tsx src/back-end/index.ts"
 	},
 	"version": "1.9.0"

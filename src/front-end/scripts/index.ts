@@ -7,3 +7,5 @@ const app = createApp(App as unknown as App.Component);
 app.use(router);
 app.use(store);
 app.mount("#🖥️");
+
+export default app;

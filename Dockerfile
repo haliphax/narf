@@ -11,7 +11,7 @@ RUN apt-get update -qq && \
 COPY --link package-lock.json package.json ./
 RUN npm ci --include=dev
 COPY --link . .
-RUN npm run build
+RUN npm run build && npm prune --omit=dev
 
 FROM base
 COPY --from=build /app /app

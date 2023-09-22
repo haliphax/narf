@@ -12,7 +12,7 @@
   - [Vuex][] - State management
   - [Vue Router][] - Routing
 - [Remult][] - Data access layer
-- [Parcel][] - Build agent (transpilation, minification, bundling, etc.)
+- [Vite][] - Front-end build framework
 - [CSS Grid][] (mostly) - Layout paradigm
 - [Less][] - CSS preprocessor (media queries as variables, complex nesting)
 
@@ -21,10 +21,10 @@
 [express]: https://expressjs.com
 [less]: https://lesscss.org
 [live web application]: https://narf.fly.dev
-[parcel]: https://parceljs.org
 [remult]: https://remult.dev
 [story points]: https://www.scrum.org/resources/blog/why-do-we-use-story-points-estimating
 [typescript]: https://typescriptlang.org
+[vite]: https://vitejs.dev
 [vue router]: https://router.vuejs.org
 [vue3]: https://vuejs.org
 [vuex]: https://vuex.vuejs.org

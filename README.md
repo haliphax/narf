@@ -6,7 +6,6 @@
 
 ## Stack
 
-- [TypeScript][] - Language
 - [Express][] - Server
 - [Vue3][] - Client framework
   - [Vuex][] - State management
@@ -23,7 +22,6 @@
 [live web application]: https://narf.fly.dev
 [remult]: https://remult.dev
 [story points]: https://www.scrum.org/resources/blog/why-do-we-use-story-points-estimating
-[typescript]: https://typescriptlang.org
 [vite]: https://vitejs.dev
 [vue router]: https://router.vuejs.org
 [vue3]: https://vuejs.org

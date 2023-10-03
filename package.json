@@ -12,6 +12,7 @@
 		"@types/uuid": "^9.0.4",
 		"@typescript-eslint/eslint-plugin": "^6.7.0",
 		"@typescript-eslint/parser": "^6.7.0",
+		"@vitest/coverage-v8": "^0.34.6",
 		"@vue/test-utils": "^2.4.1",
 		"commitlint": "^17.7.1",
 		"commitlint-config-gitmoji": "^2.3.1",
@@ -66,10 +67,13 @@
 	"private": true,
 	"scripts": {
 		"build": "vite build src/front-end --emptyOutDir --outDir ../../dist",
+		"coverage": "npm run coverage:back-end && npm run coverage:front-end",
+		"coverage:back-end": "true",
+		"coverage:front-end": "vitest run -r src/front-end --coverage",
 		"start": "tsx src/back-end/index.ts",
 		"test": "npm run test:back-end && npm run test:front-end",
 		"test:back-end": "true",
-		"test:front-end": "vitest -r src/front-end --run"
+		"test:front-end": "vitest run -r src/front-end"
 	},
 	"version": "1.9.0"
 }

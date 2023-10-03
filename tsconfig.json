@@ -12,6 +12,7 @@
 		"noUnusedLocals": true,
 		"noUnusedParameters": true,
 		"resolveJsonModule": true,
+		"resolvePackageJsonExports": false,
 		"skipLibCheck": true,
 		"strict": true,
 		"target": "ES2020",
@@ -19,5 +20,9 @@
 		"useDefineForClassFields": true
 	},
 	"include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue"],
-	"references": [{ "path": "./tsconfig.node.json" }]
+	"references": [
+		{
+			"path": "./tsconfig.node.json"
+		}
+	]
 }

@@ -1,13 +1,19 @@
 import { shallowMount, VueWrapper } from "@vue/test-utils";
-import { beforeEach, describe, it } from "vitest";
+import { afterEach, beforeEach, describe, it } from "vitest";
 import store from "../../../src/front-end/scripts/store";
 import Home from "../../../src/front-end/scripts/views/home.vue";
 
 let home: VueWrapper;
 
+const mountHome = () => shallowMount(Home, { global: { plugins: [store] } });
+
 describe("Home view", () => {
 	beforeEach(() => {
-		home = shallowMount(Home, { global: { plugins: [store] } });
+		home = mountHome();
+	});
+
+	afterEach(() => {
+		home.unmount();
 	});
 
 	it("has Profile component", ({ expect }) => {
@@ -16,5 +22,25 @@ describe("Home view", () => {
 
 	it("has New Story component", ({ expect }) => {
 		expect(home.findComponent("NEW-STORY-STUB").exists()).toBe(true);
+	});
+
+	describe("User profile details", () => {
+		it("is expanded when username is default", ({ expect }) => {
+			const details = home.element.querySelector(
+				"details",
+			)! as HTMLDetailsElement;
+			expect(details.getAttribute("open")).toBe("true");
+		});
+
+		it("is collapsed when username is custom", async ({ expect }) => {
+			store.state.session.name = "haliphax";
+			home = mountHome();
+
+			const details = home.element.querySelector(
+				"details",
+			)! as HTMLDetailsElement;
+
+			expect(details.getAttribute("open")).toBe("false");
+		});
 	});
 });

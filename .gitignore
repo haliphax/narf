@@ -2,8 +2,7 @@
 /db/
 /dist/
 /html/
-/src/back-end/coverage
-/src/front-end/coverage
+coverage/
 node_modules/
 
 # vs code

@@ -22,6 +22,7 @@
 		"eslint-plugin-vue": "^9.17.0",
 		"gitmoji-cli": "^8.5.0",
 		"happy-dom": "^12.7.0",
+		"npm-run-all": "^4.1.5",
 		"prettier": "^3.0.3",
 		"prettier-plugin-organize-imports": "^3.2.3",
 		"prettier-plugin-toml": "^1.0.0",
@@ -67,11 +68,11 @@
 	"private": true,
 	"scripts": {
 		"build": "vite build src/front-end --emptyOutDir --outDir ../../dist",
-		"coverage": "npm run coverage:back-end && npm run coverage:front-end",
+		"coverage": "npm-run-all coverage:*",
 		"coverage:back-end": "true",
 		"coverage:front-end": "npm run test:front-end -- --coverage",
 		"start": "tsx src/back-end/index.ts",
-		"test": "npm run test:back-end && npm run test:front-end",
+		"test": "npm-run-all -c test:*",
 		"test:back-end": "true",
 		"test:front-end": "vitest run -c vitest.front-end.config.ts --dir test/front-end",
 		"transform": "tsx src/tasks/transform.ts"

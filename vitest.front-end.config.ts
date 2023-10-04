@@ -7,5 +7,6 @@ export default defineConfig({
 		root: "src/front-end",
 		environment: "happy-dom",
 		globals: true,
+		onConsoleLog: () => false,
 	},
 });

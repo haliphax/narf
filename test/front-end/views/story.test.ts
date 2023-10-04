@@ -19,7 +19,6 @@ describe("Story view", () => {
 		shallowMount<typeof Story>(Story, { global: { plugins: [store] } });
 
 	beforeEach(() => {
-		vi.stubGlobal("console", { log: vi.fn() });
 		vi.stubGlobal("EventSource", EventSourceMock);
 		vi.mock("../../../src/front-end/scripts/remult", () => ({
 			default: {

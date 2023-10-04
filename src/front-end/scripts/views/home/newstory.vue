@@ -1,7 +1,6 @@
 <script lang="ts">
 import { defineComponent } from "vue";
 import scales from "../../../../scales";
-import router from "../../router";
 import { remult } from "remult";
 import { Story } from "../../../../models/story";
 
@@ -49,7 +48,7 @@ const NewStory = defineComponent({
 				title: this.title,
 			});
 
-			router.push({ name: "story", params: { story: story.id } });
+			this.$router.push({ name: "story", params: { story: story.id } });
 		},
 	},
 });

@@ -13,14 +13,13 @@ storyMock.title = "Test";
 storyMock.votes = [];
 
 describe("Story view", () => {
-	vi.stubGlobal("console", { log: vi.fn() });
-
 	let story: VueWrapper;
 
 	const mountStory = () =>
-		shallowMount(Story, { global: { plugins: [store] } });
+		shallowMount<typeof Story>(Story, { global: { plugins: [store] } });
 
 	beforeEach(() => {
+		vi.stubGlobal("console", { log: vi.fn() });
 		vi.stubGlobal("EventSource", EventSourceMock);
 		vi.mock("../../../src/front-end/scripts/remult", () => ({
 			default: {
@@ -63,7 +62,11 @@ describe("Story view", () => {
 		expect(story.findComponent("PARTICIPANTS-STUB").exists()).toBe(true);
 	});
 
+	it("connects EventSource on mount", ({ expect }) => {
+		expect(story.vm.$store.state.story?.events).toBeInstanceOf(EventSourceMock);
+	});
+
 	it("loads story on mount", ({ expect }) => {
-		expect(store.state.story?.story).toEqual(storyMock);
+		expect(story.vm.$store.state.story?.story).toEqual(storyMock);
 	});
 });

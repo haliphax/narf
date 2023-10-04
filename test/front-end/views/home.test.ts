@@ -1,14 +1,15 @@
 import { shallowMount, VueWrapper } from "@vue/test-utils";
-import { afterEach, beforeEach, describe, it } from "vitest";
+import { afterEach, beforeEach, describe, it, vi } from "vitest";
 import store from "../../../src/front-end/scripts/store";
 import Home from "../../../src/front-end/scripts/views/home.vue";
 
-let home: VueWrapper;
-
-const mountHome = () => shallowMount(Home, { global: { plugins: [store] } });
-
 describe("Home view", () => {
+	let home: VueWrapper;
+
+	const mountHome = () => shallowMount(Home, { global: { plugins: [store] } });
+
 	beforeEach(() => {
+		vi.stubGlobal("console", { log: vi.fn() });
 		home = mountHome();
 	});
 

@@ -44,11 +44,11 @@ export default Home;
 	<h2>Point?</h2>
 	<ol>
 		<li>
-			<em>(Optional)</em> Provide your name in the
-			<strong>User profile</strong> section
+			<em>(Optional)</em> Fill out your
+			<strong>User profile</strong>
 		</li>
-		<li>Create a story room with a title and voting scale</li>
-		<li>Share the room URL with your team members</li>
+		<li>Create a story room with a title and scale</li>
+		<li>Share the room URL with your team</li>
 		<li>Wait for votes to roll in</li>
 		<li>Click the <strong>Reveal</strong> button to show results</li>
 		<li>Take over the world! <span aria-hidden="true">🌎🐁</span></li>

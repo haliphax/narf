@@ -12,6 +12,7 @@
   - [Vue Router][] - Routing
 - [Remult][] - Data access layer
 - [Vite][] - Front-end build framework
+- [Vitest][] - Testing framework
 - [CSS Grid][] (mostly) - Layout paradigm
 - [Less][] - CSS preprocessor (media queries as variables, complex nesting)
 
@@ -23,6 +24,7 @@
 [remult]: https://remult.dev
 [story points]: https://www.scrum.org/resources/blog/why-do-we-use-story-points-estimating
 [vite]: https://vitejs.dev
+[vitest]: https://vitest.dev
 [vue router]: https://router.vuejs.org
 [vue3]: https://vuejs.org
 [vuex]: https://vuex.vuejs.org

@@ -28,6 +28,7 @@
 		"prettier-plugin-toml": "^1.0.0",
 		"semantic-release": "^21.1.1",
 		"semantic-release-gitmoji": "^1.6.4",
+		"vite": "^4.4.5",
 		"vitest": "^0.34.6"
 	},
 	"dependencies": {
@@ -49,7 +50,6 @@
 		"tsx": "^3.12.10",
 		"typescript": "^5.2.2",
 		"uuid": "^9.0.1",
-		"vite": "^4.4.5",
 		"vue": "^3.3.4",
 		"vue-router": "^4.2.4",
 		"vuex": "^4.1.0"

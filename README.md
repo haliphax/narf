@@ -20,7 +20,7 @@
 [demonstration app]: https://sphenoid-secret-antimony.glitch.me
 [express]: https://expressjs.com
 [less]: https://lesscss.org
-[live web application]: https://narf.fly.dev
+[live web application]: https://narf.poker
 [remult]: https://remult.dev
 [story points]: https://www.scrum.org/resources/blog/why-do-we-use-story-points-estimating
 [vite]: https://vitejs.dev

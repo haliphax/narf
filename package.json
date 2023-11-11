@@ -34,7 +34,7 @@
 	"dependencies": {
 		"@rollup/plugin-inject": "^5.0.3",
 		"@vitejs/plugin-vue": "^4.3.4",
-		"axios": "^1.5.0",
+		"axios": "^1.6.0",
 		"buffer": "^6.0.3",
 		"compression": "^1.7.4",
 		"connect-history-api-fallback": "^2.0.0",

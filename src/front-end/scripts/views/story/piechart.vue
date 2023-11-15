@@ -56,7 +56,7 @@ const PieChart = defineComponent({
 
 				s.percent = s.votes / total;
 				s.rotation = rotation;
-				rotation += Math.floor(360 * s.percent);
+				rotation += 360 * s.percent;
 			}
 
 			return slices;

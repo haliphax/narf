@@ -1,3 +1,8 @@
+# [v1.9.1](https://github.com/haliphax/narf/compare/v1.9.0...v1.9.1) (2023-11-15)
+
+## 🐛 Bug Fixes
+- [`3604e73`](https://github.com/haliphax/narf/commit/3604e73)  fix pie chart slice rotation
+
 # [v1.9.0](https://github.com/haliphax/narf/compare/v1.8.0...v1.9.0) (2023-09-21)
 
 ## ✨ New Features

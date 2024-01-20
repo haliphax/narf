@@ -28,7 +28,7 @@
 		"prettier-plugin-toml": "^1.0.0",
 		"semantic-release": "^21.1.1",
 		"semantic-release-gitmoji": "^1.6.4",
-		"vite": "^4.4.12",
+		"vite": "^4.5.2",
 		"vitest": "^0.34.6"
 	},
 	"dependencies": {

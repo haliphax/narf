@@ -4,14 +4,14 @@ primary_region = "den"
 [build]
 
 [mounts]
-source = "db"
 destination = "/app/db"
+source = "db"
 
 [http_service]
-internal_port = 3000
-force_https = true
-auto_stop_machines = true
 auto_start_machines = true
+auto_stop_machines = true
+force_https = true
+internal_port = 3000
 min_machines_running = 1
 processes = ["app"]
 
@@ -23,3 +23,6 @@ path = "/"
 port = 3000
 timeout = "10s"
 type = "http"
+
+[[vm]]
+memory = 512

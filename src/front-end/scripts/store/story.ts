@@ -12,9 +12,9 @@ const story: Module<StoryState | Promise<StoryState>, StoreState> = {
 			const storyId = router.currentRoute.value.params.story as string;
 			const events = new EventSource(`${ROOT_URI}${storyId}/events`);
 
-			events.addEventListener("message", () => {
+			events.addEventListener("message", async () => {
 				console.log("Story update received");
-				ctx.dispatch("story.load");
+				await ctx.dispatch("story.load");
 			});
 			ctx.commit("events", events);
 
@@ -36,7 +36,7 @@ const story: Module<StoryState | Promise<StoryState>, StoreState> = {
 				await voteRepo.insert(partial);
 			}
 
-			ctx.dispatch("story.load");
+			await ctx.dispatch("story.load");
 		},
 		async "story.load"(ctx) {
 			const story = await remult

@@ -43,7 +43,7 @@ const Estimate = defineComponent({
 
 			return classes;
 		},
-		vote(option: string) {
+		async vote(option: string) {
 			const payload: Vote =
 				this.you ??
 				(() => {
@@ -55,7 +55,7 @@ const Estimate = defineComponent({
 					} as Vote;
 				})();
 			payload.vote = option;
-			this.$store.dispatch("story.vote", payload);
+			await this.$store.dispatch("story.vote", payload);
 		},
 	},
 });

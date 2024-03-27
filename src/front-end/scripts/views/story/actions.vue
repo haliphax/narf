@@ -7,7 +7,7 @@ const Actions = defineComponent({
 			await window.navigator.clipboard.writeText(window.location.href);
 			alert("The room URL has been copied to your clipboard!");
 		},
-		reveal() {
+		async reveal() {
 			if (
 				this.$store.state.story.story?.owner !== this.$store.state.session.id &&
 				!confirm("You are not the owner of this story. Are you sure?")
@@ -15,7 +15,7 @@ const Actions = defineComponent({
 				return;
 			}
 
-			this.$store.dispatch("story.reveal");
+			await this.$store.dispatch("story.reveal");
 		},
 	},
 });

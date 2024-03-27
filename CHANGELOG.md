@@ -1,3 +1,8 @@
+# [v1.9.2](https://github.com/haliphax/narf/compare/v1.9.1...v1.9.2) (2024-03-27)
+
+## 🐛 Bug Fixes
+- [`e5ef889`](https://github.com/haliphax/narf/commit/e5ef889)  don&#x27;t add placeholder votes to revealed stories
+
 # [v1.9.1](https://github.com/haliphax/narf/compare/v1.9.0...v1.9.1) (2023-11-15)
 
 ## 🐛 Bug Fixes

@@ -80,5 +80,5 @@
 		"test:front-end": "vitest run -c vitest.front-end.config.ts --dir test/front-end",
 		"transform": "tsx src/tasks/transform.ts"
 	},
-	"version": "1.10.0"
+	"version": "1.10.1"
 }

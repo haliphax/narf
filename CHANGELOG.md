@@ -1,3 +1,8 @@
+# [v1.10.1](https://github.com/haliphax/narf/compare/v1.10.0...v1.10.1) (2024-03-27)
+
+## 🐛 Bug Fixes
+- [`914bbb9`](https://github.com/haliphax/narf/commit/914bbb9)  disable reveal button while loading story
+
 # [v1.10.0](https://github.com/haliphax/narf/compare/v1.9.2...v1.10.0) (2024-03-27)
 
 ## ✨ New Features

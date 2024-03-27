@@ -1,3 +1,8 @@
+# [v1.10.2](https://github.com/haliphax/narf/compare/v1.10.1...v1.10.2) (2024-03-27)
+
+## 🐛 Bug Fixes
+- [`9fe709c`](https://github.com/haliphax/narf/commit/9fe709c)  async all the things
+
 # [v1.10.1](https://github.com/haliphax/narf/compare/v1.10.0...v1.10.1) (2024-03-27)
 
 ## 🐛 Bug Fixes

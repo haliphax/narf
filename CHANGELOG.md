@@ -1,3 +1,8 @@
+# [v1.10.3](https://github.com/haliphax/narf/compare/v1.10.2...v1.10.3) (2024-03-27)
+
+## 🐛 Bug Fixes
+- [`f1f12ff`](https://github.com/haliphax/narf/commit/f1f12ff)  fix pie chart label positions
+
 # [v1.10.2](https://github.com/haliphax/narf/compare/v1.10.1...v1.10.2) (2024-03-27)
 
 ## 🐛 Bug Fixes

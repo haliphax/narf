@@ -18,6 +18,7 @@ const story: Module<StoryState | Promise<StoryState>, StoreState> = {
 			});
 			ctx.commit("events", events);
 
+			const storyRepo = remult.repo(Story);
 			const voteRepo = remult.repo(Vote);
 			const partial = {
 				participantId: ctx.rootState.session.id,
@@ -26,6 +27,7 @@ const story: Module<StoryState | Promise<StoryState>, StoreState> = {
 			};
 
 			if (
+				(await storyRepo.count({ id: storyId, revealed: true })) === 0 &&
 				(await voteRepo.count({
 					participantId: partial.participantId,
 					storyId,

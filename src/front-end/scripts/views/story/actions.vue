@@ -32,7 +32,10 @@ export default Actions;
 			</button>
 		</li>
 		<li>
-			<button :disabled="$store.state.story.story?.revealed" @click="reveal">
+			<button
+				:disabled="$store.state.story.story?.revealed ?? true"
+				@click="reveal"
+			>
 				<span aria-hidden="true">👀</span>
 				Reveal
 			</button>

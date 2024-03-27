@@ -155,15 +155,19 @@ label {
 
 .🍕 label {
 	-webkit-text-stroke: 1px #000;
+	bottom: 1px;
 	color: #fff;
 	display: block;
 	font-size: 2rem;
 	height: 100%;
+	left: 1px;
 	padding: var(--space-l);
 	position: absolute;
+	right: 1px;
 	stroke-width: 1px;
 	stroke: 1px #000;
 	text-align: center;
+	top: 1px;
 	transform: rotate(calc(var(--p) * 180deg));
 	width: 100%;
 }

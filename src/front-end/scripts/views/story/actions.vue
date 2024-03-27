@@ -44,7 +44,8 @@ export default Actions;
 </template>
 
 <style lang="less" scoped>
-button {
+li {
+	display: inline-block;
 	margin-right: var(--space-m);
 }
 </style>

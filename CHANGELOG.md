@@ -1,3 +1,8 @@
+# [v1.11.0](https://github.com/haliphax/narf/compare/v1.10.3...v1.11.0) (2024-05-01)
+
+## ✨ New Features
+- [`522e58d`](https://github.com/haliphax/narf/commit/522e58d)  confirmation for owner reveal
+
 # [v1.10.3](https://github.com/haliphax/narf/compare/v1.10.2...v1.10.3) (2024-03-27)
 
 ## 🐛 Bug Fixes

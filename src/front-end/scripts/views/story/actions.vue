@@ -8,10 +8,12 @@ const Actions = defineComponent({
 			alert("The room URL has been copied to your clipboard!");
 		},
 		async reveal() {
-			if (
-				this.$store.state.story.story?.owner !== this.$store.state.session.id &&
-				!confirm("You are not the owner of this story. Are you sure?")
-			) {
+			const message =
+				this.$store.state.story.story?.owner === this.$store.state.session.id
+					? "Are you ready to reveal the votes?"
+					: "You are not the owner of this story. Are you sure?";
+
+			if (!confirm(message)) {
 				return;
 			}
 

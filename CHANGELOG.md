@@ -1,3 +1,8 @@
+# [v1.11.1](https://github.com/haliphax/narf/compare/v1.11.0...v1.11.1) (2024-05-16)
+
+## 🔒 Security Issues
+- [`18ff97b`](https://github.com/haliphax/narf/commit/18ff97b) ️ bump tar and semantic-release
+
 # [v1.11.0](https://github.com/haliphax/narf/compare/v1.10.3...v1.11.0) (2024-05-01)
 
 ## ✨ New Features

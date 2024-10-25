@@ -1,7 +1,7 @@
 import { shallowMount, VueWrapper } from "@vue/test-utils";
 import { afterEach, beforeEach, describe, it, vi } from "vitest";
-import store from "../../../src/front-end/scripts/store";
-import Story from "../../../src/front-end/scripts/views/story.vue";
+import store from "../../../src/front-end/app/store";
+import Story from "../../../src/front-end/app/views/story.vue";
 import { Story as StoryModel } from "../../../src/models/story";
 import { EventSourceMock } from "../mocks";
 
@@ -20,7 +20,7 @@ describe("Story view", () => {
 
 	beforeEach(() => {
 		vi.stubGlobal("EventSource", EventSourceMock);
-		vi.mock("../../../src/front-end/scripts/remult", () => ({
+		vi.mock("../../../src/front-end/app/remult", () => ({
 			default: {
 				repo: vi.fn(() => ({
 					count: vi.fn(),
@@ -28,7 +28,7 @@ describe("Story view", () => {
 				})),
 			},
 		}));
-		vi.mock("../../../src/front-end/scripts/router", () => ({
+		vi.mock("../../../src/front-end/app/router", () => ({
 			default: {
 				currentRoute: {
 					value: {

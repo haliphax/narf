@@ -29,7 +29,7 @@ describe("Home view", () => {
 			const details = home.element.querySelector(
 				"details",
 			)! as HTMLDetailsElement;
-			expect(details.getAttribute("open")).toBe("true");
+			expect(details.getAttribute("open")).toBe("");
 		});
 
 		it("is collapsed when username is custom", async ({ expect }) => {
@@ -40,7 +40,7 @@ describe("Home view", () => {
 				"details",
 			)! as HTMLDetailsElement;
 
-			expect(details.getAttribute("open")).toBe("false");
+			expect(details.getAttribute("open")).toBe(null);
 		});
 	});
 });

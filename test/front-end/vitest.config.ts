@@ -4,7 +4,6 @@ import { defineConfig } from "vitest/config";
 export default defineConfig({
 	plugins: [vue()],
 	test: {
-		root: "src/front-end",
 		environment: "happy-dom",
 		globals: true,
 		onConsoleLog: () => false,

@@ -77,7 +77,7 @@
 		"start": "tsx src/back-end/index.ts",
 		"test": "npm-run-all -c test:*",
 		"test:back-end": "true",
-		"test:front-end": "vitest run -c vitest.front-end.config.ts --dir test/front-end",
+		"test:front-end": "vitest run -r test/front-end",
 		"transform": "tsx src/tasks/transform.ts"
 	},
 	"version": "1.11.1"

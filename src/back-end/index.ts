@@ -8,7 +8,7 @@ import cronjobs from "./cronjobs";
 import routes from "./routes";
 import server from "./server";
 
-const host = process.env.host ?? "localhost";
+const host = process.env.host ?? "0.0.0.0";
 const port = parseInt(process.env.port ?? "3000");
 const app = express();
 

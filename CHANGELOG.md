@@ -1,3 +1,8 @@
+# [v1.11.2](https://github.com/haliphax/narf/compare/v1.11.1...v1.11.2) (2024-11-12)
+
+## 🔒 Security Issues
+- [`efcd12b`](https://github.com/haliphax/narf/commit/efcd12b) ️ npm audit fix
+
 # [v1.11.1](https://github.com/haliphax/narf/compare/v1.11.0...v1.11.1) (2024-05-16)
 
 ## 🔒 Security Issues

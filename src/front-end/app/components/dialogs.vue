@@ -66,7 +66,10 @@ export default Dialogs;
 					<legend>Alert</legend>
 					<p>{{ dialogText }}</p>
 					<div>
-						<button class="fr" type="submit">✅ OK</button>
+						<button class="fr" type="submit">
+							<span aria-hidden="true">✅</span>
+							OK
+						</button>
 					</div>
 				</fieldset>
 			</form>
@@ -77,9 +80,13 @@ export default Dialogs;
 					<legend>Confirm</legend>
 					<p>{{ dialogText }}</p>
 					<div>
-						<button type="submit" value="Cancel">🚫 Cancel</button>
+						<button type="submit" value="Cancel">
+							<span aria-hidden="true">🚫</span>
+							Cancel
+						</button>
 						<button class="fr" value="OK" @click.prevent="confirmed">
-							✅ OK
+							<span aria-hidden="true">✅</span>
+							OK
 						</button>
 					</div>
 				</fieldset>

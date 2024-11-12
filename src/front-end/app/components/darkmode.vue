@@ -20,7 +20,7 @@ const DarkMode = defineComponent({
 	created() {
 		this.bodyClass(this.enabled);
 		this.$store.subscribe((mutation) => {
-			const keys = Object.getOwnPropertyNames(mutation.payload);
+			const keys = Object.getOwnPropertyNames(mutation.payload ?? {});
 
 			if (mutation.type == "session" && keys.includes("settings"))
 				this.enabled = (mutation.payload as SessionState).settings.darkMode;

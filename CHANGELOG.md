@@ -1,3 +1,8 @@
+# [v1.12.0](https://github.com/haliphax/narf/compare/v1.11.2...v1.12.0) (2024-11-12)
+
+## ✨ New Features
+- [`305b2c9`](https://github.com/haliphax/narf/commit/305b2c9)  styled html dialog component (#127) (Issues: [`#127`](https://github.com/haliphax/narf/issues/127))
+
 # [v1.11.2](https://github.com/haliphax/narf/compare/v1.11.1...v1.11.2) (2024-11-12)
 
 ## 🔒 Security Issues

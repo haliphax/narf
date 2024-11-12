@@ -27,29 +27,51 @@ const Profile = defineComponent({
 			(this.$refs.file as HTMLInputElement).click();
 		},
 		async loadFile() {
-			const files = (this.$refs.file as HTMLInputElement).files;
+			const input = this.$refs.file as HTMLInputElement;
+			const files = input.files;
 
 			if (!files || files.length === 0) return;
-			if (files.length > 1) return alert("Please select a single file");
+
+			if (files.length > 1) {
+				input.value = "";
+				await this.$store.dispatch("alert", {
+					text: "Please select a single file",
+				});
+				return;
+			}
 
 			const file = files[0];
 
-			if (!file.name.endsWith(".json"))
-				return alert("Please select a JSON file");
+			if (!file.name.endsWith(".json")) {
+				input.value = "";
+				await this.$store.dispatch("alert", {
+					text: "Please select a JSON file",
+				});
+				return;
+			}
 
-			const session: SessionState = JSON.parse(await file.text());
+			try {
+				const session: SessionState = JSON.parse(await file.text());
 
-			this.$store.commit("session", session);
-			this.name = session.name;
-			requestAnimationFrame(() => {
+				this.$store.commit("session", session);
+				this.name = session.name;
+			} catch (ex) {
+				await this.$store.dispatch("alert", { text: `Error: ${ex}` });
+			} finally {
+				input.value = "";
+			}
+
+			requestAnimationFrame(async () => {
 				this.upToDate = true;
-				alert("Profile imported successfully");
+				await this.$store.dispatch("alert", {
+					text: "Profile imported successfully",
+				});
 			});
 		},
 		submit() {
 			this.$store.commit("session", { name: this.name });
 			this.upToDate = true;
-			alert("Profile updated");
+			this.$store.dispatch("alert", { text: "Profile updated" });
 		},
 	},
 });

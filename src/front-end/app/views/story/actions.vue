@@ -2,10 +2,21 @@
 import { defineComponent } from "vue";
 
 const Actions = defineComponent({
+	async mounted() {
+		this.$store.subscribeAction(async (a) => {
+			if (!(a.type === "confirmed" && a.payload === "reveal")) {
+				return;
+			}
+
+			await this.$store.dispatch("story.reveal");
+		});
+	},
 	methods: {
 		async copyUrl() {
 			await window.navigator.clipboard.writeText(window.location.href);
-			alert("The room URL has been copied to your clipboard!");
+			await this.$store.dispatch("alert", {
+				text: "The room URL has been copied to your clipboard!",
+			});
 		},
 		async reveal() {
 			const message =
@@ -13,11 +24,7 @@ const Actions = defineComponent({
 					? "Are you ready to reveal the votes?"
 					: "You are not the owner of this story. Are you sure?";
 
-			if (!confirm(message)) {
-				return;
-			}
-
-			await this.$store.dispatch("story.reveal");
+			await this.$store.dispatch("confirm", { id: "reveal", text: message });
 		},
 	},
 });

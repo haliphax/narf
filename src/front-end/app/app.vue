@@ -1,11 +1,13 @@
 <script lang="ts">
 import { defineComponent } from "vue";
 import DarkMode from "./components/darkmode.vue";
+import Dialogs from "./components/dialogs.vue";
 import { ROOT_URI } from "./constants";
 
 const App = defineComponent({
 	components: {
 		DarkMode,
+		Dialogs,
 	},
 	async beforeCreate() {
 		document.cookie = [
@@ -21,6 +23,7 @@ export default App;
 </script>
 
 <template>
+	<Dialogs></Dialogs>
 	<a class="btn ⏩" href="#main">
 		<span aria-hidden="true">⏩</span>
 		Skip to main

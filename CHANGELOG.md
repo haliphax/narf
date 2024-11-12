@@ -1,3 +1,8 @@
+# [v1.12.1](https://github.com/haliphax/narf/compare/v1.12.0...v1.12.1) (2024-11-12)
+
+## 🐛 Bug Fixes
+- [`2d529a4`](https://github.com/haliphax/narf/commit/2d529a4)  hide icons in dialogs from screen readers
+
 # [v1.12.0](https://github.com/haliphax/narf/compare/v1.11.2...v1.12.0) (2024-11-12)
 
 ## ✨ New Features

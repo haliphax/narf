@@ -1,8 +1,6 @@
-/.parcel-cache/
+/coverage/
 /db/
-/dist/
 /html/
-coverage/
 node_modules/
 
 # vs code

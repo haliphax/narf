@@ -1,3 +1,8 @@
+# [v1.12.2](https://github.com/haliphax/narf/compare/v1.12.1...v1.12.2) (2024-11-13)
+
+## 🔒 Security Issues
+- [`fc74a2e`](https://github.com/haliphax/narf/commit/fc74a2e) ️ upgrade remult, add checks to models
+
 # [v1.12.1](https://github.com/haliphax/narf/compare/v1.12.0...v1.12.1) (2024-11-12)
 
 ## 🐛 Bug Fixes

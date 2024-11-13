@@ -1,7 +1,5 @@
-/.parcel-cache/
 /db/
 /dist/
-/html/
 node_modules/
 
 # vs code

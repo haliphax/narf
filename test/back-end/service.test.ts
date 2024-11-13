@@ -4,16 +4,16 @@ import cookieParser from "cookie-parser";
 import cors from "cors";
 import express from "express";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
-import cronjobs from "../../src/back-end/cronjobs";
 import routes from "../../src/back-end/routes";
 import server from "../../src/back-end/server";
 import service from "../../src/back-end/service";
 
-cronjobs; // mock the module without using it in a test
-
 describe("service", () => {
 	beforeEach(() => {
-		vi.mock("../../src/back-end/cronjobs", () => ({ default: vi.fn() }));
+		vi.mock("../../src/back-end/cronjobs", () => ({
+			default: vi.fn(),
+			stop: vi.fn(),
+		}));
 		vi.mock("../../src/back-end/routes", () => ({ default: vi.fn() }));
 		vi.mock("../../src/back-end/server", () => ({ default: vi.fn() }));
 		vi.mock("compression", () => ({ default: vi.fn() }));
@@ -51,6 +51,9 @@ describe("service", () => {
 		vi.unstubAllEnvs();
 		vi.unstubAllGlobals();
 		vi.clearAllMocks();
+		["SIGINT", "SIGTERM"].forEach((signal) =>
+			process.removeAllListeners(signal),
+		);
 	});
 
 	it("loads modules", () => {

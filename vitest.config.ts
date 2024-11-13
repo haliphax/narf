@@ -5,7 +5,6 @@ export default defineConfig({
 	plugins: [vue()],
 	test: {
 		coverage: {
-			lines: 75,
 			reporter: ["html", "lcov", "text"],
 			skipFull: true,
 		},

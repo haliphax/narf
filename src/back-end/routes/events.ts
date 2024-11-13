@@ -1,4 +1,4 @@
-import { Application, Response } from "express";
+import { Application, Request, Response } from "express";
 import { v4 as uuid } from "uuid";
 import { Story } from "../../models/story";
 
@@ -7,38 +7,38 @@ interface NarfClient {
 	response: Response;
 }
 
-const clients = new Map<string, NarfClient[]>();
+export const clients = new Map<string, NarfClient[]>();
 
-/** Server-sent events endpoint for story updates */
-export const events = (app: Application) => {
-	app.get("/:story/events", async (r, s) => {
-		s.set({
-			"Cache-Control": "no-cache",
-			"Content-Type": "text/event-stream",
-			Connection: "keep-alive",
-		});
-		s.flushHeaders();
+export const handler = async (r: Request, s: Response) => {
+	s.set({
+		"Cache-Control": "no-cache",
+		"Content-Type": "text/event-stream",
+		Connection: "keep-alive",
+	});
+	s.flushHeaders();
 
-		const story = r.params.story;
-		const client: NarfClient = { id: uuid(), response: s };
+	const story = r.params.story;
+	const client: NarfClient = { id: uuid(), response: s };
 
-		console.log(`Client ${client.id} connected`);
+	console.log(`Client ${client.id} connected`);
 
-		if (clients.has(story)) {
-			clients.set(story, (clients.get(story) ?? []).concat(client));
-		} else {
-			clients.set(story, [client]);
-		}
+	if (clients.has(story)) {
+		clients.set(story, (clients.get(story) ?? []).concat(client));
+	} else {
+		clients.set(story, [client]);
+	}
 
-		r.on("close", () => {
-			console.log(`Client ${client.id} disconnected`);
-			clients.set(
-				story,
-				(clients.get(story) ?? []).filter((c) => c.id !== client.id),
-			);
-		});
+	r.on("close", () => {
+		console.log(`Client ${client.id} disconnected`);
+		clients.set(
+			story,
+			(clients.get(story) ?? []).filter((c) => c.id !== client.id),
+		);
 	});
 };
+
+/** Server-sent events endpoint for story updates */
+export const events = (app: Application) => app.get("/:story/events", handler);
 
 export const updateStory = (story: Story) => {
 	console.log(`Sending update to story ${story.id}`);

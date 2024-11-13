@@ -6,6 +6,7 @@ export default defineConfig({
 	test: {
 		coverage: {
 			lines: 75,
+			reporter: ["html", "lcov"],
 			skipFull: true,
 		},
 		environment: "happy-dom",

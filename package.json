@@ -70,7 +70,7 @@
 	},
 	"private": true,
 	"scripts": {
-		"build": "vite build src/front-end --emptyOutDir --outDir ../../dist",
+		"build": "vite build src/front-end",
 		"coverage": "npm-run-all coverage:*",
 		"coverage:back-end": "true",
 		"coverage:front-end": "npm run test:front-end -- --coverage",

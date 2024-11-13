@@ -9,6 +9,9 @@ import { Story } from "./story";
 	options.id = (e) => [e.participantId, e.storyId];
 	options.saved = async (e) => {
 		const story = await remult.repo(Story).findId(e.storyId);
+
+		if (!story) throw "Invalid story";
+
 		updateStory(story);
 	};
 })
@@ -29,6 +32,8 @@ export class Vote {
 
 			const story = await remult.repo(Story).findId(e.storyId);
 
+			if (!story) throw "Invalid story";
+			if (!story.scale) throw "Invalid scale";
 			if (!scales.get(story.scale)?.includes(e.vote)) throw "Invalid vote";
 		};
 	})

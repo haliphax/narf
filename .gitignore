@@ -1,6 +1,6 @@
 /coverage/
 /db/
-/html/
+/dist/
 node_modules/
 
 # vs code

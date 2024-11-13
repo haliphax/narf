@@ -1,8 +1,10 @@
 # narf!
 
-> Simple [story points][] estimation
+[![Test coverage](https://coveralls.io/repos/github/haliphax/narf/badge.svg?branch=main)](https://coveralls.io/github/haliphax/narf?branch=main)
 
-[Live web application][]
+Simple [story points][] estimation
+
+- [Live web application][]
 
 ## Stack
 

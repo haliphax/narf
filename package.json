@@ -71,13 +71,13 @@
 	"private": true,
 	"scripts": {
 		"build": "vite build src/front-end",
-		"coverage": "npm-run-all coverage:*",
-		"coverage:back-end": "true",
+		"coverage": "npm test -- --coverage",
+		"coverage:back-end": "npm run test:back-end -- --coverage",
 		"coverage:front-end": "npm run test:front-end -- --coverage",
 		"start": "tsx src/back-end/index.ts",
-		"test": "npm-run-all -c test:*",
-		"test:back-end": "true",
-		"test:front-end": "vitest run -r test/front-end",
+		"test": "vitest run",
+		"test:back-end": "vitest run test/back-end",
+		"test:front-end": "vitest run test/front-end",
 		"transform": "tsx src/tasks/transform.ts"
 	},
 	"version": "1.12.1"

@@ -101,7 +101,7 @@ footer {
 	}
 
 	li:not(:last-child) {
-		margin-right: var(--space-m);
+		margin-right: var(--space-xl);
 	}
 }
 </style>

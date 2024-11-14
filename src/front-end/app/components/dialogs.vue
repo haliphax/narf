@@ -95,7 +95,7 @@ export default Dialogs;
 	</span>
 </template>
 
-<style lang="less">
+<style lang="less" scoped>
 dialog {
 	background-color: var(--color-bg-global);
 	border: 1px solid #000;

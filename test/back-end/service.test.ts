@@ -85,7 +85,11 @@ describe("service", () => {
 
 		service(app);
 
-		expect(app.listen).toHaveBeenCalledWith(3000, "0.0.0.0", expect.anything());
+		expect(app.listen).toHaveBeenCalledWith(
+			3000,
+			"localhost",
+			expect.anything(),
+		);
 	});
 
 	it("removes x-powered-by header", () => {

@@ -21,4 +21,5 @@ RUN mkdir -p /data
 VOLUME /data
 EXPOSE 3000
 ENV DATABASE_URL="file:///data/sqlite.db"
+ENV host="0.0.0.0"
 CMD [ "npm", "run", "start" ]

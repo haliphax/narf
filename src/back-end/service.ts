@@ -9,7 +9,7 @@ import routes from "./routes";
 import server from "./server";
 
 const service = (app: Application) => {
-	const host = process.env.host ?? "0.0.0.0";
+	const host = process.env.host ?? "localhost";
 	const port = parseInt(process.env.port ?? "3000");
 
 	if (process.env.NODE_ENV !== "production") {

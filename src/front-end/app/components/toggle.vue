@@ -3,9 +3,9 @@ import { defineComponent } from "vue";
 
 const Toggle = defineComponent({
 	props: {
-		// eslint-disable-next-line vue/require-prop-types
 		checked: {
 			default: null,
+			type: Boolean,
 		},
 		id: {
 			type: String,

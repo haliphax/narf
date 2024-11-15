@@ -16,6 +16,10 @@ describe("Home view", () => {
 		home.unmount();
 	});
 
+	it("has Dialogs component", ({ expect }) => {
+		expect(home.findComponent("DIALOGS-STUB").exists()).toBe(true);
+	});
+
 	it("has Profile component", ({ expect }) => {
 		expect(home.findComponent("PROFILE-STUB").exists()).toBe(true);
 	});

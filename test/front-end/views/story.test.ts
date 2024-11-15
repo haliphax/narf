@@ -15,9 +15,6 @@ storyMock.votes = [];
 describe("Story view", () => {
 	let story: VueWrapper;
 
-	const mountStory = () =>
-		shallowMount<typeof Story>(Story, { global: { plugins: [store] } });
-
 	beforeEach(() => {
 		vi.stubGlobal("EventSource", EventSourceMock);
 		vi.mock("../../../src/front-end/app/remult", () => ({
@@ -40,7 +37,7 @@ describe("Story view", () => {
 			},
 		}));
 
-		story = mountStory();
+		story = shallowMount(Story, { global: { plugins: [store] } });
 	});
 
 	afterEach(() => {

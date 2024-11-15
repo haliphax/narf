@@ -6,10 +6,8 @@ import store from "../../src/front-end/app/store";
 describe("App component", () => {
 	let app: VueWrapper;
 
-	const mountApp = () => shallowMount(App, { global: { plugins: [store] } });
-
 	beforeEach(() => {
-		app = mountApp();
+		app = shallowMount(App, { global: { plugins: [store] } });
 	});
 
 	afterEach(() => {

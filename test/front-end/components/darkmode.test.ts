@@ -7,11 +7,9 @@ import store from "../../../src/front-end/app/store";
 describe("DarkMode component", () => {
 	let darkMode: VueWrapper;
 
-	const mountDarkMode = () => mount(DarkMode, { global: { plugins: [store] } });
-
 	beforeEach(() => {
 		store.state.session.settings.darkMode = false;
-		darkMode = mountDarkMode();
+		darkMode = mount(DarkMode, { global: { plugins: [store] } });
 	});
 
 	afterEach(() => {

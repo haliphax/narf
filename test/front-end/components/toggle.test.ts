@@ -5,10 +5,8 @@ import Toggle from "../../../src/front-end/app/components/toggle.vue";
 describe("Toggle component", () => {
 	let toggle: VueWrapper;
 
-	const mountToggle = () => mount(Toggle);
-
 	beforeEach(() => {
-		toggle = mountToggle();
+		toggle = mount(Toggle);
 	});
 
 	afterEach(() => {
@@ -16,8 +14,6 @@ describe("Toggle component", () => {
 	});
 
 	it("mounts as unchecked by default", ({ expect }) => {
-		toggle = mount(Toggle);
-
 		expect(
 			(toggle.find("input[type='checkbox']").element as HTMLInputElement)
 				.checked,

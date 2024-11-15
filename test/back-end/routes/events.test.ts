@@ -56,9 +56,29 @@ describe("events", () => {
 
 		handler(request, response);
 		handler(request, response);
+
 		expect(clients.has("test")).toBeTruthy();
 		const testClients = clients.get("test");
 		expect(testClients).toHaveLength(2);
+	});
+
+	it("removes client from tracking list on close", () => {
+		vi.mock("uuid", () => ({ v4: vi.fn(() => "test") }));
+		request.params = { story: "test" };
+
+		// initial request
+		handler(request, response);
+
+		// assert client is tracked
+		expect(clients.get("test")![0]).toMatchObject({ id: "test", response });
+		// assert "close" event listener is added
+		expect(request.on).toHaveBeenCalledWith("close", expect.anything());
+
+		// call onClose event listener
+		request.on.mock.calls[0][1]();
+
+		// assert client has been removed
+		expect(clients.get("test")!.length).toBe(0);
 	});
 
 	describe("updateStory", () => {

@@ -21,16 +21,16 @@ describe("DarkMode component", () => {
 	it("toggles settings.darkmode", ({ expect }) => {
 		const toggle = darkMode.findComponent(Toggle);
 
-		expect(store.state.session.settings.darkMode).toBeFalsy();
+		expect(store.state.session.settings.darkMode).toBe(false);
 		toggle.vm.$emit("click");
-		expect(store.state.session.settings.darkMode).toBeTruthy();
+		expect(store.state.session.settings.darkMode).toBe(true);
 	});
 
 	it("reacts to settings.darkmode state changes", ({ expect }) => {
 		const data = darkMode.vm.$data as { enabled: boolean };
 
-		expect(data.enabled).toBeFalsy();
+		expect(data.enabled).toBe(false);
 		store.commit("session.settings", { darkMode: true });
-		expect(data.enabled).toBeTruthy();
+		expect(data.enabled).toBe(true);
 	});
 });

@@ -1,13 +1,5 @@
 import { Request, Response } from "express";
-import {
-	MockedObject,
-	afterEach,
-	beforeEach,
-	describe,
-	expect,
-	it,
-	vi,
-} from "vitest";
+import { MockedObject, afterEach, beforeEach, describe, it, vi } from "vitest";
 import {
 	clients,
 	handler,
@@ -41,7 +33,9 @@ describe("events", () => {
 		vi.clearAllMocks();
 	});
 
-	it("creates tracking list when no clients exist for story ID", () => {
+	it("creates tracking list when no clients exist for story ID", ({
+		expect,
+	}) => {
 		request.params = { story: "test" };
 
 		handler(request, response);
@@ -51,7 +45,9 @@ describe("events", () => {
 		expect(testClients).toHaveLength(1);
 	});
 
-	it("appends to tracking list when clients exist for story ID", () => {
+	it("appends to tracking list when clients exist for story ID", ({
+		expect,
+	}) => {
 		request.params = { story: "test" };
 
 		handler(request, response);
@@ -62,7 +58,7 @@ describe("events", () => {
 		expect(testClients).toHaveLength(2);
 	});
 
-	it("removes client from tracking list on close", () => {
+	it("removes client from tracking list on close", ({ expect }) => {
 		vi.mock("uuid", () => ({ v4: vi.fn(() => "test") }));
 		request.params = { story: "test" };
 
@@ -82,7 +78,7 @@ describe("events", () => {
 	});
 
 	describe("updateStory", () => {
-		it("should write to client response", () => {
+		it("should write to client response", ({ expect }) => {
 			const Story = vi.fn(function () {
 				return {
 					created: 0,

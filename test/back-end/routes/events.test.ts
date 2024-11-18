@@ -46,7 +46,7 @@ describe("events", () => {
 
 		handler(request, response);
 
-		expect(clients.has("test")).toBeTruthy();
+		expect(clients.has("test")).toBe(true);
 		const testClients = clients.get("test");
 		expect(testClients).toHaveLength(1);
 	});
@@ -57,7 +57,7 @@ describe("events", () => {
 		handler(request, response);
 		handler(request, response);
 
-		expect(clients.has("test")).toBeTruthy();
+		expect(clients.has("test")).toBe(true);
 		const testClients = clients.get("test");
 		expect(testClients).toHaveLength(2);
 	});

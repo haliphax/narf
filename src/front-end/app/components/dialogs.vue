@@ -8,6 +8,7 @@ type DialogsModuleState = object;
 const dialogsModule: Module<DialogsModuleState, StoreState> = {
 	actions: {
 		alert() {},
+		close() {},
 		confirm() {},
 		confirmed() {},
 	},

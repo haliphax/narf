@@ -16,8 +16,29 @@ const Story = defineComponent({
 			type: String,
 		},
 	},
-	created() {
-		this.$store.dispatch("story.join");
+	async created() {
+		await this.$store.dispatch("story.join");
+
+		this.$store.subscribeAction(async (o) => {
+			if (!["close", "confirmed"].includes(o.type) || o.payload !== "paused") {
+				return;
+			}
+
+			await this.$store.dispatch("story.join");
+		});
+
+		if (this.$store.state.story.events) {
+			setTimeout(
+				async () => {
+					this.$store.state.story.events?.close();
+					await this.$store.dispatch("alert", {
+						id: "paused",
+						text: "Live updates paused. Close this alert to resume.",
+					});
+				},
+				1000 * 60 * 10, // 10 minutes
+			);
+		}
 	},
 	unmounted() {
 		this.$store.commit("story", undefined);

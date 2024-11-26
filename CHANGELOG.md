@@ -1,3 +1,8 @@
+# [v1.14.0](https://github.com/haliphax/narf/compare/v1.13.0...v1.14.0) (2024-11-26)
+
+## ✨ New Features
+- [`cf6b633`](https://github.com/haliphax/narf/commit/cf6b633)  disconnect eventsource for revealed story
+
 # [v1.13.0](https://github.com/haliphax/narf/compare/v1.12.2...v1.13.0) (2024-11-26)
 
 ## ✨ New Features

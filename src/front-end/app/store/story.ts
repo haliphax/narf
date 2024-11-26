@@ -47,6 +47,10 @@ const story: Module<StoryState | Promise<StoryState>, StoreState> = {
 
 			console.log("Story", story);
 			ctx.commit("story", story);
+
+			if (story?.revealed) {
+				ctx.rootState.story.events?.close();
+			}
 		},
 		async "story.reveal"(ctx) {
 			const state = ctx.state as StoryState;

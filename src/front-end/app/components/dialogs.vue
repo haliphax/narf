@@ -26,26 +26,31 @@ const Dialogs = defineComponent({
 			this.$store.registerModule("dialogs", dialogsModule);
 		}
 
+		const alertDialog = this.$refs.alert as HTMLDialogElement;
+		const confirmDialog = this.$refs.confirm as HTMLDialogElement;
+
 		this.$store.subscribeAction((a) => {
 			switch (a.type) {
 				case "alert": {
 					this.responseId = a.payload.id ?? "";
 					this.dialogText = a.payload.text;
-					(this.$refs.alert as HTMLDialogElement).showModal();
+					alertDialog.showModal();
 					break;
 				}
 				case "confirm": {
 					this.responseId = a.payload.id;
 					this.dialogText = a.payload.text;
-					(this.$refs.confirm as HTMLDialogElement).showModal();
+					confirmDialog.showModal();
 					break;
 				}
 			}
 		});
 
-		(this.$refs.alert as HTMLDialogElement).addEventListener(
-			"close",
-			async () => await this.$store.dispatch("close", this.responseId),
+		[alertDialog, confirmDialog].forEach((d) =>
+			d.addEventListener(
+				"close",
+				async () => await this.$store.dispatch("close", this.responseId),
+			),
 		);
 	},
 	methods: {

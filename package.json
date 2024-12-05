@@ -41,7 +41,7 @@
 		"connect-history-api-fallback": "^2.0.0",
 		"cookie-parser": "^1.4.7",
 		"cors": "^2.8.5",
-		"express": "^4.21.1",
+		"express": "^4.21.2",
 		"http-terminator": "^3.2.0",
 		"knex": "^2.5.1",
 		"node-cron": "^3.0.2",

@@ -73,7 +73,7 @@ label {
 	float: right;
 }
 
-label > span {
+label > span:first-child {
 	margin-right: var(--space-m);
 }
 

@@ -33,4 +33,35 @@ describe("Dialogs component", () => {
 		await store.dispatch("confirm", { responseId: "test", text: "test" });
 		expect(dialog.open).toBe(true);
 	});
+
+	it("dispatches close action when dialog is closed", async ({ expect }) => {
+		const dialog = dialogs.vm.$refs.confirm as HTMLDialogElement;
+		let closed = false;
+
+		store.subscribeAction((o) => {
+			if (o.type == "close") {
+				closed = true;
+			}
+		});
+
+		dialog.dispatchEvent(new Event("close"));
+
+		expect(closed).toBe(true);
+	});
+
+	it("dispatches confirmed action when OK is clicked", async ({ expect }) => {
+		const dialog = dialogs.vm.$refs.confirm as HTMLDialogElement;
+		const ok = dialog.querySelector("button[value='OK']")!;
+		let confirmed = false;
+
+		store.subscribeAction((o) => {
+			if (o.type == "confirmed") {
+				confirmed = true;
+			}
+		});
+
+		ok.dispatchEvent(new Event("click"));
+
+		expect(confirmed).toBe(true);
+	});
 });

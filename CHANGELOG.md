@@ -1,3 +1,8 @@
+# [v1.14.1](https://github.com/haliphax/narf/compare/v1.14.0...v1.14.1) (2024-12-11)
+
+## 🔒 Security Issues
+- [`f0450bd`](https://github.com/haliphax/narf/commit/f0450bd) ️ npm audit fix
+
 # [v1.14.0](https://github.com/haliphax/narf/compare/v1.13.0...v1.14.0) (2024-11-26)
 
 ## ✨ New Features

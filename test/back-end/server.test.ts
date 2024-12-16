@@ -6,37 +6,19 @@ import { Story } from "../../src/models/story";
 import { Vote } from "../../src/models/vote";
 
 const { mockDb, mockExpress } = vi.hoisted(() => ({
-	mockDb: {
-		raw: vi.fn(),
-	},
+	mockDb: { raw: vi.fn() },
 	mockExpress: vi.fn(),
 }));
 
-vi.mock("remult", () => ({
-	dbNamesOf: () => ({
-		$entityName: "test",
-	}),
-}));
-vi.mock("remult/remult-express", () => ({
-	remultExpress: mockExpress,
-}));
+vi.mock("remult", () => ({ dbNamesOf: () => ({ $entityName: "test" }) }));
+vi.mock("remult/remult-express", () => ({ remultExpress: mockExpress }));
 vi.mock("remult/remult-knex", () => ({
 	createKnexDataProvider: vi.fn(),
-	KnexDataProvider: {
-		getDb: () => mockDb,
-	},
+	KnexDataProvider: { getDb: () => mockDb },
 }));
-vi.mock("../../src/back-end/cronjobs", () => ({
-	default: {
-		start: vi.fn(),
-	},
-}));
-vi.mock("../../src/models/story", () => ({
-	Story: 0,
-}));
-vi.mock("../../src/models/vote", () => ({
-	Vote: 1,
-}));
+vi.mock("../../src/back-end/cronjobs", () => ({ default: { start: vi.fn() } }));
+vi.mock("../../src/models/story", () => ({ Story: 0 }));
+vi.mock("../../src/models/vote", () => ({ Vote: 1 }));
 
 await import("../../src/back-end/server");
 
@@ -47,34 +29,26 @@ describe("server", async () => {
 
 	it("provides Story and Vote entities", ({ expect }) => {
 		expect(remultExpress).toHaveBeenCalledWith(
-			expect.objectContaining({
-				entities: [Story, Vote],
-			}),
+			expect.objectContaining({ entities: [Story, Vote] }),
 		);
 	});
 
 	it("provides getUser method", ({ expect }) => {
 		expect(remultExpress).toHaveBeenCalledWith(
-			expect.objectContaining({
-				getUser: expect.anything(),
-			}),
+			expect.objectContaining({ getUser: expect.anything() }),
 		);
 	});
 
 	it("provides initApi method", ({ expect }) => {
 		expect(remultExpress).toHaveBeenCalledWith(
-			expect.objectContaining({
-				initApi: expect.anything(),
-			}),
+			expect.objectContaining({ initApi: expect.anything() }),
 		);
 	});
 
 	describe("getUser", () => {
 		it("returns user from cookie if present", async ({ expect }) => {
 			const user = await mockExpress.mock.lastCall![0].getUser({
-				cookies: {
-					narfClient: "test",
-				},
+				cookies: { narfClient: "test" },
 			});
 
 			expect(user.id).toBe("test");

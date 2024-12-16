@@ -10,12 +10,8 @@ import service from "../../src/back-end/service";
 
 vi.mock("compression", () => ({ default: vi.fn() }));
 vi.mock("connect-history-api-fallback", () => ({ default: vi.fn() }));
-vi.mock("cookie-parser", () => ({
-	default: vi.fn(),
-}));
-vi.mock("cors", () => ({
-	default: vi.fn((args) => args),
-}));
+vi.mock("cookie-parser", () => ({ default: vi.fn() }));
+vi.mock("cors", () => ({ default: vi.fn((args) => args) }));
 vi.mock("express", () => ({
 	default: vi.fn(() => ({
 		disable: vi.fn(),
@@ -25,14 +21,10 @@ vi.mock("express", () => ({
 	json: vi.fn(),
 	static: vi.fn(),
 }));
-vi.mock("http-terminator", () => ({
-	createHttpTerminator: vi.fn(),
-}));
-vi.mock("../../src/back-end/cronjobs", () => ({
-	stop: vi.fn(),
-}));
+vi.mock("http-terminator", () => ({ createHttpTerminator: vi.fn() }));
+vi.mock("../../src/back-end/cronjobs", () => ({ stop: vi.fn() }));
 vi.mock("../../src/back-end/routes", () => ({ default: vi.fn() }));
-vi.mock("../../src/back-end/server", () => ({ default: vi.fn() }));
+vi.mock("../../src/back-end/server", () => ({ default: 0 }));
 
 describe("service", () => {
 	afterEach(() => {

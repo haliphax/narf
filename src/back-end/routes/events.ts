@@ -42,7 +42,7 @@ export const handler = async (r: Request, s: Response) => {
 export const events = (app: Application) => app.get("/:story/events", handler);
 
 export class UpdateStoryController {
-	@BackendMethod({ allowed: true })
+	@BackendMethod({ allowed: false })
 	static updateStory(story: Story) {
 		console.log(`Sending update to story ${story.id}`);
 		clients.get(story.id)?.map((c) => {

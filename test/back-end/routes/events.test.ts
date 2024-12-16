@@ -6,6 +6,8 @@ import {
 	updateStory,
 } from "../../../src/back-end/routes/events";
 
+vi.mock("uuid", () => ({ v4: vi.fn(() => "test") }));
+
 describe("events", () => {
 	/** mock request */
 	let request: MockedObject<Request>;
@@ -41,8 +43,7 @@ describe("events", () => {
 		handler(request, response);
 
 		expect(clients.has("test")).toBe(true);
-		const testClients = clients.get("test");
-		expect(testClients).toHaveLength(1);
+		expect(clients.get("test")).toHaveLength(1);
 	});
 
 	it("appends to tracking list when clients exist for story ID", ({
@@ -54,12 +55,10 @@ describe("events", () => {
 		handler(request, response);
 
 		expect(clients.has("test")).toBe(true);
-		const testClients = clients.get("test");
-		expect(testClients).toHaveLength(2);
+		expect(clients.get("test")).toHaveLength(2);
 	});
 
 	it("removes client from tracking list on close", ({ expect }) => {
-		vi.mock("uuid", () => ({ v4: vi.fn(() => "test") }));
 		request.params = { story: "test" };
 
 		// initial request
@@ -71,7 +70,7 @@ describe("events", () => {
 		expect(request.on).toHaveBeenCalledWith("close", expect.anything());
 
 		// call onClose event listener
-		request.on.mock.calls[0][1]();
+		request.on.mock.lastCall![1]();
 
 		// assert client has been removed
 		expect(clients.get("test")!.length).toBe(0);
@@ -101,6 +100,7 @@ describe("events", () => {
 
 			const testClients = clients.get("test");
 			expect(testClients).toHaveLength(1);
+
 			const testClient = testClients![0];
 			expect(testClient.response.write).toHaveBeenCalled();
 			expect(testClient.response.flush).toHaveBeenCalled();

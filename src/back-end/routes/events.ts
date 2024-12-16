@@ -1,4 +1,5 @@
 import { Application, Request, Response } from "express";
+import { BackendMethod } from "remult";
 import { v4 as uuid } from "uuid";
 import { Story } from "../../models/story";
 
@@ -40,11 +41,14 @@ export const handler = async (r: Request, s: Response) => {
 /** Server-sent events endpoint for story updates */
 export const events = (app: Application) => app.get("/:story/events", handler);
 
-export const updateStory = (story: Story) => {
-	console.log(`Sending update to story ${story.id}`);
-	clients.get(story.id)?.map((c) => {
-		console.log(`Updating client ${c.id}`);
-		c.response.write(`data: update\n\n`);
-		c.response.flush();
-	});
-};
+export class UpdateStoryController {
+	@BackendMethod({ allowed: true })
+	static updateStory(story: Story) {
+		console.log(`Sending update to story ${story.id}`);
+		clients.get(story.id)?.map((c) => {
+			console.log(`Updating client ${story.id} => ${c.id}`);
+			c.response.write(`data: update\n\n`);
+			c.response.flush();
+		});
+	}
+}

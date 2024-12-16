@@ -1,11 +1,12 @@
 import { Request, Response } from "express";
 import { MockedObject, afterEach, beforeEach, describe, it, vi } from "vitest";
 import {
+	UpdateStoryController,
 	clients,
 	handler,
-	updateStory,
 } from "../../../src/back-end/routes/events";
 
+vi.mock("remult", () => ({ BackendMethod: vi.fn() }));
 vi.mock("uuid", () => ({ v4: vi.fn(() => "test") }));
 
 describe("events", () => {
@@ -96,7 +97,7 @@ describe("events", () => {
 				},
 			]);
 
-			updateStory(new Story());
+			UpdateStoryController.updateStory(new Story());
 
 			const testClients = clients.get("test");
 			expect(testClients).toHaveLength(1);

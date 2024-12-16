@@ -45,7 +45,6 @@ const story: Module<StoryState | Promise<StoryState>, StoreState> = {
 					useCache: false,
 				});
 
-			console.log("Story", story);
 			ctx.commit("story", story);
 
 			if (story?.revealed) {

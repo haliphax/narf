@@ -1,6 +1,6 @@
 import { Entity, Fields, Remult, Validators } from "remult";
 import { v4 } from "uuid";
-import { updateStory } from "../back-end/routes/events";
+import { UpdateStoryController } from "../back-end/routes/events";
 import scales from "../scales";
 import { Vote } from "./vote";
 
@@ -14,7 +14,7 @@ const generateId = () =>
 
 @Entity<Story>("story", {
 	allowApiCrud: true,
-	saved: (r) => updateStory(r),
+	saved: (r) => UpdateStoryController.updateStory(r),
 })
 export class Story {
 	@Fields.string({ allowApiUpdate: false, validate: Validators.unique })

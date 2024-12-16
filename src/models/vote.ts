@@ -1,5 +1,5 @@
 import { Entity, Fields } from "remult";
-import { updateStory } from "../back-end/routes/events";
+import { UpdateStoryController } from "../back-end/routes/events";
 import scales from "../scales";
 import { Story } from "./story";
 
@@ -12,7 +12,7 @@ import { Story } from "./story";
 
 		if (!story) throw "Invalid story";
 
-		updateStory(story);
+		UpdateStoryController.updateStory(story);
 	};
 })
 export class Vote {

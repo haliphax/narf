@@ -1,7 +1,13 @@
 <script lang="ts">
 import { defineComponent } from "vue";
+import { StoryStoreState } from "./types";
 
 const Actions = defineComponent({
+	computed: {
+		storyState() {
+			return (this.$store.state as unknown as StoryStoreState).story;
+		},
+	},
 	async mounted() {
 		this.$store.subscribeAction(async (a) => {
 			if (!(a.type === "confirmed" && a.payload === "reveal")) {
@@ -20,7 +26,7 @@ const Actions = defineComponent({
 		},
 		async reveal() {
 			const message =
-				this.$store.state.story.story?.owner === this.$store.state.session.id
+				this.storyState.story?.owner === this.$store.state.session.id
 					? "Are you ready to reveal the votes?"
 					: "You are not the owner of this story. Are you sure?";
 
@@ -41,10 +47,7 @@ export default Actions;
 			</button>
 		</li>
 		<li>
-			<button
-				:disabled="$store.state.story.story?.revealed ?? true"
-				@click="reveal"
-			>
+			<button :disabled="storyState.story?.revealed ?? true" @click="reveal">
 				<span aria-hidden="true">👀</span>
 				Reveal
 			</button>

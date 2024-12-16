@@ -1,5 +1,6 @@
 <script lang="ts">
 import { defineComponent } from "vue";
+import { StoryStoreState } from "./types";
 import PieChart from "./piechart.vue";
 import scales from "../../../../scales";
 import { Vote } from "../../../../models/vote";
@@ -9,15 +10,18 @@ const Estimate = defineComponent({
 		PieChart,
 	},
 	computed: {
+		storyState() {
+			return (this.$store.state as unknown as StoryStoreState).story;
+		},
 		options(): Readonly<Array<string>> {
-			return scales.get(this.$store.state.story.story?.scale ?? "") ?? [];
+			return scales.get(this.storyState.story?.scale ?? "") ?? [];
 		},
 		votes() {
-			if (!this.$store.state.story.story) return [];
+			if (!this.storyState.story) return [];
 
 			const votes = new Map<string, number>();
 
-			this.$store.state.story.story.votes?.map((v: Vote) => {
+			this.storyState.story.votes?.map((v: Vote) => {
 				if (v.vote === null) return;
 
 				const value = v.vote.toString();
@@ -30,7 +34,7 @@ const Estimate = defineComponent({
 			return votes;
 		},
 		you() {
-			return this.$store.state.story.story?.votes?.find(
+			return this.storyState.story?.votes?.find(
 				(v) => v.participantId === this.$store.state.session.id,
 			);
 		},
@@ -50,7 +54,7 @@ const Estimate = defineComponent({
 					return {
 						participantId: this.$store.state.session.id,
 						participantName: this.$store.state.session.name,
-						storyId: this.$store.state.story.story?.id,
+						storyId: this.storyState.story?.id,
 						vote: option,
 					} as Vote;
 				})();
@@ -66,7 +70,7 @@ export default Estimate;
 <template>
 	<div aria-live="polite">
 		<h2>Estimate</h2>
-		<ul v-if="!$store.state.story.story?.revealed" class="g x">
+		<ul v-if="!storyState.story?.revealed" class="g x">
 			<li v-for="option in options" :key="option">
 				<button
 					:class="classes(option)"

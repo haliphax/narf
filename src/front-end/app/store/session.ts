@@ -64,7 +64,7 @@ const session: Module<SessionState, StoreState> = {
 				darkMode: JSON.parse(
 					localStorage.getItem(keys.darkMode) ?? darkModeDetected.toString(),
 				),
-				scale: localStorage.getItem(keys.scale) ?? scales.keys().next().value,
+				scale: localStorage.getItem(keys.scale) ?? scales.keys().next().value!,
 			},
 		};
 	},

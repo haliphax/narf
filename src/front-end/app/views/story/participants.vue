@@ -1,14 +1,19 @@
 <script lang="ts">
 import { defineComponent } from "vue";
+import { StoryStoreState } from "./types";
 import { Vote } from "../../../../models/vote";
 
 const Participants = defineComponent({
+	computed: {
+		storyState() {
+			return (this.$store.state as unknown as StoryStoreState).story;
+		},
+	},
 	methods: {
 		getVoteTitle(v: Vote) {
 			if (!v.vote) return "has not voted";
 
-			if (this.isYou(v) || this.$store.state.story.story?.revealed)
-				return undefined;
+			if (this.isYou(v) || this.storyState.story?.revealed) return undefined;
 
 			return "voted";
 		},
@@ -25,11 +30,7 @@ export default Participants;
 	<div>
 		<h2>Participants</h2>
 		<ul class="x">
-			<li
-				v-for="v of $store.state.story.story?.votes"
-				:key="v.participantId"
-				class="g"
-			>
+			<li v-for="v of storyState.story?.votes" :key="v.participantId" class="g">
 				<span class="n">
 					{{ v.participantName ?? "User" }}
 					<span v-if="isYou(v)" class="y">(You)</span>

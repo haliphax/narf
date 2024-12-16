@@ -1,3 +1,8 @@
+# [v1.14.2](https://github.com/haliphax/narf/compare/v1.14.1...v1.14.2) (2024-12-16)
+
+## 🐛 Bug Fixes
+- [`0d6aff3`](https://github.com/haliphax/narf/commit/0d6aff3)  move updateStory to controller as BackendMethod
+
 # [v1.14.1](https://github.com/haliphax/narf/compare/v1.14.0...v1.14.1) (2024-12-11)
 
 ## 🔒 Security Issues

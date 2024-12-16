@@ -3,7 +3,11 @@ import { afterEach, beforeEach, describe, it, vi } from "vitest";
 import store from "../../../src/front-end/app/store";
 import Story from "../../../src/front-end/app/views/story.vue";
 import { Story as StoryModel } from "../../../src/models/story";
-import { EventSourceMock } from "../mocks";
+
+class EventSourceMock {
+	addEventListener = vi.fn();
+	close = vi.fn();
+}
 
 const storyMock = new StoryModel();
 storyMock.id = "1";

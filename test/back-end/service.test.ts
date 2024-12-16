@@ -3,49 +3,38 @@ import historyApiFallback from "connect-history-api-fallback";
 import cookieParser from "cookie-parser";
 import cors from "cors";
 import express from "express";
-import { afterEach, beforeEach, describe, it, vi } from "vitest";
+import { afterEach, describe, it, vi } from "vitest";
 import routes from "../../src/back-end/routes";
 import server from "../../src/back-end/server";
 import service from "../../src/back-end/service";
 
+vi.mock("compression", () => ({ default: vi.fn() }));
+vi.mock("connect-history-api-fallback", () => ({ default: vi.fn() }));
+vi.mock("cookie-parser", () => ({
+	default: vi.fn(),
+}));
+vi.mock("cors", () => ({
+	default: vi.fn((args) => args),
+}));
+vi.mock("express", () => ({
+	default: vi.fn(() => ({
+		disable: vi.fn(),
+		listen: vi.fn(),
+		use: vi.fn(),
+	})),
+	json: vi.fn(),
+	static: vi.fn(),
+}));
+vi.mock("http-terminator", () => ({
+	createHttpTerminator: vi.fn(),
+}));
+vi.mock("../../src/back-end/cronjobs", () => ({
+	stop: vi.fn(),
+}));
+vi.mock("../../src/back-end/routes", () => ({ default: vi.fn() }));
+vi.mock("../../src/back-end/server", () => ({ default: vi.fn() }));
+
 describe("service", () => {
-	beforeEach(() => {
-		vi.mock("../../src/back-end/cronjobs", () => ({
-			stop: vi.fn(),
-		}));
-		vi.mock("../../src/back-end/routes", () => ({ default: vi.fn() }));
-		vi.mock("../../src/back-end/server", () => ({ default: vi.fn() }));
-		vi.mock("compression", () => ({ default: vi.fn() }));
-		vi.mock("connect-history-api-fallback", () => ({ default: vi.fn() }));
-		vi.mock("cookie-parser", () => ({
-			default: vi.fn(),
-			cookieParser: vi.fn(),
-		}));
-		vi.mock("cors", () => {
-			const mockDefault = vi.fn();
-
-			return {
-				default: () => mockDefault,
-			};
-		});
-		vi.mock("express", () => {
-			const mockDefault = {
-				disable: vi.fn(),
-				listen: vi.fn(),
-				use: vi.fn(),
-			};
-
-			return {
-				default: () => mockDefault,
-				json: vi.fn(),
-				static: vi.fn(),
-			};
-		});
-		vi.mock("http-terminator", () => ({
-			createHttpTerminator: vi.fn(),
-		}));
-	});
-
 	afterEach(() => {
 		vi.unstubAllEnvs();
 		vi.unstubAllGlobals();

@@ -1,6 +1,6 @@
 import Vue from "vue";
 import { Store } from "vuex";
-import { StoreState } from "./front-end/app/store/types";
+import { StoreState } from "./store/types";
 
 declare module "*.vue" {
 	export default Vue;

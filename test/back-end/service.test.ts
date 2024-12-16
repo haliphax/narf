@@ -11,7 +11,6 @@ import service from "../../src/back-end/service";
 describe("service", () => {
 	beforeEach(() => {
 		vi.mock("../../src/back-end/cronjobs", () => ({
-			default: vi.fn(),
 			stop: vi.fn(),
 		}));
 		vi.mock("../../src/back-end/routes", () => ({ default: vi.fn() }));

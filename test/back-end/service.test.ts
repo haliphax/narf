@@ -3,7 +3,7 @@ import historyApiFallback from "connect-history-api-fallback";
 import cookieParser from "cookie-parser";
 import cors from "cors";
 import express from "express";
-import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
+import { afterEach, beforeEach, describe, it, vi } from "vitest";
 import routes from "../../src/back-end/routes";
 import server from "../../src/back-end/server";
 import service from "../../src/back-end/service";
@@ -56,7 +56,7 @@ describe("service", () => {
 		);
 	});
 
-	it("loads modules", () => {
+	it("loads modules", ({ expect }) => {
 		const app = express();
 
 		service(app);
@@ -70,7 +70,7 @@ describe("service", () => {
 		expect(app.use).toHaveBeenCalledWith(server);
 	});
 
-	it("uses host and port parameters from env", () => {
+	it("uses host and port parameters from env", ({ expect }) => {
 		vi.stubEnv("host", "test");
 		vi.stubEnv("port", "80");
 		const app = express();
@@ -80,7 +80,7 @@ describe("service", () => {
 		expect(app.listen).toHaveBeenCalledWith(80, "test", expect.anything());
 	});
 
-	it("uses fallback host and port parameters if not in env", () => {
+	it("uses fallback host and port parameters if not in env", ({ expect }) => {
 		const app = express();
 
 		service(app);
@@ -92,7 +92,7 @@ describe("service", () => {
 		);
 	});
 
-	it("removes x-powered-by header", () => {
+	it("removes x-powered-by header", ({ expect }) => {
 		const app = express();
 
 		service(app);
@@ -100,7 +100,7 @@ describe("service", () => {
 		expect(app.disable).toHaveBeenCalledWith("x-powered-by");
 	});
 
-	it("uses cors middleware in dev/test", () => {
+	it("uses cors middleware in dev/test", ({ expect }) => {
 		vi.stubEnv("NODE_ENV", "test");
 		const app = express();
 
@@ -109,7 +109,7 @@ describe("service", () => {
 		expect(app.use).toHaveBeenCalledWith(cors({ origin: "*" }));
 	});
 
-	it("doesn't use cors middleware in production", () => {
+	it("doesn't use cors middleware in production", ({ expect }) => {
 		vi.stubEnv("NODE_ENV", "production");
 		const app = express();
 

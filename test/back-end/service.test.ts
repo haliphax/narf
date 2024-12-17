@@ -29,7 +29,6 @@ vi.mock("../../src/back-end/server", () => ({ default: 0 }));
 describe("service", () => {
 	afterEach(() => {
 		vi.unstubAllEnvs();
-		vi.unstubAllGlobals();
 		vi.clearAllMocks();
 		["SIGINT", "SIGTERM"].forEach((signal) =>
 			process.removeAllListeners(signal),

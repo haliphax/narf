@@ -2,12 +2,12 @@
 
 ARG NODE_VERSION=20
 
-FROM node:${NODE_VERSION}-slim as base
+FROM node:${NODE_VERSION}-slim AS base
 LABEL fly_launch_runtime="Node.js"
 WORKDIR /app
 ENV NODE_ENV="production"
 
-FROM base as build
+FROM base AS build
 RUN apt-get update -qq && \
 	apt-get install -y --no-install-recommends \
 	build-essential=12.9 pkg-config=1.8.1-1 python-is-python3=3.11.2-1+deb12u1

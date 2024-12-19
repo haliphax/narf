@@ -2,45 +2,41 @@ import { shallowMount, VueWrapper } from "@vue/test-utils";
 import { afterEach, beforeEach, describe, it, vi } from "vitest";
 import store from "../../../src/front-end/app/store";
 import Story from "../../../src/front-end/app/views/story.vue";
+import { StoryStoreState } from "../../../src/front-end/app/views/story/types";
 import { Story as StoryModel } from "../../../src/models/story";
 
 class EventSourceMock {
-	addEventListener = vi.fn();
-	close = vi.fn();
+	addEventListener = () => {};
+	close = () => {};
 }
 
-const storyMock = new StoryModel();
-storyMock.id = "1";
-storyMock.owner = "1";
-storyMock.scale = "Fibonacci";
-storyMock.title = "Test";
-storyMock.votes = [];
+const storyMock = vi.mocked({
+	id: "1",
+	owner: "1",
+	created: 1234567890,
+	scale: "Fibonacci",
+	revealed: false,
+	title: "Test",
+	votes: [],
+}) as StoryModel;
+
+vi.mock("../../../src/front-end/app/remult", () => ({
+	default: {
+		repo: () => ({
+			count: () => {},
+			findId: () => storyMock,
+		}),
+	},
+}));
+vi.mock("../../../src/front-end/app/router", () => ({
+	default: { currentRoute: { value: { params: { story: 1 } } } },
+}));
 
 describe("Story view", () => {
 	let story: VueWrapper;
 
 	beforeEach(() => {
 		vi.stubGlobal("EventSource", EventSourceMock);
-		vi.mock("../../../src/front-end/app/remult", () => ({
-			default: {
-				repo: vi.fn(() => ({
-					count: vi.fn(),
-					findId: vi.fn(() => storyMock),
-				})),
-			},
-		}));
-		vi.mock("../../../src/front-end/app/router", () => ({
-			default: {
-				currentRoute: {
-					value: {
-						params: {
-							story: 1,
-						},
-					},
-				},
-			},
-		}));
-
 		story = shallowMount(Story, { global: { plugins: [store] } });
 	});
 
@@ -63,10 +59,16 @@ describe("Story view", () => {
 	});
 
 	it("connects EventSource on mount", ({ expect }) => {
-		expect(story.vm.$store.state.story?.events).toBeInstanceOf(EventSourceMock);
+		const storyState = (story.vm.$store.state as unknown as StoryStoreState)
+			.story;
+
+		expect(storyState.events).toBeInstanceOf(EventSourceMock);
 	});
 
 	it("loads story on mount", ({ expect }) => {
-		expect(story.vm.$store.state.story?.story).toEqual(storyMock);
+		const storyState = (story.vm.$store.state as unknown as StoryStoreState)
+			.story;
+
+		expect(storyState.story).toEqual(storyMock);
 	});
 });

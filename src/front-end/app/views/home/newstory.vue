@@ -11,12 +11,6 @@ interface NewStoryProps {
 }
 
 const NewStory = defineComponent({
-	props: {
-		id: {
-			default: "main",
-			type: String,
-		},
-	},
 	data(): NewStoryProps {
 		const opts: Array<string> = [];
 		const scaleIter = scales.keys();
@@ -57,7 +51,7 @@ export default NewStory;
 </script>
 
 <template>
-	<form :id="id" @submit.prevent="submit()">
+	<form @submit.prevent="submit()">
 		<fieldset class="g">
 			<legend>New room</legend>
 			<span>

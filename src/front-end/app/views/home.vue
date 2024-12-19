@@ -33,6 +33,7 @@ export default Home;
 		</code>
 		<small>Simple story points estimation</small>
 	</h1>
+	<a name="main"></a>
 	<details :open="openProfile">
 		<summary>
 			<span aria-hidden="true">🧑</span>

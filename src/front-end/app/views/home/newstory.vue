@@ -1,8 +1,8 @@
 <script lang="ts">
+import { Story } from "@/models/story";
+import scales from "@/scales";
 import { defineComponent } from "vue";
-import scales from "../../../../scales";
 import { remult } from "remult";
-import { Story } from "../../../../models/story";
 
 interface NewStoryProps {
 	scale: string;

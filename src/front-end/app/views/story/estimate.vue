@@ -1,9 +1,9 @@
 <script lang="ts">
+import { Vote } from "@/models/vote";
+import scales from "@/scales";
 import { defineComponent } from "vue";
 import { StoryStoreState } from "./types";
 import PieChart from "./piechart.vue";
-import scales from "../../../../scales";
-import { Vote } from "../../../../models/vote";
 
 const Estimate = defineComponent({
 	components: {

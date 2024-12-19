@@ -1,7 +1,7 @@
+import { LOCALSTORAGE_GLOBAL_PREFIX } from "@/front-end/app/constants";
+import scales from "@/scales";
 import { v4 } from "uuid";
 import { Module } from "vuex";
-import scales from "../../../scales";
-import { LOCALSTORAGE_GLOBAL_PREFIX } from "../constants";
 import { SessionSettings, SessionState, StoreState } from "./types";
 
 const SESSION_PREFIX = `${LOCALSTORAGE_GLOBAL_PREFIX}session.`;

@@ -1,5 +1,5 @@
+import { task } from "@/back-end/cronjobs/purge";
 import { afterEach, describe, it, vi } from "vitest";
-import { task } from "../../../src/back-end/cronjobs/purge";
 
 const { mockDelete, mockWhere } = vi.hoisted(() => ({
 	mockDelete: vi.fn(),

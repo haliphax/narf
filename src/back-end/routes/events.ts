@@ -1,7 +1,7 @@
+import { Story } from "@/models/story";
 import { Application, Request, Response } from "express";
 import { BackendMethod } from "remult";
 import { v4 as uuid } from "uuid";
-import { Story } from "../../models/story";
 
 interface NarfClient {
 	id: string;

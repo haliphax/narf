@@ -1,9 +1,9 @@
+import store from "@/front-end/app/store";
+import Story from "@/front-end/app/views/story.vue";
+import { StoryStoreState } from "@/front-end/app/views/story/types";
+import { Story as StoryModel } from "@/models/story";
 import { shallowMount, VueWrapper } from "@vue/test-utils";
 import { afterEach, beforeEach, describe, it, vi } from "vitest";
-import store from "../../../src/front-end/app/store";
-import Story from "../../../src/front-end/app/views/story.vue";
-import { StoryStoreState } from "../../../src/front-end/app/views/story/types";
-import { Story as StoryModel } from "../../../src/models/story";
 
 class EventSourceMock {
 	addEventListener = () => {};
@@ -20,7 +20,7 @@ const storyMock = vi.mocked({
 	votes: [],
 }) as StoryModel;
 
-vi.mock("../../../src/front-end/app/remult", () => ({
+vi.mock("@/front-end/app/remult", () => ({
 	default: {
 		repo: () => ({
 			count: () => {},
@@ -28,7 +28,7 @@ vi.mock("../../../src/front-end/app/remult", () => ({
 		}),
 	},
 }));
-vi.mock("../../../src/front-end/app/router", () => ({
+vi.mock("@/front-end/app/router", () => ({
 	default: { currentRoute: { value: { params: { story: 1 } } } },
 }));
 

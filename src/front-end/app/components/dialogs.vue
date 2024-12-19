@@ -1,7 +1,7 @@
 <script lang="ts">
+import { StoreState } from "@/front-end/app/store/types";
 import { defineComponent } from "vue";
 import { Module } from "vuex";
-import { StoreState } from "../store/types";
 
 type DialogsModuleState = object;
 

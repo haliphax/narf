@@ -1,12 +1,12 @@
 <script lang="ts">
+import { ROOT_URI } from "@/front-end/app/constants";
+import remult from "@/front-end/app/remult";
+import router from "@/front-end/app/router";
+import { StoreState } from "@/front-end/app/store/types";
+import { Story as StoryModel } from "@/models/story";
+import { Vote } from "@/models/vote";
 import { defineComponent } from "vue";
 import { Module } from "vuex";
-import { Story as StoryModel } from "../../../models/story";
-import { Vote } from "../../../models/vote";
-import { ROOT_URI } from "../constants";
-import remult from "../remult";
-import router from "../router";
-import { StoreState } from "../store/types";
 import Actions from "./story/actions.vue";
 import Estimate from "./story/estimate.vue";
 import Participants from "./story/participants.vue";

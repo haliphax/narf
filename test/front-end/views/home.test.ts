@@ -1,7 +1,7 @@
+import store from "@/front-end/app/store";
+import Home from "@/front-end/app/views/home.vue";
 import { shallowMount, VueWrapper } from "@vue/test-utils";
 import { afterEach, beforeEach, describe, it } from "vitest";
-import store from "../../../src/front-end/app/store";
-import Home from "../../../src/front-end/app/views/home.vue";
 
 describe("Home view", () => {
 	let home: VueWrapper;

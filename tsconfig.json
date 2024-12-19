@@ -1,5 +1,6 @@
 {
 	"compilerOptions": {
+		"baseUrl": "./",
 		"allowImportingTsExtensions": true,
 		"experimentalDecorators": true,
 		"isolatedModules": true,
@@ -11,6 +12,9 @@
 		"noFallthroughCasesInSwitch": true,
 		"noUnusedLocals": true,
 		"noUnusedParameters": true,
+		"paths": {
+			"@/*": ["src/*"]
+		},
 		"resolveJsonModule": true,
 		"resolvePackageJsonExports": false,
 		"skipLibCheck": true,

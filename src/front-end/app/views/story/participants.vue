@@ -1,7 +1,7 @@
 <script lang="ts">
+import { Vote } from "@/models/vote";
 import { defineComponent } from "vue";
 import { StoryStoreState } from "./types";
-import { Vote } from "../../../../models/vote";
 
 const Participants = defineComponent({
 	computed: {

@@ -1,6 +1,6 @@
 <script lang="ts">
+import { SessionState } from "@/front-end/app/store/types";
 import { defineComponent } from "vue";
-import { SessionState } from "../../store/types";
 
 const Profile = defineComponent({
 	data() {

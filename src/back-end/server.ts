@@ -1,8 +1,8 @@
+import { Story } from "@/models/story";
+import { Vote } from "@/models/vote";
 import { UserInfo, dbNamesOf } from "remult";
 import { remultExpress } from "remult/remult-express";
 import { KnexDataProvider, createKnexDataProvider } from "remult/remult-knex";
-import { Story } from "../models/story";
-import { Vote } from "../models/vote";
 import cronjobs from "./cronjobs";
 
 const server = remultExpress({

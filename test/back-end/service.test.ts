@@ -1,12 +1,12 @@
+import routes from "@/back-end/routes";
+import server from "@/back-end/server";
+import service from "@/back-end/service";
 import compression from "compression";
 import historyApiFallback from "connect-history-api-fallback";
 import cookieParser from "cookie-parser";
 import cors from "cors";
 import express from "express";
 import { afterEach, describe, it, vi } from "vitest";
-import routes from "../../src/back-end/routes";
-import server from "../../src/back-end/server";
-import service from "../../src/back-end/service";
 
 vi.mock("compression", () => ({ default: vi.fn() }));
 vi.mock("connect-history-api-fallback", () => ({ default: vi.fn() }));
@@ -22,9 +22,9 @@ vi.mock("express", () => ({
 	static: vi.fn(),
 }));
 vi.mock("http-terminator", () => ({ createHttpTerminator: vi.fn() }));
-vi.mock("../../src/back-end/cronjobs", () => ({ stop: vi.fn() }));
-vi.mock("../../src/back-end/routes", () => ({ default: vi.fn() }));
-vi.mock("../../src/back-end/server", () => ({ default: 0 }));
+vi.mock("@/back-end/cronjobs", () => ({ stop: vi.fn() }));
+vi.mock("@/back-end/routes", () => ({ default: vi.fn() }));
+vi.mock("@/back-end/server", () => ({ default: 0 }));
 
 describe("service", () => {
 	afterEach(() => {

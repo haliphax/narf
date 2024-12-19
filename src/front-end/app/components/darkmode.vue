@@ -1,7 +1,7 @@
 <script lang="ts">
+import { SessionSettings, SessionState } from "@/front-end/app/store/types";
 import { defineComponent } from "vue";
 import Toggle from "./toggle.vue";
-import { SessionSettings, SessionState } from "../store/types";
 
 const DarkMode = defineComponent({
 	components: {

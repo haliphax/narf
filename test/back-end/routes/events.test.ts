@@ -1,10 +1,10 @@
-import { Request, Response } from "express";
-import { MockedObject, afterEach, beforeEach, describe, it, vi } from "vitest";
 import {
 	UpdateStoryController,
 	clients,
 	handler,
-} from "../../../src/back-end/routes/events";
+} from "@/back-end/routes/events";
+import { Request, Response } from "express";
+import { MockedObject, afterEach, beforeEach, describe, it, vi } from "vitest";
 
 vi.mock("remult", () => ({ BackendMethod: vi.fn() }));
 vi.mock("uuid", () => ({ v4: vi.fn(() => "test") }));

@@ -1,9 +1,9 @@
+import cronjobs from "@/back-end/cronjobs";
+import { Story } from "@/models/story";
+import { Vote } from "@/models/vote";
 import { remultExpress } from "remult/remult-express";
 import { createKnexDataProvider } from "remult/remult-knex";
 import { beforeEach, describe, it, vi } from "vitest";
-import cronjobs from "../../src/back-end/cronjobs";
-import { Story } from "../../src/models/story";
-import { Vote } from "../../src/models/vote";
 
 const { mockDb, mockExpress } = vi.hoisted(() => ({
 	mockDb: { raw: vi.fn() },
@@ -16,11 +16,11 @@ vi.mock("remult/remult-knex", () => ({
 	createKnexDataProvider: vi.fn(),
 	KnexDataProvider: { getDb: () => mockDb },
 }));
-vi.mock("../../src/back-end/cronjobs", () => ({ default: { start: vi.fn() } }));
-vi.mock("../../src/models/story", () => ({ Story: 0 }));
-vi.mock("../../src/models/vote", () => ({ Vote: 1 }));
+vi.mock("@/back-end/cronjobs", () => ({ default: { start: vi.fn() } }));
+vi.mock("@/models/story", () => ({ Story: 0 }));
+vi.mock("@/models/vote", () => ({ Vote: 1 }));
 
-await import("../../src/back-end/server");
+await vi.importActual("@/back-end/server");
 
 describe("server", async () => {
 	it("creates a knex data provider", ({ expect }) => {

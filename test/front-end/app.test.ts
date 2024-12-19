@@ -1,7 +1,7 @@
+import App from "@/front-end/app/app.vue";
+import store from "@/front-end/app/store";
 import { shallowMount, VueWrapper } from "@vue/test-utils";
 import { afterEach, beforeEach, describe, it } from "vitest";
-import App from "../../src/front-end/app/app.vue";
-import store from "../../src/front-end/app/store";
 
 describe("App component", () => {
 	let app: VueWrapper;

@@ -1,13 +1,20 @@
-import Dialogs from "@/front-end/app/components/dialogs.vue";
+import Dialogs, {
+	DialogsState,
+	DialogsStoreState,
+} from "@/front-end/app/components/dialogs.vue";
 import store from "@/front-end/app/store";
-import { mount, VueWrapper } from "@vue/test-utils";
+import { VueWrapper, mount } from "@vue/test-utils";
 import { afterEach, beforeEach, describe, it } from "vitest";
 
 describe("Dialogs component", () => {
 	let dialogs: VueWrapper;
+	// eslint-disable-next-line @typescript-eslint/no-unused-vars
+	let dialogsState: DialogsState;
 
 	beforeEach(() => {
 		dialogs = mount(Dialogs, { global: { plugins: [store] } });
+		dialogsState = (dialogs.vm.$store.state as unknown as DialogsStoreState)
+			.dialogs;
 	});
 
 	afterEach(() => {
@@ -18,20 +25,15 @@ describe("Dialogs component", () => {
 		expect(store.hasModule("dialogs")).toBe(true);
 	});
 
-	it("shows alert dialog on alert action dispatch", async ({ expect }) => {
-		const dialog = dialogs.vm.$refs.alert as HTMLDialogElement;
-
-		expect(dialog.open).toBe(false);
-		await store.dispatch("alert", { text: "test" });
-		expect(dialog.open).toBe(true);
+	it("sets dialog props on alert action dispatch", async ({ expect }) => {
+		await store.dispatch("alert", { text: "alert" });
+		expect(dialogsState.dialogText).toBe("alert");
 	});
 
-	it("shows confirm dialog on confirm action dispatch", async ({ expect }) => {
-		const dialog = dialogs.vm.$refs.confirm as HTMLDialogElement;
-
-		expect(dialog.open).toBe(false);
-		await store.dispatch("confirm", { responseId: "test", text: "test" });
-		expect(dialog.open).toBe(true);
+	it("sets dialog props on confirm action dispatch", async ({ expect }) => {
+		await store.dispatch("confirm", { id: "id", text: "confirm" });
+		expect(dialogsState.responseId).toBe("id");
+		expect(dialogsState.dialogText).toBe("confirm");
 	});
 
 	it("dispatches close action when dialog is closed", async ({ expect }) => {

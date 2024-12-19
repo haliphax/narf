@@ -3,60 +3,83 @@ import { StoreState } from "@/front-end/app/store/types";
 import { defineComponent } from "vue";
 import { Module } from "vuex";
 
-type DialogsModuleState = object;
+export type DialogPayload = {
+	id: string | undefined;
+	text: string;
+};
 
-const dialogsModule: Module<DialogsModuleState, StoreState> = {
-	actions: {
-		alert() {},
-		close() {},
-		confirm() {},
-		confirmed() {},
-	},
+export type DialogsState = {
+	responseId: string;
+	dialogText: string;
+};
+
+export type DialogsStoreState = {
+	dialogs: DialogsState;
 };
 
 const Dialogs = defineComponent({
 	data() {
 		return {
-			responseId: "",
-			dialogText: "",
+			stateModule: {
+				actions: {
+					alert: (_ctx, payload) => this.alert(payload),
+					confirm: (_ctx, payload) => this.confirm(payload),
+					// other components should subscribe to the actions below
+					close: () => {},
+					confirmed: () => {},
+				},
+				mutations: {
+					dialogText: (state, payload) => (state.dialogText = payload),
+					responseId: (state, payload) => (state.responseId = payload),
+				},
+				state() {
+					return {
+						dialogText: "",
+						responseId: "",
+					};
+				},
+			} as Module<DialogsState, DialogsStoreState | StoreState>,
 		};
 	},
-	mounted() {
+	computed: {
+		alertDialog() {
+			return this.$refs.alert as HTMLDialogElement;
+		},
+		confirmDialog() {
+			return this.$refs.confirm as HTMLDialogElement;
+		},
+		dialogsState() {
+			return (this.$store.state as unknown as DialogsStoreState).dialogs;
+		},
+	},
+	created() {
 		if (!this.$store.hasModule("dialogs")) {
-			this.$store.registerModule("dialogs", dialogsModule);
+			this.$store.registerModule("dialogs", this.stateModule);
 		}
-
-		const alertDialog = this.$refs.alert as HTMLDialogElement;
-		const confirmDialog = this.$refs.confirm as HTMLDialogElement;
-
-		this.$store.subscribeAction((a) => {
-			switch (a.type) {
-				case "alert": {
-					this.responseId = a.payload.id ?? "";
-					this.dialogText = a.payload.text;
-					alertDialog.showModal();
-					break;
-				}
-				case "confirm": {
-					this.responseId = a.payload.id;
-					this.dialogText = a.payload.text;
-					confirmDialog.showModal();
-					break;
-				}
-			}
-		});
-
-		[alertDialog, confirmDialog].forEach((d) =>
+	},
+	mounted() {
+		[this.alertDialog, this.confirmDialog].forEach((d) =>
 			d.addEventListener(
 				"close",
-				async () => await this.$store.dispatch("close", this.responseId),
+				async () =>
+					await this.$store.dispatch("close", this.dialogsState.responseId),
 			),
 		);
 	},
 	methods: {
-		async confirmed() {
+		alert(payload: DialogPayload) {
+			this.$store.commit("responseId", payload.id ?? "");
+			this.$store.commit("dialogText", payload.text);
+			this.alertDialog.showModal();
+		},
+		confirm(payload: DialogPayload) {
+			this.$store.commit("responseId", payload.id!);
+			this.$store.commit("dialogText", payload.text);
+			this.confirmDialog.showModal();
+		},
+		async confirmClick() {
 			(this.$refs.confirm as HTMLDialogElement).close("OK");
-			await this.$store.dispatch("confirmed", this.responseId);
+			await this.$store.dispatch("confirmed", this.dialogsState.responseId);
 		},
 	},
 });
@@ -70,7 +93,7 @@ export default Dialogs;
 			<form method="dialog">
 				<fieldset>
 					<legend>Alert</legend>
-					<p>{{ dialogText }}</p>
+					<p>{{ dialogsState.dialogText }}</p>
 					<div>
 						<button class="fr" type="submit">
 							<span aria-hidden="true">✅</span>
@@ -84,13 +107,13 @@ export default Dialogs;
 			<form method="dialog">
 				<fieldset>
 					<legend>Confirm</legend>
-					<p>{{ dialogText }}</p>
+					<p>{{ dialogsState.dialogText }}</p>
 					<div>
 						<button type="submit" value="Cancel">
 							<span aria-hidden="true">🚫</span>
 							Cancel
 						</button>
-						<button class="fr" value="OK" @click.prevent="confirmed">
+						<button class="fr" value="OK" @click.prevent="confirmClick">
 							<span aria-hidden="true">✅</span>
 							OK
 						</button>

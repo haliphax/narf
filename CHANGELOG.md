@@ -1,3 +1,8 @@
+# [v1.14.3](https://github.com/haliphax/narf/compare/v1.14.2...v1.14.3) (2024-12-20)
+
+## 🐛 Bug Fixes
+- [`b445610`](https://github.com/haliphax/narf/commit/b445610)  return early on error during profile import
+
 # [v1.14.2](https://github.com/haliphax/narf/compare/v1.14.1...v1.14.2) (2024-12-16)
 
 ## 🐛 Bug Fixes

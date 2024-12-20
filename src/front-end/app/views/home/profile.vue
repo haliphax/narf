@@ -57,15 +57,14 @@ const Profile = defineComponent({
 				this.name = session.name;
 			} catch (ex) {
 				await this.$store.dispatch("alert", { text: `Error: ${ex}` });
+				return;
 			} finally {
 				input.value = "";
 			}
 
-			requestAnimationFrame(async () => {
-				this.upToDate = true;
-				await this.$store.dispatch("alert", {
-					text: "Profile imported successfully",
-				});
+			this.upToDate = true;
+			await this.$store.dispatch("alert", {
+				text: "Profile imported successfully",
 			});
 		},
 		submit() {

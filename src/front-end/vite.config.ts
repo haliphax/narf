@@ -11,10 +11,10 @@ export default defineConfig({
 			plugins: [inject({ Buffer: ["buffer", "Buffer"] })],
 		},
 	},
+	plugins: [vue()],
 	resolve: {
 		alias: {
 			"@": resolve(__dirname, ".."),
 		},
 	},
-	plugins: [vue()],
 });

@@ -4,13 +4,9 @@ import { defineComponent } from "vue";
 import Toggle from "./toggle.vue";
 
 const DarkMode = defineComponent({
-	components: {
-		Toggle,
-	},
+	components: { Toggle },
 	data() {
-		return {
-			enabled: this.$store.state.session.settings.darkMode,
-		};
+		return { enabled: this.$store.state.session.settings.darkMode };
 	},
 	watch: {
 		enabled() {

@@ -105,10 +105,7 @@ const Story = defineComponent({
 		},
 	},
 	async created() {
-		if (!this.$store.hasModule("story")) {
-			this.$store.registerModule("story", storyModule);
-		}
-
+		this.$store.registerModule("story", storyModule);
 		await this.$store.dispatch("story.join");
 
 		this.$store.subscribeAction(async (o) => {

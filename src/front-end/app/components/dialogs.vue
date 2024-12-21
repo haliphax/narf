@@ -53,18 +53,16 @@ const Dialogs = defineComponent({
 		},
 	},
 	created() {
-		if (!this.$store.hasModule("dialogs")) {
-			this.$store.registerModule("dialogs", this.stateModule);
-		}
+		this.$store.registerModule("dialogs", this.stateModule);
 	},
 	mounted() {
-		[this.alertDialog, this.confirmDialog].forEach((d) =>
+		for (const d of [this.alertDialog, this.confirmDialog]) {
 			d.addEventListener(
 				"close",
 				async () =>
 					await this.$store.dispatch("close", this.dialogsState.responseId),
-			),
-		);
+			);
+		}
 	},
 	methods: {
 		alert(payload: DialogPayload) {
@@ -78,7 +76,7 @@ const Dialogs = defineComponent({
 			this.confirmDialog.showModal();
 		},
 		async confirmClick() {
-			(this.$refs.confirm as HTMLDialogElement).close("OK");
+			this.confirmDialog.close("OK");
 			await this.$store.dispatch("confirmed", this.dialogsState.responseId);
 		},
 	},

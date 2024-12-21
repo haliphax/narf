@@ -14,9 +14,7 @@ const Toggle = defineComponent({
 	},
 	emits: ["click"],
 	data() {
-		return {
-			defaultChecked: false,
-		};
+		return { defaultChecked: false };
 	},
 	computed: {
 		isChecked() {

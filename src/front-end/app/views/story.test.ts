@@ -1,9 +1,9 @@
 import store from "@/front-end/app/store";
-import Story from "@/front-end/app/views/story.vue";
-import { StoryStoreState } from "@/front-end/app/views/story/types";
 import { Story as StoryModel } from "@/models/story";
 import { shallowMount, VueWrapper } from "@vue/test-utils";
 import { afterEach, beforeEach, describe, it, vi } from "vitest";
+import Story from "./story.vue";
+import { StoryStoreState } from "./story/types";
 
 class EventSourceMock {
 	addEventListener = () => {};

@@ -1,10 +1,7 @@
-import Dialogs, {
-	DialogsState,
-	DialogsStoreState,
-} from "@/front-end/app/components/dialogs.vue";
 import store from "@/front-end/app/store";
 import { VueWrapper, mount } from "@vue/test-utils";
 import { afterEach, beforeEach, describe, it } from "vitest";
+import Dialogs, { DialogsState, DialogsStoreState } from "./dialogs.vue";
 
 describe("Dialogs component", () => {
 	let dialogs: VueWrapper;

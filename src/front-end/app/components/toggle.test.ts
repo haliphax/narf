@@ -1,6 +1,6 @@
-import Toggle from "@/front-end/app/components/toggle.vue";
 import { mount, VueWrapper } from "@vue/test-utils";
 import { afterEach, beforeEach, describe, it } from "vitest";
+import Toggle from "./toggle.vue";
 
 describe("Toggle component", () => {
 	let toggle: VueWrapper;

@@ -77,8 +77,8 @@
 		"coverage:front-end": "npm run test:front-end -- --coverage",
 		"start": "tsx src/back-end/index.ts",
 		"test": "vitest run",
-		"test:back-end": "vitest run test/back-end",
-		"test:front-end": "vitest run test/front-end",
+		"test:back-end": "vitest run src/back-end",
+		"test:front-end": "vitest run src/front-end",
 		"transform": "tsx src/tasks/transform.ts"
 	},
 	"type": "module",

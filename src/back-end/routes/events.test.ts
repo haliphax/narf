@@ -1,10 +1,6 @@
-import {
-	UpdateStoryController,
-	clients,
-	handler,
-} from "@/back-end/routes/events";
 import { Request, Response } from "express";
 import { MockedObject, afterEach, beforeEach, describe, it, vi } from "vitest";
+import { UpdateStoryController, clients, handler } from "./events";
 
 vi.mock("remult", () => ({ BackendMethod: vi.fn() }));
 vi.mock("uuid", () => ({ v4: vi.fn(() => "test") }));

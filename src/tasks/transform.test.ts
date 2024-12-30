@@ -16,7 +16,7 @@ const { mockPromisify, mockWriteFile } = vi.hoisted(() => ({
 vi.mock("util", () => ({ default: { promisify: mockPromisify } }));
 
 describe("transform task", async () => {
-	const transform = (await vi.importActual("@/tasks/transform"))
+	const transform = (await vi.importActual("./transform"))
 		.default as () => Promise<void>;
 
 	afterEach(() => {

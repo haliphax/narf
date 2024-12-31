@@ -75,7 +75,7 @@ export default NewStory;
 </template>
 
 <style lang="less" scoped>
-@import "../../../styles/breakpoints.less";
+@import "@/front-end/styles/breakpoints.less";
 
 @media @breakpoint_m {
 	.g > span {

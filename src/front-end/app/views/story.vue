@@ -154,7 +154,7 @@ export default Story;
 </template>
 
 <style lang="less" scoped>
-@import "../../styles/breakpoints.less";
+@import "@/front-end/styles/breakpoints.less";
 
 .a {
 	grid-column: 1 / span 2;

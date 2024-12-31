@@ -5,7 +5,6 @@ import Dialogs, { DialogsState, DialogsStoreState } from "./dialogs.vue";
 
 describe("Dialogs component", () => {
 	let dialogs: VueWrapper;
-	// eslint-disable-next-line @typescript-eslint/no-unused-vars
 	let dialogsState: DialogsState;
 
 	beforeEach(() => {

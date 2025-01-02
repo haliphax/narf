@@ -30,10 +30,17 @@ const service = (app: Application) => {
 		console.log(`Server listening at http://${host}:${port}`),
 	);
 	const terminator = createHttpTerminator({ server: listener });
-	const shutdown = async () => {
+	const shutdown = () => {
 		console.log("Terminating");
 		cronjobs.stop();
-		await terminator.terminate();
+
+		// await promise by wrapping in try/finally
+		try {
+			terminator.terminate();
+		} finally {
+			//
+		}
+
 		process.exit(0);
 	};
 

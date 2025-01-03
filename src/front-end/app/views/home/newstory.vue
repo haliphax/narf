@@ -16,9 +16,7 @@ const NewStory = defineComponent({
 		const scaleIter = scales.keys();
 		let next: IteratorResult<string>;
 
-		while ((next = scaleIter.next())) {
-			if (next.done) break;
-
+		while ((next = scaleIter.next()) && !next.done) {
 			opts.push(next.value);
 		}
 

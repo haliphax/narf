@@ -14,6 +14,7 @@ describe("Profile", () => {
 	});
 
 	afterEach(() => {
+		vi.unstubAllGlobals();
 		profile.vm.$store.unregisterModule("test");
 		profile.unmount();
 	});
@@ -35,6 +36,25 @@ describe("Profile", () => {
 		expect(profile.vm.$store.state.session.name).toBe("test");
 	});
 
+	it("exports session data", async ({ expect }) => {
+		const mockAnchor = {
+			href: "",
+			download: "",
+			click: vi.fn(),
+		};
+		vi.stubGlobal("document", { createElement: () => mockAnchor });
+
+		profile
+			.findAll("button")
+			.filter((v) => v.text().includes("Export"))[0]
+			.trigger("click");
+		await profile.vm.$nextTick();
+
+		expect(mockAnchor.href).toContain("data:application/json,");
+		expect(mockAnchor.download).toBe("narf.json");
+		expect(mockAnchor.click).toHaveBeenCalled();
+	});
+
 	describe("import", () => {
 		const makeFileList = (files: File[]) => {
 			const input = document.createElement("input");
@@ -49,6 +69,43 @@ describe("Profile", () => {
 
 			return fileList;
 		};
+
+		it("raises alert on import exception", async ({ expect }) => {
+			vi.stubGlobal("JSON", {
+				parse() {
+					throw new Error();
+				},
+			});
+			let alerted = false;
+			store.subscribeAction((o) => {
+				if (o.type !== "alert" || !o.payload.text?.includes("Error: ")) return;
+				alerted = true;
+			});
+
+			const fileInput = profile.get("ul").get("input").element;
+			fileInput.files = makeFileList([
+				new File([""], "test1.json", { type: "application/json" }),
+			]);
+			fileInput.dispatchEvent(new Event("change"));
+			await profile.vm.$nextTick();
+
+			expect(alerted).toBe(true);
+		});
+
+		it("clicks files button on user's behalf", async ({ expect }) => {
+			let clicked = false;
+			profile
+				.findAll("input")
+				.filter((v) => (v.attributes() as { type?: string }).type === "file")[0]
+				.element.addEventListener("click", () => (clicked = true));
+
+			profile
+				.findAll("button")
+				.filter((v) => v.text().includes("Import"))[0]
+				.trigger("click");
+
+			expect(clicked).toBe(true);
+		});
 
 		it("throws error if multiple files selected", async ({ expect }) => {
 			let alertMessage = "";

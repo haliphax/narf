@@ -26,8 +26,6 @@ const Estimate = defineComponent({
 
 				const value = v.vote.toString();
 
-				if (!votes.has(value)) votes.set(value, 0);
-
 				votes.set(value, (votes.get(value) ?? 0) + 1);
 			});
 

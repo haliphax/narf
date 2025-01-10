@@ -42,6 +42,7 @@ describe("Participants", () => {
 	});
 
 	afterEach(() => {
+		store.unregisterModule("session");
 		store.unregisterModule("story");
 		participants.unmount();
 	});
@@ -65,6 +66,7 @@ describe("Participants", () => {
 					v.attributes().title === "has not voted" &&
 					v.text().trim().includes("⏱️"),
 			);
+
 		expect(voteSpans.length).toBe(1);
 	});
 

@@ -11,8 +11,10 @@ export default defineConfig({
 	},
 	test: {
 		coverage: {
+			reportOnFailure: true,
 			reporter: ["html", "lcov", "text"],
 			skipFull: true,
+			thresholds: { lines: 90 },
 		},
 		environment: "happy-dom",
 		globals: true,

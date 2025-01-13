@@ -2,19 +2,20 @@ import { readFile, writeFile } from "fs";
 import { afterEach, describe, it, vi } from "vitest";
 import transform from "./transform";
 
-const { mockPromisify, mockWriteFile } = vi.hoisted(() => ({
-	mockPromisify: (arg: unknown) => {
-		switch (arg) {
-			case readFile:
-				return () => '<link href="/test" />';
-			case writeFile:
-				return mockWriteFile;
-		}
-	},
-	mockWriteFile: vi.fn(),
-}));
+const { mockWriteFile } = vi.hoisted(() => ({ mockWriteFile: vi.fn() }));
 
-vi.mock("util", () => ({ default: { promisify: mockPromisify } }));
+vi.mock("util", () => ({
+	default: {
+		promisify: (arg: unknown) => {
+			switch (arg) {
+				case readFile:
+					return () => '<link href="/test" />';
+				case writeFile:
+					return mockWriteFile;
+			}
+		},
+	},
+}));
 
 describe("transform task", async () => {
 	afterEach(() => {

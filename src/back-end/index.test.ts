@@ -8,7 +8,7 @@ const { mockExpress, mockService } = vi.hoisted(() => ({
 vi.mock("express", () => ({ default: () => mockExpress }));
 vi.mock("./service", () => ({ default: mockService }));
 
-await vi.importActual("./index");
+await import("./index");
 
 describe("entrypoint", () => {
 	it("creates a service instance", ({ expect }) => {

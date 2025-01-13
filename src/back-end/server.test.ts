@@ -20,7 +20,7 @@ vi.mock("@/models/story", () => ({ Story: 0 }));
 vi.mock("@/models/vote", () => ({ Vote: 1 }));
 vi.mock("./cronjobs", () => ({ default: { start: vi.fn() } }));
 
-await vi.importActual("./server");
+await import("./server");
 
 describe("server", async () => {
 	it("creates a knex data provider", ({ expect }) => {

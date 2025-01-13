@@ -1,5 +1,6 @@
 import { readFile, writeFile } from "fs";
 import { afterEach, describe, it, vi } from "vitest";
+import transform from "./transform";
 
 const { mockPromisify, mockWriteFile } = vi.hoisted(() => ({
 	mockPromisify: (arg: unknown) => {
@@ -16,9 +17,6 @@ const { mockPromisify, mockWriteFile } = vi.hoisted(() => ({
 vi.mock("util", () => ({ default: { promisify: mockPromisify } }));
 
 describe("transform task", async () => {
-	const transform = (await vi.importActual("./transform"))
-		.default as () => Promise<void>;
-
 	afterEach(() => {
 		vi.unstubAllEnvs();
 		vi.clearAllMocks();

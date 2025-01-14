@@ -9,10 +9,11 @@ const { mockInsert } = vi.hoisted(() => ({
 	mockInsert: vi.fn(() => ({ id: "test" })),
 }));
 
-vi.mock("@/front-end/app/remult", () => ({ default: vi.fn() }));
+vi.mock("@/front-end/app/remult", () => ({
+	default: { repo: () => ({ insert: mockInsert }) },
+}));
 vi.mock("@/models/story", () => ({ Story: 1 }));
 vi.mock("@/models/vote", () => ({ Vote: 2 }));
-vi.mock("remult", () => ({ remult: { repo: () => ({ insert: mockInsert }) } }));
 vi.mock("uuid", () => ({ v4: () => "test" }));
 
 describe("NewStory", () => {

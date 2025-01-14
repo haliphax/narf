@@ -1,8 +1,8 @@
 <script lang="ts">
+import remult from "@/front-end/app/remult";
 import { Story } from "@/models/story";
 import scales from "@/scales";
 import { defineComponent } from "vue";
-import { remult } from "remult";
 
 interface NewStoryProps {
 	scale: string;

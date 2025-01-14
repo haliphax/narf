@@ -24,6 +24,14 @@ describe("DarkMode component", () => {
 		expect(store.state.session.settings.darkMode).toBe(true);
 	});
 
+	it("reacts to settings state changes", ({ expect }) => {
+		const data = darkMode.vm.$data as { enabled: boolean };
+
+		expect(data.enabled).toBe(false);
+		store.commit("session", { settings: { darkMode: true } });
+		expect(data.enabled).toBe(true);
+	});
+
 	it("reacts to settings.darkmode state changes", ({ expect }) => {
 		const data = darkMode.vm.$data as { enabled: boolean };
 

@@ -1,3 +1,8 @@
+# [v1.14.4](https://github.com/haliphax/narf/compare/v1.14.3...v1.14.4) (2025-01-14)
+
+## 🐛 Bug Fixes
+- [`06878a6`](https://github.com/haliphax/narf/commit/06878a6)  use app remult instance in newstory.vue
+
 # [v1.14.3](https://github.com/haliphax/narf/compare/v1.14.2...v1.14.3) (2024-12-20)
 
 ## 🐛 Bug Fixes

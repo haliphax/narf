@@ -1,91 +1,10 @@
 <script lang="ts">
-import { ROOT_URI } from "@/front-end/app/constants";
-import remult from "@/front-end/app/remult";
-import router from "@/front-end/app/router";
-import { StoreState } from "@/front-end/app/store/types";
-import { Story as StoryModel } from "@/models/story";
-import { Vote } from "@/models/vote";
 import { defineComponent } from "vue";
-import { Module } from "vuex";
 import Actions from "./story/actions.vue";
 import Estimate from "./story/estimate.vue";
+import storyModule from "./story/module";
 import Participants from "./story/participants.vue";
-import { StoryState, StoryStoreState } from "./story/types";
-
-const storyModule: Module<StoryState, StoreState | StoryStoreState> = {
-	actions: {
-		async "story.join"(ctx) {
-			const rootState = ctx.rootState as StoreState;
-			const storyId = router.currentRoute.value.params.story as string;
-			const events = new EventSource(`${ROOT_URI}${storyId}/events`);
-
-			events.addEventListener("message", async () => {
-				console.log("Story update received");
-				await ctx.dispatch("story.load");
-			});
-			ctx.commit("events", events);
-
-			const storyRepo = remult.repo(StoryModel);
-			const voteRepo = remult.repo(Vote);
-			const partial = {
-				participantId: rootState.session.id,
-				participantName: rootState.session.name,
-				storyId,
-			};
-
-			if (
-				(await storyRepo.count({ id: storyId, revealed: true })) === 0 &&
-				(await voteRepo.count({
-					participantId: partial.participantId,
-					storyId,
-				})) === 0
-			) {
-				await voteRepo.insert(partial);
-			}
-
-			await ctx.dispatch("story.load");
-		},
-		async "story.load"(ctx) {
-			const story = await remult
-				.repo(StoryModel)
-				.findId(router.currentRoute.value.params.story.toString(), {
-					useCache: false,
-				});
-
-			ctx.commit("story", story);
-
-			if (story?.revealed) ctx.state.events?.close();
-		},
-		async "story.reveal"(ctx) {
-			if (!ctx.state.story) return;
-
-			await remult.repo(StoryModel).update(ctx.state.story.id, {
-				revealed: true,
-			});
-		},
-		async "story.vote"(ctx, payload: Vote) {
-			if (!ctx.state.story) return;
-
-			await remult.repo(Vote).save(payload);
-		},
-	},
-	mutations: {
-		events(state, payload: EventSource | undefined) {
-			if (!payload) state.events?.close();
-
-			state.events = payload;
-		},
-		story(state, payload: StoryModel) {
-			state.story = payload;
-		},
-	},
-	state() {
-		return {
-			events: undefined,
-			story: undefined,
-		};
-	},
-};
+import { StoryStoreState } from "./story/types";
 
 const Story = defineComponent({
 	components: {
@@ -115,7 +34,8 @@ const Story = defineComponent({
 
 			await this.$store.dispatch("story.join");
 		});
-
+	},
+	mounted() {
 		if (this.storyState.events) {
 			setTimeout(
 				async () => {

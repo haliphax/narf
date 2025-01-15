@@ -15,7 +15,7 @@ Simple [story points][] estimation
 
 ### Client
 
-- [Vite][] - Build framework
+- [Vite][] - Build system
 - [Vue3][] - Application framework
 - [Vuex][] - State management
 - [Vue Router][] - Request routing

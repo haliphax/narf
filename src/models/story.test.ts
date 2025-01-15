@@ -23,7 +23,7 @@ vi.mock("remult", async () => {
 	const mockField =
 		(opts: unknown) => (_target: unknown, propertyKey: string) =>
 			decoratorCalls.set(propertyKey, opts);
-	const a = await vi.importActual("remult");
+	const actual = await vi.importActual("remult");
 
 	return {
 		Entity: mockEntity,
@@ -33,7 +33,7 @@ vi.mock("remult", async () => {
 			object: mockField,
 			string: mockField,
 		},
-		Validators: a.Validators,
+		Validators: actual.Validators,
 	};
 });
 vi.mock("./vote", () => ({ Vote: "vote" }));
@@ -42,9 +42,7 @@ describe("Story", () => {
 	new Story();
 
 	it("calls UpdateStoryController.updateStory on save", ({ expect }) => {
-		const args = mockEntity.mock.lastCall![1] as WithSaved;
-
-		args.saved("test");
+		(mockEntity.mock.lastCall![1] as WithSaved).saved("test");
 
 		expect(UpdateStoryController.updateStory).toHaveBeenCalledWith("test");
 	});

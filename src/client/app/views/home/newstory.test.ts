@@ -1,5 +1,5 @@
-import router from "@/front-end/app/router";
-import store from "@/front-end/app/store";
+import router from "@/client/app/router";
+import store from "@/client/app/store";
 import scales from "@/scales";
 import { mount, VueWrapper } from "@vue/test-utils";
 import { afterEach, beforeEach, describe, it, vi } from "vitest";
@@ -9,7 +9,7 @@ const { mockInsert } = vi.hoisted(() => ({
 	mockInsert: vi.fn(() => ({ id: "test" })),
 }));
 
-vi.mock("@/front-end/app/remult", () => ({
+vi.mock("@/client/app/remult", () => ({
 	default: { repo: () => ({ insert: mockInsert }) },
 }));
 vi.mock("@/models/story", () => ({ Story: 1 }));

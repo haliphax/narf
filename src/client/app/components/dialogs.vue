@@ -1,5 +1,5 @@
 <script lang="ts">
-import { StoreState } from "@/front-end/app/store/types";
+import { StoreState } from "@/client/app/store/types";
 import { defineComponent } from "vue";
 import { Module } from "vuex";
 

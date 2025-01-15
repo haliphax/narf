@@ -1,5 +1,5 @@
-import { UpdateStoryController } from "@/back-end/routes/events";
 import scales from "@/scales";
+import { UpdateStoryController } from "@/server/routes/events";
 import { Entity, Fields, Remult, Validators } from "remult";
 import { v4 } from "uuid";
 import { Vote } from "./vote";

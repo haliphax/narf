@@ -113,7 +113,7 @@ export default PieChart;
 </template>
 
 <style lang="less" scoped>
-@import "@/front-end/styles/breakpoints.less";
+@import "@/client/styles/breakpoints.less";
 
 label {
 	cursor: default;

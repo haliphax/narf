@@ -1,4 +1,4 @@
-import store from "@/front-end/app/store";
+import store from "@/client/app/store";
 import scales from "@/scales";
 import { shallowMount, VueWrapper } from "@vue/test-utils";
 import { afterEach, beforeEach, describe, it, vi } from "vitest";

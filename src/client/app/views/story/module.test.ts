@@ -1,4 +1,4 @@
-import store from "@/front-end/app/store";
+import store from "@/client/app/store";
 import { afterEach, beforeEach, describe, it, vi } from "vitest";
 import storyModule from "./module";
 
@@ -25,7 +25,7 @@ class EventSourceMock {
 	close = mockClose;
 }
 
-vi.mock("@/front-end/app/remult", () => ({
+vi.mock("@/client/app/remult", () => ({
 	default: {
 		repo: () => ({
 			count: mockCount,
@@ -36,7 +36,7 @@ vi.mock("@/front-end/app/remult", () => ({
 		}),
 	},
 }));
-vi.mock("@/front-end/app/router", () => ({
+vi.mock("@/client/app/router", () => ({
 	default: { currentRoute: { value: { params: { story: 1 } } } },
 }));
 

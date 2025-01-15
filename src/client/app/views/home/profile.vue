@@ -1,5 +1,5 @@
 <script lang="ts">
-import { SessionState } from "@/front-end/app/store/types";
+import { SessionState } from "@/client/app/store/types";
 import { defineComponent } from "vue";
 
 const Profile = defineComponent({
@@ -121,7 +121,7 @@ export default Profile;
 </template>
 
 <style lang="less" scoped>
-@import "@/front-end/styles/breakpoints.less";
+@import "@/client/styles/breakpoints.less";
 
 ul.x {
 	margin-top: var(--space-l);

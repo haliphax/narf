@@ -1,5 +1,5 @@
 <script lang="ts">
-import { SessionSettings, SessionState } from "@/front-end/app/store/types";
+import { SessionSettings, SessionState } from "@/client/app/store/types";
 import { defineComponent } from "vue";
 import Toggle from "./toggle.vue";
 

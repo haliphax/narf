@@ -44,7 +44,7 @@ export default App;
 </template>
 
 <style lang="less" scoped>
-@import "@/front-end/styles/breakpoints.less";
+@import "@/client/styles/breakpoints.less";
 
 .📦 {
 	margin: 0 auto;

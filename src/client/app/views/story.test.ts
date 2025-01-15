@@ -1,4 +1,4 @@
-import store from "@/front-end/app/store";
+import store from "@/client/app/store";
 import { Story as StoryModel } from "@/models/story";
 import { shallowMount, VueWrapper } from "@vue/test-utils";
 import { afterEach, beforeEach, describe, it, vi } from "vitest";
@@ -25,7 +25,7 @@ const storyMock = {
 	votes: [],
 } as StoryModel;
 
-vi.mock("@/front-end/app/remult", () => ({
+vi.mock("@/client/app/remult", () => ({
 	default: {
 		repo: () => ({
 			count: () => "count",
@@ -33,7 +33,7 @@ vi.mock("@/front-end/app/remult", () => ({
 		}),
 	},
 }));
-vi.mock("@/front-end/app/router", () => ({
+vi.mock("@/client/app/router", () => ({
 	default: { currentRoute: { value: { params: { story: 1 } } } },
 }));
 vi.mock("@/models/story", () => ({ Story: "Story" }));

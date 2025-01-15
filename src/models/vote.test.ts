@@ -1,4 +1,4 @@
-import { UpdateStoryController } from "@/back-end/routes/events";
+import { UpdateStoryController } from "@/server/routes/events";
 import { Remult } from "remult";
 import { describe, it, vi } from "vitest";
 import { Vote } from "./vote";
@@ -15,7 +15,7 @@ const { decoratorCalls, mockEntity } = vi.hoisted(() => ({
 	mockEntity: vi.fn(),
 }));
 
-vi.mock("@/back-end/routes/events", () => ({
+vi.mock("@/server/routes/events", () => ({
 	UpdateStoryController: { updateStory: vi.fn() },
 }));
 vi.mock("remult", async () => ({

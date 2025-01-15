@@ -1,7 +1,7 @@
-import { ROOT_URI } from "@/front-end/app/constants";
-import remult from "@/front-end/app/remult";
-import router from "@/front-end/app/router";
-import { StoreState } from "@/front-end/app/store/types";
+import { ROOT_URI } from "@/client/app/constants";
+import remult from "@/client/app/remult";
+import router from "@/client/app/router";
+import { StoreState } from "@/client/app/store/types";
 import { Story } from "@/models/story";
 import { Vote } from "@/models/vote";
 import { Module } from "vuex";

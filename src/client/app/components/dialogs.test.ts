@@ -1,4 +1,4 @@
-import store from "@/front-end/app/store";
+import store from "@/client/app/store";
 import { VueWrapper, mount } from "@vue/test-utils";
 import { afterEach, beforeEach, describe, it } from "vitest";
 import Dialogs, { DialogsState, DialogsStoreState } from "./dialogs.vue";

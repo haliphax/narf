@@ -1,5 +1,5 @@
 <script lang="ts">
-import remult from "@/front-end/app/remult";
+import remult from "@/client/app/remult";
 import { Story } from "@/models/story";
 import scales from "@/scales";
 import { defineComponent } from "vue";
@@ -73,7 +73,7 @@ export default NewStory;
 </template>
 
 <style lang="less" scoped>
-@import "@/front-end/styles/breakpoints.less";
+@import "@/client/styles/breakpoints.less";
 
 @media @breakpoint_m {
 	.g > span {

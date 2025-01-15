@@ -1,4 +1,4 @@
-import { LOCALSTORAGE_GLOBAL_PREFIX } from "@/front-end/app/constants";
+import { LOCALSTORAGE_GLOBAL_PREFIX } from "@/client/app/constants";
 import scales from "@/scales";
 import { v4 } from "uuid";
 import { Module } from "vuex";

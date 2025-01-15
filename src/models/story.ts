@@ -1,7 +1,7 @@
+import { UpdateStoryController } from "@/back-end/routes/events";
+import scales from "@/scales";
 import { Entity, Fields, Remult, Validators } from "remult";
 import { v4 } from "uuid";
-import { UpdateStoryController } from "../back-end/routes/events";
-import scales from "../scales";
 import { Vote } from "./vote";
 
 const ownerOnly = (e?: Story, remult?: Remult) =>

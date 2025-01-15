@@ -1,6 +1,6 @@
+import { UpdateStoryController } from "@/back-end/routes/events";
+import scales from "@/scales";
 import { Entity, Fields } from "remult";
-import { UpdateStoryController } from "../back-end/routes/events";
-import scales from "../scales";
 import { Story } from "./story";
 
 @Entity<Vote>("vote", (options, remult) => {

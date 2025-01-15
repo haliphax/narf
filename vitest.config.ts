@@ -20,6 +20,6 @@ export default defineConfig({
 		globals: true,
 		onConsoleLog: () => false,
 		outputFile: "coverage/junit.xml",
-		reporters: ["junit"],
+		reporters: ["default", "junit"],
 	},
 });

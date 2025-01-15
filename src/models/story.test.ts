@@ -11,17 +11,18 @@ type WithServerExpr = {
 };
 type WithValidate = { validate: (value: unknown) => void };
 
-const { decoratorCalls, mockEntity, mockField } = vi.hoisted(() => ({
+const { decoratorCalls, mockEntity } = vi.hoisted(() => ({
 	decoratorCalls: new Map<string, unknown>(),
 	mockEntity: vi.fn(),
-	mockField: (opts: unknown) => (_target: unknown, propertyKey: string) =>
-		decoratorCalls.set(propertyKey, opts),
 }));
 
 vi.mock("@/back-end/routes/events", () => ({
 	UpdateStoryController: { updateStory: vi.fn() },
 }));
 vi.mock("remult", async () => {
+	const mockField =
+		(opts: unknown) => (_target: unknown, propertyKey: string) =>
+			decoratorCalls.set(propertyKey, opts);
 	const a = await vi.importActual("remult");
 
 	return {

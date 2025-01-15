@@ -8,16 +8,23 @@ type WithAllowApiUpdate = {
 };
 type WithDynamicOpts = (options: unknown, remult: unknown) => void;
 type WithSaved = { saved?: (value: unknown) => Promise<void> };
+type WithValidate = { validate?: (value: unknown) => Promise<void> };
 
-const { mockEntity } = vi.hoisted(() => ({ mockEntity: vi.fn() }));
+const { decoratorCalls, mockEntity } = vi.hoisted(() => ({
+	decoratorCalls: new Map<string, unknown>(),
+	mockEntity: vi.fn(),
+}));
 
 vi.mock("@/back-end/routes/events", () => ({
 	UpdateStoryController: { updateStory: vi.fn() },
 }));
-vi.mock("remult", async () => {
-	const a = await vi.importActual("remult");
-	return { Entity: mockEntity, Fields: a.Fields };
-});
+vi.mock("remult", async () => ({
+	Entity: mockEntity,
+	Fields: {
+		string: (opts: unknown) => (_target: unknown, propertyKey: string) =>
+			decoratorCalls.set(propertyKey, opts),
+	},
+}));
 vi.mock("./story", () => ({ Story: "Story" }));
 
 describe("Vote model", () => {
@@ -55,9 +62,9 @@ describe("Vote model", () => {
 			const opts: WithSaved = { saved: undefined };
 			(mockEntity.mock.lastCall![1] as WithDynamicOpts)(opts, mockRemult);
 
-			expect(async () => {
-				await opts.saved!({ storyId: "test" });
-			}).rejects.toThrowError("Invalid story");
+			expect(opts.saved!({ storyId: "test" })).rejects.toThrowError(
+				"Invalid story",
+			);
 		});
 
 		it("calls UpdateStoryController.updateStory", async ({ expect }) => {
@@ -71,6 +78,43 @@ describe("Vote model", () => {
 			await opts.saved!({ storyId: "test" });
 
 			expect(UpdateStoryController.updateStory).toHaveBeenCalledWith("story");
+		});
+	});
+
+	describe("vote validation", async () => {
+		const mockFindId = vi.fn();
+		const mockRemult = {
+			repo: () => ({ findId: mockFindId }),
+		} as unknown as Remult;
+		const opts: WithValidate = { validate: undefined };
+		(decoratorCalls.get("vote")! as WithDynamicOpts)(opts, mockRemult);
+
+		it("passes if vote is undefined", ({ expect }) => {
+			expect(opts.validate!({})).resolves.not.toThrowError();
+		});
+
+		it("fails if no story", ({ expect }) => {
+			mockFindId.mockImplementationOnce(() => false);
+
+			expect(
+				opts.validate!({ storyId: "test", vote: "test" }),
+			).rejects.toThrowError("Invalid story");
+		});
+
+		it("fails if no scale", ({ expect }) => {
+			mockFindId.mockImplementationOnce(() => "story");
+
+			expect(opts.validate!({ storyId: "test", vote: "test" })).rejects.toThrow(
+				"Invalid scale",
+			);
+		});
+
+		it("fails if invalid vote", ({ expect }) => {
+			mockFindId.mockImplementationOnce(() => ({ scale: "Fibonacci" }));
+
+			expect(
+				opts.validate!({ storyId: "test", vote: "test" }),
+			).rejects.toThrowError("Invalid vote");
 		});
 	});
 });

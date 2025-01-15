@@ -8,15 +8,24 @@ Simple [story points][] estimation
 
 ## Stack
 
-- [Express][] - Server
-- [Vue3][] - Client framework
-  - [Vuex][] - State management
-  - [Vue Router][] - Routing
+### Server
+
+- [Express][] - HTTP application server
+- [SQLite][] - Database engine
+
+### Client
+
+- [Vite][] - Build framework
+- [Vue3][] - Application framework
+- [Vuex][] - State management
+- [Vue Router][] - Request routing
+- [CSS Grid][] - Layout paradigm (with a sprinkle of flexbox)
+- [Less][] - CSS preprocessor (for media queries as variables)
+
+### Shared
+
 - [Remult][] - Data access layer
-- [Vite][] - Front-end build framework
 - [Vitest][] - Testing framework
-- [CSS Grid][] (mostly) - Layout paradigm
-- [Less][] - CSS preprocessor (media queries as variables, complex nesting)
 
 [css grid]: https://developer.mozilla.org/en-us/docs/web/css/css_grid_layout
 [demonstration app]: https://sphenoid-secret-antimony.glitch.me
@@ -24,6 +33,7 @@ Simple [story points][] estimation
 [less]: https://lesscss.org
 [live web application]: https://narf.poker
 [remult]: https://remult.dev
+[sqlite]: https://sqlite.org
 [story points]: https://www.scrum.org/resources/blog/why-do-we-use-story-points-estimating
 [vite]: https://vitejs.dev
 [vitest]: https://vitest.dev

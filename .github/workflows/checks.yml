@@ -57,8 +57,17 @@ jobs:
     steps:
       - uses: haliphax/narf/.github@main
 
+      - uses: testspace-com/setup-testspace@v1
+        with:
+          domain: ${{ github.repository_owner }}
+
       - name: Run unit tests
         run: npm run coverage
 
+      - name: Push result to Testspace server
+        run: testspace ./coverage/junit.xml
+        if: always()
+
       - name: Upload coverage report or add comment
         uses: coverallsapp/github-action@v2
+        if: always()

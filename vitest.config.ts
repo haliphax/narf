@@ -19,5 +19,7 @@ export default defineConfig({
 		environment: "happy-dom",
 		globals: true,
 		onConsoleLog: () => false,
+		outputFile: "coverage/junit.xml",
+		reporters: ["junit"],
 	},
 });

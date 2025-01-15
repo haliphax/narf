@@ -1,6 +1,6 @@
+import { UpdateStoryController } from "@/back-end/routes/events";
 import { Remult } from "remult";
 import { describe, it, vi } from "vitest";
-import { Story } from "./story";
 import { Vote } from "./vote";
 
 type WithAllowApiUpdate = {
@@ -48,20 +48,6 @@ describe("Vote model", () => {
 	});
 
 	describe("save", () => {
-		it("finds associated story", async ({ expect }) => {
-			const mockFindId = vi.fn(async () => "story");
-			const mockRemult = {
-				repo: vi.fn(() => ({ findId: mockFindId })),
-			} as unknown as Remult;
-			const opts: WithSaved = { saved: undefined };
-			(mockEntity.mock.lastCall![1] as WithDynamicOpts)(opts, mockRemult);
-
-			await opts.saved!({ storyId: "test" });
-
-			expect(mockRemult.repo).toHaveBeenCalledWith(Story);
-			expect(mockFindId).toHaveBeenCalledWith("test");
-		});
-
 		it("throws error if no story", async ({ expect }) => {
 			const mockRemult = {
 				repo: () => ({ findId: async () => false }),
@@ -72,6 +58,19 @@ describe("Vote model", () => {
 			expect(async () => {
 				await opts.saved!({ storyId: "test" });
 			}).rejects.toThrowError("Invalid story");
+		});
+
+		it("calls UpdateStoryController.updateStory", async ({ expect }) => {
+			const mockFindId = async () => "story";
+			const mockRemult = {
+				repo: () => ({ findId: mockFindId }),
+			} as unknown as Remult;
+			const opts: WithSaved = { saved: undefined };
+			(mockEntity.mock.lastCall![1] as WithDynamicOpts)(opts, mockRemult);
+
+			await opts.saved!({ storyId: "test" });
+
+			expect(UpdateStoryController.updateStory).toHaveBeenCalledWith("story");
 		});
 	});
 });

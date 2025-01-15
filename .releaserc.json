@@ -7,13 +7,7 @@
 		[
 			"@semantic-release/git",
 			{
-				"assets": [
-					"!**/*.test.ts",
-					"!vitest.config.ts",
-					"CHANGELOG.md",
-					"package-lock.json",
-					"package.json"
-				],
+				"assets": ["CHANGELOG.md", "package-lock.json", "package.json"],
 				"message": "🔖 release ${nextRelease.version}"
 			}
 		],

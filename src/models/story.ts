@@ -4,7 +4,7 @@ import { Entity, Fields, Remult, Validators } from "remult";
 import { v4 } from "uuid";
 import { Vote } from "./vote";
 
-const ownerOnly = (e?: Story, remult?: Remult) =>
+export const ownerOnly = (e?: Story, remult?: Remult) =>
 	!e?.owner || remult?.user?.id === e?.owner;
 
 const generateId = () =>

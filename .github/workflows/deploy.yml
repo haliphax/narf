@@ -20,6 +20,11 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
+      - name: Remove test code
+        run: |
+          find src -type f -name '*.test.ts' -delete
+          rm vitest.config.ts
+
       - uses: superfly/flyctl-actions/setup-flyctl@master
 
       - run: flyctl deploy --remote-only

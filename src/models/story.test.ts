@@ -59,7 +59,7 @@ describe("Story", () => {
 	it("_votes fetches associated records", ({ expect }) => {
 		const mockFind = vi.fn();
 		const mockRemult = { repo: vi.fn(() => ({ find: mockFind })) };
-		const opts: WithServerExpr = { serverExpression: undefined };
+		const opts: WithServerExpr = {};
 		(decoratorCalls.get("_votes")! as WithDynamicOpts)(opts, mockRemult);
 
 		opts.serverExpression!({ id: "test" });
@@ -71,7 +71,7 @@ describe("Story", () => {
 	describe("votes", () => {
 		it("hides other participantIds and votes", ({ expect }) => {
 			const mockRemult = { user: { id: "test" } };
-			const opts: WithServerExpr = { serverExpression: undefined };
+			const opts: WithServerExpr = {};
 			(decoratorCalls.get("votes")! as WithDynamicOpts)(opts, mockRemult);
 
 			const value = opts.serverExpression!({
@@ -89,11 +89,11 @@ describe("Story", () => {
 
 		it("uses null if awaiting other vote", ({ expect }) => {
 			const mockRemult = { user: { id: "test" } };
-			const opts: WithServerExpr = { serverExpression: undefined };
+			const opts: WithServerExpr = {};
 			(decoratorCalls.get("votes")! as WithDynamicOpts)(opts, mockRemult);
 
 			const value = opts.serverExpression!({
-				_votes: [{ participantId: "other", vote: undefined }],
+				_votes: [{ participantId: "other" }],
 				revealed: false,
 			}) as unknown[];
 
@@ -103,7 +103,7 @@ describe("Story", () => {
 
 		it("shows votes when revealed", ({ expect }) => {
 			const mockRemult = { user: { id: "test" } };
-			const opts: WithServerExpr = { serverExpression: undefined };
+			const opts: WithServerExpr = {};
 			(decoratorCalls.get("votes")! as WithDynamicOpts)(opts, mockRemult);
 
 			const value = opts.serverExpression!({

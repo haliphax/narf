@@ -31,7 +31,7 @@ describe("Vote model", () => {
 	new Vote();
 
 	describe("allowApiUpdate check", () => {
-		const opts: WithAllowApiUpdate = { allowApiUpdate: undefined };
+		const opts: WithAllowApiUpdate = {};
 		const mockRemult = { user: { id: "test" } } as Remult;
 		(mockEntity.mock.lastCall![1] as WithDynamicOpts)(opts, mockRemult);
 
@@ -59,7 +59,7 @@ describe("Vote model", () => {
 			const mockRemult = {
 				repo: () => ({ findId: async () => false }),
 			} as unknown as Remult;
-			const opts: WithSaved = { saved: undefined };
+			const opts: WithSaved = {};
 			(mockEntity.mock.lastCall![1] as WithDynamicOpts)(opts, mockRemult);
 
 			expect(opts.saved!({ storyId: "test" })).rejects.toThrowError(
@@ -72,7 +72,7 @@ describe("Vote model", () => {
 			const mockRemult = {
 				repo: () => ({ findId: mockFindId }),
 			} as unknown as Remult;
-			const opts: WithSaved = { saved: undefined };
+			const opts: WithSaved = {};
 			(mockEntity.mock.lastCall![1] as WithDynamicOpts)(opts, mockRemult);
 
 			await opts.saved!({ storyId: "test" });
@@ -86,7 +86,7 @@ describe("Vote model", () => {
 		const mockRemult = {
 			repo: () => ({ findId: mockFindId }),
 		} as unknown as Remult;
-		const opts: WithValidate = { validate: undefined };
+		const opts: WithValidate = {};
 		(decoratorCalls.get("vote")! as WithDynamicOpts)(opts, mockRemult);
 
 		it("passes if vote is undefined", ({ expect }) => {

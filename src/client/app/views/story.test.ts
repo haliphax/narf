@@ -92,7 +92,7 @@ describe("Story view", () => {
 	});
 
 	it("disconnects after timeout", async ({ expect }) => {
-		store.commit("story", { events: new EventSourceMock() });
+		store.commit("events", new EventSourceMock());
 		story.unmount();
 		story = shallowMount(Story, { global: { plugins: [store] } });
 		await story.vm.$nextTick();

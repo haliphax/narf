@@ -19,11 +19,7 @@ describe("Participants", () => {
 	];
 
 	beforeEach(() => {
-		store.registerModule("session", {
-			state() {
-				return { id: "test" };
-			},
-		});
+		store.commit("session", { id: "test" });
 
 		store.registerModule("story", {
 			mutations: {
@@ -42,7 +38,6 @@ describe("Participants", () => {
 	});
 
 	afterEach(() => {
-		store.unregisterModule("session");
 		store.unregisterModule("story");
 		participants.unmount();
 	});

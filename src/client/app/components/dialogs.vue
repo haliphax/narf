@@ -64,6 +64,9 @@ const Dialogs = defineComponent({
 			);
 		}
 	},
+	unmounted() {
+		this.$store.unregisterModule("dialogs");
+	},
 	methods: {
 		alert(payload: DialogPayload) {
 			this.$store.commit("responseId", payload.id ?? "");

@@ -50,8 +50,7 @@ const Story = defineComponent({
 		}
 	},
 	unmounted() {
-		this.$store.commit("story", undefined);
-		this.$store.commit("events", undefined);
+		this.$store.unregisterModule("story");
 	},
 });
 

@@ -7,17 +7,13 @@ describe("Actions component", () => {
 	let actions: VueWrapper;
 
 	beforeEach(() => {
+		store.commit("session", { id: "test" });
+
 		store.registerModule("dialogs", {
 			actions: {
 				alert() {},
 				confirm() {},
 				confirmed() {},
-			},
-		});
-
-		store.registerModule("session", {
-			state() {
-				return { id: "test" };
 			},
 		});
 
@@ -45,7 +41,6 @@ describe("Actions component", () => {
 	afterEach(() => {
 		actions.unmount();
 		store.unregisterModule("dialogs");
-		store.unregisterModule("session");
 		store.unregisterModule("story");
 		vi.unstubAllGlobals();
 	});

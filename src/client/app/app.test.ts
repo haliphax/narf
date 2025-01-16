@@ -1,13 +1,14 @@
 import { shallowMount, VueWrapper } from "@vue/test-utils";
 import { afterEach, beforeEach, describe, it } from "vitest";
 import App from "./app.vue";
+import router from "./router";
 import store from "./store";
 
 describe("App component", () => {
 	let app: VueWrapper;
 
 	beforeEach(() => {
-		app = shallowMount(App, { global: { plugins: [store] } });
+		app = shallowMount(App, { global: { plugins: [router, store] } });
 	});
 
 	afterEach(() => {

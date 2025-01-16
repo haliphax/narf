@@ -1,5 +1,5 @@
 import { UpdateStoryController } from "@/server/routes/events";
-import { Remult } from "remult";
+import { Remult, ValidateFieldEvent } from "remult";
 import { describe, it, vi } from "vitest";
 import { Story, ownerOnly } from "./story";
 import { Vote } from "./vote";
@@ -9,7 +9,9 @@ type WithSaved = { saved: (value: unknown) => void };
 type WithServerExpr = {
 	serverExpression?: (value: unknown) => object;
 };
-type WithValidate = { validate: (value: unknown) => void };
+type WithValidate = {
+	validate: (value: unknown, event?: ValidateFieldEvent) => void;
+};
 
 const { decoratorCalls, mockEntity } = vi.hoisted(() => ({
 	decoratorCalls: new Map<string, unknown>(),
@@ -47,14 +49,6 @@ describe("Story", () => {
 		expect(UpdateStoryController.updateStory).toHaveBeenCalledWith("test");
 	});
 
-	it("scale throws error if invalid", async ({ expect }) => {
-		expect(() =>
-			(decoratorCalls.get("scale")! as WithValidate).validate({
-				scale: "invalid",
-			}),
-		).toThrowError("Unknown scale");
-	});
-
 	it("_votes fetches associated records", ({ expect }) => {
 		const mockFind = vi.fn();
 		const mockRemult = { repo: vi.fn(() => ({ find: mockFind })) };
@@ -65,6 +59,38 @@ describe("Story", () => {
 
 		expect(mockRemult.repo).toHaveBeenCalledWith(Vote);
 		expect(mockFind).toHaveBeenCalled();
+	});
+
+	describe("scale validation", () => {
+		it("fails if unknown", async ({ expect }) => {
+			const v = {} as ValidateFieldEvent;
+
+			(decoratorCalls.get("scale")! as WithValidate).validate(
+				{ scale: "invalid" },
+				v,
+			);
+
+			expect(v.error).toBe("Invalid scale");
+		});
+
+		it("succeeds if undefined", async ({ expect }) => {
+			const v = {} as ValidateFieldEvent;
+
+			(decoratorCalls.get("scale")! as WithValidate).validate({}, v);
+
+			expect(v.error).toBeUndefined();
+		});
+
+		it("succeeds if known", async ({ expect }) => {
+			const v = {} as ValidateFieldEvent;
+
+			(decoratorCalls.get("scale")! as WithValidate).validate(
+				{ scale: "Fibonacci" },
+				v,
+			);
+
+			expect(v.error).toBeUndefined();
+		});
 	});
 
 	describe("votes", () => {

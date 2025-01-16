@@ -1,5 +1,5 @@
 import { UpdateStoryController } from "@/server/routes/events";
-import { Remult } from "remult";
+import { Remult, ValidateFieldEvent } from "remult";
 import { describe, it, vi } from "vitest";
 import { Vote } from "./vote";
 
@@ -8,7 +8,9 @@ type WithAllowApiUpdate = {
 };
 type WithDynamicOpts = (options: unknown, remult: unknown) => void;
 type WithSaved = { saved?: (value: unknown) => Promise<void> };
-type WithValidate = { validate?: (value: unknown) => Promise<void> };
+type WithValidate = {
+	validate?: (value: unknown, event: ValidateFieldEvent) => Promise<void>;
+};
 
 const { decoratorCalls, mockEntity } = vi.hoisted(() => ({
 	decoratorCalls: new Map<string, unknown>(),
@@ -90,31 +92,38 @@ describe("Vote model", () => {
 		(decoratorCalls.get("vote")! as WithDynamicOpts)(opts, mockRemult);
 
 		it("passes if vote is undefined", ({ expect }) => {
-			expect(opts.validate!({})).resolves.not.toThrowError();
+			const v = {} as ValidateFieldEvent;
+
+			opts.validate!({}, v);
+
+			expect(v.error).toBeUndefined();
 		});
 
-		it("fails if no story", ({ expect }) => {
+		it("fails if no story", async ({ expect }) => {
 			mockFindId.mockImplementationOnce(() => false);
+			const v = {} as ValidateFieldEvent;
 
-			expect(
-				opts.validate!({ storyId: "test", vote: "test" }),
-			).rejects.toThrowError("Invalid story");
+			await opts.validate!({ storyId: "test", vote: "test" }, v);
+
+			expect(v.error).toBe("Invalid story");
 		});
 
-		it("fails if no scale", ({ expect }) => {
+		it("fails if no scale", async ({ expect }) => {
 			mockFindId.mockImplementationOnce(() => "story");
+			const v = {} as ValidateFieldEvent;
 
-			expect(opts.validate!({ storyId: "test", vote: "test" })).rejects.toThrow(
-				"Invalid scale",
-			);
+			await opts.validate!({ storyId: "test", vote: "test" }, v);
+
+			expect(v.error).toBe("Invalid scale");
 		});
 
-		it("fails if invalid vote", ({ expect }) => {
+		it("fails if invalid vote", async ({ expect }) => {
 			mockFindId.mockImplementationOnce(() => ({ scale: "Fibonacci" }));
+			const v = {} as ValidateFieldEvent;
 
-			expect(
-				opts.validate!({ storyId: "test", vote: "test" }),
-			).rejects.toThrowError("Invalid vote");
+			await opts.validate!({ storyId: "test", vote: "test" }, v);
+
+			expect(v.error).toBe("Invalid vote");
 		});
 	});
 });

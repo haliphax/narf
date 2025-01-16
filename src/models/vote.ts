@@ -27,14 +27,18 @@ export class Vote {
 
 	@Fields.string<Vote>((options, remult) => {
 		options.allowNull = true;
-		options.validate = async (e) => {
+		options.validate = async (e, v) => {
 			if (!e.vote) return;
 
 			const story = await remult.repo(Story).findId(e.storyId);
 
-			if (!story) throw "Invalid story";
-			if (!story.scale) throw "Invalid scale";
-			if (!scales.get(story.scale)?.includes(e.vote)) throw "Invalid vote";
+			if (!story) {
+				v.error = "Invalid story";
+			} else if (!story.scale) {
+				v.error = "Invalid scale";
+			} else if (!scales.get(story.scale)?.includes(e.vote)) {
+				v.error = "Invalid vote";
+			}
 		};
 	})
 	vote: string | null = null;

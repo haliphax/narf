@@ -34,11 +34,9 @@ export class Story {
 
 	@Fields.string({
 		allowApiUpdate: ownerOnly,
-		validate: (e) => {
-			if (e.scale && !scales.has(e.scale)) {
-				console.error(`Unknown scale: ${e.scale}`);
-				throw "Unknown scale";
-			}
+		validate: (e, v) => {
+			if (!e.scale || scales.has(e.scale)) return;
+			v.error = "Invalid scale";
 		},
 	})
 	scale = scales.keys().next().value;

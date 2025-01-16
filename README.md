@@ -1,10 +1,12 @@
-# narf!
+# narf! 🌎🐁
 
 [![Test coverage](https://coveralls.io/repos/github/haliphax/narf/badge.svg?branch=main)](https://coveralls.io/github/haliphax/narf?branch=main)
 
 Simple [story points][] estimation
 
 - [Live web application][]
+- [Test results][]
+- [Test coverage][]
 
 ## Stack
 
@@ -35,6 +37,8 @@ Simple [story points][] estimation
 [remult]: https://remult.dev
 [sqlite]: https://sqlite.org
 [story points]: https://www.scrum.org/resources/blog/why-do-we-use-story-points-estimating
+[test coverage]: https://coveralls.io/github/haliphax/narf?branch=main
+[test results]: https://haliphax.testspace.com/spaces/295558
 [vite]: https://vitejs.dev
 [vitest]: https://vitest.dev
 [vue router]: https://router.vuejs.org

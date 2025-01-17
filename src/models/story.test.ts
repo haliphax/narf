@@ -77,11 +77,11 @@ describe("Story", () => {
 	});
 
 	describe("votes", () => {
-		it("hides other participantIds and votes", () => {
-			const mockRemult = { user: { id: "test" } };
-			const opts: WithServerExpr = {};
-			(decoratorCalls.get("votes")! as WithDynamicOpts)(opts, mockRemult);
+		const mockRemult = { user: { id: "test" } };
+		const opts: WithServerExpr = {};
+		(decoratorCalls.get("votes")! as WithDynamicOpts)(opts, mockRemult);
 
+		it("hides other participantIds and votes", () => {
 			const value = opts.serverExpression!({
 				_votes: [
 					{ participantId: "test", vote: "test" },
@@ -96,10 +96,6 @@ describe("Story", () => {
 		});
 
 		it("uses null if awaiting other vote", () => {
-			const mockRemult = { user: { id: "test" } };
-			const opts: WithServerExpr = {};
-			(decoratorCalls.get("votes")! as WithDynamicOpts)(opts, mockRemult);
-
 			const value = opts.serverExpression!({
 				_votes: [{ participantId: "other" }],
 				revealed: false,
@@ -110,10 +106,6 @@ describe("Story", () => {
 		});
 
 		it("shows votes when revealed", () => {
-			const mockRemult = { user: { id: "test" } };
-			const opts: WithServerExpr = {};
-			(decoratorCalls.get("votes")! as WithDynamicOpts)(opts, mockRemult);
-
 			const value = opts.serverExpression!({
 				_votes: [
 					{ participantId: "test", vote: "test" },

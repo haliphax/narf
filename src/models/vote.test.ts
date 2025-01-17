@@ -1,13 +1,13 @@
 import { UpdateStoryController } from "@/server/routes/events";
-import { Remult, ValidateFieldEvent } from "remult";
+import { ValidateFieldEvent } from "remult";
 import { describe, expect, it, vi } from "vitest";
 import { Vote } from "./vote";
 
-type WithAllowApiUpdate = {
+type EntityOpts = {
 	allowApiUpdate?: (value: unknown, remult: unknown) => boolean;
+	saved?: (value: unknown) => Promise<void>;
 };
 type WithDynamicOpts = (options: unknown, remult: unknown) => void;
-type WithSaved = { saved?: (value: unknown) => Promise<void> };
 type WithValidate = {
 	validate?: (value: unknown, event: ValidateFieldEvent) => Promise<void>;
 };
@@ -30,13 +30,18 @@ vi.mock("remult", async () => ({
 vi.mock("./story", () => ({ Story: "Story" }));
 
 describe("Vote model", () => {
+	const mockStory = { storyId: "test" };
+	const mockFindId = vi.fn();
+	const mockRemult = {
+		repo: () => ({ findId: mockFindId }),
+		user: { id: "test" },
+	};
+	const opts: EntityOpts = {};
+	(mockEntity.mock.lastCall![1] as WithDynamicOpts)(opts, mockRemult);
+
 	new Vote();
 
 	describe("allowApiUpdate check", () => {
-		const opts: WithAllowApiUpdate = {};
-		const mockRemult = { user: { id: "test" } } as Remult;
-		(mockEntity.mock.lastCall![1] as WithDynamicOpts)(opts, mockRemult);
-
 		it.each([
 			["passes if user is participant", "test", true],
 			["fails if user is not participant", "other", false],
@@ -49,26 +54,15 @@ describe("Vote model", () => {
 
 	describe("save", () => {
 		it("throws error if no story", async () => {
-			const mockRemult = {
-				repo: () => ({ findId: async () => false }),
-			} as unknown as Remult;
-			const opts: WithSaved = {};
-			(mockEntity.mock.lastCall![1] as WithDynamicOpts)(opts, mockRemult);
+			mockFindId.mockImplementation(() => false);
 
-			expect(opts.saved!({ storyId: "test" })).rejects.toThrowError(
-				"Invalid story",
-			);
+			expect(opts.saved!(mockStory)).rejects.toThrowError("Invalid story");
 		});
 
 		it("calls UpdateStoryController.updateStory", async () => {
-			const mockFindId = async () => "story";
-			const mockRemult = {
-				repo: () => ({ findId: mockFindId }),
-			} as unknown as Remult;
-			const opts: WithSaved = {};
-			(mockEntity.mock.lastCall![1] as WithDynamicOpts)(opts, mockRemult);
+			mockFindId.mockImplementation(() => "story");
 
-			await opts.saved!({ storyId: "test" });
+			await opts.saved!(mockStory);
 
 			expect(UpdateStoryController.updateStory).toHaveBeenCalledWith("story");
 		});
@@ -76,10 +70,6 @@ describe("Vote model", () => {
 
 	describe("vote validation", async () => {
 		const mockVote = { storyId: "test", vote: "test" };
-		const mockFindId = vi.fn();
-		const mockRemult = {
-			repo: () => ({ findId: mockFindId }),
-		} as unknown as Remult;
 		const opts: WithValidate = {};
 		(decoratorCalls.get("vote")! as WithDynamicOpts)(opts, mockRemult);
 

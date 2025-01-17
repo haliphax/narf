@@ -1,6 +1,6 @@
 import store from "@/client/app/store";
 import { mount, VueWrapper } from "@vue/test-utils";
-import { afterEach, beforeEach, describe, it, vi } from "vitest";
+import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import Actions from "./actions.vue";
 
 describe("Actions component", () => {
@@ -45,7 +45,7 @@ describe("Actions component", () => {
 		vi.unstubAllGlobals();
 	});
 
-	it("share button copies room URL to clipboard", ({ expect }) => {
+	it("share button copies room URL to clipboard", () => {
 		vi.stubGlobal("window", {
 			location: { href: "test" },
 			navigator: { clipboard: { writeText: vi.fn() } },
@@ -60,26 +60,22 @@ describe("Actions component", () => {
 	});
 
 	describe("reveal button", () => {
-		it("is enabled for rooms not revealed", ({ expect }) => {
-			const revealButton = actions
-				.findAll("button")
-				.find((v) => v.text().includes("Reveal"))!;
-
-			expect(revealButton.element.disabled).toBe(false);
-		});
-
-		it("is disabled for revealed rooms", async ({ expect }) => {
-			store.commit("story", { revealed: true, owner: "test" });
+		it.each([
+			// name, revealed, disabled
+			["is enabled for rooms not revealed", false, false],
+			["is disabled for revealed rooms", true, true],
+		])("%s", async (_name, revealed, expected) => {
+			store.commit("story", { revealed, owner: "test" });
 			await actions.vm.$nextTick();
 
 			const revealButton = actions
 				.findAll("button")
 				.find((v) => v.text().includes("Reveal"))!;
 
-			expect(revealButton.element.disabled).toBe(true);
+			expect(revealButton.element.disabled).toBe(expected);
 		});
 
-		it("requests confirmation", ({ expect }) => {
+		it("requests confirmation", () => {
 			let dialog = false;
 			store.subscribeAction((o) => {
 				if (o.type !== "confirm" || o.payload.id !== "reveal") return;
@@ -94,7 +90,7 @@ describe("Actions component", () => {
 			expect(dialog).toBe(true);
 		});
 
-		it("dispatches story.reveal action on confirm", async ({ expect }) => {
+		it("dispatches story.reveal action on confirm", async () => {
 			let reveal = false;
 			store.subscribeAction((o) => {
 				if (o.type !== "story.reveal") return;

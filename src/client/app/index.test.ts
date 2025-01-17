@@ -1,4 +1,4 @@
-import { describe, it, vi } from "vitest";
+import { describe, expect, it, vi } from "vitest";
 import App from "./app.vue";
 import router from "./router";
 import store from "./store";
@@ -20,16 +20,16 @@ vi.mock("./store", () => ({ default: "store" }));
 await import("./index");
 
 describe("entry point", () => {
-	it("creates an application instance", ({ expect }) => {
+	it("creates an application instance", () => {
 		expect(mockCreate).toHaveBeenCalledWith(App);
 	});
 
-	it("uses plugins", ({ expect }) => {
+	it("uses plugins", () => {
 		expect(mockUse).toHaveBeenCalledWith(router);
 		expect(mockUse).toHaveBeenCalledWith(store);
 	});
 
-	it("mounts application", ({ expect }) => {
+	it("mounts application", () => {
 		expect(mockMount).toHaveBeenCalled();
 	});
 });

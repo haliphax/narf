@@ -1,6 +1,6 @@
 import { UpdateStoryController } from "@/server/routes/events";
 import { Remult, ValidateFieldEvent } from "remult";
-import { describe, it, vi } from "vitest";
+import { describe, expect, it, vi } from "vitest";
 import { Vote } from "./vote";
 
 type WithAllowApiUpdate = {
@@ -37,27 +37,18 @@ describe("Vote model", () => {
 		const mockRemult = { user: { id: "test" } } as Remult;
 		(mockEntity.mock.lastCall![1] as WithDynamicOpts)(opts, mockRemult);
 
-		it("passes if user is participant", ({ expect }) => {
-			const result = opts.allowApiUpdate!(
-				{ participantId: "test" },
-				mockRemult,
-			);
+		it.each([
+			["passes if user is participant", "test", true],
+			["fails if user is not participant", "other", false],
+		])("%s", (_name, participantId, expected) => {
+			const result = opts.allowApiUpdate!({ participantId }, mockRemult);
 
-			expect(result).toBe(true);
-		});
-
-		it("fails if user is not participant", ({ expect }) => {
-			const result = opts.allowApiUpdate!(
-				{ participantId: "other" },
-				mockRemult,
-			);
-
-			expect(result).toBe(false);
+			expect(result).toBe(expected);
 		});
 	});
 
 	describe("save", () => {
-		it("throws error if no story", async ({ expect }) => {
+		it("throws error if no story", async () => {
 			const mockRemult = {
 				repo: () => ({ findId: async () => false }),
 			} as unknown as Remult;
@@ -69,7 +60,7 @@ describe("Vote model", () => {
 			);
 		});
 
-		it("calls UpdateStoryController.updateStory", async ({ expect }) => {
+		it("calls UpdateStoryController.updateStory", async () => {
 			const mockFindId = async () => "story";
 			const mockRemult = {
 				repo: () => ({ findId: mockFindId }),
@@ -84,6 +75,7 @@ describe("Vote model", () => {
 	});
 
 	describe("vote validation", async () => {
+		const mockVote = { storyId: "test", vote: "test" };
 		const mockFindId = vi.fn();
 		const mockRemult = {
 			repo: () => ({ findId: mockFindId }),
@@ -91,39 +83,25 @@ describe("Vote model", () => {
 		const opts: WithValidate = {};
 		(decoratorCalls.get("vote")! as WithDynamicOpts)(opts, mockRemult);
 
-		it("passes if vote is undefined", ({ expect }) => {
+		it.each([
+			// test, mockFindId result, vote, v.error
+			["passes if vote is undefined", 1, {}, undefined],
+			[
+				"passes if valid",
+				{ scale: "Fibonacci" },
+				{ ...mockVote, vote: "1" },
+				undefined,
+			],
+			["fails if no story", false, mockVote, "Invalid story"],
+			["fails if no scale", 1, mockVote, "Invalid scale"],
+			["fails if invalid", { scale: "Fibonacci" }, mockVote, "Invalid vote"],
+		])("%s", async (_name, found, vote, expected) => {
+			mockFindId.mockImplementation(() => found);
 			const v = {} as ValidateFieldEvent;
 
-			opts.validate!({}, v);
+			await opts.validate!(vote, v);
 
-			expect(v.error).toBeUndefined();
-		});
-
-		it("fails if no story", async ({ expect }) => {
-			mockFindId.mockImplementationOnce(() => false);
-			const v = {} as ValidateFieldEvent;
-
-			await opts.validate!({ storyId: "test", vote: "test" }, v);
-
-			expect(v.error).toBe("Invalid story");
-		});
-
-		it("fails if no scale", async ({ expect }) => {
-			mockFindId.mockImplementationOnce(() => "story");
-			const v = {} as ValidateFieldEvent;
-
-			await opts.validate!({ storyId: "test", vote: "test" }, v);
-
-			expect(v.error).toBe("Invalid scale");
-		});
-
-		it("fails if invalid vote", async ({ expect }) => {
-			mockFindId.mockImplementationOnce(() => ({ scale: "Fibonacci" }));
-			const v = {} as ValidateFieldEvent;
-
-			await opts.validate!({ storyId: "test", vote: "test" }, v);
-
-			expect(v.error).toBe("Invalid vote");
+			expect(v.error).toBe(expected);
 		});
 	});
 });

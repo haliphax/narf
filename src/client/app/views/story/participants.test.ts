@@ -1,6 +1,6 @@
 import store from "@/client/app/store";
 import { mount, VueWrapper } from "@vue/test-utils";
-import { afterEach, beforeEach, describe, it } from "vitest";
+import { afterEach, beforeEach, describe, expect, it } from "vitest";
 import Participants from "./participants.vue";
 
 describe("Participants", () => {
@@ -42,13 +42,13 @@ describe("Participants", () => {
 		participants.unmount();
 	});
 
-	it("lists participants", ({ expect }) => {
+	it("lists participants", () => {
 		const votes = participants.findAll("li");
 
 		expect(votes.length).toBe(mockVotes.length);
 	});
 
-	it("shows icon when vote is missing", async ({ expect }) => {
+	it("shows icon when vote is missing", async () => {
 		store.commit("story", {
 			votes: [...mockVotes, { participantName: "Test 3" }],
 		});
@@ -65,7 +65,7 @@ describe("Participants", () => {
 		expect(voteSpans.length).toBe(1);
 	});
 
-	it("clears span titles on reveal", async ({ expect }) => {
+	it("clears span titles on reveal", async () => {
 		store.commit("story", { revealed: true, votes: mockVotes });
 		await participants.vm.$nextTick();
 

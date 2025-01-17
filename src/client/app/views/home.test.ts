@@ -1,6 +1,6 @@
 import store from "@/client/app/store";
 import { shallowMount, VueWrapper } from "@vue/test-utils";
-import { afterEach, beforeEach, describe, it } from "vitest";
+import { afterEach, beforeEach, describe, expect, it } from "vitest";
 import Home from "./home.vue";
 
 describe("Home view", () => {
@@ -16,31 +16,28 @@ describe("Home view", () => {
 		home.unmount();
 	});
 
-	it("has Profile component", ({ expect }) => {
-		expect(home.findComponent("PROFILE-STUB").exists()).toBe(true);
-	});
-
-	it("has New Story component", ({ expect }) => {
-		expect(home.findComponent("NEW-STORY-STUB").exists()).toBe(true);
+	it.each([["Profile"], ["New Story"]])("has %s component", (name) => {
+		expect(
+			home
+				.findComponent(`${name.replace(" ", "-").toUpperCase()}-STUB`)
+				.exists(),
+		).toBe(true);
 	});
 
 	describe("User profile details", () => {
-		it("is expanded when username is default", ({ expect }) => {
-			const details = home.element.querySelector(
-				"details",
-			)! as HTMLDetailsElement;
-			expect(details.getAttribute("open")).toBe("");
-		});
-
-		it("is collapsed when username is custom", async ({ expect }) => {
-			store.state.session.name = "haliphax";
+		it.each([
+			// name, username, open attribute value
+			["is expanded when username is default", "User", ""],
+			["is collapsed when username is custom", "test", null],
+		])("%s", (_name, username, expected) => {
+			store.state.session.name = username;
 			home = mountHome();
 
 			const details = home.element.querySelector(
 				"details",
 			)! as HTMLDetailsElement;
 
-			expect(details.getAttribute("open")).toBe(null);
+			expect(details.getAttribute("open")).toBe(expected);
 		});
 	});
 });

@@ -1,6 +1,6 @@
 import { UpdateStoryController } from "@/server/routes/events";
 import { Remult, ValidateFieldEvent } from "remult";
-import { describe, it, vi } from "vitest";
+import { describe, expect, it, vi } from "vitest";
 import { Story, ownerOnly } from "./story";
 import { Vote } from "./vote";
 
@@ -43,13 +43,13 @@ vi.mock("./vote", () => ({ Vote: "vote" }));
 describe("Story", () => {
 	new Story();
 
-	it("calls UpdateStoryController.updateStory on save", ({ expect }) => {
+	it("calls UpdateStoryController.updateStory on save", () => {
 		(mockEntity.mock.lastCall![1] as WithSaved).saved("test");
 
 		expect(UpdateStoryController.updateStory).toHaveBeenCalledWith("test");
 	});
 
-	it("_votes fetches associated records", ({ expect }) => {
+	it("_votes fetches associated records", () => {
 		const mockFind = vi.fn();
 		const mockRemult = { repo: vi.fn(() => ({ find: mockFind })) };
 		const opts: WithServerExpr = {};
@@ -62,39 +62,22 @@ describe("Story", () => {
 	});
 
 	describe("scale validation", () => {
-		it("fails if unknown", async ({ expect }) => {
+		it.each([
+			// name, story partial, validation error
+			["fails if unknown", { scale: "invalid" }, "Invalid scale"],
+			["succeeds if undefined", {}, undefined],
+			["succeeds if known", { scale: "Fibonacci" }, undefined],
+		])("%s", (_name, value, expected) => {
 			const v = {} as ValidateFieldEvent;
 
-			(decoratorCalls.get("scale")! as WithValidate).validate(
-				{ scale: "invalid" },
-				v,
-			);
+			(decoratorCalls.get("scale")! as WithValidate).validate(value, v);
 
-			expect(v.error).toBe("Invalid scale");
-		});
-
-		it("succeeds if undefined", async ({ expect }) => {
-			const v = {} as ValidateFieldEvent;
-
-			(decoratorCalls.get("scale")! as WithValidate).validate({}, v);
-
-			expect(v.error).toBeUndefined();
-		});
-
-		it("succeeds if known", async ({ expect }) => {
-			const v = {} as ValidateFieldEvent;
-
-			(decoratorCalls.get("scale")! as WithValidate).validate(
-				{ scale: "Fibonacci" },
-				v,
-			);
-
-			expect(v.error).toBeUndefined();
+			expect(v.error).toBe(expected);
 		});
 	});
 
 	describe("votes", () => {
-		it("hides other participantIds and votes", ({ expect }) => {
+		it("hides other participantIds and votes", () => {
 			const mockRemult = { user: { id: "test" } };
 			const opts: WithServerExpr = {};
 			(decoratorCalls.get("votes")! as WithDynamicOpts)(opts, mockRemult);
@@ -112,7 +95,7 @@ describe("Story", () => {
 			expect(value).toContainEqual({ participantId: "test", vote: "test" });
 		});
 
-		it("uses null if awaiting other vote", ({ expect }) => {
+		it("uses null if awaiting other vote", () => {
 			const mockRemult = { user: { id: "test" } };
 			const opts: WithServerExpr = {};
 			(decoratorCalls.get("votes")! as WithDynamicOpts)(opts, mockRemult);
@@ -126,7 +109,7 @@ describe("Story", () => {
 			expect(value).toContainEqual({ participantId: "", vote: null });
 		});
 
-		it("shows votes when revealed", ({ expect }) => {
+		it("shows votes when revealed", () => {
 			const mockRemult = { user: { id: "test" } };
 			const opts: WithServerExpr = {};
 			(decoratorCalls.get("votes")! as WithDynamicOpts)(opts, mockRemult);
@@ -146,28 +129,28 @@ describe("Story", () => {
 	});
 
 	describe("ownerOnly check", () => {
-		it("succeeds if story has no owner", ({ expect }) => {
-			const result = ownerOnly(undefined, undefined);
-
-			expect(result).toBe(true);
-		});
-
-		it("succeeds if user is owner", ({ expect }) => {
+		it.each([
+			// name, story, remult mock
+			["succeeds if story has no owner", undefined, undefined, true],
+			[
+				"succeeds if user is owner",
+				{ owner: "test" },
+				{ user: { id: "test" } },
+				true,
+			],
+			[
+				"fails if user is not owner",
+				{ owner: "test" },
+				{ user: { id: "other" } },
+				false,
+			],
+		])("%s", (_name, owner, user, expected) => {
 			const result = ownerOnly(
-				{ owner: "test" } as Story,
-				{ user: { id: "test" } } as Remult,
+				owner as Story | undefined,
+				user as Remult | undefined,
 			);
 
-			expect(result).toBe(true);
-		});
-
-		it("fails if user is not owner", ({ expect }) => {
-			const result = ownerOnly(
-				{ owner: "test" } as Story,
-				{ user: { id: "other" } } as Remult,
-			);
-
-			expect(result).toBe(false);
+			expect(result).toBe(expected);
 		});
 	});
 });

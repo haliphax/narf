@@ -3,7 +3,7 @@ import historyApiFallback from "connect-history-api-fallback";
 import cookieParser from "cookie-parser";
 import cors from "cors";
 import express from "express";
-import { afterEach, describe, it, vi } from "vitest";
+import { afterEach, describe, expect, it, vi } from "vitest";
 import cronjobs from "./cronjobs";
 import routes from "./routes";
 import server from "./server";
@@ -45,7 +45,7 @@ describe("service", () => {
 		);
 	});
 
-	it("loads modules", ({ expect }) => {
+	it("loads modules", () => {
 		const app = express();
 
 		service(app);
@@ -59,29 +59,25 @@ describe("service", () => {
 		expect(app.use).toHaveBeenCalledWith(server);
 	});
 
-	it("uses host and port parameters from env", ({ expect }) => {
-		vi.stubEnv("host", "test");
-		vi.stubEnv("port", "80");
-		const app = express();
-
-		service(app);
-
-		expect(app.listen).toHaveBeenCalledWith(80, "test", expect.anything());
-	});
-
-	it("uses fallback host and port parameters if not in env", ({ expect }) => {
+	it.each([
+		// name, host param, port param, expected host, expected port
+		["uses host/port parameters from env", "test", "80", "test", 80],
+		["uses fallback host/port if not in env", null, null, "localhost", 3000],
+	])("%s", (_name, host, port, expectedHost, expectedPort) => {
+		host && vi.stubEnv("host", host);
+		port && vi.stubEnv("port", port);
 		const app = express();
 
 		service(app);
 
 		expect(app.listen).toHaveBeenCalledWith(
-			3000,
-			"localhost",
+			expectedPort,
+			expectedHost,
 			expect.anything(),
 		);
 	});
 
-	it("removes x-powered-by header", ({ expect }) => {
+	it("removes x-powered-by header", () => {
 		const app = express();
 
 		service(app);
@@ -89,7 +85,7 @@ describe("service", () => {
 		expect(app.disable).toHaveBeenCalledWith("x-powered-by");
 	});
 
-	it("uses cors middleware in dev/test", ({ expect }) => {
+	it("uses cors middleware in dev/test", () => {
 		vi.stubEnv("NODE_ENV", "test");
 		const app = express();
 
@@ -98,7 +94,7 @@ describe("service", () => {
 		expect(app.use).toHaveBeenCalledWith(cors({ origin: "*" }));
 	});
 
-	it("doesn't use cors middleware in production", ({ expect }) => {
+	it("doesn't use cors middleware in production", () => {
 		vi.stubEnv("NODE_ENV", "production");
 		const app = express();
 
@@ -107,7 +103,7 @@ describe("service", () => {
 		expect(app.use).not.toHaveBeenCalledWith(cors({ origin: "*" }));
 	});
 
-	it("logs on startup", ({ expect }) => {
+	it("logs on startup", () => {
 		vi.stubGlobal("console", { log: vi.fn() });
 		const app = express();
 
@@ -119,7 +115,7 @@ describe("service", () => {
 		);
 	});
 
-	it("stops cronjobs on shutdown", ({ expect }) => {
+	it("stops cronjobs on shutdown", () => {
 		const app = express();
 
 		service(app);
@@ -128,7 +124,7 @@ describe("service", () => {
 		expect(cronjobs.stop).toHaveBeenCalled();
 	});
 
-	it("gracefully shuts down", ({ expect }) => {
+	it("gracefully shuts down", () => {
 		const app = express();
 
 		service(app);

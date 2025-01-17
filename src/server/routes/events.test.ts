@@ -1,5 +1,13 @@
 import { Request, Response } from "express";
-import { MockedObject, afterEach, beforeEach, describe, it, vi } from "vitest";
+import {
+	MockedObject,
+	afterEach,
+	beforeEach,
+	describe,
+	expect,
+	it,
+	vi,
+} from "vitest";
 import { UpdateStoryController, clients, handler } from "./events";
 
 vi.mock("remult", () => ({ BackendMethod: vi.fn() }));
@@ -55,7 +63,7 @@ describe("events", () => {
 		expect(clients.get("test")).toHaveLength(2);
 	});
 
-	it("removes client from tracking list on close", ({ expect }) => {
+	it("removes client from tracking list on close", () => {
 		request.params = { story: "test" };
 
 		// initial request
@@ -74,7 +82,7 @@ describe("events", () => {
 	});
 
 	describe("updateStory", () => {
-		it("should write to client response", ({ expect }) => {
+		it("should write to client response", () => {
 			const Story = vi.fn(function () {
 				return {
 					created: 0,

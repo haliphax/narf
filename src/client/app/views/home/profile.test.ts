@@ -1,6 +1,6 @@
 import store from "@/client/app/store";
 import { mount, VueWrapper } from "@vue/test-utils";
-import { afterEach, beforeEach, describe, it, vi } from "vitest";
+import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import Profile from "./profile.vue";
 
 vi.mock("uuid", () => ({ v4: () => "test" }));
@@ -19,11 +19,11 @@ describe("Profile", () => {
 		profile.unmount();
 	});
 
-	it("uses default name", ({ expect }) => {
+	it("uses default name", () => {
 		expect(profile.vm.$store.state.session.name).toBe("User");
 	});
 
-	it("submit updates session name", async ({ expect }) => {
+	it("submit updates session name", async () => {
 		profile.vm.$store.subscribe((m, s) => {
 			if (m.type !== "session") return;
 			s.session = m.payload;
@@ -36,7 +36,7 @@ describe("Profile", () => {
 		expect(profile.vm.$store.state.session.name).toBe("test");
 	});
 
-	it("exports session data", async ({ expect }) => {
+	it("exports session data", async () => {
 		const mockAnchor = {
 			href: "",
 			download: "",
@@ -70,7 +70,7 @@ describe("Profile", () => {
 			return fileList;
 		};
 
-		it("raises alert on import exception", async ({ expect }) => {
+		it("raises alert on import exception", async () => {
 			vi.stubGlobal("JSON", {
 				parse() {
 					throw new Error();
@@ -92,7 +92,7 @@ describe("Profile", () => {
 			expect(alerted).toBe(true);
 		});
 
-		it("clicks files button on user's behalf", async ({ expect }) => {
+		it("clicks files button on user's behalf", async () => {
 			let clicked = false;
 			profile
 				.findAll("input")
@@ -107,7 +107,22 @@ describe("Profile", () => {
 			expect(clicked).toBe(true);
 		});
 
-		it("throws error if multiple files selected", async ({ expect }) => {
+		it.each([
+			// name, files, alert text
+			[
+				"throws error if multiple files selected",
+				[
+					new File([""], "test1.json", { type: "application/json" }),
+					new File([""], "test2.json", { type: "application/json" }),
+				],
+				"Please select a single file",
+			],
+			[
+				"throws error if non-JSON file selected",
+				[new File([""], "test.txt", { type: "text/plain" })],
+				"Please select a JSON file",
+			],
+		])("%s", (_name, fileList, expected) => {
 			let alertMessage = "";
 			profile.vm.$store.subscribeAction((o) => {
 				if (o.type !== "alert") return;
@@ -115,32 +130,13 @@ describe("Profile", () => {
 			});
 
 			const fileInput = profile.get("ul").get("input").element;
-			fileInput.files = makeFileList([
-				new File([""], "test1.json", { type: "application/json" }),
-				new File([""], "test2.json", { type: "application/json" }),
-			]);
+			fileInput.files = makeFileList(fileList);
 			fileInput.dispatchEvent(new Event("change"));
 
-			expect(alertMessage).toBe("Please select a single file");
+			expect(alertMessage).toBe(expected);
 		});
 
-		it("throws error if non-JSON file selected", ({ expect }) => {
-			let alertMessage = "";
-			profile.vm.$store.subscribeAction((o) => {
-				if (o.type !== "alert") return;
-				alertMessage = (o.payload as { text: string }).text;
-			});
-
-			const fileInput = profile.get("ul").get("input").element;
-			fileInput.files = makeFileList([
-				new File([""], "test.txt", { type: "text/plain" }),
-			]);
-			fileInput.dispatchEvent(new Event("change"));
-
-			expect(alertMessage).toBe("Please select a JSON file");
-		});
-
-		it("loads data into session", async ({ expect }) => {
+		it("loads data into session", async () => {
 			profile.vm.$store.subscribe((m, s) => {
 				if (m.type !== "session") return;
 				s.session = m.payload;

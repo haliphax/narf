@@ -1,6 +1,6 @@
 import store from "@/client/app/store";
 import { VueWrapper, mount } from "@vue/test-utils";
-import { afterEach, beforeEach, describe, it } from "vitest";
+import { afterEach, beforeEach, describe, expect, it } from "vitest";
 import Dialogs, { DialogsState, DialogsStoreState } from "./dialogs.vue";
 
 describe("Dialogs component", () => {
@@ -17,22 +17,22 @@ describe("Dialogs component", () => {
 		dialogs.unmount();
 	});
 
-	it("registers the dialogs vuex store module", ({ expect }) => {
+	it("registers the dialogs vuex store module", () => {
 		expect(store.hasModule("dialogs")).toBe(true);
 	});
 
-	it("sets dialog props on alert action dispatch", async ({ expect }) => {
+	it("sets dialog props on alert action dispatch", async () => {
 		await store.dispatch("alert", { text: "alert" });
 		expect(dialogsState.dialogText).toBe("alert");
 	});
 
-	it("sets dialog props on confirm action dispatch", async ({ expect }) => {
+	it("sets dialog props on confirm action dispatch", async () => {
 		await store.dispatch("confirm", { id: "id", text: "confirm" });
 		expect(dialogsState.responseId).toBe("id");
 		expect(dialogsState.dialogText).toBe("confirm");
 	});
 
-	it("dispatches close action when dialog is closed", async ({ expect }) => {
+	it("dispatches close action when dialog is closed", async () => {
 		const dialog = dialogs.vm.$refs.confirm as HTMLDialogElement;
 		let closed = false;
 
@@ -47,7 +47,7 @@ describe("Dialogs component", () => {
 		expect(closed).toBe(true);
 	});
 
-	it("dispatches confirmed action when OK is clicked", async ({ expect }) => {
+	it("dispatches confirmed action when OK is clicked", async () => {
 		const dialog = dialogs.vm.$refs.confirm as HTMLDialogElement;
 		const ok = dialog.querySelector("button[value='OK']")!;
 		let confirmed = false;

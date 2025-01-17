@@ -1,5 +1,5 @@
 import { shallowMount, VueWrapper } from "@vue/test-utils";
-import { afterEach, beforeEach, describe, it } from "vitest";
+import { afterEach, beforeEach, describe, expect, it } from "vitest";
 import App from "./app.vue";
 import router from "./router";
 import store from "./store";
@@ -15,7 +15,7 @@ describe("App component", () => {
 		app.unmount();
 	});
 
-	it("has Dialogs component", ({ expect }) => {
+	it("has Dialogs component", () => {
 		expect(app.findComponent("DIALOGS-STUB").exists()).toBe(true);
 	});
 });

@@ -1,5 +1,5 @@
 import store from "@/client/app/store";
-import { afterEach, beforeEach, describe, it, vi } from "vitest";
+import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import storyModule from "./module";
 
 const {
@@ -51,7 +51,7 @@ describe("story module", () => {
 		vi.unstubAllGlobals();
 	});
 
-	it("spawns message listener on join", async ({ expect }) => {
+	it("spawns message listener on join", async () => {
 		await store.dispatch("story.join");
 
 		expect(mockAddEventListener).toHaveBeenCalledWith(
@@ -60,7 +60,7 @@ describe("story module", () => {
 		);
 	});
 
-	it("inserts partial vote on first join", async ({ expect }) => {
+	it("inserts partial vote on first join", async () => {
 		mockCount.mockImplementation(() => 0);
 		await store.dispatch("story.join");
 
@@ -71,7 +71,7 @@ describe("story module", () => {
 		});
 	});
 
-	it("dispatches story.load on new message", async ({ expect }) => {
+	it("dispatches story.load on new message", async () => {
 		let load = false;
 		store.subscribeAction((o) => {
 			if (o.type !== "story.load") return;
@@ -84,7 +84,7 @@ describe("story module", () => {
 		expect(load).toBe(true);
 	});
 
-	it("closes EventSource on load if revealed", async ({ expect }) => {
+	it("closes EventSource on load if revealed", async () => {
 		store.commit("events", new EventSourceMock());
 		mockFindId.mockImplementationOnce(() => ({ revealed: true }));
 
@@ -93,14 +93,14 @@ describe("story module", () => {
 		expect(mockClose).toHaveBeenCalled();
 	});
 
-	it("sets revealed=true on reveal", async ({ expect }) => {
+	it("sets revealed=true on reveal", async () => {
 		store.commit("story", { id: "test" });
 		await store.dispatch("story.reveal");
 
 		expect(mockUpdate).toHaveBeenCalledWith("test", { revealed: true });
 	});
 
-	it("saves record on vote", async ({ expect }) => {
+	it("saves record on vote", async () => {
 		store.commit("story", 1);
 
 		await store.dispatch("story.vote", "test");

@@ -1,6 +1,6 @@
 import store from "@/client/app/store";
 import { mount, VueWrapper } from "@vue/test-utils";
-import { afterEach, beforeEach, describe, it } from "vitest";
+import { afterEach, beforeEach, describe, expect, it } from "vitest";
 import DarkMode from "./darkmode.vue";
 import Toggle from "./toggle.vue";
 
@@ -16,7 +16,7 @@ describe("DarkMode component", () => {
 		darkMode.unmount();
 	});
 
-	it("toggles settings.darkmode", ({ expect }) => {
+	it("toggles settings.darkmode", () => {
 		const toggle = darkMode.findComponent(Toggle);
 
 		expect(store.state.session.settings.darkMode).toBe(false);
@@ -24,7 +24,7 @@ describe("DarkMode component", () => {
 		expect(store.state.session.settings.darkMode).toBe(true);
 	});
 
-	it("reacts to settings state changes", ({ expect }) => {
+	it("reacts to settings state changes", () => {
 		const data = darkMode.vm.$data as { enabled: boolean };
 
 		expect(data.enabled).toBe(false);
@@ -32,7 +32,7 @@ describe("DarkMode component", () => {
 		expect(data.enabled).toBe(true);
 	});
 
-	it("reacts to settings.darkmode state changes", ({ expect }) => {
+	it("reacts to settings.darkmode state changes", () => {
 		const data = darkMode.vm.$data as { enabled: boolean };
 
 		expect(data.enabled).toBe(false);

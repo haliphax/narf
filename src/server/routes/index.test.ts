@@ -1,5 +1,5 @@
 import { Application } from "express";
-import { afterEach, beforeEach, describe, it, vi } from "vitest";
+import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import routes from "./index";
 
 const { mockEvents } = vi.hoisted(() => ({ mockEvents: vi.fn() }));
@@ -18,7 +18,7 @@ describe("routes index", () => {
 		vi.resetAllMocks();
 	});
 
-	it("attaches route handlers", ({ expect }) => {
+	it("attaches route handlers", () => {
 		routes(mockApp);
 		expect(mockEvents).toHaveBeenCalledWith(mockApp);
 	});

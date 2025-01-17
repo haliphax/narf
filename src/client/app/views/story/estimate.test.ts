@@ -1,7 +1,7 @@
 import store from "@/client/app/store";
 import scales from "@/scales";
 import { shallowMount, VueWrapper } from "@vue/test-utils";
-import { afterEach, beforeEach, describe, it, vi } from "vitest";
+import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import Estimate from "./estimate.vue";
 import PieChart from "./piechart.vue";
 import { StoryStoreState } from "./types";
@@ -44,7 +44,7 @@ describe("Estimate component", () => {
 		vi.clearAllMocks();
 	});
 
-	it("creates buttons for voting options", ({ expect }) => {
+	it("creates buttons for voting options", () => {
 		const opts = scales.get("Fibonacci");
 		const buttons = estimate.findAll("button");
 
@@ -53,21 +53,18 @@ describe("Estimate component", () => {
 		}
 	});
 
-	it("hides pie chart if story is not revealed", ({ expect }) => {
-		expect(estimate.findAllComponents(PieChart)).toHaveLength(0);
-	});
-
-	it("shows pie chart if story is revealed", async ({ expect }) => {
-		store.commit("story", {
-			...mockStory,
-			revealed: true,
-		});
+	it.each([
+		// name, revealed, component exists
+		["hides pie chart if story is not revealed", false, false],
+		["shows pie chart if story is revealed", true, true],
+	])("%s", async (_name, revealed, expected) => {
+		store.commit("story", { ...mockStory, revealed });
 		await estimate.vm.$nextTick();
 
-		expect(estimate.findAllComponents(PieChart)).toHaveLength(1);
+		expect(estimate.findComponent(PieChart).exists()).toBe(expected);
 	});
 
-	it("commits proper vote object on button click", async ({ expect }) => {
+	it("commits proper vote object on button click", async () => {
 		let payload: {
 			participantId: string;
 			participantName: string;

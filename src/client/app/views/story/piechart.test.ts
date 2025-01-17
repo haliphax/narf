@@ -1,5 +1,5 @@
 import { mount, VueWrapper } from "@vue/test-utils";
-import { afterEach, beforeEach, describe, it } from "vitest";
+import { afterEach, beforeEach, describe, expect, it } from "vitest";
 import PieChart from "./piechart.vue";
 
 describe("PieChart", () => {
@@ -20,7 +20,7 @@ describe("PieChart", () => {
 		pieChart.unmount();
 	});
 
-	it("provides a slice for each option in data", ({ expect }) => {
+	it("provides a slice for each option in data", () => {
 		const slices = pieChart
 			.findAll("div")
 			.filter((v) => v.classes().includes("🍕"));

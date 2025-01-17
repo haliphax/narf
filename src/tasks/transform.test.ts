@@ -1,5 +1,5 @@
 import { readFile, writeFile } from "fs";
-import { afterEach, describe, it, vi } from "vitest";
+import { afterEach, describe, expect, it, vi } from "vitest";
 import transform from "./transform";
 
 const { mockWriteFile } = vi.hoisted(() => ({ mockWriteFile: vi.fn() }));
@@ -23,25 +23,18 @@ describe("transform task", async () => {
 		vi.clearAllMocks();
 	});
 
-	it("keeps links intact when rootURI is /", async ({ expect }) => {
-		vi.stubEnv("ROOT_URI", "");
+	it.each([
+		// name, ROOT_URI, expected URL
+		["keeps links intact with default root", "", "/test"],
+		["reformats links with custom root", "/prefix/", "/prefix/test"],
+	])("%s", async (_name, root, expected) => {
+		vi.stubEnv("ROOT_URI", root);
 
 		await transform();
 
 		expect(mockWriteFile).toHaveBeenCalledWith(
 			expect.anything(),
-			'<link href="/test" />',
-		);
-	});
-
-	it("reformats links when rootURI is custom", async ({ expect }) => {
-		vi.stubEnv("ROOT_URI", "/prefix/");
-
-		await transform();
-
-		expect(mockWriteFile).toHaveBeenCalledWith(
-			expect.anything(),
-			'<link href="/prefix/test" />',
+			`<link href="${expected}" />`,
 		);
 	});
 });

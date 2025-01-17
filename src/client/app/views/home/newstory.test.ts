@@ -2,7 +2,7 @@ import router from "@/client/app/router";
 import store from "@/client/app/store";
 import scales from "@/scales";
 import { mount, VueWrapper } from "@vue/test-utils";
-import { afterEach, beforeEach, describe, it, vi } from "vitest";
+import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import NewStory from "./newstory.vue";
 
 const { mockInsert } = vi.hoisted(() => ({
@@ -27,7 +27,7 @@ describe("NewStory", () => {
 		newStory.unmount();
 	});
 
-	it("lists scales", ({ expect }) => {
+	it("lists scales", () => {
 		const scalesArray: string[] = [];
 		scales.forEach((_, k) => scalesArray.push(k));
 		const data = newStory.vm.$data as { scales: string[] };
@@ -35,7 +35,7 @@ describe("NewStory", () => {
 		expect(data.scales).toEqual(scalesArray);
 	});
 
-	it("updates session settings on scale change", async ({ expect }) => {
+	it("updates session settings on scale change", async () => {
 		expect(newStory.vm.$store.state.session.settings.scale).toBe("Fibonacci");
 
 		(newStory.vm.$data as { scale: string }).scale = "T-shirt sizes";
@@ -47,7 +47,7 @@ describe("NewStory", () => {
 		});
 	});
 
-	it("creates a new record on submit", async ({ expect }) => {
+	it("creates a new record on submit", async () => {
 		(newStory.vm.$data as { title: string }).title = "test";
 
 		await newStory.get("form").trigger("submit");

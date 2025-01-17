@@ -1,7 +1,7 @@
 import store from "@/client/app/store";
 import { Story as StoryModel } from "@/models/story";
 import { shallowMount, VueWrapper } from "@vue/test-utils";
-import { afterEach, beforeEach, describe, it, vi } from "vitest";
+import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import Story from "./story.vue";
 import { StoryStoreState } from "./story/types";
 
@@ -61,37 +61,34 @@ describe("Story view", () => {
 		vi.unstubAllGlobals();
 	});
 
-	it("has Actions component", ({ expect }) => {
-		expect(story.findComponent("ACTIONS-STUB").exists()).toBe(true);
-	});
+	it.each([["Actions"], ["Estimate"], ["Participants"]])(
+		"has %s component",
+		(name) => {
+			expect(story.findComponent(`${name.toUpperCase()}-STUB`).exists()).toBe(
+				true,
+			);
+		},
+	);
 
-	it("has Estimate component", ({ expect }) => {
-		expect(story.findComponent("ESTIMATE-STUB").exists()).toBe(true);
-	});
-
-	it("has Participants component", ({ expect }) => {
-		expect(story.findComponent("PARTICIPANTS-STUB").exists()).toBe(true);
-	});
-
-	it("registers story module", ({ expect }) => {
+	it("registers story module", () => {
 		expect(store.hasModule("story")).toBe(true);
 	});
 
-	it("connects EventSource on mount", ({ expect }) => {
+	it("connects EventSource on mount", () => {
 		const storyState = (story.vm.$store.state as unknown as StoryStoreState)
 			.story;
 
 		expect(storyState.events).toBeInstanceOf(EventSourceMock);
 	});
 
-	it("loads story on mount", ({ expect }) => {
+	it("loads story on mount", () => {
 		const storyState = (story.vm.$store.state as unknown as StoryStoreState)
 			.story;
 
 		expect(storyState.story).toEqual(storyMock);
 	});
 
-	it("disconnects after timeout", async ({ expect }) => {
+	it("disconnects after timeout", async () => {
 		store.commit("events", new EventSourceMock());
 		story.unmount();
 		story = shallowMount(Story, { global: { plugins: [store] } });
@@ -104,7 +101,7 @@ describe("Story view", () => {
 		expect(mockEventsClose).toHaveBeenCalled();
 	});
 
-	it("reconnects when timeout modal is closed", async ({ expect }) => {
+	it("reconnects when timeout modal is closed", async () => {
 		let rejoin = false;
 		store.subscribeAction((o) => {
 			if (o.type !== "story.join") return;

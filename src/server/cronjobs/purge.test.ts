@@ -1,4 +1,4 @@
-import { afterEach, describe, it, vi } from "vitest";
+import { afterEach, describe, expect, it, vi } from "vitest";
 import { task } from "./purge";
 
 const { mockDelete, mockWhere } = vi.hoisted(() => ({
@@ -17,7 +17,7 @@ describe("purge cronjob", async () => {
 		vi.clearAllMocks();
 	});
 
-	it("deletes expired stories and associated votes", async ({ expect }) => {
+	it("deletes expired stories and associated votes", async () => {
 		await task(new Date());
 
 		expect(mockWhere).toHaveBeenCalledWith("storyId", 1234);
@@ -25,7 +25,7 @@ describe("purge cronjob", async () => {
 		expect(mockDelete).toHaveBeenCalledTimes(2);
 	});
 
-	it("runs on init", async ({ expect }) => {
+	it("runs on init", async () => {
 		await task("init");
 
 		expect(mockDelete).toHaveBeenCalledTimes(2);

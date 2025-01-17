@@ -11,7 +11,7 @@ export default defineConfig({
 	},
 	test: {
 		coverage: {
-			reporter: ["html", "lcov", "text"],
+			reporter: ["clover", "html", "text"],
 			reportOnFailure: true,
 			skipFull: true,
 			thresholds: { lines: 90 },

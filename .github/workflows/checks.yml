@@ -64,10 +64,12 @@ jobs:
       - name: Run unit tests
         run: npm run coverage
 
-      - name: Push result to Testspace server
-        run: testspace ./coverage/junit.xml
-        if: always()
-
       - name: Upload coverage report or add comment
         uses: coverallsapp/github-action@v2
+        if: always()
+        with:
+          file: coverage/clover.xml
+
+      - name: Push result to Testspace server
+        run: testspace ./coverage/clover.xml ./coverage/junit.xml
         if: always()

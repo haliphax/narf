@@ -122,7 +122,7 @@ describe("Story", () => {
 
 	describe("ownerOnly check", () => {
 		it.each([
-			// name, story, remult mock
+			// name, story, remult mock, pass
 			["succeeds if story has no owner", undefined, undefined, true],
 			[
 				"succeeds if user is owner",

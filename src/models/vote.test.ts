@@ -43,6 +43,7 @@ describe("Vote model", () => {
 
 	describe("allowApiUpdate check", () => {
 		it.each([
+			// name, username, pass
 			["passes if user is participant", "test", true],
 			["fails if user is not participant", "other", false],
 		])("%s", (_name, participantId, expected) => {

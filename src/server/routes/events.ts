@@ -24,7 +24,7 @@ export const handler = async (r: Request, s: Response) => {
 	console.log(`Client ${client.id} connected`);
 
 	if (clients.has(story)) {
-		clients.set(story, (clients.get(story) ?? []).concat(client));
+		clients.set(story, clients.get(story)!.concat(client));
 	} else {
 		clients.set(story, [client]);
 	}

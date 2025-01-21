@@ -1,0 +1,8 @@
+bash <<EOF
+if [[ "$(git branch --show-current)" == "main" ]]; then
+	echo "❌ Do not commit to main branch" >&2
+	exit 1
+fi
+EOF
+
+npx lint-staged

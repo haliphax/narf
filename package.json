@@ -50,7 +50,7 @@
 		"prettier-plugin-toml": "^1.0.0",
 		"semantic-release": "^22.0.12",
 		"semantic-release-gitmoji": "^1.6.5",
-		"vite": "^5.0.0",
+		"vite": "^5.4.14",
 		"vitest": "^2.0.0",
 		"vitest-mock-extended": "^2.0.2",
 		"vue": "^3.3.4",

@@ -29,6 +29,26 @@ Simple [story points][] estimation
 - [Remult][] - Data access layer
 - [Vitest][] - Testing framework
 
+## Run locally
+
+Install dependencies:
+
+```bash
+npm ci
+```
+
+Build the client web app:
+
+```bash
+npm run build
+```
+
+Start the app server:
+
+```bash
+npm run start
+```
+
 [css grid]: https://developer.mozilla.org/en-us/docs/web/css/css_grid_layout
 [demonstration app]: https://sphenoid-secret-antimony.glitch.me
 [express]: https://expressjs.com

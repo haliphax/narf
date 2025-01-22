@@ -1,3 +1,8 @@
+# [v1.14.5](https://github.com/haliphax/narf/compare/v1.14.4...v1.14.5) (2025-01-22)
+
+## 🔒 Security Issues
+- [`7c896ae`](https://github.com/haliphax/narf/commit/7c896ae) ️ Bump vite from 5.4.11 to 5.4.14 (#134) (Issues: [`#134`](https://github.com/haliphax/narf/issues/134))
+
 # [v1.14.4](https://github.com/haliphax/narf/compare/v1.14.3...v1.14.4) (2025-01-14)
 
 ## 🐛 Bug Fixes

@@ -35,6 +35,15 @@ jobs:
           PR_TITLE: ${{ github.event.pull_request.title }}
         run: echo "$PR_TITLE" | npx commitlint
 
+  docker:
+    name: Docker build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: haliphax/narf/.github@main
+
+      - name: Docker build
+        run: docker build -t narf .
+
   eslint:
     runs-on: ubuntu-latest
     steps:

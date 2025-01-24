@@ -10,7 +10,7 @@
 		"node-cron": "^3.0.2",
 		"process": "^0.11.10",
 		"remult": "^0.27.22",
-		"sqlite3": "^5.1.6",
+		"sqlite3": "^5.1.7",
 		"tsx": "^3.12.10",
 		"typescript": "^5.2.2",
 		"uuid": "^9.0.1"
@@ -36,6 +36,7 @@
 		"buffer": "^6.0.3",
 		"commitlint": "^17.7.1",
 		"commitlint-config-gitmoji": "^2.3.1",
+		"cypress": "^14.0.0",
 		"eslint": "^8.49.0",
 		"eslint-config-prettier": "^9.0.0",
 		"eslint-plugin-prettier": "^5.0.0",
@@ -85,9 +86,10 @@
 		"coverage": "npm test -- --coverage",
 		"coverage:client": "npm run test:client -- --coverage",
 		"coverage:server": "npm run test:server -- --coverage",
+		"e2e": "cypress run",
 		"prepare": "husky",
 		"start": "tsx src/server/index.ts",
-		"test": "vitest run",
+		"test": "vitest run src",
 		"test:client": "vitest run src/client",
 		"test:server": "vitest run src/server",
 		"transform": "tsx src/tasks/transform.ts"

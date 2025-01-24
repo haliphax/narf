@@ -35,24 +35,21 @@ jobs:
           PR_TITLE: ${{ github.event.pull_request.title }}
         run: echo "$PR_TITLE" | npx commitlint
 
-  docker:
-    name: Docker build
-    runs-on: ubuntu-latest
-    steps:
-      - uses: haliphax/narf/.github@main
-
-      - name: Docker build
-        run: docker build -t narf .
-
-  end-to-end:
+  e2e:
     name: End-to-end tests
     runs-on: ubuntu-latest
     steps:
-      - uses: haliphax/narf/.github@main
+      - name: Checkout
+        uses: actions/checkout@v4
 
-      - name: End-to-end tests
+      - name: Docker build
+        run: docker build -t narf:latest .
+
+      - name: Cypress
         run: |
-          npm run start &
+          mkdir db
+          docker run -d -p 3000:3000 -v $(pwd)/db:/app/db narf:latest
+          npm i cypress
           npm run e2e
 
   eslint:

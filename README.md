@@ -46,7 +46,27 @@ npm run build
 Start the app server:
 
 ```bash
-npm run start
+npm start
+```
+
+## Development
+
+Run unit tests:
+
+```bash
+npm test
+```
+
+Generate coverage reports:
+
+```bash
+npm run coverage
+```
+
+Run end-to-end tests:
+
+```bash
+npm run e2e
 ```
 
 [css grid]: https://developer.mozilla.org/en-us/docs/web/css/css_grid_layout

@@ -27,7 +27,8 @@ Simple [story points][] estimation
 ### Shared
 
 - [Remult][] - Data access layer
-- [Vitest][] - Testing framework
+- [Vitest][] - Unit/integration test framework
+- [Cypress][] - End-to-end test framework
 
 ## Run locally
 
@@ -70,6 +71,7 @@ npm run e2e
 ```
 
 [css grid]: https://developer.mozilla.org/en-us/docs/web/css/css_grid_layout
+[cypress]: https://cypress.io
 [demonstration app]: https://sphenoid-secret-antimony.glitch.me
 [express]: https://expressjs.com
 [less]: https://lesscss.org

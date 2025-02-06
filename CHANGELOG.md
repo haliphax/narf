@@ -1,3 +1,8 @@
+# [v1.14.7](https://github.com/haliphax/narf/compare/v1.14.6...v1.14.7) (2025-02-06)
+
+## 🐛 Bug Fixes
+- [`b5d0c7c`](https://github.com/haliphax/narf/commit/b5d0c7c)  include dist folder in release
+
 # [v1.14.6](https://github.com/haliphax/narf/compare/v1.14.5...v1.14.6) (2025-02-06)
 
 ## 🔒 Security Issues

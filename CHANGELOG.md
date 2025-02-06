@@ -1,3 +1,8 @@
+# [v1.14.6](https://github.com/haliphax/narf/compare/v1.14.5...v1.14.6) (2025-02-06)
+
+## 🔒 Security Issues
+- [`7041b83`](https://github.com/haliphax/narf/commit/7041b83) ️ Bump vitest and @vitest/coverage-v8 (#136) (Issues: [`#136`](https://github.com/haliphax/narf/issues/136))
+
 # [v1.14.5](https://github.com/haliphax/narf/compare/v1.14.4...v1.14.5) (2025-01-22)
 
 ## 🔒 Security Issues

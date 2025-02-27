@@ -1,3 +1,9 @@
+# [v1.14.8](https://github.com/haliphax/narf/compare/v1.14.7...v1.14.8) (2025-02-27)
+
+## 🔒 Security Issues
+- [`a7dcf2a`](https://github.com/haliphax/narf/commit/a7dcf2a) ️ upgrade esbuild to ^0.25.0 
+- [`30a16b0`](https://github.com/haliphax/narf/commit/30a16b0) ️ node lts/jod
+
 # [v1.14.7](https://github.com/haliphax/narf/compare/v1.14.6...v1.14.7) (2025-02-06)
 
 ## 🐛 Bug Fixes

@@ -1,9 +1,6 @@
+.git/
+/.vscode/
 /coverage/
 /db/
 /dist/
 node_modules/
-
-# vs code
-.vscode/*
-!.vscode/extensions.json
-!.vscode/settings.json

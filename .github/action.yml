@@ -2,6 +2,10 @@ name: Checkout repo and setup Node
 description: narf composite action for setting up jobs
 
 inputs:
+  dependencies:
+    description: Whether to install dependencies
+    required: false
+    default: "true"
   token:
     description: alternative GitHub token
     required: false
@@ -22,5 +26,6 @@ runs:
         cache: npm
 
     - name: Install dependencies
+      if: inputs.dependencies == 'true'
       run: npm ci
       shell: bash

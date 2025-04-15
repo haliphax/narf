@@ -39,14 +39,9 @@ jobs:
     name: End-to-end tests
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Set up Node
-        uses: actions/setup-node@v4
+      - uses: haliphax/narf/.github@main
         with:
-          node-version-file: .nvmrc
-          cache: npm
+          dependencies: "false"
 
       - name: Docker build
         run: docker build -t narf:latest .

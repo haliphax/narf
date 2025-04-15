@@ -43,8 +43,14 @@ jobs:
         with:
           dependencies: "false"
 
-      - name: Docker build
-        run: docker build -t narf:latest .
+      - uses: docker/setup-buildx-action@v3
+
+      - uses: docker/build-push-action@v6
+        with:
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+          load: true
+          tags: narf:latest
 
       - name: Cypress
         env:

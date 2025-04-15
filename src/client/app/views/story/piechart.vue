@@ -126,13 +126,11 @@ label {
 	margin: 0;
 	padding: 0;
 	position: relative;
-	z-index: -2;
 }
 
 .🥧 > div {
 	position: absolute;
 	width: 100%;
-	z-index: -1;
 }
 
 .🍕 {

@@ -37,18 +37,20 @@ jobs:
         run: echo "DOCKER_CACHE_KEY=${{ hashFiles('.dockerignore', 'Dockerfile', 'package*.json', 'src/**', 'tsconfig.json') }}" >> $GITHUB_OUTPUT
 
       - uses: actions/cache/restore@v4
+        id: cache-restore
         with:
           path: /tmp/docker-image.tgz
           key: ${{ steps.cache-key.outputs.DOCKER_CACHE_KEY }}
 
-      - name: Load docker image from cache
-        run: stat /tmp/docker-image.tgz && gunzip -c /tmp/docker-image.tgz | docker load
+      - name: Load cached docker image
+        if: steps.cache-restore.outputs.cache-hit == 'true'
+        run: gunzip -c /tmp/docker-image.tgz | docker load
 
       - name: Build docker image
         run: docker build -t narf:latest .
 
-      - name: Export docker image for cache
-        run: docker save narf:latest | gzip -c > /tmp/docker-image.tgz
+      - name: Cache docker image
+        run: docker save narf:latest | gzip -c >/tmp/docker-image.tgz
 
       - uses: actions/cache/save@v4
         with:
@@ -60,7 +62,7 @@ jobs:
           TERM: xterm-256color
         run: |
           mkdir db
-          docker run -d -p 3000:3000 -v $(pwd)/db:/app/db narf:latest
+          docker run --rm -d -p 3000:3000 -v $(pwd)/db:/app/db narf:latest
           npm i -D cypress
           npm run e2e
 

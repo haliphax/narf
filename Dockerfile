@@ -7,10 +7,12 @@ LABEL fly_launch_runtime="Node.js"
 WORKDIR /app
 ENV NODE_ENV="production"
 
-FROM base AS build
+FROM base AS requirements
 RUN apt-get update -qq && \
 	apt-get install -y --no-install-recommends \
 	build-essential=12.9 pkg-config=1.8.1-1 python-is-python3=3.11.2-1+deb12u1
+
+FROM requirements AS build
 COPY package-lock.json package.json ./
 RUN npm ci --include=dev
 COPY . .

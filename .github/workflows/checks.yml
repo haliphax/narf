@@ -3,6 +3,7 @@ name: Checks
 on:
   pull_request:
     branches: [main]
+    types: [opened, reopened, synchronize]
 
   push:
     branches: [main]
@@ -22,18 +23,6 @@ jobs:
 
       - name: Build client
         run: npm run build
-
-  commitlint:
-    name: CommitLint
-    if: ${{ contains(github.event_name, 'pull_request') }}
-    runs-on: ubuntu-latest
-    steps:
-      - uses: haliphax/narf/.github@main
-
-      - name: Lint pull request title
-        env:
-          PR_TITLE: ${{ github.event.pull_request.title }}
-        run: echo "$PR_TITLE" | npx commitlint
 
   e2e:
     name: End-to-end tests

@@ -1,3 +1,13 @@
+# [v1.14.9](https://github.com/haliphax/narf/compare/v1.14.8...v1.14.9) (2025-04-15)
+
+## 🐛 Bug Fixes
+- [`a9b091a`](https://github.com/haliphax/narf/commit/a9b091a)  inline body style to prevent flash on load 
+- [`a9da09d`](https://github.com/haliphax/narf/commit/a9da09d)  avoid loading flash for both dark and light modes 
+
+## 🔒 Security Issues
+- [`ba64554`](https://github.com/haliphax/narf/commit/ba64554) ️ bump axios from 1.7.4 to 1.8.2 (#137) (Issues: [`#137`](https://github.com/haliphax/narf/issues/137))
+- [`829321f`](https://github.com/haliphax/narf/commit/829321f) ️ bump vite from 5.4.14 to 5.4.18 (#138) (Issues: [`#138`](https://github.com/haliphax/narf/issues/138))
+
 # [v1.14.8](https://github.com/haliphax/narf/compare/v1.14.7...v1.14.8) (2025-02-27)
 
 ## 🔒 Security Issues

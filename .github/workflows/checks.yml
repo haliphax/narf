@@ -29,8 +29,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: haliphax/narf/.github@main
-        with:
-          dependencies: "false"
 
       - name: Generate cache key
         id: cache-key
@@ -66,7 +64,6 @@ jobs:
         run: |
           mkdir db
           docker run --rm -d -p 3000:3000 -v $(pwd)/db:/app/db narf:latest
-          npm i -D cypress
           npm run e2e
 
   eslint:

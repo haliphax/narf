@@ -1,3 +1,8 @@
+# [v1.14.10](https://github.com/haliphax/narf/compare/v1.14.9...v1.14.10) (2025-04-15)
+
+## 🐛 Bug Fixes
+- [`c718a8c`](https://github.com/haliphax/narf/commit/c718a8c)  more bulletproof FOUC prevention
+
 # [v1.14.9](https://github.com/haliphax/narf/compare/v1.14.8...v1.14.9) (2025-04-15)
 
 ## 🐛 Bug Fixes

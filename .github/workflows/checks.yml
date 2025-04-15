@@ -30,33 +30,16 @@ jobs:
     steps:
       - uses: haliphax/narf/.github@main
 
-      - name: Generate cache key
-        id: cache-key
-        run: echo "DOCKER_CACHE_KEY=${{ hashFiles('.dockerignore', 'Dockerfile', 'package*.json', 'src/**', '!src/**.test.ts', 'tsconfig.json') }}" >> $GITHUB_OUTPUT
+      - name: Set up buildx
+        uses: docker/setup-buildx-action@v3
 
-      - uses: actions/cache/restore@v4
-        id: cache-restore
+      - name: Build
+        uses: docker/build-push-action@v6
         with:
-          path: /tmp/docker-image.tgz
-          key: ${{ steps.cache-key.outputs.DOCKER_CACHE_KEY }}
-
-      - name: Load cached docker image
-        if: steps.cache-restore.outputs.cache-hit == 'true'
-        run: gunzip -c /tmp/docker-image.tgz | docker load
-
-      - name: Build docker image
-        if: steps.cache-restore.outputs.cache-hit != 'true'
-        run: docker build -t narf:latest .
-
-      - name: Save docker image
-        if: steps.cache-restore.outputs.cache-hit != 'true'
-        run: docker save narf:latest | gzip -c >/tmp/docker-image.tgz
-
-      - uses: actions/cache/save@v4
-        if: steps.cache-restore.outputs.cache-hit != 'true'
-        with:
-          path: /tmp/docker-image.tgz
-          key: ${{ steps.cache-key.outputs.DOCKER_CACHE_KEY }}
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+          load: true
+          tags: narf:latest
 
       - name: Cypress
         env:

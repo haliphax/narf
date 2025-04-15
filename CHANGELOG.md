@@ -1,3 +1,8 @@
+# [v1.14.11](https://github.com/haliphax/narf/compare/v1.14.10...v1.14.11) (2025-04-15)
+
+## 🔒 Security Issues
+- [`ef31630`](https://github.com/haliphax/narf/commit/ef31630) ️ upgrade dependencies
+
 # [v1.14.10](https://github.com/haliphax/narf/compare/v1.14.9...v1.14.10) (2025-04-15)
 
 ## 🐛 Bug Fixes

@@ -32,11 +32,28 @@ jobs:
         with:
           dependencies: "false"
 
-      - uses: satackey/action-docker-layer-caching@v0.0.11
-        continue-on-error: true
+      - name: Generate cache key
+        id: cache-key
+        run: echo "DOCKER_CACHE_KEY=${{ hashFiles('.dockerignore', 'Dockerfile', 'package*.json', 'src/**', 'tsconfig.json') }}" >> $GITHUB_OUTPUT
+
+      - uses: actions/cache/restore@v4
+        with:
+          path: /tmp/docker-image.tgz
+          key: ${{ steps.cache-key.outputs.DOCKER_CACHE_KEY }}
+
+      - name: Load docker image from cache
+        run: stat /tmp/docker-image.tgz && gunzip -c /tmp/docker-image.tgz | docker load
 
       - name: Build docker image
         run: docker build -t narf:latest .
+
+      - name: Export docker image for cache
+        run: docker save narf:latest | gzip -c > /tmp/docker-image.tgz
+
+      - uses: actions/cache/save@v4
+        with:
+          path: /tmp/docker-image.tgz
+          key: ${{ steps.cache-key.outputs.DOCKER_CACHE_KEY }}
 
       - name: Cypress
         env:

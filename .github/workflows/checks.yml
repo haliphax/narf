@@ -32,14 +32,11 @@ jobs:
         with:
           dependencies: "false"
 
-      - uses: docker/setup-buildx-action@v3
+      - uses: satackey/action-docker-layer-caching@v0.0.11
+        continue-on-error: true
 
-      - uses: docker/build-push-action@v6
-        with:
-          cache-from: type=gha
-          cache-to: type=gha,mode=max
-          load: true
-          tags: narf:latest
+      - name: Build docker image
+        run: docker build -t narf:latest .
 
       - name: Cypress
         env:
@@ -47,7 +44,7 @@ jobs:
         run: |
           mkdir db
           docker run -d -p 3000:3000 -v $(pwd)/db:/app/db narf:latest
-          npm i cypress
+          npm i -D cypress
           npm run e2e
 
   eslint:

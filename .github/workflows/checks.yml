@@ -61,7 +61,7 @@ jobs:
       - uses: haliphax/narf/.github@main
 
       - name: Prettier
-        run: npx prettier -l -u .
+        run: npx prettier -lu .
 
   unit-tests:
     name: Unit tests

@@ -21,8 +21,13 @@ const session: Module<SessionState, StoreState> = {
 				...payload,
 			};
 
-			payload.id && localStorage.setItem(keys.sessionId, payload.id);
-			payload.name && localStorage.setItem(keys.name, payload.name.toString());
+			if (payload.id) {
+				localStorage.setItem(keys.sessionId, payload.id);
+			}
+
+			if (payload.name) {
+				localStorage.setItem(keys.name, payload.name.toString());
+			}
 
 			if (payload.settings) {
 				localStorage.setItem(
@@ -42,8 +47,8 @@ const session: Module<SessionState, StoreState> = {
 				localStorage.setItem(keys.darkMode, payload.darkMode.toString());
 			}
 
-			if (payload.scale != undefined) {
-				payload.scale && localStorage.setItem(keys.scale, payload.scale);
+			if (payload.scale != undefined && payload.scale) {
+				localStorage.setItem(keys.scale, payload.scale);
 			}
 		},
 	},

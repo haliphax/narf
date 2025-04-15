@@ -64,8 +64,9 @@ describe("service", () => {
 		["uses host/port parameters from env", "test", "80", "test", 80],
 		["uses fallback host/port if not in env", null, null, "localhost", 3000],
 	])("%s", (_name, host, port, expectedHost, expectedPort) => {
-		host && vi.stubEnv("host", host);
-		port && vi.stubEnv("port", port);
+		if (host) vi.stubEnv("host", host);
+		if (port) vi.stubEnv("port", port);
+
 		const app = express();
 
 		service(app);

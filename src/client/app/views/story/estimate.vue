@@ -2,8 +2,8 @@
 import { Vote } from "@/models/vote";
 import scales from "@/scales";
 import { defineComponent } from "vue";
-import { StoryStoreState } from "./types";
 import PieChart from "./piechart.vue";
+import { StoryStoreState } from "./types";
 
 const Estimate = defineComponent({
 	components: {

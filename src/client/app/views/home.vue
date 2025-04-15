@@ -1,8 +1,8 @@
 <script lang="ts">
+import pkg from "@/../package.json";
 import { defineComponent } from "vue";
 import NewStory from "./home/newstory.vue";
 import Profile from "./home/profile.vue";
-import pkg from "@/../package.json";
 
 const Home = defineComponent({
 	components: {

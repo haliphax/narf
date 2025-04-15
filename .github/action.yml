@@ -2,6 +2,11 @@ name: Checkout repo and setup Node
 description: narf composite action for setting up jobs
 
 inputs:
+  dependencies:
+    description: Whether to install dependencies
+    required: false
+    type: boolean
+    default: true
   token:
     description: alternative GitHub token
     required: false

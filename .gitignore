@@ -1,4 +1,5 @@
 /coverage/
+/cypress/screenshots/
 /db/
 /dist/
 node_modules/

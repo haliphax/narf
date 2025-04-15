@@ -34,7 +34,7 @@ jobs:
 
       - name: Generate cache key
         id: cache-key
-        run: echo "DOCKER_CACHE_KEY=${{ hashFiles('.dockerignore', 'Dockerfile', 'package*.json', 'src/**', 'tsconfig.json') }}" >> $GITHUB_OUTPUT
+        run: echo "DOCKER_CACHE_KEY=${{ hashFiles('.dockerignore', 'Dockerfile', 'package*.json', 'src/**', '!src/**.test.ts', 'tsconfig.json') }}" >> $GITHUB_OUTPUT
 
       - uses: actions/cache/restore@v4
         id: cache-restore
@@ -47,12 +47,15 @@ jobs:
         run: gunzip -c /tmp/docker-image.tgz | docker load
 
       - name: Build docker image
+        if: steps.cache-restore.outputs.cache-hit != 'true'
         run: docker build -t narf:latest .
 
-      - name: Cache docker image
+      - name: Save docker image
+        if: steps.cache-restore.outputs.cache-hit != 'true'
         run: docker save narf:latest | gzip -c >/tmp/docker-image.tgz
 
       - uses: actions/cache/save@v4
+        if: steps.cache-restore.outputs.cache-hit != 'true'
         with:
           path: /tmp/docker-image.tgz
           key: ${{ steps.cache-key.outputs.DOCKER_CACHE_KEY }}

@@ -6,6 +6,7 @@ inputs:
     description: Whether to install dependencies
     required: false
     default: "true"
+
   token:
     description: alternative GitHub token
     required: false

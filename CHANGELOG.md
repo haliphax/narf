@@ -1,3 +1,8 @@
+# [v1.14.12](https://github.com/haliphax/narf/compare/v1.14.11...v1.14.12) (2025-04-15)
+
+## 🐛 Bug Fixes
+- [`7b994ab`](https://github.com/haliphax/narf/commit/7b994ab)  fix pie chart visibility bug
+
 # [v1.14.11](https://github.com/haliphax/narf/compare/v1.14.10...v1.14.11) (2025-04-15)
 
 ## 🔒 Security Issues

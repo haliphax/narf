@@ -21,6 +21,30 @@ runs:
         node-version-file: .nvmrc
         cache: npm
 
+    - name: Generate node_modules cache key
+      id: cache-key
+      shell: bash
+      run: echo "CACHE_KEY=${{ hashFiles('package*.json') }}" >> $GITHUB_OUTPUT
+
+    - name: Get cached dependencies
+      id: cache-restore
+      uses: actions/cache/restore@v4
+      with:
+        key: ${{ steps.cache-key.outputs.CACHE_KEY }}
+        path: |
+          ./node_modules
+          /home/runner/.cache/Cypress
+
     - name: Install dependencies
+      if: steps.cache-restore.outputs.cache-hit != 'true'
       run: npm ci
       shell: bash
+
+    - name: Save dependencies cache
+      if: steps.cache-restore.outputs.cache-hit != 'true'
+      uses: actions/cache/save@v4
+      with:
+        key: ${{ steps.cache-key.outputs.CACHE_KEY }}
+        path: |
+          ./node_modules
+          /home/runner/.cache/Cypress

@@ -2,6 +2,11 @@ name: Checkout repo and setup Node
 description: narf composite action for setting up jobs
 
 inputs:
+  dependencies:
+    description: Whether to install dependencies
+    required: false
+    default: "true"
+
   token:
     description: alternative GitHub token
     required: false
@@ -23,11 +28,13 @@ runs:
 
     - name: Generate node_modules cache key
       id: cache-key
+      if: inputs.dependencies == 'true'
       shell: bash
       run: echo "CACHE_KEY=${{ hashFiles('package*.json') }}" >> $GITHUB_OUTPUT
 
     - name: Get cached dependencies
       id: cache-restore
+      if: inputs.dependencies == 'true'
       uses: actions/cache/restore@v4
       with:
         key: ${{ steps.cache-key.outputs.CACHE_KEY }}
@@ -36,12 +43,16 @@ runs:
           /home/runner/.cache/Cypress
 
     - name: Install dependencies
-      if: steps.cache-restore.outputs.cache-hit != 'true'
+      if: |
+        inputs.dependencies == 'true'
+        && steps.cache-restore.outputs.cache-hit != 'true'
       run: npm ci
       shell: bash
 
     - name: Save dependencies cache
-      if: steps.cache-restore.outputs.cache-hit != 'true'
+      if: |
+        inputs.dependencies == 'true'
+        && steps.cache-restore.outputs.cache-hit != 'true'
       uses: actions/cache/save@v4
       with:
         key: ${{ steps.cache-key.outputs.CACHE_KEY }}

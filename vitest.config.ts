@@ -11,7 +11,7 @@ export default defineConfig({
 	},
 	test: {
 		coverage: {
-			reporter: ["clover", "html", "text"],
+			reporter: ["clover", "json", "json-summary", "html", "text"],
 			reportOnFailure: true,
 			skipFull: true,
 			thresholds: { lines: 90 },

@@ -81,6 +81,12 @@ jobs:
       - name: Run unit tests
         run: npm run coverage
 
+      - name: Add step summary
+        if: always()
+        uses: davelosert/vitest-coverage-report-action@v2
+        with:
+          comment-on: none
+
       - name: Upload coverage report or add comment
         uses: coverallsapp/github-action@v2
         if: always()

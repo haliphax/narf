@@ -15,49 +15,22 @@ concurrency:
   group: ${{ github.workflow }}-${{ github.branch }}
 
 jobs:
-  build:
-    name: Build client
-    runs-on: ubuntu-latest
-    steps:
-      - uses: haliphax/narf/.github@main
-
-      - name: Build client
-        run: npm run build
-
   e2e:
     name: End-to-end tests
     runs-on: ubuntu-latest
-    services:
-      registry:
-        image: registry:3
-        ports:
-          - 5000:5000
     steps:
       - uses: haliphax/narf/.github@main
-        with:
-          dependencies: "false"
 
-      - name: Set up buildx
-        uses: docker/setup-buildx-action@v3
-        with:
-          driver-opts: network=host
-
-      - name: Build
-        uses: docker/build-push-action@v6
-        with:
-          cache-from: type=gha
-          cache-to: type=gha,mode=max
-          push: true
-          tags: localhost:5000/narf:latest
-
-      - name: Start server container
+      - name: Cypress
+        env:
+          host: 0.0.0.0
+          TERM: xterm-256color
         run: |
           mkdir db
-          docker run --rm -d -p 3000:3000 -v $(pwd)/db:/app/db localhost:5000/narf:latest
-
-      - uses: cypress-io/github-action@v6
-        with:
-          working-directory: .
+          npm run build
+          npm start &
+          sleep 3
+          npm run e2e
 
   eslint:
     runs-on: ubuntu-latest

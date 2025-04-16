@@ -45,6 +45,8 @@ jobs:
       - name: Build
         uses: docker/build-push-action@v6
         with:
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
           push: true
           tags: localhost:5000/narf:latest
 

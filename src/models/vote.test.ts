@@ -57,7 +57,9 @@ describe("Vote model", () => {
 		it("throws error if no story", async () => {
 			mockFindId.mockImplementation(() => false);
 
-			expect(opts.saved!(mockStory)).rejects.toThrowError("Invalid story");
+			await expect(opts.saved!(mockStory)).rejects.toThrowError(
+				"Invalid story",
+			);
 		});
 
 		it("calls UpdateStoryController.updateStory", async () => {

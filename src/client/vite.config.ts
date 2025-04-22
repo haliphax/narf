@@ -8,7 +8,7 @@ import { viteSingleFile } from "vite-plugin-singlefile";
 export default defineConfig({
 	build: {
 		emptyOutDir: true,
-		outDir: "../../dist",
+		outDir: resolve(__dirname, "..", "..", "dist"),
 		rollupOptions: {
 			plugins: [inject({ Buffer: ["buffer", "Buffer"] })],
 		},

@@ -1,3 +1,8 @@
+# [v1.14.13](https://github.com/haliphax/narf/compare/v1.14.12...v1.14.13) (2025-05-03)
+
+## 🔒 Security Issues
+- [`1fd256f`](https://github.com/haliphax/narf/commit/1fd256f) ️ Bump vite from 6.2.6 to 6.3.4 (#142) (Issues: [`#142`](https://github.com/haliphax/narf/issues/142))
+
 # [v1.14.12](https://github.com/haliphax/narf/compare/v1.14.11...v1.14.12) (2025-04-15)
 
 ## 🐛 Bug Fixes

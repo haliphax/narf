@@ -15,6 +15,7 @@ const Actions = defineComponent({
 			}
 
 			await this.$store.dispatch("story.reveal");
+			await this.$store.dispatch("story.load");
 		});
 	},
 	methods: {

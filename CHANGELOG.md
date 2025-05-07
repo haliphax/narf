@@ -1,3 +1,8 @@
+# [v1.14.15](https://github.com/haliphax/narf/compare/v1.14.14...v1.14.15) (2025-05-07)
+
+## 🐛 Bug Fixes
+- [`a0f51c7`](https://github.com/haliphax/narf/commit/a0f51c7)  fix quick reveal failure, body height (for real this time)
+
 # [v1.14.14](https://github.com/haliphax/narf/compare/v1.14.13...v1.14.14) (2025-05-07)
 
 ## 🐛 Bug Fixes

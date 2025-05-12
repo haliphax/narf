@@ -13,7 +13,11 @@ export default defineConfig({
 			plugins: [inject({ Buffer: ["buffer", "Buffer"] })],
 		},
 	},
-	plugins: [createHtmlPlugin({ minify: true }), viteSingleFile(), vue()],
+	plugins: [
+		createHtmlPlugin({ minify: true }),
+		viteSingleFile({ removeViteModuleLoader: true }),
+		vue(),
+	],
 	resolve: {
 		alias: {
 			"@": resolve(__dirname, ".."),

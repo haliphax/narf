@@ -1,9 +1,9 @@
-describe("story spec", () => {
-	it("passes", () => {
+describe("story lifecycle spec", () => {
+	it("creates, votes, reveals", () => {
 		cy.visit("http://localhost:3000", {})
 			.get("#title")
 			.should("be.visible")
-			.type("Test{enter}")
+			.type("Lifecycle test{enter}")
 			.location()
 			.should("match", /\/[%a-zA-Z0-9]+/)
 			.get('button[title="Vote 1"]')

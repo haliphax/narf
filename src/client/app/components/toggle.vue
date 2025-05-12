@@ -46,12 +46,7 @@ export default Toggle;
 			type="checkbox"
 			@click="$emit('click')"
 		/>
-		<label
-			:for="id"
-			tabindex="0"
-			aria-hidden="true"
-			@keypress="proxyClick($event)"
-		>
+		<label :for="id" tabindex="0" @keypress="proxyClick($event)">
 			<span class="sr">Toggle</span>
 		</label>
 	</span>

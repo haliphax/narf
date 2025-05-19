@@ -73,7 +73,7 @@
 		"*": [
 			"prettier -luw"
 		],
-		"*.{cts,ts,vue}": [
+		"*.{cts,mjs,ts,vue}": [
 			"eslint --fix"
 		]
 	},

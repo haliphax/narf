@@ -21,4 +21,4 @@ RUN mkdir -p /app/db
 VOLUME /app/db
 EXPOSE 3000
 ENV host="0.0.0.0"
-CMD [ "npm", "run", "start" ]
+CMD [ "npm", "start" ]

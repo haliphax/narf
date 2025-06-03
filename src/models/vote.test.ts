@@ -1,16 +1,8 @@
 import { UpdateStoryController } from "@/server/routes/events";
 import { ValidateFieldEvent } from "remult";
 import { describe, expect, it, vi } from "vitest";
+import { EntityOpts, WithDynamicOpts, WithValidate } from "./test";
 import { Vote } from "./vote";
-
-type EntityOpts = {
-	allowApiUpdate?: (value: unknown, remult: unknown) => boolean;
-	saved?: (value: unknown) => Promise<void>;
-};
-type WithDynamicOpts = (options: unknown, remult: unknown) => void;
-type WithValidate = {
-	validate?: (value: unknown, event: ValidateFieldEvent) => Promise<void>;
-};
 
 const { decoratorCalls, mockEntity } = vi.hoisted(() => ({
 	decoratorCalls: new Map<string, unknown>(),

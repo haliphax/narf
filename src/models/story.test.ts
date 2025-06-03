@@ -2,16 +2,13 @@ import { UpdateStoryController } from "@/server/routes/events";
 import { Remult, ValidateFieldEvent } from "remult";
 import { describe, expect, it, vi } from "vitest";
 import { Story, ownerOnly } from "./story";
+import {
+	WithDynamicOpts,
+	WithSaved,
+	WithServerExpr,
+	WithValidate,
+} from "./test";
 import { Vote } from "./vote";
-
-type WithDynamicOpts = (options: unknown, remult: unknown) => void;
-type WithSaved = { saved: (value: unknown) => void };
-type WithServerExpr = {
-	serverExpression?: (value: unknown) => object;
-};
-type WithValidate = {
-	validate: (value: unknown, event?: ValidateFieldEvent) => void;
-};
 
 const { decoratorCalls, mockEntity } = vi.hoisted(() => ({
 	decoratorCalls: new Map<string, unknown>(),
@@ -44,7 +41,7 @@ describe("Story", () => {
 	new Story();
 
 	it("calls UpdateStoryController.updateStory on save", () => {
-		(mockEntity.mock.lastCall![1] as WithSaved).saved("test");
+		(mockEntity.mock.lastCall![1] as WithSaved).saved!("test");
 
 		expect(UpdateStoryController.updateStory).toHaveBeenCalledWith("test");
 	});
@@ -70,7 +67,7 @@ describe("Story", () => {
 		])("%s", (_name, value, expected) => {
 			const v = {} as ValidateFieldEvent;
 
-			(decoratorCalls.get("scale")! as WithValidate).validate(value, v);
+			(decoratorCalls.get("scale")! as WithValidate).validate!(value, v);
 
 			expect(v.error).toBe(expected);
 		});

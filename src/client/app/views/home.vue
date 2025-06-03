@@ -47,11 +47,12 @@ export default Home;
 		<li>
 			<em>(Optional)</em> Fill out your
 			<strong>User profile</strong>
+			<span aria-hidden="true">☝️</span>
 		</li>
-		<li>Create a story room with a title and scale</li>
-		<li>Share the room URL with your team</li>
-		<li>Wait for votes to roll in</li>
-		<li>Click the <strong>Reveal</strong> button to show results</li>
+		<li><strong>Create</strong> a story room with a title and scale</li>
+		<li><strong>Share</strong> the room URL with your team</li>
+		<li><strong>Vote</strong> on the estimate</li>
+		<li><strong>Reveal</strong> the voting results</li>
 		<li>Take over the world! <span aria-hidden="true">🌎🐁</span></li>
 	</ol>
 	<footer>

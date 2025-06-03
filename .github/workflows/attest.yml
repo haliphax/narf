@@ -16,10 +16,10 @@ jobs:
     steps:
       - uses: haliphax/narf/.github@main
 
-      - name: Build artifact
-        run: npm run build
+      - name: Prune
+        run: find ./src -type f -name '*test*.ts' -delete
 
       - name: Attest
         uses: actions/attest-build-provenance@v2
         with:
-          subject-path: "${{ github.workspace }}/dist"
+          subject-path: "${{ github.workspace }}/src"

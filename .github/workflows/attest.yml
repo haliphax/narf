@@ -1,0 +1,25 @@
+name: Attest
+
+on:
+  release:
+    types: [prereleased, released]
+
+  workflow_dispatch:
+
+jobs:
+  attest:
+    permissions:
+      id-token: write
+      contents: read
+      attestations: write
+    runs-on: ubuntu-latest
+    steps:
+      - uses: haliphax/narf/.github@main
+
+      - name: Build artifact
+        run: npm run build
+
+      - name: Attest
+        uses: actions/attest-build-provenance@v2
+        with:
+          subject-path: "${{ github.workspace }}/dist"

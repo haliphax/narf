@@ -1,3 +1,8 @@
+# [v1.14.17](https://github.com/haliphax/narf/compare/v1.14.16...v1.14.17) (2025-06-03)
+
+## 🔒 Security Issues
+- [`67cf273`](https://github.com/haliphax/narf/commit/67cf273) ️ bump tar-fs from 2.1.2 to 2.1.3 (#145) (Issues: [`#145`](https://github.com/haliphax/narf/issues/145))
+
 # [v1.14.16](https://github.com/haliphax/narf/compare/v1.14.15...v1.14.16) (2025-05-07)
 
 ## 🐛 Bug Fixes

@@ -1,4 +1,4 @@
-describe("story lifecycle spec", () => {
+describe("story interface", () => {
 	it("creates, votes, reveals", () => {
 		cy.visit("http://localhost:3000", {})
 			.get("#title")
@@ -10,8 +10,8 @@ describe("story lifecycle spec", () => {
 			.click()
 			.location()
 			.then((l) => {
-				localStorage.clear();
-				cy.visit(l.href)
+				cy.clearAllLocalStorage()
+					.visit(l.href)
 					.get('button[title="Vote 2"]')
 					.should("be.visible")
 					.click()
@@ -28,6 +28,30 @@ describe("story lifecycle spec", () => {
 					.should("be.visible")
 					.find("> div")
 					.should("have.length", 2);
+			});
+	});
+
+	it("copies room URL to clipboard", () => {
+		cy.visit("http://localhost:3000", {})
+			.get("#title")
+			.should("be.visible")
+			.type("Share test{enter}")
+			.location()
+			.should("match", /\/[%a-zA-Z0-9]+/)
+			.then((l) => {
+				cy.visit(l.href)
+					.get("button")
+					.filter((_, e) => e.textContent.includes("Share"))
+					.should("be.visible")
+					.click()
+					.get('dialog[open] button[type="submit"]')
+					.should("be.visible")
+					.click()
+					.window()
+					.then(async (win) => {
+						const clipped = await win.navigator.clipboard.readText();
+						expect(clipped).to.eq(l.href);
+					});
 			});
 	});
 });

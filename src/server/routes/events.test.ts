@@ -22,17 +22,20 @@ describe("events", () => {
 
 	beforeEach(() => {
 		// mock request defaults
-		request = vi.mocked({} as Request, { partial: true });
-		request.on = vi.fn(() => request);
-
-		// mock response defaults
-		response = vi.mocked({} as Response<string, Record<string, string>>, {
+		request = vi.mocked({ on: vi.fn(() => request) } as unknown as Request, {
 			partial: true,
 		});
-		response.flush = vi.fn();
-		response.flushHeaders = vi.fn();
-		response.set = vi.fn(() => response);
-		response.write = vi.fn(() => true);
+
+		// mock response defaults
+		response = vi.mocked(
+			{
+				flush: vi.fn(),
+				flushHeaders: vi.fn(),
+				set: vi.fn(() => response),
+				write: vi.fn(() => true),
+			} as unknown as Response<string, Record<string, string>>,
+			{ partial: true },
+		);
 	});
 
 	afterEach(() => {

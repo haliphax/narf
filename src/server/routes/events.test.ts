@@ -1,3 +1,4 @@
+import { Story } from "@/models/story";
 import { Request, Response } from "express";
 import {
 	MockedObject,
@@ -30,7 +31,7 @@ describe("events", () => {
 		response = vi.mocked(
 			{
 				flush: vi.fn(),
-				flushHeaders: vi.fn(),
+				flushHeaders: () => {},
 				set: vi.fn(() => response),
 				write: vi.fn(() => true),
 			} as unknown as Response<string, Record<string, string>>,
@@ -86,16 +87,17 @@ describe("events", () => {
 
 	describe("updateStory", () => {
 		it("should write to client response", () => {
-			const Story = vi.fn(function () {
-				return {
+			const story = vi.mocked(
+				{
 					created: 0,
 					id: "test",
 					owner: "",
 					revealed: false,
 					scale: "",
 					title: "",
-				};
-			});
+				} as unknown as Story,
+				{ partial: true },
+			);
 
 			clients.set("test", [
 				{
@@ -104,7 +106,7 @@ describe("events", () => {
 				},
 			]);
 
-			UpdateStoryController.updateStory(new Story());
+			UpdateStoryController.updateStory(story);
 
 			const testClients = clients.get("test");
 			expect(testClients).toHaveLength(1);

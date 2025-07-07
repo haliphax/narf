@@ -49,7 +49,7 @@ jobs:
         run: |
           mkdir db
           npm run build
-          npm start &
+          npm start &>/dev/null &
           sleep 3
           npm run e2e
 

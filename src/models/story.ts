@@ -1,16 +1,18 @@
 import scales from "@/scales";
 import { UpdateStoryController } from "@/server/routes/events";
+import basex from "base-x";
 import { Entity, Fields, Remult, Validators } from "remult";
 import { v4 } from "uuid";
 import { Vote } from "./vote";
 
+const b62 = basex(
+	"0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ",
+);
+
 export const ownerOnly = (e?: Story, remult?: Remult) =>
 	!e?.owner || remult?.user?.id === e?.owner;
 
-const generateId = () =>
-	encodeURIComponent(
-		Buffer.from(v4().replace("-", ""), "hex").toString("base64"),
-	);
+const generateId = () => b62.encode(Buffer.from(v4().replace("-", ""), "hex"));
 
 @Entity<Story>("story", {
 	allowApiCrud: true,

@@ -1,3 +1,8 @@
+# [v1.14.18](https://github.com/haliphax/narf/compare/v1.14.17...v1.14.18) (2025-07-18)
+
+## 🔒 Security Issues
+- [`e927e9f`](https://github.com/haliphax/narf/commit/e927e9f) ️ Bump on-headers and compression (#147) (Issues: [`#147`](https://github.com/haliphax/narf/issues/147))
+
 # [v1.14.17](https://github.com/haliphax/narf/compare/v1.14.16...v1.14.17) (2025-06-03)
 
 ## 🔒 Security Issues

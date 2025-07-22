@@ -1,3 +1,8 @@
+# [v1.14.19](https://github.com/haliphax/narf/compare/v1.14.18...v1.14.19) (2025-07-22)
+
+## 🔒 Security Issues
+- [`36fc3df`](https://github.com/haliphax/narf/commit/36fc3df) ️ bump form-data from 4.0.2 to 4.0.4 (#148) (Issues: [`#148`](https://github.com/haliphax/narf/issues/148))
+
 # [v1.14.18](https://github.com/haliphax/narf/compare/v1.14.17...v1.14.18) (2025-07-18)
 
 ## 🔒 Security Issues

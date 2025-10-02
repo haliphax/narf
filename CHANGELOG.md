@@ -1,3 +1,11 @@
+# [v1.14.20](https://github.com/haliphax/narf/compare/v1.14.19...v1.14.20) (2025-10-02)
+
+## 🔒 Security Issues
+- [`b36618d`](https://github.com/haliphax/narf/commit/b36618d) ️ bump vite from 6.3.4 to 6.3.6 (#149) (Issues: [`#149`](https://github.com/haliphax/narf/issues/149))
+- [`5b4c0bf`](https://github.com/haliphax/narf/commit/5b4c0bf) ️ bump axios from 1.8.4 to 1.12.0 (#150) (Issues: [`#150`](https://github.com/haliphax/narf/issues/150))
+- [`061650b`](https://github.com/haliphax/narf/commit/061650b) ️ bump tmp, @inquirer/editor and inquirer (#151) (Issues: [`#151`](https://github.com/haliphax/narf/issues/151))
+- [`e8b2478`](https://github.com/haliphax/narf/commit/e8b2478) ️ bump tar-fs from 2.1.3 to 2.1.4 (#152) (Issues: [`#152`](https://github.com/haliphax/narf/issues/152))
+
 # [v1.14.19](https://github.com/haliphax/narf/compare/v1.14.18...v1.14.19) (2025-07-22)
 
 ## 🔒 Security Issues

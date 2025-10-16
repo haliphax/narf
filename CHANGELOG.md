@@ -1,3 +1,9 @@
+# [v1.14.21](https://github.com/haliphax/narf/compare/v1.14.20...v1.14.21) (2025-10-16)
+
+## 🔒 Security Issues
+- [`366ade5`](https://github.com/haliphax/narf/commit/366ade5) ️ bump happy-dom from 17.4.4 to 20.0.0 (#153) (Issues: [`#153`](https://github.com/haliphax/narf/issues/153))
+- [`7a0ec06`](https://github.com/haliphax/narf/commit/7a0ec06) ️ bump happy-dom from 20.0.0 to 20.0.2 (#154) (Issues: [`#154`](https://github.com/haliphax/narf/issues/154))
+
 # [v1.14.20](https://github.com/haliphax/narf/compare/v1.14.19...v1.14.20) (2025-10-02)
 
 ## 🔒 Security Issues

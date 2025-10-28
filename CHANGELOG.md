@@ -1,3 +1,9 @@
+# [v1.14.22](https://github.com/haliphax/narf/compare/v1.14.21...v1.14.22) (2025-10-28)
+
+## 🔒 Security Issues
+- [`8367e18`](https://github.com/haliphax/narf/commit/8367e18) ️ bump vite from 6.3.6 to 6.4.1 (#155) (Issues: [`#155`](https://github.com/haliphax/narf/issues/155))
+- [`df8c216`](https://github.com/haliphax/narf/commit/df8c216) ️ bump validator from 13.15.0 to 13.15.20 (#156) (Issues: [`#156`](https://github.com/haliphax/narf/issues/156))
+
 # [v1.14.21](https://github.com/haliphax/narf/compare/v1.14.20...v1.14.21) (2025-10-16)
 
 ## 🔒 Security Issues

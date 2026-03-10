@@ -1,3 +1,12 @@
+# [v1.14.23](https://github.com/haliphax/narf/compare/v1.14.22...v1.14.23) (2026-03-10)
+
+## 🔒 Security Issues
+- [`d60ddf0`](https://github.com/haliphax/narf/commit/d60ddf0) ️ bump js-yaml from 4.1.0 to 4.1.1 (#158) (Issues: [`#158`](https://github.com/haliphax/narf/issues/158))
+- [`a295dde`](https://github.com/haliphax/narf/commit/a295dde) ️ bump body-parser from 2.2.0 to 2.2.1 (#160) (Issues: [`#160`](https://github.com/haliphax/narf/issues/160))
+- [`6f2b572`](https://github.com/haliphax/narf/commit/6f2b572) ️ bump express from 5.1.0 to 5.2.0 (#161) (Issues: [`#161`](https://github.com/haliphax/narf/issues/161))
+- [`5105a0e`](https://github.com/haliphax/narf/commit/5105a0e) ️ bump validator from 13.15.20 to 13.15.23 (#162) (Issues: [`#162`](https://github.com/haliphax/narf/issues/162))
+- [`5000d41`](https://github.com/haliphax/narf/commit/5000d41)  dependency updates
+
 # [v1.14.22](https://github.com/haliphax/narf/compare/v1.14.21...v1.14.22) (2025-10-28)
 
 ## 🔒 Security Issues

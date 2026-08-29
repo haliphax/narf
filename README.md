@@ -75,7 +75,7 @@ npm run e2e
 [demonstration app]: https://sphenoid-secret-antimony.glitch.me
 [express]: https://expressjs.com
 [less]: https://lesscss.org
-[live web application]: https://narf.poker
+[live web application]: https://narf.fly.dev
 [remult]: https://remult.dev
 [sqlite]: https://sqlite.org
 [story points]: https://www.scrum.org/resources/blog/why-do-we-use-story-points-estimating

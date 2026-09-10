@@ -2,23 +2,16 @@ import store from "@/client/app/store";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import storyModule from "./module";
 
-const {
-	mockAddEventListener,
-	mockClose,
-	mockCount,
-	mockFindId,
-	mockInsert,
-	mockUpdate,
-	mockSave,
-} = vi.hoisted(() => ({
-	mockAddEventListener: vi.fn(),
-	mockClose: vi.fn(),
-	mockCount: vi.fn(),
-	mockFindId: vi.fn(),
-	mockInsert: vi.fn(),
-	mockUpdate: vi.fn(),
-	mockSave: vi.fn(),
-}));
+const { mockAddEventListener, mockClose, mockCount, mockFindId, mockInsert, mockUpdate, mockSave } =
+	vi.hoisted(() => ({
+		mockAddEventListener: vi.fn(),
+		mockClose: vi.fn(),
+		mockCount: vi.fn(),
+		mockFindId: vi.fn(),
+		mockInsert: vi.fn(),
+		mockUpdate: vi.fn(),
+		mockSave: vi.fn(),
+	}));
 
 class EventSourceMock {
 	addEventListener = mockAddEventListener;
@@ -54,10 +47,7 @@ describe("story module", () => {
 	it("spawns message listener on join", async () => {
 		await store.dispatch("story.join");
 
-		expect(mockAddEventListener).toHaveBeenCalledWith(
-			"message",
-			expect.anything(),
-		);
+		expect(mockAddEventListener).toHaveBeenCalledWith("message", expect.anything());
 	});
 
 	it("inserts partial vote on first join", async () => {

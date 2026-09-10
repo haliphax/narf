@@ -5,12 +5,9 @@ import { Entity, Fields, Remult, Validators } from "remult";
 import { v4 } from "uuid";
 import { Vote } from "./vote";
 
-const b62 = basex(
-	"0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ",
-);
+const b62 = basex("0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ");
 
-export const ownerOnly = (e?: Story, remult?: Remult) =>
-	!e?.owner || remult?.user?.id === e?.owner;
+export const ownerOnly = (e?: Story, remult?: Remult) => !e?.owner || remult?.user?.id === e?.owner;
 
 const generateId = () => b62.encode(Buffer.from(v4().replace("-", ""), "hex"));
 
@@ -45,8 +42,7 @@ export class Story {
 
 	@Fields.object<Story>((options, remult) => {
 		options.includeInApi = false;
-		options.serverExpression = (e) =>
-			remult.repo(Vote).find({ where: { storyId: e.id } });
+		options.serverExpression = (e) => remult.repo(Vote).find({ where: { storyId: e.id } });
 	})
 	_votes?: Vote[];
 

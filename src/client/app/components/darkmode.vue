@@ -20,10 +20,7 @@ const DarkMode = defineComponent({
 
 			if (mutation.type == "session" && keys.includes("settings"))
 				this.enabled = (mutation.payload as SessionState).settings.darkMode;
-			else if (
-				mutation.type == "session.settings" &&
-				keys.includes("darkMode")
-			) {
+			else if (mutation.type == "session.settings" && keys.includes("darkMode")) {
 				this.enabled = (mutation.payload as SessionSettings).darkMode;
 			}
 		});
@@ -47,12 +44,7 @@ export default DarkMode;
 			<span class="☀️">☀️</span>
 			<span class="🌙">🌙</span>
 		</span>
-		<Toggle
-			id="dm-toggle"
-			ref="toggle"
-			:checked="enabled"
-			@click="toggle"
-		></Toggle>
+		<Toggle id="dm-toggle" ref="toggle" :checked="enabled" @click="toggle"></Toggle>
 	</label>
 </template>
 

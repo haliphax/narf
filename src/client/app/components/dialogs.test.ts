@@ -9,8 +9,7 @@ describe("Dialogs component", () => {
 
 	beforeEach(() => {
 		dialogs = mount(Dialogs, { global: { plugins: [store] } });
-		dialogsState = (dialogs.vm.$store.state as unknown as DialogsStoreState)
-			.dialogs;
+		dialogsState = (dialogs.vm.$store.state as unknown as DialogsStoreState).dialogs;
 	});
 
 	afterEach(() => {

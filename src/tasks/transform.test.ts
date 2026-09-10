@@ -32,9 +32,6 @@ describe("transform task", async () => {
 
 		await transform();
 
-		expect(mockWriteFile).toHaveBeenCalledWith(
-			expect.anything(),
-			`<link href="${expected}" />`,
-		);
+		expect(mockWriteFile).toHaveBeenCalledWith(expect.anything(), `<link href="${expected}" />`);
 	});
 });

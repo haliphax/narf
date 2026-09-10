@@ -102,9 +102,7 @@ export default Story;
 	}
 
 	.g {
-		grid-template-columns: calc(40% - var(--space-xl) / 2) calc(
-				60% - var(--space-xl) / 2
-			);
+		grid-template-columns: calc(40% - var(--space-xl) / 2) calc(60% - var(--space-xl) / 2);
 		column-gap: var(--space-xl);
 	}
 

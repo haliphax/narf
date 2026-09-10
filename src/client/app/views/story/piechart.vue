@@ -41,12 +41,8 @@ const PieChart = defineComponent({
 			}
 
 			slices.sort((a, b) => {
-				const a1 = isNumber.test(a.key)
-					? parseFloat(a.key)
-					: Number.MAX_SAFE_INTEGER;
-				const b1 = isNumber.test(b.key)
-					? parseFloat(b.key)
-					: Number.MAX_SAFE_INTEGER;
+				const a1 = isNumber.test(a.key) ? parseFloat(a.key) : Number.MAX_SAFE_INTEGER;
+				const b1 = isNumber.test(b.key) ? parseFloat(b.key) : Number.MAX_SAFE_INTEGER;
 
 				return a.votes === b.votes ? a1 - b1 : b.votes - a.votes;
 			});
@@ -96,12 +92,7 @@ export default PieChart;
 			<tbody>
 				<tr v-for="(s, idx) in slices" :key="s.key">
 					<td>
-						<span
-							:id="`🍕🌈${s.key}`"
-							:class="`🌈 🌈${idx}`"
-							:style="styles(s)"
-						>
-						</span>
+						<span :id="`🍕🌈${s.key}`" :class="`🌈 🌈${idx}`" :style="styles(s)"> </span>
 					</td>
 					<td>{{ s.key }}</td>
 					<td>{{ s.votes }}</td>

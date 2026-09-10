@@ -70,11 +70,7 @@ export default Estimate;
 		<h2>Estimate</h2>
 		<ul v-if="!storyState.story?.revealed" class="g x">
 			<li v-for="option in options" :key="option">
-				<button
-					:class="classes(option)"
-					:title="`Vote ${option}`"
-					@click="vote(option)"
-				>
+				<button :class="classes(option)" :title="`Vote ${option}`" @click="vote(option)">
 					{{ option }}
 				</button>
 			</li>

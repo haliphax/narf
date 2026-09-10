@@ -61,29 +61,22 @@ describe("Story view", () => {
 		vi.unstubAllGlobals();
 	});
 
-	it.each([["Actions"], ["Estimate"], ["Participants"]])(
-		"has %s component",
-		(name) => {
-			expect(story.findComponent(`${name.toUpperCase()}-STUB`).exists()).toBe(
-				true,
-			);
-		},
-	);
+	it.each([["Actions"], ["Estimate"], ["Participants"]])("has %s component", (name) => {
+		expect(story.findComponent(`${name.toUpperCase()}-STUB`).exists()).toBe(true);
+	});
 
 	it("registers story module", () => {
 		expect(store.hasModule("story")).toBe(true);
 	});
 
 	it("connects EventSource on mount", () => {
-		const storyState = (story.vm.$store.state as unknown as StoryStoreState)
-			.story;
+		const storyState = (story.vm.$store.state as unknown as StoryStoreState).story;
 
 		expect(storyState.events).toBeInstanceOf(EventSourceMock);
 	});
 
 	it("loads story on mount", () => {
-		const storyState = (story.vm.$store.state as unknown as StoryStoreState)
-			.story;
+		const storyState = (story.vm.$store.state as unknown as StoryStoreState).story;
 
 		expect(storyState.story).toEqual(storyMock);
 	});

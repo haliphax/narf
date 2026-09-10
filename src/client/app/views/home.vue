@@ -24,10 +24,7 @@ export default Home;
 	<h1>
 		narf!
 		<code>
-			<a
-				:href="`https://github.com/haliphax/narf/releases/tag/v${version}`"
-				title="Release notes"
-			>
+			<a :href="`https://github.com/haliphax/narf/releases/tag/v${version}`" title="Release notes">
 				{{ version }}
 			</a>
 		</code>
@@ -60,9 +57,7 @@ export default Home;
 			<li><a href="https://github.com/haliphax/narf">source</a></li>
 			<li><a href="https://haliphax.dev">author</a></li>
 			<li>
-				<a href="https://en.wikipedia.org/wiki/Pinky_and_the_Brain">
-					nostalgia
-				</a>
+				<a href="https://en.wikipedia.org/wiki/Pinky_and_the_Brain"> nostalgia </a>
 			</li>
 		</ul>
 	</footer>

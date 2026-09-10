@@ -11,9 +11,7 @@ export const task = async (now: Date | "manual" | "init") => {
 		},
 		useNullAsDefault: true,
 	});
-	const threshold =
-		(typeof now == "string" ? new Date() : (now as Date)).valueOf() -
-		THIRTY_DAYS;
+	const threshold = (typeof now == "string" ? new Date() : (now as Date)).valueOf() - THIRTY_DAYS;
 	console.log(`Purging expired stories < ${threshold}`);
 
 	const rows = await db("story").where("created", "<", threshold).select("id");

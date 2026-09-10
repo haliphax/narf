@@ -1,4 +1,3 @@
-import inject from "@rollup/plugin-inject";
 import vue from "@vitejs/plugin-vue";
 import { resolve } from "path";
 import { defineConfig } from "vite";
@@ -8,9 +7,11 @@ import { viteSingleFile } from "vite-plugin-singlefile";
 export default defineConfig({
 	build: {
 		emptyOutDir: true,
-		outDir: resolve(__dirname, "..", "..", "dist"),
-		rollupOptions: {
-			plugins: [inject({ Buffer: ["buffer", "Buffer"] })],
+		outDir: resolve(import.meta.dirname, "..", "..", "dist"),
+		rolldownOptions: {
+			transform: {
+				inject: { Buffer: ["buffer", "Buffer"] },
+			},
 		},
 	},
 	plugins: [
@@ -20,7 +21,7 @@ export default defineConfig({
 	],
 	resolve: {
 		alias: {
-			"@": resolve(__dirname, ".."),
+			"@": resolve(import.meta.dirname, ".."),
 		},
 	},
 });

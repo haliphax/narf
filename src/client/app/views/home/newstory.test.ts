@@ -41,9 +41,7 @@ describe("NewStory", () => {
 		(newStory.vm.$data as { scale: string }).scale = "T-shirt sizes";
 
 		await newStory.vm.$nextTick(() => {
-			expect(newStory.vm.$store.state.session.settings.scale).toBe(
-				"T-shirt sizes",
-			);
+			expect(newStory.vm.$store.state.session.settings.scale).toBe("T-shirt sizes");
 		});
 	});
 

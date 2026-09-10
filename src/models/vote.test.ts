@@ -49,9 +49,7 @@ describe("Vote model", () => {
 		it("throws error if no story", async () => {
 			mockFindId.mockImplementation(() => false);
 
-			await expect(opts.saved!(mockStory)).rejects.toThrowError(
-				"Invalid story",
-			);
+			await expect(opts.saved!(mockStory)).rejects.toThrowError("Invalid story");
 		});
 
 		it("calls UpdateStoryController.updateStory", async () => {
@@ -71,12 +69,7 @@ describe("Vote model", () => {
 		it.each([
 			// test, mockFindId result, vote, v.error
 			["passes if vote is undefined", 1, {}, undefined],
-			[
-				"passes if valid",
-				{ scale: "Fibonacci" },
-				{ ...mockVote, vote: "1" },
-				undefined,
-			],
+			["passes if valid", { scale: "Fibonacci" }, { ...mockVote, vote: "1" }, undefined],
 			["fails if no story", false, mockVote, "Invalid story"],
 			["fails if no scale", 1, mockVote, "Invalid scale"],
 			["fails if invalid", { scale: "Fibonacci" }, mockVote, "Invalid vote"],

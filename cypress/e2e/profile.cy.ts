@@ -1,6 +1,6 @@
 describe("user profile", () => {
 	it("processes updates", () => {
-		cy.visit("http://localhost:3000", {})
+		cy.visit("http://localhost:3000")
 			.get("details[open]")
 			.get("#name")
 			.should("be.visible")

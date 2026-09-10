@@ -1,17 +1,25 @@
+Cypress.automation("remote:debugger:protocol", {
+	command: "Browser.grantPermissions",
+	params: {
+		permissions: ["clipboardReadWrite", "clipboardSanitizedWrite"],
+		origin: window.location.origin,
+	},
+});
+
 describe("story interface", () => {
 	it("creates, votes, reveals", () => {
 		cy.visit("http://localhost:3000", {})
 			.get("#title")
 			.should("be.visible")
 			.type("Lifecycle test{enter}")
-			.location()
-			.should("match", /\/[%a-zA-Z0-9]+/)
+			.location("pathname")
+			.should("match", /\/[a-zA-Z0-9]+/)
 			.get('button[title="Vote 1"]')
 			.click()
-			.location()
+			.location("href")
 			.then((l) => {
 				cy.clearAllLocalStorage()
-					.visit(l.href)
+					.visit(l)
 					.get('button[title="Vote 2"]')
 					.should("be.visible")
 					.click()
@@ -36,10 +44,11 @@ describe("story interface", () => {
 			.get("#title")
 			.should("be.visible")
 			.type("Share test{enter}")
-			.location()
-			.should("match", /\/[%a-zA-Z0-9]+/)
+			.location("pathname")
+			.should("match", /\/[a-zA-Z0-9]+/)
+			.location("href")
 			.then((l) => {
-				cy.visit(l.href)
+				cy.visit(l)
 					.get("button")
 					.filter((_, e) => e.textContent.includes("Share"))
 					.should("be.visible")
@@ -50,7 +59,7 @@ describe("story interface", () => {
 					.window()
 					.then(async (win) => {
 						const clipped = await win.navigator.clipboard.readText();
-						expect(clipped).to.eq(l.href);
+						expect(clipped).to.eq(l);
 					});
 			});
 	});

@@ -1,11 +1,6 @@
 import type { Remult, ValidateFieldEvent } from "remult";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
-import type {
-	WithDynamicOpts,
-	WithSaved,
-	WithServerExpr,
-	WithValidate,
-} from "./test";
+import type { WithDynamicOpts, WithSaved, WithServerExpr, WithValidate } from "./test";
 
 describe("Story", () => {
 	let mockEntity: ReturnType<typeof vi.fn>;
@@ -22,9 +17,8 @@ describe("Story", () => {
 		decoratorCalls = new Map<string, unknown>();
 		mockEntity = vi.fn();
 
-		const mockField =
-			(opts: unknown) => (_target: unknown, propertyKey: string) =>
-				decoratorCalls.set(propertyKey, opts);
+		const mockField = (opts: unknown) => (_target: unknown, propertyKey: string) =>
+			decoratorCalls.set(propertyKey, opts);
 
 		vi.doMock("@/server/routes/events", () => ({
 			UpdateStoryController: { updateStory: vi.fn() },
@@ -49,8 +43,7 @@ describe("Story", () => {
 		Story = storyMod.Story;
 		ownerOnly = storyMod.ownerOnly;
 		const eventsMod = await import("@/server/routes/events");
-		UpdateStoryController =
-			eventsMod.UpdateStoryController as typeof UpdateStoryController;
+		UpdateStoryController = eventsMod.UpdateStoryController as typeof UpdateStoryController;
 	});
 
 	afterEach(() => {
@@ -145,18 +138,8 @@ describe("Story", () => {
 	describe("ownerOnly check", () => {
 		it.each([
 			["succeeds if story has no owner", undefined, undefined, true],
-			[
-				"succeeds if user is owner",
-				{ owner: "test" },
-				{ user: { id: "test" } },
-				true,
-			],
-			[
-				"fails if user is not owner",
-				{ owner: "test" },
-				{ user: { id: "other" } },
-				false,
-			],
+			["succeeds if user is owner", { owner: "test" }, { user: { id: "test" } }, true],
+			["fails if user is not owner", { owner: "test" }, { user: { id: "other" } }, false],
 		])("%s", (_name, owner, user, expected) => {
 			const result = ownerOnly(
 				owner as import("./story").Story | undefined,

@@ -83,13 +83,9 @@ describe("Profile", () => {
 			});
 
 			const fileInput = profile.get("ul").get("input").element;
-			fileInput.files = makeFileList([
-				new File([""], "test1.json", { type: "application/json" }),
-			]);
+			fileInput.files = makeFileList([new File([""], "test1.json", { type: "application/json" })]);
 			fileInput.dispatchEvent(new Event("change"));
-			await profile.vm.$nextTick();
-
-			expect(alerted).toBe(true);
+			await expect.poll(() => alerted, { timeout: 500, interval: 20 }).toBe(true);
 		});
 
 		it("clicks files button on user's behalf", async () => {

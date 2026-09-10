@@ -42,6 +42,9 @@ jobs:
     steps:
       - uses: haliphax/narf/.github@main
 
+      - name: Install Chrome
+        run: npx @puppeteer/browsers install chrome@stable
+
       - name: Cypress
         env:
           host: 0.0.0.0
@@ -51,15 +54,23 @@ jobs:
           npm run build
           npm start &>/dev/null &
           sleep 3
-          npm run e2e
+          npm run e2e -- -b chrome
 
-  eslint:
+  oxlint:
     runs-on: ubuntu-latest
     steps:
       - uses: haliphax/narf/.github@main
 
-      - name: ESLint
-        run: npx eslint .
+      - name: oxlint
+        run: npx oxlint .
+
+  oxfmt:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: haliphax/narf/.github@main
+
+      - name: oxfmt
+        run: npx oxfmt --no-error-on-unmatched-pattern .
 
   prettier:
     runs-on: ubuntu-latest

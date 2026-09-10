@@ -6,7 +6,7 @@ export default defineConfig({
 	plugins: [vue()],
 	resolve: {
 		alias: {
-			"@": resolve(__dirname, "src"),
+			"@": resolve(import.meta.dirname, "src"),
 		},
 	},
 	test: {
@@ -20,6 +20,7 @@ export default defineConfig({
 		globals: true,
 		onConsoleLog: () => false,
 		outputFile: "coverage/junit.xml",
+		pool: "vmThreads",
 		reporters: ["default", "junit"],
 	},
 });

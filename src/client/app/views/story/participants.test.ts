@@ -56,11 +56,7 @@ describe("Participants", () => {
 
 		const voteSpans = participants
 			.findAll("span")
-			.filter(
-				(v) =>
-					v.attributes().title === "has not voted" &&
-					v.text().trim().includes("⏱️"),
-			);
+			.filter((v) => v.attributes().title === "has not voted" && v.text().trim().includes("⏱️"));
 
 		expect(voteSpans.length).toBe(1);
 	});
@@ -69,9 +65,7 @@ describe("Participants", () => {
 		store.commit("story", { revealed: true, votes: mockVotes });
 		await participants.vm.$nextTick();
 
-		const hasTitle = participants
-			.findAll("span")
-			.filter((v) => v.attributes().title);
+		const hasTitle = participants.findAll("span").filter((v) => v.attributes().title);
 
 		expect(hasTitle.length).toBe(0);
 	});

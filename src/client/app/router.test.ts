@@ -31,14 +31,11 @@ describe("router", () => {
 
 	it("uses web history", () => {
 		expect(mockCreateHistory).toHaveBeenCalled();
-		expect(mockCreateRouter.mock.lastCall![0].history).toBe(
-			"mockCreateHistory",
-		);
+		expect(mockCreateRouter.mock.lastCall![0].history).toBe("mockCreateHistory");
 	});
 
 	it("assigns routes for main views", () => {
-		const routes: { component: unknown }[] =
-			mockCreateRouter.mock.lastCall![0].routes;
+		const routes: { component: unknown }[] = mockCreateRouter.mock.lastCall![0].routes;
 		const components = routes.map((c) => c.component);
 
 		expect(components).toContain("Home");

@@ -2,3 +2,6 @@ CHANGELOG.md
 package-lock.json
 /db/
 /dist/
+**/*.*ts
+**/*.*js
+**/*.vue

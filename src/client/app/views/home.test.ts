@@ -17,11 +17,7 @@ describe("Home view", () => {
 	});
 
 	it.each([["Profile"], ["New Story"]])("has %s component", (name) => {
-		expect(
-			home
-				.findComponent(`${name.replace(" ", "-").toUpperCase()}-STUB`)
-				.exists(),
-		).toBe(true);
+		expect(home.findComponent(`${name.replace(" ", "-").toUpperCase()}-STUB`).exists()).toBe(true);
 	});
 
 	describe("User profile details", () => {
@@ -33,9 +29,7 @@ describe("Home view", () => {
 			store.state.session.name = username;
 			home = mountHome();
 
-			const details = home.element.querySelector(
-				"details",
-			)! as HTMLDetailsElement;
+			const details = home.element.querySelector("details")! as HTMLDetailsElement;
 
 			expect(details.getAttribute("open")).toBe(expected);
 		});

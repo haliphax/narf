@@ -68,9 +68,7 @@ describe("Actions component", () => {
 			store.commit("story", { revealed, owner: "test" });
 			await actions.vm.$nextTick();
 
-			const revealButton = actions
-				.findAll("button")
-				.find((v) => v.text().includes("Reveal"))!;
+			const revealButton = actions.findAll("button").find((v) => v.text().includes("Reveal"))!;
 
 			expect(revealButton.element.disabled).toBe(expected);
 		});

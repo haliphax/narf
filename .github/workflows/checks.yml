@@ -72,14 +72,6 @@ jobs:
       - name: oxfmt
         run: npx oxfmt --no-error-on-unmatched-pattern .
 
-  prettier:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: haliphax/narf/.github@main
-
-      - name: Prettier
-        run: npx prettier -lu .
-
   unit-tests:
     name: Unit tests
     runs-on: ubuntu-latest

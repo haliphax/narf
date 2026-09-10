@@ -30,10 +30,7 @@ const session: Module<SessionState, StoreState> = {
 			}
 
 			if (payload.settings) {
-				localStorage.setItem(
-					keys.darkMode,
-					payload.settings.darkMode.toString(),
-				);
+				localStorage.setItem(keys.darkMode, payload.settings.darkMode.toString());
 				localStorage.setItem(keys.scale, payload.settings.scale);
 			}
 		},
@@ -66,9 +63,7 @@ const session: Module<SessionState, StoreState> = {
 			id: sessionId,
 			name: localStorage.getItem(keys.name) ?? "User",
 			settings: {
-				darkMode: JSON.parse(
-					localStorage.getItem(keys.darkMode) ?? darkModeDetected.toString(),
-				),
+				darkMode: JSON.parse(localStorage.getItem(keys.darkMode) ?? darkModeDetected.toString()),
 				scale: localStorage.getItem(keys.scale) ?? scales.keys().next().value!,
 			},
 		};

@@ -59,8 +59,7 @@ const Dialogs = defineComponent({
 		for (const d of [this.alertDialog, this.confirmDialog]) {
 			d.addEventListener(
 				"close",
-				async () =>
-					await this.$store.dispatch("close", this.dialogsState.responseId),
+				async () => await this.$store.dispatch("close", this.dialogsState.responseId),
 			);
 		}
 	},

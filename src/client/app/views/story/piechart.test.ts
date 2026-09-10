@@ -21,9 +21,7 @@ describe("PieChart", () => {
 	});
 
 	it("provides a slice for each option in data", () => {
-		const slices = pieChart
-			.findAll("div")
-			.filter((v) => v.classes().includes("🍕"));
+		const slices = pieChart.findAll("div").filter((v) => v.classes().includes("🍕"));
 
 		expect(slices.length).toBe(data.size);
 	});

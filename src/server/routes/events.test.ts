@@ -1,14 +1,6 @@
 import { Story } from "@/models/story";
 import { Request, Response } from "express";
-import {
-	MockedObject,
-	afterEach,
-	beforeEach,
-	describe,
-	expect,
-	it,
-	vi,
-} from "vitest";
+import { MockedObject, afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { UpdateStoryController, clients, handler } from "./events";
 
 vi.mock("remult", () => ({ BackendMethod: vi.fn() }));
@@ -44,9 +36,7 @@ describe("events", () => {
 		vi.clearAllMocks();
 	});
 
-	it("creates tracking list when no clients exist for story ID", ({
-		expect,
-	}) => {
+	it("creates tracking list when no clients exist for story ID", ({ expect }) => {
 		request.params = { story: "test" };
 
 		handler(request, response);
@@ -55,9 +45,7 @@ describe("events", () => {
 		expect(clients.get("test")).toHaveLength(1);
 	});
 
-	it("appends to tracking list when clients exist for story ID", ({
-		expect,
-	}) => {
+	it("appends to tracking list when clients exist for story ID", ({ expect }) => {
 		request.params = { story: "test" };
 
 		handler(request, response);

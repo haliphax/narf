@@ -72,9 +72,6 @@
 		"nano-staged": "^1.0.2",
 		"oxfmt": "^0.67.0",
 		"oxlint": "^1.82.0",
-		"prettier": "^3.9.6",
-		"prettier-plugin-organize-imports": "^4.3.0",
-		"prettier-plugin-toml": "^2.0.6",
 		"semantic-release": "^25.0.9",
 		"semantic-release-gitmoji": "^1.6.9",
 		"vitest": "^5.0.0",
@@ -82,19 +79,11 @@
 	},
 	"nano-staged": {
 		"*": [
-			"prettier -luw",
 			"oxfmt --no-error-on-unmatched-pattern"
 		],
 		"*.{cts,mjs,ts,vue}": [
 			"oxlint --fix"
 		]
-	},
-	"prettier": {
-		"plugins": [
-			"prettier-plugin-organize-imports",
-			"prettier-plugin-toml"
-		],
-		"vueIndentScriptAndStyle": false
 	},
 	"engines": {
 		"node": "^24"

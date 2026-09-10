@@ -51,11 +51,7 @@ describe("server", () => {
 
 	describe("getUser", () => {
 		it.each([
-			[
-				"returns user from cookie if present",
-				{ cookies: { narfClient: "test" } },
-				"test",
-			],
+			["returns user from cookie if present", { cookies: { narfClient: "test" } }, "test"],
 			["returns undefined if id not in cookie", { cookies: {} }, undefined],
 			["returns undefined if no cookies", {}, undefined],
 		])("%s", async (_name, req, expected) => {

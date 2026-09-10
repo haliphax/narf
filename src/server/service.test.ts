@@ -40,9 +40,7 @@ describe("service", () => {
 		vi.unstubAllGlobals();
 		vi.unstubAllEnvs();
 		vi.clearAllMocks();
-		["SIGINT", "SIGTERM"].forEach((signal) =>
-			process.removeAllListeners(signal),
-		);
+		["SIGINT", "SIGTERM"].forEach((signal) => process.removeAllListeners(signal));
 	});
 
 	it("loads modules", () => {
@@ -71,11 +69,7 @@ describe("service", () => {
 
 		service(app);
 
-		expect(app.listen).toHaveBeenCalledWith(
-			expectedPort,
-			expectedHost,
-			expect.anything(),
-		);
+		expect(app.listen).toHaveBeenCalledWith(expectedPort, expectedHost, expect.anything());
 	});
 
 	it("removes x-powered-by header", () => {
@@ -111,9 +105,7 @@ describe("service", () => {
 		service(app);
 		mockListen.mock.lastCall![2]();
 
-		expect(console.log).toHaveBeenCalledWith(
-			expect.stringContaining("Server listening at "),
-		);
+		expect(console.log).toHaveBeenCalledWith(expect.stringContaining("Server listening at "));
 	});
 
 	it("stops cronjobs on shutdown", () => {

@@ -8,7 +8,7 @@ import cronjobs from "./cronjobs";
 const server = remultExpress({
 	entities: [Story, Vote],
 	dataProvider: createKnexDataProvider({
-		client: "sqlite3",
+		client: "better-sqlite3",
 		connection: {
 			filename: "./db/narf.sqlite3",
 		},

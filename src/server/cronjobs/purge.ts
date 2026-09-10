@@ -5,7 +5,7 @@ const THIRTY_DAYS = 60 * 60 * 24 * 30 * 1000;
 
 export const task = async (now: Date | "manual" | "init") => {
 	const db = knex({
-		client: "sqlite3",
+		client: "better-sqlite3",
 		connection: {
 			filename: "./db/narf.sqlite3",
 		},

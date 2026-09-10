@@ -1,46 +1,56 @@
-import { Story } from "@/models/story";
-import { Vote } from "@/models/vote";
-import { remultExpress } from "remult/remult-express";
-import { createKnexDataProvider } from "remult/remult-knex";
-import { beforeEach, describe, expect, it, vi } from "vitest";
-import cronjobs from "./cronjobs";
+import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 
-const { mockDb, mockExpress } = vi.hoisted(() => ({
-	mockDb: { raw: vi.fn() },
-	mockExpress: vi.fn(),
-}));
+describe("server", () => {
+	let mockDb: { raw: ReturnType<typeof vi.fn> };
+	let mockExpress: ReturnType<typeof vi.fn>;
+	let mockCreateKnex: ReturnType<typeof vi.fn>;
+	let mockCronStart: ReturnType<typeof vi.fn>;
+	const mockStory = 0;
+	const mockVote = 1;
 
-vi.mock("remult", () => ({ dbNamesOf: () => ({ $entityName: "test" }) }));
-vi.mock("remult/remult-express", () => ({ remultExpress: mockExpress }));
-vi.mock("remult/remult-knex", () => ({
-	createKnexDataProvider: vi.fn(),
-	KnexDataProvider: { getDb: () => mockDb },
-}));
-vi.mock("@/models/story", () => ({ Story: 0 }));
-vi.mock("@/models/vote", () => ({ Vote: 1 }));
-vi.mock("./cronjobs", () => ({ default: { start: vi.fn() } }));
+	beforeEach(async () => {
+		vi.resetModules();
 
-await import("./server");
+		mockDb = { raw: vi.fn() };
+		mockExpress = vi.fn();
+		mockCreateKnex = vi.fn();
+		mockCronStart = vi.fn();
 
-describe("server", async () => {
+		vi.doMock("remult", () => ({
+			dbNamesOf: () => ({ $entityName: "test" }),
+		}));
+		vi.doMock("remult/remult-express", () => ({
+			remultExpress: mockExpress,
+		}));
+		vi.doMock("remult/remult-knex", () => ({
+			createKnexDataProvider: mockCreateKnex,
+			KnexDataProvider: { getDb: () => mockDb },
+		}));
+		vi.doMock("@/models/story", () => ({ Story: mockStory }));
+		vi.doMock("@/models/vote", () => ({ Vote: mockVote }));
+		vi.doMock("./cronjobs", () => ({ default: { start: mockCronStart } }));
+
+		await import("./server");
+	});
+
+	afterEach(() => {
+		vi.restoreAllMocks();
+	});
+
 	it("creates a knex data provider", () => {
-		expect(createKnexDataProvider).toHaveBeenCalled();
+		expect(mockCreateKnex).toHaveBeenCalled();
 	});
 
 	it.each([
-		// name, args partial
-		["provides entities", { entities: [Story, Vote] }],
+		["provides entities", { entities: [mockStory, mockVote] }],
 		["provides getUser method", { getUser: expect.anything() }],
 		["provides initApi method", { initApi: expect.anything() }],
 	])("%s", (_name, expected) => {
-		expect(remultExpress).toHaveBeenCalledWith(
-			expect.objectContaining(expected),
-		);
+		expect(mockExpress).toHaveBeenCalledWith(expect.objectContaining(expected));
 	});
 
 	describe("getUser", () => {
 		it.each([
-			// name, mock request data, expected user.id
 			[
 				"returns user from cookie if present",
 				{ cookies: { narfClient: "test" } },
@@ -60,11 +70,8 @@ describe("server", async () => {
 
 		it("creates index on vote compound key", async () => {
 			const query = (mockDb.raw.mock.lastCall![0] as string)
-				// convert newlines/tabs into spaces
 				.replace(/\r\n|\n|\t+/g, " ")
-				// collapse multiple spaces
 				.replace(/ +/g, " ")
-				// strip leading/trailing spaces
 				.replace(/^\s|\s$/g, "");
 
 			expect(query).toEqual(
@@ -74,7 +81,7 @@ describe("server", async () => {
 		});
 
 		it("starts cronjobs", async () => {
-			expect(cronjobs.start).toHaveBeenCalled();
+			expect(mockCronStart).toHaveBeenCalled();
 		});
 	});
 });

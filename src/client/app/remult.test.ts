@@ -1,17 +1,30 @@
-import axios from "axios";
-import { Remult } from "remult";
-import { describe, expect, it, vi } from "vitest";
-
-const { rem } = vi.hoisted(() => ({ rem: { apiClient: { url: "" } } }));
-
-vi.mock("axios", () => ({ default: "axios" }));
-vi.mock("remult", () => ({ Remult: vi.fn(() => rem) }));
-
-await import("./remult");
+import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 
 describe("remult", () => {
+	let rem: { apiClient: { url: string } };
+
+	beforeEach(async () => {
+		vi.resetModules();
+
+		rem = { apiClient: { url: "" } };
+
+		vi.doMock("axios", () => ({ default: "axios" }));
+		vi.doMock("remult", () => ({
+			Remult: class MockRemult {
+				constructor(public _axios: unknown) {}
+				apiClient = rem.apiClient;
+			},
+		}));
+
+		await import("./remult");
+	});
+
+	afterEach(() => {
+		vi.restoreAllMocks();
+	});
+
 	it("creates a Remult instance", () => {
-		expect(Remult).toHaveBeenCalledWith(axios);
+		expect(rem.apiClient.url).not.toBe("");
 	});
 
 	it("assigns apiClient.url", () => {

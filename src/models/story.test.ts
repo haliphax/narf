@@ -1,46 +1,64 @@
-import { UpdateStoryController } from "@/server/routes/events";
-import { Remult, ValidateFieldEvent } from "remult";
-import { describe, expect, it, vi } from "vitest";
-import { Story, ownerOnly } from "./story";
-import {
+import type { Remult, ValidateFieldEvent } from "remult";
+import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
+import type {
 	WithDynamicOpts,
 	WithSaved,
 	WithServerExpr,
 	WithValidate,
 } from "./test";
-import { Vote } from "./vote";
-
-const { decoratorCalls, mockEntity } = vi.hoisted(() => ({
-	decoratorCalls: new Map<string, unknown>(),
-	mockEntity: vi.fn(),
-}));
-
-vi.mock("@/server/routes/events", () => ({
-	UpdateStoryController: { updateStory: vi.fn() },
-}));
-vi.mock("remult", async () => {
-	const mockField =
-		(opts: unknown) => (_target: unknown, propertyKey: string) =>
-			decoratorCalls.set(propertyKey, opts);
-	const actual = await vi.importActual("remult");
-
-	return {
-		Entity: mockEntity,
-		Fields: {
-			boolean: mockField,
-			integer: mockField,
-			object: mockField,
-			string: mockField,
-		},
-		Validators: actual.Validators,
-	};
-});
-vi.mock("./vote", () => ({ Vote: "vote" }));
 
 describe("Story", () => {
-	new Story();
+	let mockEntity: ReturnType<typeof vi.fn>;
+	let decoratorCalls: Map<string, unknown>;
+	let Story: typeof import("./story").Story;
+	let ownerOnly: typeof import("./story").ownerOnly;
+	let UpdateStoryController: {
+		updateStory: ReturnType<typeof vi.fn>;
+	};
+
+	beforeEach(async () => {
+		vi.resetModules();
+
+		decoratorCalls = new Map<string, unknown>();
+		mockEntity = vi.fn();
+
+		const mockField =
+			(opts: unknown) => (_target: unknown, propertyKey: string) =>
+				decoratorCalls.set(propertyKey, opts);
+
+		vi.doMock("@/server/routes/events", () => ({
+			UpdateStoryController: { updateStory: vi.fn() },
+		}));
+		vi.doMock("remult", async () => {
+			const actual = await vi.importActual("remult");
+
+			return {
+				Entity: mockEntity,
+				Fields: {
+					boolean: mockField,
+					integer: mockField,
+					object: mockField,
+					string: mockField,
+				},
+				Validators: actual.Validators,
+			};
+		});
+		vi.doMock("./vote", () => ({ Vote: "vote" }));
+
+		const storyMod = await import("./story");
+		Story = storyMod.Story;
+		ownerOnly = storyMod.ownerOnly;
+		const eventsMod = await import("@/server/routes/events");
+		UpdateStoryController =
+			eventsMod.UpdateStoryController as typeof UpdateStoryController;
+	});
+
+	afterEach(() => {
+		vi.restoreAllMocks();
+	});
 
 	it("calls UpdateStoryController.updateStory on save", () => {
+		new Story();
 		(mockEntity.mock.lastCall![1] as WithSaved).saved!("test");
 
 		expect(UpdateStoryController.updateStory).toHaveBeenCalledWith("test");
@@ -54,13 +72,12 @@ describe("Story", () => {
 
 		opts.serverExpression!({ id: "test" });
 
-		expect(mockRemult.repo).toHaveBeenCalledWith(Vote);
+		expect(mockRemult.repo).toHaveBeenCalledWith("vote");
 		expect(mockFind).toHaveBeenCalled();
 	});
 
 	describe("scale validation", () => {
 		it.each([
-			// name, story partial, validation error
 			["fails if unknown", { scale: "invalid" }, "Invalid scale"],
 			["succeeds if undefined", {}, undefined],
 			["succeeds if known", { scale: "Fibonacci" }, undefined],
@@ -74,11 +91,11 @@ describe("Story", () => {
 	});
 
 	describe("votes", () => {
-		const mockRemult = { user: { id: "test" } };
-		const opts: WithServerExpr = {};
-		(decoratorCalls.get("votes")! as WithDynamicOpts)(opts, mockRemult);
-
 		it("hides other participantIds and votes", () => {
+			const mockRemult = { user: { id: "test" } } as unknown as Remult;
+			const opts: WithServerExpr = {};
+			(decoratorCalls.get("votes")! as WithDynamicOpts)(opts, mockRemult);
+
 			const value = opts.serverExpression!({
 				_votes: [
 					{ participantId: "test", vote: "test" },
@@ -93,6 +110,10 @@ describe("Story", () => {
 		});
 
 		it("uses null if awaiting other vote", () => {
+			const mockRemult = { user: { id: "test" } } as unknown as Remult;
+			const opts: WithServerExpr = {};
+			(decoratorCalls.get("votes")! as WithDynamicOpts)(opts, mockRemult);
+
 			const value = opts.serverExpression!({
 				_votes: [{ participantId: "other" }],
 				revealed: false,
@@ -103,6 +124,10 @@ describe("Story", () => {
 		});
 
 		it("shows votes when revealed", () => {
+			const mockRemult = { user: { id: "test" } } as unknown as Remult;
+			const opts: WithServerExpr = {};
+			(decoratorCalls.get("votes")! as WithDynamicOpts)(opts, mockRemult);
+
 			const value = opts.serverExpression!({
 				_votes: [
 					{ participantId: "test", vote: "test" },
@@ -119,7 +144,6 @@ describe("Story", () => {
 
 	describe("ownerOnly check", () => {
 		it.each([
-			// name, story, remult mock, pass
 			["succeeds if story has no owner", undefined, undefined, true],
 			[
 				"succeeds if user is owner",
@@ -135,7 +159,7 @@ describe("Story", () => {
 			],
 		])("%s", (_name, owner, user, expected) => {
 			const result = ownerOnly(
-				owner as Story | undefined,
+				owner as import("./story").Story | undefined,
 				user as Remult | undefined,
 			);
 

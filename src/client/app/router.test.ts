@@ -1,23 +1,30 @@
-import { describe, expect, it, vi } from "vitest";
-import Home from "./views/home.vue";
-import Story from "./views/story.vue";
-
-const { mockCreateRouter, mockCreateHistory } = vi.hoisted(() => ({
-	mockCreateRouter: vi.fn(),
-	mockCreateHistory: vi.fn(() => "mockCreateHistory"),
-}));
-
-vi.mock("vue", () => ({ Component: "Component" }));
-vi.mock("vue-router", () => ({
-	createRouter: mockCreateRouter,
-	createWebHistory: mockCreateHistory,
-}));
-vi.mock("./views/home.vue", () => ({ default: "Home" }));
-vi.mock("./views/story.vue", () => ({ default: "Story" }));
-
-await import("./router");
+import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 
 describe("router", () => {
+	let mockCreateRouter: ReturnType<typeof vi.fn>;
+	let mockCreateHistory: ReturnType<typeof vi.fn>;
+
+	beforeEach(async () => {
+		vi.resetModules();
+
+		mockCreateRouter = vi.fn();
+		mockCreateHistory = vi.fn(() => "mockCreateHistory");
+
+		vi.doMock("vue", () => ({ Component: "Component" }));
+		vi.doMock("vue-router", () => ({
+			createRouter: mockCreateRouter,
+			createWebHistory: mockCreateHistory,
+		}));
+		vi.doMock("./views/home.vue", () => ({ default: "Home" }));
+		vi.doMock("./views/story.vue", () => ({ default: "Story" }));
+
+		await import("./router");
+	});
+
+	afterEach(() => {
+		vi.restoreAllMocks();
+	});
+
 	it("creates a router instance", () => {
 		expect(mockCreateRouter).toHaveBeenCalled();
 	});
@@ -34,7 +41,7 @@ describe("router", () => {
 			mockCreateRouter.mock.lastCall![0].routes;
 		const components = routes.map((c) => c.component);
 
-		expect(components).toContain(Home);
-		expect(components).toContain(Story);
+		expect(components).toContain("Home");
+		expect(components).toContain("Story");
 	});
 });

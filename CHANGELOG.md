@@ -1,3 +1,12 @@
+# [v1.14.25](https://github.com/haliphax/narf/compare/v1.14.24...v1.14.25) (2026-10-06)
+
+## 🔒 Security Issues
+- [`5771c39`](https://github.com/haliphax/narf/commit/5771c39)  bump ip-address from 10.7.0 to 10.7.3 (#226) (Issues: [`#226`](https://github.com/haliphax/narf/issues/226))
+- [`7f0ce8c`](https://github.com/haliphax/narf/commit/7f0ce8c)  bump brace-expansion (#228) (Issues: [`#228`](https://github.com/haliphax/narf/issues/228))
+- [`701da5f`](https://github.com/haliphax/narf/commit/701da5f)  bump compression from 1.8.1 to 1.8.2 (#227) (Issues: [`#227`](https://github.com/haliphax/narf/issues/227))
+- [`2e4734e`](https://github.com/haliphax/narf/commit/2e4734e)  bump source-map-js from 1.2.1 to 1.2.2 (#229) (Issues: [`#229`](https://github.com/haliphax/narf/issues/229))
+- [`4b470ec`](https://github.com/haliphax/narf/commit/4b470ec)  bump proxy-addr from 2.0.7 to 2.0.8 (#230) (Issues: [`#230`](https://github.com/haliphax/narf/issues/230))
+
 # [v1.14.24](https://github.com/haliphax/narf/compare/v1.14.23...v1.14.24) (2026-09-10)
 
 ## 🔒 Security Issues

@@ -23,7 +23,7 @@
 		"base-x": "^5.0.1",
 		"better-sqlite3": "^13.0.3",
 		"buffer": "^6.0.3",
-		"compression": "^1.8.1",
+		"compression": "^1.8.2",
 		"connect-history-api-fallback": "^2.0.0",
 		"cookie-parser": "^1.4.7",
 		"cors": "^2.8.6",
